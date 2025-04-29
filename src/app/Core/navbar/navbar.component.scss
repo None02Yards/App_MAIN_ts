@@ -1,0 +1,173 @@
+@import "../../../styles.scss";
+
+
+.navbar{
+    background-color: $lightBgColor;
+    margin: 0 30px;
+    .nav-link{
+        color: #c2bbbb;
+        font-size: 18px;
+        }
+
+        a:hover, .active{
+
+            color: #b70e0e;
+
+    }
+    .navbar-toggler{
+        border: 1px rgba(0, 0, 0,0.7) solid;
+    }
+    .dropdown:hover .dropdown-menu {
+        .dropdown-item{
+            color: $fontColor;
+            &:hover{
+                background-color: #db0000 !important;
+            }
+        }
+
+        background-color: $bgColor;
+        display: block;
+        margin-top: 0;
+     }
+
+    i{
+        margin: 1.5rem;
+    }
+    .dropdown-toggle::after {
+      display: none !important;
+    }
+
+    .notification-bell {
+      position: relative;
+      display: inline-block;
+    
+      i {
+        font-size: 24px; 
+        color: #dedbdb;     
+      }
+    
+      .notification-count {
+        position: absolute;
+        top: -6px;
+        right: -6px;
+        background: red;
+        color: white;
+        font-size: 12px;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+      }
+    }
+    
+    
+}
+.text-danger {
+  margin-right: 20px;
+   --bs-text-opacity: 0.97 !important; 
+  color: rgba(220,53,69, var(--bs-text-opacity)) !important;
+}
+
+.navbar.scroll {
+    background-color: rgba(0, 0, 0, 0); // fully transparent initially
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    backdrop-filter: none;
+    height: 100px; 
+    padding: 0 2rem; 
+  }
+  
+  .navbar.scroll.scrolled {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    height: 60px; 
+    padding: 0 2rem; 
+  }
+  
+
+  .navbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 1rem;
+  }
+  
+  .navbar i {
+    color: #c2bbbb; 
+    margin: 0.5rem; 
+    font-size: 1rem; 
+  }
+  
+  .navbar-collapse {
+    display: flex !important;
+    align-items: center;
+  }
+  
+  .form-inline {
+    input {
+      width: 180px;
+    }
+  
+    button {
+      margin-left: 0.5rem;
+    }
+  }
+  
+  .search-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-container input {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-radius: 20px;
+    padding: 8px 40px 8px 15px;
+    font-size: 14px;
+    height: 36px; // Adjust to match social icon size
+    width: 200px;
+    transition: all 0.3s ease;
+    margin-right: 1rem;
+  }
+  
+  .search-container input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .search-container .search-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #db0000;
+    font-size: 18px;
+    z-index: 10;
+    cursor: pointer;
+  }
+  
+.navbar-brand{
+  font-size: 30px;
+  font-weight: 900 !important;
+  margin-right: 55px;
+}
+
+
+  a.nav-link {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  
+  a.nav-link.ng-animating {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  
+  

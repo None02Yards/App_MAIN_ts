@@ -1,0 +1,118 @@
+<ng-container>
+  <app-slider></app-slider>
+</ng-container>
+
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
+<ng-container>
+  <!-- Cinematic Quote Section -->
+  <section class="cinema-quote text-center my-6">
+    <blockquote>
+      “Cinema is a matter of what’s in the frame and what’s out.”
+    </blockquote>
+    <cite>– Martin Scorsese</cite>
+  </section>
+
+
+  <div class=" mt-5 px-4 my-2">
+
+  <!-- Slider with Arrows -->
+  <div class=" mb-5 slider-container position-relative">
+    <button class="arrow left" (click)="scrollLeft()">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+
+    <div #movieSlider class="slider d-flex overflow-auto">
+      <div *ngFor="let item of trendingMovies" class="movie-card">
+        <div class="poster position-relative overflow-hidden">
+          <img class="w-100" [src]="'https://image.tmdb.org/t/p/original/' + item?.poster_path" [alt]="item.original_title">
+          <div class="layer">
+            <a class="bg-transparent" [routerLink]="'/details/movie/' + item.id">
+              <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
+            </a>
+            <p class="text-dark font-weight-bolder">See more!</p>
+          </div>
+        </div>
+        <h5 class="text-center mt-2">{{ item.original_title }}</h5>
+      </div>
+    </div>
+
+    <button class="arrow right" (click)="scrollRight()">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+  </div>
+
+
+<!-- More to Explore Section -->
+  <section class="more-to-explore mt-5">
+    <div class=" container">
+      <h3 class="section-title mt-5">More to CineWorld</h3>
+      <div class="Border w-25"></div>
+
+      <div class="row">
+        <div *ngFor="let section of moreToExplore" class="col-md-4 mb-4">
+          <div class="editor-card p-3  rounded shadow-sm h-100">
+            <h4 class="editor-title mb-3">{{ section.title }}</h4>
+            
+            <div class="d-flex flex-wrap gap-3 justify-content-start">
+              <div *ngFor="let movie of section.posters | slice:0:3" class="poster-box">
+                <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
+                    [alt]="movie.title"
+                    class="img-fluid rounded shadow-sm" />
+              </div>
+            </div>
+            <a [href]="section.link" class="editor-link d-block mt-3 text-primary">
+              {{ section.linkText }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Top 10 This Week -->
+  <section class="py-5">
+    <div class="container">
+      <h3 class="section-title">Top TVShows on IMDb This Week</h3>
+      <div class="Border w-25"></div>
+
+      <div class="row">
+        <div class="top-card mb-4" *ngFor="let movie of topTenMovies">
+
+          <div class="card h-100">
+            <img [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path" [alt]="movie.title" class="card-img-top">
+            <div class="movie-title mt-2 px-1">
+              <h5 class="rank me-1"> {{ movie.name }}</h5>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="tv-shows-section py-5">
+    <div class="container text-center">
+      <h2 class="text-warning fw-bold mb-2">Exclusive Videos</h2>
+      <p class="text-light mb-4">Celebrity interviews, trending entertainment stories, and expert analysis</p>
+  
+      <div class="d-flex justify-content-center flex-wrap gap-4">
+        <div class="video-card bg-dark text-white position-relative" *ngFor="let video of exclusiveVideos.slice(0, 3)">
+          <img [src]="video.imageUrl" class="video-card-img" [alt]="video.title">
+  
+          <a [href]="'https://www.youtube.com/watch?v=' + video.key" target="_blank" class="play-button">▶</a>
+  
+          <div class="video-card-overlay d-flex flex-column justify-content-end">
+            <h5 class="video-card-title">{{ video.title }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+ 
+</div>
+</ng-container>

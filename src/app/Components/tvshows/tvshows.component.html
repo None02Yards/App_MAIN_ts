@@ -1,0 +1,51 @@
+
+
+<div class="tvshows-page px-4 my-2">
+    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
+      <p style="color: white">Loading...</p>
+    </ngx-spinner>
+  
+    <div class="d-flex justify-content-center">
+      <div class="row" style="max-width: 1140px;">
+        <div *ngFor="let item of tvShows; trackBy: trackById" class="col-md-2 overflow-hidden mb-4">
+          <div class="poster position-relative overflow-hidden">
+            <img class="w-100" src="https://image.tmdb.org/t/p/original/{{ item?.poster_path }}" alt="">
+            <div class="layer">
+              <a class="bg-transparent" routerLink="/details/tv/{{ item.id }}">
+                <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
+              </a>
+              <p class="text-dark font-weight-bolder">See more!</p>
+            </div>
+            <div class="watchlist-icon" [ngClass]="{ 'watchlist-active': isInWatchlist(item.id) }" (click)="toggleWatchlist(item.id)">
+              <i class="fa fa-bookmark bookmark-icon-inner"></i>
+            </div>
+            <h5 class="text-center mt-2">{{ item.name }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+      <!-- Clean Pagination Template -->
+  <!-- Pagination arrows below the cards -->
+  <div class="d-flex justify-content-center align-items-center mt-4">
+    <!-- Prev -->
+    <button *ngIf="disablePrev" (click)="Prev()" class="bg-transparent border-0">
+      <i class="fa fa-3x fa-arrow-circle-left text-white" aria-hidden="true"></i>
+    </button>
+
+    <!-- Page number -->
+    <div class="mx-3 mt-2">
+      <h3 class="font-weight-bolder">{{ page }}</h3>
+    </div>
+
+    <!-- Next -->
+    <button *ngIf="disableNext" (click)="Next()" class="bg-transparent border-0">
+      <i class="fa fa-3x fa-arrow-circle-right text-white" aria-hidden="true"></i>
+    </button>
+  </div>
+
+
+
+</div>
+  

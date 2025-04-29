@@ -1,0 +1,51 @@
+@import '../../../assets/scss/hero';
+
+.genre-badge {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 4px 8px;
+    margin: 4px 6px 0 0;
+    border-radius: 12px;
+    font-size: 0.75rem;
+  }
+  
+  .hero-buttons {
+    margin-top: 35px;
+  
+    button.btn {
+      display: inline-flex;
+      align-items: center;
+      background-color: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: white;
+      padding: 8px 35px;
+      margin-right: 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background-color 0.3s ease;
+  
+      i.material-icons {
+        font-size: 20px;
+        margin-right: 5px;
+      }
+    }
+  .btn.btn-play{
+    background-color: #f6c207;
+
+  }
+    button.btn:hover {
+      background-color: rgba(109, 109, 107, 0.962);
+    }
+  
+    .btn-play {
+      background-color: white;
+      color: black;
+    }
+  
+    .btn-play:hover {
+      background-color: #e6e6e6;
+    }
+  }
+  

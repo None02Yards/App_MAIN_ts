@@ -1,0 +1,59 @@
+<div class="container pt-5 mt-5"> 
+  <!-- Profile image -->
+  <div class="row justify-content-center mb-4">
+    <div class="col-md-4 col-sm-6 text-center">
+      <img class="img-fluid rounded-circle shadow" [src]="profileSrc" alt="Profile" style="max-width: 250px;">
+    </div>
+  </div>
+
+
+<div class="row justify-content-center mb-5">
+  <div class="col-lg-10">
+    <div class="bg-dark p-4 rounded shadow text-light">
+      <div class="d-md-flex align-items-start justify-content-between flex-wrap">
+        <div class="mb-4">
+          <h2 class="mb-2">{{ personData.name }}</h2>
+          <h5 class="text-muted">Born: {{ personData.birthday }}</h5>
+        </div>
+        <div class="text-md-end mt-3 mt-md-0">
+          <span class="badge bg-info text-dark p-2">Popularity: {{ personData.popularity | number:'1.0-0' }}</span>
+        </div>
+      </div>
+
+      <h4 class="mt-4 mb-4">Biography <i class="fa fa-book-open me-2"></i>: </h4>
+        <div *ngFor="let sentence of visibleBio">
+          <p class="text-justify">{{ sentence }}</p>
+        </div>
+        <button class="btn btn-sm btn-outline-light mt-2" (click)="toggleBio()">
+          {{ showFullBio ? 'Show Less' : 'Read More' }}
+        </button>
+
+
+      
+    </div>
+  </div>
+</div>
+
+
+  <!-- Known For -->
+  <h3 class="text-center mt-5">Known For</h3>
+    <div class="row justify-content-center">
+    <div *ngFor="let item of knownFor.slice(0, 6)" class="col-md-2 overflow-hidden mb-4">
+      <div class="poster position-relative overflow-hidden">
+        <img class="w-100" [src]="'https://image.tmdb.org/t/p/original/' + item?.poster_path" alt="Known for">
+  
+        <!-- Hover Layer -->
+        <div class="layer">
+          <a class="bg-transparent" [routerLink]="['/details', item.media_type, item.id]">
+            <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
+          </a>
+          <p class="text-dark font-weight-bolder">See more!</p>
+        </div>
+  
+        <h5 class="text-center mt-2">{{ item.name || item.original_title }}</h5>
+      </div>
+    </div>
+    </div>
+  </div>
+
+

@@ -1,0 +1,86 @@
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
+
+$bgColor:#000000;
+$lightBgColor:rgba(30, 41, 82, 0.1);
+$bgTransparent:rgba(36,186,239,.6) ;
+$fontColor:#fff;
+$borderColor:#a8a8a83d;
+$borderHeight:1px;
+$secondFontColor:#949cb0;
+
+router-outlet + * {
+    margin-bottom: 80px; 
+  }
+  
+
+body{
+    overflow-x: hidden;
+    background-color: $bgColor;
+    color: $fontColor;
+    font-family: "Open Sans",sans-serif !important;
+    // line-height: 1.923em;
+    font-weight: 400;
+    .Border{
+        border:$borderHeight $borderColor solid;
+        margin:  0;
+      }
+      .different{
+          color: $secondFontColor;
+      }
+    a {
+        text-decoration: none !important;
+        color: $fontColor;
+    }
+
+
+    .poster{
+        .layer{
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            background-color:white;
+           position: absolute;
+           top: 100%;
+           left: 0px;
+           transition: all 0.8s;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           flex-direction: column;
+           z-index: 100;
+        }
+        img{
+            transition: all 0.5s;
+        }
+        &:hover .layer{
+            opacity: 0.5;
+            top: 0%;
+        }
+        &:hover img{
+            transform: scale(1.2,1.2)
+        }
+
+    }
+h1{
+    font-family: "Bebas Neue", sans-serif !important;
+    font-size: 5.5rem !important;
+}
+
+h2 {
+    font-family: "Lora",Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.7rem;
+    // line-height: 1.3em;
+    font-weight: 300;
+    margin-top: 1.5rem;
+    color: #ffffff;
+}
+
+h3 {
+    font-family: "Lora",sans-serif;
+    font-size: 1.8614em;
+   
+}
+
+
+}

@@ -1,0 +1,29 @@
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "square-jelly-box" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+
+<div class=" container px-4 mt-5 pt-5">
+
+    <h1 class="text-center mb-6 my-3">Celebrities</h1>
+    <div class="row">
+    <div *ngFor="let item of people.slice(0, 12)" class="col-md-2 mb-4">
+        <div class="poster position-relative">
+          <img src="https://image.tmdb.org/t/p/original/{{item?.profile_path}}" alt="{{item.name}}" />
+          <div class="layer d-flex flex-column justify-content-center align-items-center">
+            <a class="bg-transparent" routerLink="/person/{{item.id}}">
+              <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
+            </a>
+            <p class="text-dark font-weight-bolder mb-0">See more!</p>
+          </div>
+        </div>
+        <h5 class="text-center mt-2">{{ item.name }}</h5>
+      </div>
+      
+</div>
+<div class="row mb-4">
+    <div class="col-md-12 d-flex justify-content-center align-content-center">
+        <a  routerLink="/people/{{page}}" ><button *ngIf="disablePrev" (click)="Prev()" class="bg-transparent border-0"><i class="fa fa-3x fa-arrow-circle-left text-white" aria-hidden="true"></i></button></a>
+        <div class="mx-3 mt-2"><h3 class="font-weight-bolder">{{page}}</h3></div>
+                <a routerLink="/people//{{page}}" ><button *ngIf="disableNext" (click)="Next()" class="bg-transparent border-0"><i class="fa fa-3x fa-arrow-circle-right text-white" aria-hidden="true"></i></button></a>
+
+        </div>
+</div>
+</div>

@@ -1,0 +1,88 @@
+
+   <nav *ngIf="!hideNavbar" 
+   class="navbar fixed-top navbar-expand-lg navbar-dark scroll"
+   [ngClass]="{ 'scrolled': isScrolled }">
+  <a class="navbar-brand" routerLink="home" style="color: #db0000; font-weight: bold;">MAIN</a>
+  
+    <button class="navbar-toggler text-white d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+      Menu
+    </button>
+  
+    <div class="collapse navbar-collapse justify-content-between" id="collapsibleNavId">
+      <!-- LEFT SIDE NAV -->
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li *ngIf="showMenuItem" class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="home">Home</a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="showMenuItem">
+          <a class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">Movies</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/movies/now_playing/1">Now playing</a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/movies/popular/1">Popular</a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/movies/top_rated/1">Top Rated</a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/movies/upcoming/1">Upcoming</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown" *ngIf="showMenuItem">
+          <a class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false" routerLinkActive="active">TV Shows</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/tvshows/on_the_air/1">On Air</a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/tvshows/popular/1">Popular</a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/tvshows/top_rated/1">Top Rated</a>
+            <a class="dropdown-item" routerLinkActive="active" routerLink="/tvshows/airing_today/1">Airing Today</a>
+          </div>
+        </li>
+        <li *ngIf="showMenuItem" class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/people/1">People</a>
+        </li>
+      </ul>
+  
+ <!-- RIGHT SIDE: Search & Social -->
+<div class="d-flex align-items-center">
+  <form *ngIf="showMenuItem && showSearch" class="form-inline my-2 my-lg-0" (submit)="redirectToSearch()">
+    <div class="search-container">
+      <input
+        class="form-control"
+        (keyup)="targetInfo($event)"
+        type="text"
+        placeholder="Search by word"
+        name="searchInput"
+      />
+      <button type="submit" class="search-btn">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  </form>
+  
+  <div class="social-icons d-flex align-items-center">
+    <!-- Watchlist -->
+    <a *ngIf="showSearch" routerLink="/watchlist" class="nav-link text-danger font-weight-bold ml-3 d-flex align-items-center">
+      <i class="fa fa-bookmark mr-1"></i> Watchlist
+    </a>
+  
+    <!-- If we're on Welcome page, show social icons -->
+    <ng-container *ngIf="isWelcomePage; else notificationIcon">
+      <i class="fab fa-facebook ml-2"></i>
+      <i class="fab fa-twitter ml-2"></i>
+      <i class="fab fa-youtube ml-2"></i>
+      <i class="fab fa-instagram ml-2"></i>
+    </ng-container>
+  
+    <!-- If not Welcome, show notification bell -->
+    <ng-template #notificationIcon>
+      <!-- <i class="fa fa-bell ml-3" style="font-size: 22px;"></i> -->
+      <div class="notification-bell">
+        <i class="fas fa-bell"></i>
+        <span class="notification-count">0</span>
+      </div>
+      
+    </ng-template>
+  </div>
+  
+  
+</div>
+
+    </div>
+  </nav>
+  

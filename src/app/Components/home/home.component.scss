@@ -1,0 +1,349 @@
+:host {
+    display: block;
+    
+    color: #ffffff;
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  hr {
+    border-color: #444;
+    margin: 1rem 0;
+  }
+  
+  .Border {
+    height: 4px;
+    background-color: #ffdd57;
+    border-radius: 2px;
+    margin: 0 1.5rem 60px;
+  }
+  
+  h3 {
+    font-size: 1.6rem;
+  
+  }
+  
+  p.different {
+    font-size: 1rem;
+    color: #ccc;
+  }
+  
+  .poster {
+    max-width: 250px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  
+    img {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+    }
+  
+    .layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.6);
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.3s ease;
+      border-radius: 10px;
+  
+      i {
+        margin-bottom: 1.5rem;
+      }
+    }
+  
+    &:hover {
+      transform: scale(1.05);
+  
+      img {
+        transform: scale(1.1);
+      }
+  
+      .layer {
+        opacity: 1;
+      }
+    }
+  }
+  
+  h5 {
+    text-align: center !important;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #f5f5f5;
+  }
+  
+  @media (max-width: 768px) {
+    .poster {
+      margin-bottom: 2rem;
+    }
+  }
+  .movies-section {
+    position: relative;
+    z-index: 1; 
+  }
+
+  .slider-container {
+    position: relative;
+    padding: 0 30px;
+    margin-bottom: 6rem !important;
+  
+    .slider {
+      scroll-behavior: smooth;
+      overflow-x: auto;
+      white-space: nowrap;
+      gap: 1rem;
+  
+      &::-webkit-scrollbar {
+        display: none;
+      }
+  
+      .movie-card {
+        min-width: 200px;
+        flex: 0 0 auto;
+        margin-right: 1rem;
+      }
+    }
+  
+    .arrow {
+      position: absolute;
+      top: 40%;
+      transform: translateY(-50%);
+      z-index: 2;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 50%;
+      cursor: pointer;
+  
+      &.left {
+        left: 0;
+      }
+  
+      &.right {
+        right: 0;
+      }
+  
+      i {
+        font-size: 1.5rem;
+      }
+    }
+  }
+  
+  // .movie-slider {
+  //   display: flex;
+  //   overflow-x: auto;
+  //   scroll-behavior: smooth;
+  //   gap: 1rem;
+  //   padding: 1rem;
+  // }
+  
+  .industry-news-section {
+    .section-header {
+      text-align: left;
+    }
+  
+    .news-card {
+      transition: transform 0.3s ease;
+      &:hover {
+        transform: translateY(-5px);
+      }
+      img {
+        height: 200px;
+        object-fit: cover;
+      }
+    }
+  
+    .btn-outline-primary {
+      font-size: 0.9rem;
+    }
+  }
+  
+  .more-to-explore {
+    .row {
+      display: flex;
+      justify-content: space-between;
+    }
+    .editor-card {
+      background-color: #020202;
+      min-height: 100%;
+      .poster-box {
+        width: 25%; 
+        img {
+          width: 100%;
+          height: auto;
+          border-radius: 10px;
+          object-fit: cover;
+        }
+      }
+      .editor-title {
+        font-size: 1.25rem;
+        font-weight: bold;
+      }
+      .editor-link {
+        font-weight: 500;
+       color:#ffb611d1 !important;
+      }
+
+    }
+  }
+
+  .cinema-quote {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    font-family: 'Georgia', serif;
+    color: rgba(225, 225, 225, 0.85);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    opacity: 1;
+    transform: translateY(20px);
+    animation: fadeInQuote 1.5s ease-out 0.5s forwards;
+  
+    @keyframes fadeInQuote {
+      to {
+        opacity: 1;
+        transform: translateY(-1);
+      }
+    }
+
+
+    blockquote {
+      font-size: 2rem;
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 1.98rem;
+      margin: 0 -43px 1rem;
+    }
+  
+    cite {
+      display: block;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      margin-top: 0.5rem;
+    }
+  }
+
+  .top-card {
+    width: calc(100% / 6 - 0.5rem);
+    flex: 0 0 auto;
+    margin-right: 0.5rem;
+  }
+  
+  
+  .card {
+    background: #020202;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+    }
+  
+    img {
+      transition: transform 0.3s ease;
+    }
+  
+    &:hover img {
+      transform: scale(1.05);
+    }
+  }
+  
+  .movie-title {
+    background-color: #020202;
+    font-size: 1.95rem;
+    font-weight: 500;
+    color: #c0b5b5;
+    line-height: 1.4;
+    text-align: center;
+    // .rank {
+    //   color: #e0dede;
+    //   text-align: center;
+    //   font-weight: 700;
+    //   font-size: 1rem;
+    // }
+  
+    &:hover {
+      color: #e30f0f;
+      text-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+    }
+  }
+
+
+
+  .video-card {
+    width: 320px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+    .video-card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      filter: brightness(0.85);
+      transition: filter 0.3s ease;
+    }
+  
+    .play-button {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.5rem;
+      color: #fff;
+      opacity: 0.7;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+    }
+  
+    .video-card-overlay {
+      position: absolute;
+      bottom: 0;
+      padding: 1rem;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    }
+  
+    .video-card-title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin: 0;
+      color: #fff;
+    }
+  
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  
+      .video-card-img {
+        filter: brightness(1);
+      }
+  
+      .play-button {
+        opacity: 1;
+      }
+    }
+  }
+  
+  .section-title{
+    margin: 62px 1rem 8px ;
+    
+  }
+.w-25{
+  width: 33% !important;
+}
+
+  
+  
+  

@@ -1,0 +1,192 @@
+.footer {
+  background-color:rgba(7, 7, 7, 0.18) !important;
+  margin-top: 6rem;
+  width: 100%;
+  padding: 3rem 0;
+  color: #7d7b7b !important;
+  text-align: center;
+  position: relative;
+  overflow: hidden; 
+
+
+  .container {
+    max-width: 1140px;
+    margin:40px auto;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  h5 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    // margin-bottom: 1rem;
+    color: #e4e1e1;
+  }
+
+  .list-unstyled {
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 0.5rem;
+
+      a {
+        color: #898787;
+        text-decoration: none;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: #db0000;
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  .list-inline {
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 2rem;
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      a {
+        width: 3rem;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+            fill: #db0000;
+          }
+        }
+      }
+    }
+  }
+
+  form {
+    .form-control {
+      background-color: #c2b9b996;
+      border: 2px solid #444;
+      color: #fdfdfd !important;
+      border-radius: 1.375rem;
+
+      &:focus {
+        background-color: #cdc8c8;
+        color: #040404;
+        border-color: #db0000;
+        box-shadow: none;
+      }
+    }
+
+    .btn {
+      margin-top: 0.5rem;
+      width: 100%;
+      border-radius: 1.375rem;
+      background-color: #db0000;
+      color: #fff;
+      border: none;
+
+      &:hover {
+        background-color: #c30000;
+      }
+    }
+  }
+
+  .text-muted {
+    font-size: 13px;
+    color: #888 !important;
+  }
+}
+
+.bi-globe-americas {
+  transition: transform 0.3s ease;
+}
+select:hover + .bi-globe-americas,
+.bi-globe-americas:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.footer .list-inline-item a svg {
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 0 transparent);
+}
+
+.footer .list-inline-item a:hover svg {
+  filter: drop-shadow(0 0 6px rgba(255, 0, 0, 0.7)); // warm glow
+  transform: scale(1.1);
+}
+
+.form-select{
+  border-radius: 30px;
+  width: 120px;
+}
+.form-label{
+  margin-right: 141px;
+}
+// for dusty look
+
+.footer > div:first-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Behind footer */
+  pointer-events: none;
+}
+
+
+.starsec, .starthird, .starfourth, .starfifth {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  background-repeat: repeat;
+  background-size: contain;
+  animation: moveStars 200s linear infinite;
+}
+
+/* Add subtle differences in animation speed and star images */
+.starsec {
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.6;
+  animation-duration: 300s;
+}
+
+.starthird {
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.5;
+  animation-duration: 200s;
+}
+
+.starfourth {
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.3;
+  animation-duration: 250s;
+}
+
+.starfifth {
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  opacity: 0.2;
+  animation-duration: 150s;
+}
+
+/* Animation keyframes */
+@keyframes moveStars {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -10000px 5000px;
+  }
+}

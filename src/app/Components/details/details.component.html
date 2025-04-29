@@ -1,0 +1,49 @@
+
+<div class="details-wrapper d-flex flex-column justify-content-center align-items-center min-vh-100 mt-5 pt-5">
+    <div class="container">
+        <div class="row" *ngIf="showRow">
+        <div class="col-md-12 my-md-2 mx-0 d-flex justify-content-center">
+            <iframe [src]="videoSafeURL" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+           </iframe>
+           
+        </div>
+        </div>
+        <br>
+
+        <div class="px-2 mx-0"><div class="row">
+            <div class="col-md-12 d-flex justify-content-start">
+                <div>
+                    <div class="details-container">
+                        <h2 class="media-title">{{ media }} name: {{ itemDetails.name || itemDetails.original_title }}</h2>
+                        <p class="tagline">{{ itemDetails.tagline }}</p>
+                      
+                        <div *ngIf="showGenre" class="genres">
+                          <h3>Genres :</h3>
+                          <div class="genre-buttons">
+                            <button *ngFor="let genre of itemDetails.genres" class="genre-btn">{{ genre.name }}</button>
+                          </div>
+                        </div>
+                      
+                        <div class="stats">
+                          <p>⭐ Vote: <strong>{{ itemDetails.vote_average }}</strong></p>
+                          <p>🗳️ Vote count: <strong>{{ itemDetails.vote_count }}</strong></p>
+                          <p>🔥 Popularity: <strong>{{ itemDetails.popularity }}</strong></p>
+                          <p>📅 Release date: <strong>{{ itemDetails.release_date || itemDetails.first_air_date }}</strong></p>
+                        </div>
+
+
+                        <div class="overview-section text-center my-5 px-3">
+                            <h3 class="overview-title">Overview</h3>
+                            <p class="overview-text mt-3">{{ itemDetails.overview }}</p>
+                        </div>
+                    </div>
+                      
+                        
+                        
+
+                </div>
+            </div>
+        </div></div>
+    </div>
+</div>
