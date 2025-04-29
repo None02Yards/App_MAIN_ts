@@ -1,8 +1,8 @@
 
-   <nav *ngIf="!hideNavbar" 
-   class="navbar fixed-top navbar-expand-lg navbar-dark scroll"
-   [ngClass]="{ 'scrolled': isScrolled }">
-  <a class="navbar-brand" routerLink="home" style="color: #db0000; font-weight: bold;">MAIN</a>
+<nav *ngIf="!hideNavbar" 
+class="navbar fixed-top navbar-expand-lg navbar-dark scroll"
+[ngClass]="{ 'scrolled': isScrolled, 'media-margin': isMediaPage }">
+  <a class="navbar-brand logo" routerLink="home" style="color: #db0000; font-weight: bold;">MAIN</a>
   
     <button class="navbar-toggler text-white d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
       aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">

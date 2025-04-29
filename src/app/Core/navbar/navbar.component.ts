@@ -17,21 +17,28 @@ export class NavbarComponent implements OnInit {
   isWatchlistPage: boolean = false;
   hideNavbar: boolean = false;
   isWelcomePage: boolean = false;
+  isMediaPage: boolean = false;
+
 
   constructor(private _Router: Router) {}
 
   ngOnInit(): void {
     this._Router.events
       .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe(event => { // No typing here
-        const navigation = event as NavigationEnd; // 👉 cast inside safely
-        const currentUrl = navigation.urlAfterRedirects || navigation.url; // 👉 real URL string
-  
-        this.isWatchlistPage = currentUrl.includes('/watchlist');
+      .subscribe(event => {
+        const navigation = event as NavigationEnd;
+        const currentUrl = navigation.urlAfterRedirects || navigation.url;
+
+        this.isMediaPage = currentUrl.includes('/movies') || currentUrl.includes('/tvshows') || currentUrl.includes('/search');
+
+        const isHomePage = currentUrl === '/' || currentUrl === '/home';
         this.isWelcomePage = currentUrl.includes('/welcome');
-  
-        this.showMenuItem = !this.isWelcomePage;
-        this.showSearch = !this.isWelcomePage;
+        this.isWatchlistPage = currentUrl.includes('/watchlist');
+
+        // Hide menu items and search bar on welcome and home pages
+        // const shouldHideSearch = this.isWelcomePage || isHomePage;
+        // this.showMenuItem = !this.isWelcomePage;
+        // this.showSearch = !shouldHideSearch;
       });
   }
   
@@ -50,13 +57,18 @@ export class NavbarComponent implements OnInit {
   onWindowScroll() {
     const currentUrl = this._Router.url;
 
+    const isHomeOrWelcome =
+    currentUrl === '/' ||
+    currentUrl === '/home' ||
+    currentUrl.includes('/welcome');
+
     if (currentUrl.includes('/watchlist')) {
       const scrollY = window.scrollY || window.pageYOffset;
       this.hideNavbar = scrollY > 100;
       return;
     }
 
-    if (currentUrl.includes('/tvshows') || currentUrl.includes('/people') || currentUrl.includes('/movies') || currentUrl.includes('/person-details')) {
+    if (currentUrl.includes('/tvshows') || currentUrl.includes('/people') || currentUrl.includes('/movies') || currentUrl.includes('/person-details') || currentUrl.includes('/search')) {
       this.isScrolled = true;
       this.showSearch = true;
       return;

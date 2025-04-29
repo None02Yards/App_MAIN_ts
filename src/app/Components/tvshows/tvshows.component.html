@@ -14,7 +14,7 @@
               <a class="bg-transparent" routerLink="/details/tv/{{ item.id }}">
                 <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
               </a>
-              <p class="text-dark font-weight-bolder">See more!</p>
+              <!-- <p class="text-dark font-weight-bolder">See more!</p> -->
             </div>
             <div class="watchlist-icon" [ngClass]="{ 'watchlist-active': isInWatchlist(item.id) }" (click)="toggleWatchlist(item.id)">
               <i class="fa fa-bookmark bookmark-icon-inner"></i>
