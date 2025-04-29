@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1745960585008,
+  "timestamp": 1745968443223,
   "index": "https://Zu34.github.io/App_MAIN_ts/index.html",
   "assetGroups": [
     {
@@ -12,12 +12,12 @@
       },
       "urls": [
         "https://Zu34.github.io/App_MAIN_ts/index.html",
-        "https://Zu34.github.io/App_MAIN_ts/main.3395d193c7940332.js",
+        "https://Zu34.github.io/App_MAIN_ts/main.08f3b380b9f6a419.js",
         "https://Zu34.github.io/App_MAIN_ts/manifest.webmanifest",
         "https://Zu34.github.io/App_MAIN_ts/polyfills.c04b0af581447a1e.js",
         "https://Zu34.github.io/App_MAIN_ts/runtime.3f055301f0b97381.js",
         "https://Zu34.github.io/App_MAIN_ts/scripts.8610708c7365666b.js",
-        "https://Zu34.github.io/App_MAIN_ts/styles.01c3f080c46c8424.css"
+        "https://Zu34.github.io/App_MAIN_ts/styles.849927323aab7184.css"
       ],
       "patterns": []
     },
@@ -87,13 +87,13 @@
     "https://Zu34.github.io/App_MAIN_ts/fontawesome-webfont.cf011583fb81df9f.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "https://Zu34.github.io/App_MAIN_ts/fontawesome-webfont.da909aa098b0ee2d.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "https://Zu34.github.io/App_MAIN_ts/fontawesome-webfont.e9955780856cf8aa.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
-    "https://Zu34.github.io/App_MAIN_ts/index.html": "f499a505f917b2256f317c9d86d446b7941b91ff",
-    "https://Zu34.github.io/App_MAIN_ts/main.3395d193c7940332.js": "f447ad65597b38667b0763bca55119ad866f321b",
+    "https://Zu34.github.io/App_MAIN_ts/index.html": "e7dbef1b81de4462a994b332092bcea4914832af",
+    "https://Zu34.github.io/App_MAIN_ts/main.08f3b380b9f6a419.js": "2a3bed6aa9fcfc96666a8d7ec9eaac293239ab5f",
     "https://Zu34.github.io/App_MAIN_ts/manifest.webmanifest": "be68b23b2091a54cc2d64866b8d7af4b8e66dac9",
     "https://Zu34.github.io/App_MAIN_ts/polyfills.c04b0af581447a1e.js": "49d6b957e8ef325f973d921e50124c378b0441ae",
     "https://Zu34.github.io/App_MAIN_ts/runtime.3f055301f0b97381.js": "77191f0269e140988269d3fb444a7f2679acdcab",
     "https://Zu34.github.io/App_MAIN_ts/scripts.8610708c7365666b.js": "242c45583ed36f1ff8539b02e8c7039d724656f2",
-    "https://Zu34.github.io/App_MAIN_ts/styles.01c3f080c46c8424.css": "48a11f519a0d6eeb08c5b69bcb11ef4fc7153377"
+    "https://Zu34.github.io/App_MAIN_ts/styles.849927323aab7184.css": "4a11e8cec26e544077edf70856dff65fc239049e"
   },
   "navigationUrls": [
     {
