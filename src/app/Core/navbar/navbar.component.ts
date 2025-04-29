@@ -36,8 +36,8 @@ export class NavbarComponent implements OnInit {
         this.isWatchlistPage = currentUrl.includes('/watchlist');
 
         // Hide menu items and search bar on welcome and home pages
-        // const shouldHideSearch = this.isWelcomePage || isHomePage;
-        // this.showMenuItem = !this.isWelcomePage;
+        const shouldHideSearch = this.isWelcomePage || isHomePage;
+        this.showMenuItem = !this.isWelcomePage;
         // this.showSearch = !shouldHideSearch;
       });
   }
