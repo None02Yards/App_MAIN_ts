@@ -23,7 +23,20 @@ export class NavbarComponent implements OnInit {
   constructor(private _Router: Router) {}
 
   ngOnInit(): void {
-    this._Router.events
+
+
+      // Initial route check — handles page reload correctly
+        const initialUrl = this._Router.url;
+
+        this.isWelcomePage = initialUrl.includes('/welcome');
+        const isHomePage = initialUrl === '/' || initialUrl === '/home';
+
+        this.showSearch = !(this.isWelcomePage || isHomePage);
+        this.showMenuItem = !this.isWelcomePage;
+
+
+        this._Router.events
+
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(event => {
         const navigation = event as NavigationEnd;
