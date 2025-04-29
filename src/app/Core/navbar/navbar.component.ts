@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
         const navigation = event as NavigationEnd;
         const currentUrl = navigation.urlAfterRedirects || navigation.url;
 
-        this.isMediaPage = currentUrl.includes('/movies') || currentUrl.includes('/tvshows') || currentUrl.includes('/search');
+        this.isMediaPage = currentUrl.includes('/movies') || currentUrl.includes('/tvshows') || currentUrl.includes('/search') || currentUrl.includes('/home');
 
         const isHomePage = currentUrl === '/' || currentUrl === '/home';
         this.isWelcomePage = currentUrl.includes('/welcome');
