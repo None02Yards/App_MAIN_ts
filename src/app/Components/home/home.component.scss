@@ -232,9 +232,10 @@
   }
 
   .top-card {
-    width: calc(100% / 6 - 1.5rem);
+    width: calc(100% / 6 - 1rem);
     flex: 0 0 auto;
     margin-right: 0.5rem;
+    flex-shrink: 0;
   }
   @media (max-width: 768px) {
     .top-card:nth-child(n+6) {
