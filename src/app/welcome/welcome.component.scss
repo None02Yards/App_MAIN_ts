@@ -33,25 +33,6 @@ html, body {
   opacity: 0.5;
 }
 
-/* 3. STARS BACKGROUND */
-// .starsec, .starthird, .starfourth, .starfifth {
-//   position: absolute;
-//   width: 3px;
-//   height: 3px;
-//   background: transparent;
-//   box-shadow: 
-//     571px 173px #00BCD4, 
-//     1732px 143px #00BCD4,
-//     1745px 454px #FF5722,
-//     234px 784px #00BCD4, 
-//     1793px 1123px #FF9800,
-//     1076px 504px #03A9F4;
-//   animation: animStar 150s linear infinite;
-// }
-// .starthird { animation-duration: 100s; }
-// .starfourth { animation-duration: 50s; }
-// .starfifth { animation-duration: 200s; }
-
 
 .starsec{
     content: " ";
@@ -413,7 +394,7 @@ html, body {
     line-height: 42px;
     font-size: 18px;
     padding: 0;
-    max-width: 680px;
+    max-width: 731px;
     margin: 3px auto;
   }
   
