@@ -18,7 +18,12 @@ export class NavbarComponent implements OnInit {
   hideNavbar: boolean = false;
   isWelcomePage: boolean = false;
   isMediaPage: boolean = false;
+  isCollapsed = true;
 
+
+  toggleNavbar() {
+    this.isCollapsed = !this.isCollapsed;
+  }
 
   constructor(private _Router: Router) {}
 
@@ -56,6 +61,7 @@ export class NavbarComponent implements OnInit {
   }
   
 
+
   targetInfo(eventInfo: any) {
     this.target = eventInfo.target.value;
   }
@@ -92,4 +98,6 @@ export class NavbarComponent implements OnInit {
     this.isScrolled = scrollY > heroHeight;
     this.showSearch = this.isScrolled;
   }
+
+
 }

@@ -109,12 +109,17 @@
     margin: 0.5rem; 
     font-size: 1rem; 
   }
-  
-  .navbar-collapse {
-    display: flex !important;
-    align-items: center;
+    
+  .collapse {
+    display: none;
   }
   
+  .collapse.show {
+    display: flex !important;
+    flex-direction: column;
+  }
+  
+
   .form-inline {
     input {
       width: 180px;
@@ -124,6 +129,26 @@
       margin-left: 0.5rem;
     }
   }
+
+  
+  
+  @media (max-width: 991px) {
+    .navbar-nav .form-inline {
+      width: 100%;
+      margin-top: 10px;
+    }
+  
+    .navbar-nav .nav-item {
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+    }
+  
+    .search-container {
+      justify-content: center;
+    }
+  }
+  
   
   .search-container {
     position: relative;
@@ -180,5 +205,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+  
+ 
   
   
