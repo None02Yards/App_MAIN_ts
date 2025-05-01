@@ -1,3 +1,5 @@
+
+// slider.ts
 import { Component, OnInit } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { delay } from 'rxjs/internal/operators/delay';
