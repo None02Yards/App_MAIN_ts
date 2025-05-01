@@ -34,6 +34,46 @@
     }
   }
 }
+.content-wrapper {
+  position: relative;
+  z-index: 2;
+  display:flex;
+  flex-direction: column; /* Ensures .pane stacks vertically */
+
+}
+
+.mini-poster {
+  position: absolute;
+  top: 12rem; 
+  left: 50%;
+  height: 30vh;
+  transform: translateX(-50%);
+  width: 200px;
+  border-radius: 20px;
+  box-shadow: 10px 10px 25px rgba(182, 170, 170, 0.755);
+  animation: slideInPoster 0.3s ease-out forwards;
+
+}
+
+.mini-poster img {
+  width: 100%;
+  display: block;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+}
+
+
+@keyframes slideInPoster {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 
 
 .backdrop {
@@ -61,7 +101,7 @@
     content: "";
     background-image: linear-gradient(
       to top,
-      rgba(0, 0, 0, 1) 0%,
+      rgbrgba(0, 0, 0, 0.7) 0%,
       rgba(0, 0, 0, 0.1) 50%,
       rgba(0, 0, 0, 0.1) 100%
     );
@@ -112,7 +152,11 @@
 }
 
 .pane {
-  padding: 0 1.5rem 1.5rem;
+  padding: 0 1.5rem 2.5rem;
+
+  animation: fallIn 0.8s ease-out;
+
+
 
   @media (min-width: $breakpoint-small) {
     padding: 0 4rem 4rem;
@@ -140,12 +184,24 @@
   }
 }
 
+
+@keyframes fallIn {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .name {
-  margin: 0 0 1.4rem;
+  margin: 0 0 1.7rem;
   font-weight: 500;
-  font-size: 3.8rem;
+  font-size: 1.8rem;
   line-height: 1.1;
-  color: #fff;
+  color: #eaeaea;
   letter-spacing: $letter-spacing;
   cursor: pointer;
 
@@ -186,6 +242,7 @@
 .info {
   display: flex;
   align-items: center;
+  font-size: 13px;
 
   span {
     margin-right: 0.4rem;
@@ -201,11 +258,11 @@
 .desc {
   display: block;
   margin-top: 2.5rem;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: #d1c6c6;
   font-weight: $base-font-weight;
   // color: $base-font-color;
-  font-family: $font-family-serif-dosis;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 
   @media (max-width: $breakpoint-small - 1) {
     display: none;
