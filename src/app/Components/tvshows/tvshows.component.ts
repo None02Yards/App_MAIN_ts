@@ -17,6 +17,7 @@ export class TVShowsComponent implements OnInit {
   disableNext: boolean = true;
   page: number = 1;
   type: any = "";
+  pageTitle: string = '';
   allData: any[] = [];
   tvShows: any[] = [];
   watchlist: number[] = [];
@@ -39,6 +40,24 @@ export class TVShowsComponent implements OnInit {
       this.type = params.get("genre");
       this.page = Number(params.get("page")) || 1;
       this.disablePrev = this.page > 1;
+
+    switch (this.type) {
+      case 'on_the_air':
+        this.pageTitle = 'On Air';
+        break;
+      case 'popular':
+        this.pageTitle = 'Popular TV Shows';
+        break;
+      case 'top_rated':
+        this.pageTitle = 'Top Rated Shows';
+        break;
+      case 'airing_today':
+        this.pageTitle = 'Airing Today';
+        break;
+      default:
+        this.pageTitle = 'TV Shows';
+    }
+
       this.loadData();
     });
 
@@ -66,7 +85,6 @@ export class TVShowsComponent implements OnInit {
       this.watchlist.push(id);
     }
   
-    // Optional: Save to localStorage for persistence
     localStorage.setItem('watchlist', JSON.stringify(this.watchlist));
   }
   

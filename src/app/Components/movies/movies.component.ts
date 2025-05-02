@@ -13,6 +13,7 @@ import { DataService } from 'src/app/Services/data.service';
 export class MoviesComponent implements OnInit {
 
   type: string = '';
+  pageTitle: string = '';
   page: number = 1;
   Movies: any[] = [];
   displayedMovies: any[] = [];
@@ -36,6 +37,24 @@ export class MoviesComponent implements OnInit {
       this.type = this.route.snapshot.paramMap.get('genre') || '';
       this.page = Number(this.route.snapshot.paramMap.get('page')) || 1;
       
+
+      switch (this.type) {
+        case 'now_playing':
+          this.pageTitle = 'Now Playing';
+          break;
+        case 'popular':
+          this.pageTitle = 'Popular Movies';
+          break;
+        case 'top_rated':
+          this.pageTitle = 'Top Rated Movies';
+          break;
+        case 'upcoming':
+          this.pageTitle = 'Upcoming Movies';
+          break;
+        default:
+          this.pageTitle = 'Movies';
+      }
+
       this.fetchMovies();
     });
   }
