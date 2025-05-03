@@ -19,7 +19,6 @@
                         <p class="tagline">{{ itemDetails.tagline }}</p>
                       
                         <div *ngIf="showGenre" class="genres">
-                          <h3>Genres :</h3>
                           <div class="genre-buttons">
                             <button *ngFor="let genre of itemDetails.genres" class="genre-btn">{{ genre.name }}</button>
                           </div>

@@ -13,7 +13,7 @@ iframe {
   border: none;
   border-radius: 8px;
   margin-bottom: 2rem;
-  margin-top: 1rem;
+  margin-top: 2rem !important;
   box-shadow: 0 0 20px rgba(190, 238, 238, 0.563);
 
 }
@@ -31,7 +31,7 @@ h4{
 .overview-section {
   max-width: 900px;
   margin: 3rem auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
  
   .overview-title {
@@ -48,15 +48,16 @@ h4{
     font-size: 1.15rem;
     color: #f0f0f0;
     line-height: 1.8;
+    padding: 0 90px;
     letter-spacing: 0.3px;
-    text-align: justify;
+    text-align:center;
   }
 }
 
 .details-container {
   max-width: 960px;
-  margin: 4rem auto;
-  padding: 2rem;
+  margin: 4rem 60px;
+  padding: 4rem;
   background: #111;
   // border-radius: 12px;
   box-shadow: 0 0 20px rgba(0, 255, 255, 0.05);
@@ -69,38 +70,32 @@ h4{
     margin-bottom: 0.5rem;
   }
 
-  .tagline {
-    font-size: 1.2rem;
-    color: #9ab;
-    font-style: italic;
-    margin-bottom: 1.5rem;
-  }
-
   .genres {
-    margin-bottom: 2rem;
+    // margin-bottom: 5rem;
 
-    h3 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-    }
+    // h3 {
+    //   font-size: 1.4rem;
+    //   margin-bottom: 0.5rem;
+    // }
 
     .genre-buttons {
       display: flex;
       flex-wrap: wrap;
       gap: 0.6rem;
+      margin-bottom: 3rem;
 
       .genre-btn {
-        background-color: #838585;
+        background-color: #a9abab;
         border: none;
         color: #000;
-        font-weight: 600;
-        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+        padding: 5px 2.5rem;
         border-radius: 16px;
         cursor: default;
         transition: background-color 0.3s ease;
 
         &:hover {
-          background-color: #bec3c4;
+          background-color: #464748;
         }
       }
     }
