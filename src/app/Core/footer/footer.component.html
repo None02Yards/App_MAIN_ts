@@ -6,10 +6,10 @@
     <div class="starfifth"></div>
   </div>
   <div class="container">
-    <div class="row">
+    <div class="row row text-center text-md-start">
 
       <!-- About / Logo -->
-      <div class="col-md-3 mb-4">
+      <div class="col-12 col-sm-6 col-md-3 mb-4">
         <h5 class=" fw-bold text-center d-flex align-items-center gap-2">
           CINEWORLD <span class="cinema">🎬</span>
         </h5>
@@ -31,7 +31,8 @@
       </div>
 
       <!-- Quick Links -->
-      <div class="col-md-2 mb-4">
+      <div class="col-6 col-md-2 mb-4">
+
         <h5 class="">Quick Links</h5>
         <ul class="list-unstyled">
           <li><a routerLink="/home" class=" text-decoration-none">Home</a></li>
@@ -42,7 +43,8 @@
       </div>
 
       <!-- Categories -->
-      <div class="col-md-2 mb-4">
+      <div class="col-6 col-md-2 mb-4">
+
         <h5 class="">Categories</h5>
         <ul class="list-unstyled">
           <li><a routerLink="/movies/all/1" class=" text-decoration-none">Movies</a></li>
@@ -53,8 +55,8 @@
       </div>
 
       <!-- Resources -->
-      <div class="col-md-2 mb-4">
-        <h5 class="">Resources</h5>
+      <div class="col-6 col-md-2 mb-4">
+       <h5 class="">Resources</h5>
         <ul class="list-unstyled">
           <li><a href="#" class=" text-decoration-none">Blog</a></li>
           <li><a href="#" class=" text-decoration-none">Help Center</a></li>
@@ -64,11 +66,12 @@
       </div>
 
       <!-- Newsletter -->
-      <div class="col-md-3 mb-4">
+      <div class="col-12 col-sm-6 col-md-3 mb-4">
         <h5 class="text-uppercase">Stay Updated</h5>
         <form (submit)="subscribeEmail($event)">
           <input type="email" class="form-control mb-2" placeholder="Enter your email" required>
           <button type="submit" class="btn btn-danger btn-block w-100">Subscribe</button>
+          
         </form>
       </div>
     </div>

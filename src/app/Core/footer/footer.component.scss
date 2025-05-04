@@ -86,7 +86,7 @@
       color: #fdfdfd !important;
       border-radius: 2.375rem;
       width: 70% !important;
-      margin-left: 35px !important;
+      // margin-left: 35px !important;
       font-size: 12px; // ✅ 
       padding: 0.75rem 1.2rem; 
   
@@ -207,5 +207,125 @@ select:hover + .bi-globe-americas,
   }
   100% {
     background-position: -10000px 5000px;
+  }
+}
+
+@media (max-width: 676px) {
+  .footer .form-control {
+    margin-left: 2.5rem;
+    font-size: 0.9rem;
+    padding: 0.5rem 3rem;
+  }
+
+  .footer .btn {
+    font-size: 0.9rem;
+    padding: 0.5rem 3rem;
+  }
+
+  .footer h5 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .footer p, .footer li, .footer a {
+    font-size: 0.85rem;
+  }
+
+  .footer .form-label {
+    font-size: 0.85rem;
+  }
+}
+
+// @media (max-width: 768px) {
+
+//   .footer h5{
+//     margin-left: 2.5rem;
+    
+//   }
+//   .footer .small{
+//     text-align: justify;
+//     padding: 0 50px;
+//     color: #988f8f !important;
+//   }
+//   .footer .col-12 .col-md-3 {
+//     flex: 1;
+//     min-width: 100px;
+//     margin: 0 30px;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+
+//   .footer .form-control{
+   
+//     margin-left: 2.5rem;
+//     font-size: 0.9rem;
+//     // padding: 0.5rem 3rem;
+//   }
+//   .footer form {
+//     width: 100%;
+//     margin: 0 auto ;
+//   }
+
+//   .footer select .form-label.form-control{
+//     margin-right: 1.5rem;
+//   }
+//   // .form-label .form-select{
+//   //   margin-left: 1.5rem;
+
+//   // }
+  
+// }
+
+@media (max-width: 768px) {
+  .footer-links-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 10px;
+    padding: 0 1.5rem;
+  }
+
+  .footer-links-row .col-md-3 {
+    flex: 1;
+    min-width: 100px;
+    margin: 0 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer h5 {
+    margin-left: 2.5rem;
+  }
+
+  .footer .small {
+    text-align: justify;
+    padding: 0 50px;
+    color: #988f8f !important;
+  }
+
+  .footer .form-control {
+    margin-left: 2.5rem;
+    font-size: 0.9rem;
+  }
+
+  .footer form {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+
+@media (max-width: 1220px) {
+  .footer{
+    margin: 2.5rem;
+    
+  }
+
+  .footer form {
+    max-width: 100%;
+    margin: 0 auto;
   }
 }

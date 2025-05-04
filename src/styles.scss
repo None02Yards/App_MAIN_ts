@@ -9,6 +9,11 @@ $borderColor:#a8a8a83d;
 $borderHeight:1px;
 $secondFontColor:#949cb0;
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 router-outlet + * {
     margin-bottom: 80px; 
   }

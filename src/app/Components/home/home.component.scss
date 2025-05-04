@@ -244,7 +244,7 @@
   
   
   .card {
-    background: #020202;
+    background-color: #020202 !important;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   
@@ -345,6 +345,29 @@
   }
 .w-25{
   width: 30% !important;
+}
+
+@media (max-width: 767px) {
+  .slider-container {
+    padding: 0 1rem;
+  }
+
+  .movie-card h5 {
+    font-size: 0.85rem;
+  }
+
+  .cinema-quote blockquote {
+    font-size: 1.1rem;
+  }
+
+  .editor-card {
+    padding: 1rem;
+  }
+
+  .top-card {
+    width: 50%;
+    padding: 0.5rem;
+  }
 }
 
   
