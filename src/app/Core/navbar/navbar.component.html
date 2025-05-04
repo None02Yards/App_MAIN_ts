@@ -2,7 +2,7 @@
 <nav *ngIf="!hideNavbar" 
 class="navbar fixed-top navbar-expand-lg navbar-dark scroll"
 [ngClass]="{ 'scrolled': isScrolled, 'media-margin': isMediaPage }">
-  <a class="navbar-brand logo" routerLink="home" style="color: #db0000; font-weight: bold;">MAIN</a>
+  <a class="navbar-brand mt-3 logo" routerLink="home" style="color: #db0000; font-weight: bold;">MAIN</a>
   
   <button
   class="navbar-toggler"
@@ -19,13 +19,13 @@ class="navbar fixed-top navbar-expand-lg navbar-dark scroll"
 
 
   
-<div
+<div 
 [ngClass]="{
   'collapse': true,
   'navbar-collapse': true,
   'show': !isCollapsed,
   'justify-content-between': true
-}"
+}" class="mt-4"
 id="collapsibleNavId"
 >
 
@@ -58,7 +58,7 @@ id="collapsibleNavId"
       </ul>
   
 
-<!-- RIGHT SIDE: Search & Social -->
+    <!-- RIGHT SIDE: Search & Social -->
     <ul class="navbar-nav ms-auto d-flex align-items-center">
 
       <li class="nav-item" *ngIf="showMenuItem && showSearch">
@@ -80,7 +80,7 @@ id="collapsibleNavId"
     
       <li class="nav-item" *ngIf="showSearch">
         <a routerLink="/watchlist" class="nav-link text-danger font-weight-bold ms-3 d-flex align-items-center">
-          <i class="fa fa-bookmark me-1"></i> Watchlist
+          <i class="fa fa-bookmark me-1" style="color: #860202;"></i> 
         </a>
       </li>
     

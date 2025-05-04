@@ -4,10 +4,9 @@
 .navbar{
     background-color: $lightBgColor;
     margin: 0 30px;
+   
     .nav-link{
         color: #c2bbbb;
-        font-size: 15px;
-        // font-weight: 600;
         font-family: 'Montserrat';
         }
 
@@ -155,6 +154,7 @@
     position: relative;
     display: flex;
     align-items: center;
+    margin-left: 20px;
   }
   
   .search-container input {
@@ -164,14 +164,22 @@
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
     border-radius: 20px;
-    padding: 8px 40px 8px 15px;
     font-size: 14px;
-    height: 36px; // Adjust to match social icon size
-    width: 200px;
-    transition: all 0.3s ease;
+    width: 0;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: width 0.4s ease, padding 0.4s ease, opacity 0.4s ease;
     margin-right: 1rem;
   }
   
+  .search-container:hover input,
+.search-container:focus-within input {
+  width: 200px;
+  padding: 8px 40px 8px 15px;
+  opacity: 1;
+  pointer-events: auto;
+}
   .search-container input::placeholder {
     color: rgba(255, 255, 255, 0.7);
   }
@@ -191,11 +199,13 @@
   
 .navbar-brand{
   font-weight: 900 !important;
-  margin-right: 80px;
+  margin-right: 90px;
 }
 
 .logo{
+  
   font-size: 30px !important;
+  margin-left: 80px;
 
 }
   a.nav-link {

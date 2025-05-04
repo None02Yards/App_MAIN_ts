@@ -10,14 +10,14 @@
 
       <!-- About / Logo -->
       <div class="col-md-3 mb-4">
-        <h5 class=" text-center d-flex align-items-center gap-2">
+        <h5 class=" fw-bold text-center d-flex align-items-center gap-2">
           CINEWORLD <span class="cinema">🎬</span>
         </h5>
          <p class="small">
           Explore trending movies, top TV shows, and the people who make cinema magical.
         </p>
         <div class="language-switcher mt-3">
-          <label for="language" class="form-label">
+          <label for="language" class="form-label mt-3" style="color: rgb(212, 212, 210);">
             Language <i class="bi bi-globe"></i>
           </label>
             <select id="language" class="form-select form-select-sm bg-dark text-light border-secondary" (change)="changeLanguage($event)">
@@ -34,10 +34,10 @@
       <div class="col-md-2 mb-4">
         <h5 class="">Quick Links</h5>
         <ul class="list-unstyled">
-          <li><a routerLink="/home" class="text-light text-decoration-none">Home</a></li>
-          <li><a routerLink="/about" class="text-light text-decoration-none">About Us</a></li>
-          <li><a routerLink="/networks" class="text-light text-decoration-none">Networks</a></li>
-          <li><a routerLink="/people/1" class="text-light text-decoration-none">People</a></li>
+          <li><a routerLink="/home" class=" text-decoration-none">Home</a></li>
+          <li><a routerLink="/about" class=" text-decoration-none">About Us</a></li>
+          <li><a routerLink="/networks" class=" text-decoration-none">Networks</a></li>
+          <li><a routerLink="/people/1" class=" text-decoration-none">People</a></li>
         </ul>
       </div>
 
@@ -45,10 +45,10 @@
       <div class="col-md-2 mb-4">
         <h5 class="">Categories</h5>
         <ul class="list-unstyled">
-          <li><a routerLink="/movies/all/1" class="text-light text-decoration-none">Movies</a></li>
-          <li><a routerLink="/tvshows/all/1" class="text-light text-decoration-none">TV Shows</a></li>
-          <li><a routerLink="/search" class="text-light text-decoration-none">Search</a></li>
-          <li><a routerLink="/top-rated" class="text-light text-decoration-none">Top Rated</a></li>
+          <li><a routerLink="/movies/all/1" class=" text-decoration-none">Movies</a></li>
+          <li><a routerLink="/tvshows/all/1" class=" text-decoration-none">TV Shows</a></li>
+          <li><a routerLink="/search" class=" text-decoration-none">Search</a></li>
+          <li><a routerLink="/top-rated" class=" text-decoration-none">Top Rated</a></li>
         </ul>
       </div>
 
@@ -56,10 +56,10 @@
       <div class="col-md-2 mb-4">
         <h5 class="">Resources</h5>
         <ul class="list-unstyled">
-          <li><a href="#" class="text-light text-decoration-none">Blog</a></li>
-          <li><a href="#" class="text-light text-decoration-none">Help Center</a></li>
-          <li><a href="#" class="text-light text-decoration-none">API</a></li>
-          <li><a href="#" class="text-light text-decoration-none">Privacy Policy</a></li>
+          <li><a href="#" class=" text-decoration-none">Blog</a></li>
+          <li><a href="#" class=" text-decoration-none">Help Center</a></li>
+          <li><a href="#" class=" text-decoration-none">API</a></li>
+          <li><a href="#" class=" text-decoration-none">Privacy Policy</a></li>
         </ul>
       </div>
 
@@ -93,7 +93,7 @@
             </a>
           </li>
         </ul>
-        <p class="small text-muted mb-0">© {{ currentYear }} CineWorld. All rights reserved.</p>
+        <p class="small text-center text-muted mb-0">© {{ currentYear }} CineWorld. All rights reserved.</p>
       </div>
     </div>
   </div>

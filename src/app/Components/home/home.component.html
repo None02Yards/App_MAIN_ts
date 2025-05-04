@@ -60,7 +60,7 @@
               <div *ngFor="let movie of section.posters | slice:0:3" class="poster-box">
                 <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
                     [alt]="movie.title"
-                    class="img-fluid rounded shadow-sm" />
+                    class="img-fluid rounded" />
               </div>
             </div>
             <a [href]="section.link" class="editor-link d-block mt-3 text-primary">
