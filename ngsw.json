@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1746182289715,
+  "timestamp": 1746359022715,
   "index": "https://Zu34.github.io/App_MAIN_ts/index.html",
   "assetGroups": [
     {
@@ -12,12 +12,12 @@
       },
       "urls": [
         "https://Zu34.github.io/App_MAIN_ts/index.html",
-        "https://Zu34.github.io/App_MAIN_ts/main.8af8e7380a02ad2e.js",
+        "https://Zu34.github.io/App_MAIN_ts/main.4409708c37a7a329.js",
         "https://Zu34.github.io/App_MAIN_ts/manifest.webmanifest",
         "https://Zu34.github.io/App_MAIN_ts/polyfills.c04b0af581447a1e.js",
         "https://Zu34.github.io/App_MAIN_ts/runtime.3f055301f0b97381.js",
         "https://Zu34.github.io/App_MAIN_ts/scripts.b44807315ae3cf8c.js",
-        "https://Zu34.github.io/App_MAIN_ts/styles.9087dd318cfb7ba8.css"
+        "https://Zu34.github.io/App_MAIN_ts/styles.859ed59e8006ad03.css"
       ],
       "patterns": []
     },
@@ -30,6 +30,8 @@
       },
       "urls": [
         "https://Zu34.github.io/App_MAIN_ts/assets/1495 (1).gif",
+        "https://Zu34.github.io/App_MAIN_ts/assets/ScreenRecording.gif",
+        "https://Zu34.github.io/App_MAIN_ts/assets/Wlc.png",
         "https://Zu34.github.io/App_MAIN_ts/assets/favicon.jpg",
         "https://Zu34.github.io/App_MAIN_ts/assets/icons/icon-128x128.png",
         "https://Zu34.github.io/App_MAIN_ts/assets/icons/icon-144x144.png",
@@ -62,6 +64,8 @@
   "dataGroups": [],
   "hashTable": {
     "https://Zu34.github.io/App_MAIN_ts/assets/1495 (1).gif": "ea2e6a5af82d7fa7eb005acaa776fc7edff3ba01",
+    "https://Zu34.github.io/App_MAIN_ts/assets/ScreenRecording.gif": "f465d41c1a81442992c35859256766cf75d8a0b1",
+    "https://Zu34.github.io/App_MAIN_ts/assets/Wlc.png": "68e2f527195828dce06235918df9fb7d1449f473",
     "https://Zu34.github.io/App_MAIN_ts/assets/favicon.jpg": "79d41c4e7e3ff910d4a791fe73c9d68b6a0d3c5b",
     "https://Zu34.github.io/App_MAIN_ts/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "https://Zu34.github.io/App_MAIN_ts/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
@@ -72,8 +76,8 @@
     "https://Zu34.github.io/App_MAIN_ts/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "https://Zu34.github.io/App_MAIN_ts/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "https://Zu34.github.io/App_MAIN_ts/assets/screencapture-fullpage.png": "6f3a0573e02f15d2d3706368a833edd0b21fa494",
-    "https://Zu34.github.io/App_MAIN_ts/assets/scss/_hero.scss": "b77a6209fa29d472a56fb6728ec84dbe3c37b0e1",
-    "https://Zu34.github.io/App_MAIN_ts/assets/scss/_variables.scss": "54ea6be8fc967d8b2c9824ab1342aef6818c1bca",
+    "https://Zu34.github.io/App_MAIN_ts/assets/scss/_hero.scss": "b60fe9d68691b44b92103c691358c41112a5591d",
+    "https://Zu34.github.io/App_MAIN_ts/assets/scss/_variables.scss": "63a54b2ce30ed8ac62e276ec906e027fbe390af5",
     "https://Zu34.github.io/App_MAIN_ts/assets/tv.png": "5ba507de8c9bc4a063beecb569e89bcf9e0a901c",
     "https://Zu34.github.io/App_MAIN_ts/fa-brands-400.86ee2658f0f3b5a5.woff2": "31c30351084e2670bbe5c47bd342e11540a68717",
     "https://Zu34.github.io/App_MAIN_ts/fa-brands-400.8eaf0c8893de015e.ttf": "da6f537cd597b76d264970f1c95e4beebc82fde9",
@@ -87,13 +91,13 @@
     "https://Zu34.github.io/App_MAIN_ts/fontawesome-webfont.cf011583fb81df9f.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "https://Zu34.github.io/App_MAIN_ts/fontawesome-webfont.da909aa098b0ee2d.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "https://Zu34.github.io/App_MAIN_ts/fontawesome-webfont.e9955780856cf8aa.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
-    "https://Zu34.github.io/App_MAIN_ts/index.html": "0f2f71887ca4700bd58795b278ce688e41cbd230",
-    "https://Zu34.github.io/App_MAIN_ts/main.8af8e7380a02ad2e.js": "002c42ba76ad8d54e034e19aecc2fd339615fa18",
+    "https://Zu34.github.io/App_MAIN_ts/index.html": "6a6131a82aa1e03cb5f75c3ad2e1cddc97794014",
+    "https://Zu34.github.io/App_MAIN_ts/main.4409708c37a7a329.js": "0514dd979acc188776f17846c0dcb07fabcf370f",
     "https://Zu34.github.io/App_MAIN_ts/manifest.webmanifest": "be68b23b2091a54cc2d64866b8d7af4b8e66dac9",
     "https://Zu34.github.io/App_MAIN_ts/polyfills.c04b0af581447a1e.js": "49d6b957e8ef325f973d921e50124c378b0441ae",
     "https://Zu34.github.io/App_MAIN_ts/runtime.3f055301f0b97381.js": "77191f0269e140988269d3fb444a7f2679acdcab",
     "https://Zu34.github.io/App_MAIN_ts/scripts.b44807315ae3cf8c.js": "c28205c59d7bad9dccd0b7265e3e903a14c1a975",
-    "https://Zu34.github.io/App_MAIN_ts/styles.9087dd318cfb7ba8.css": "635279373b08757907b0354600331930473a83c0"
+    "https://Zu34.github.io/App_MAIN_ts/styles.859ed59e8006ad03.css": "928af57cecdbe3878ceb6e1a404dbdf9eee06785"
   },
   "navigationUrls": [
     {

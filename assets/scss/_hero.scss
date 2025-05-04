@@ -38,19 +38,17 @@
   position: relative;
   z-index: 2;
   display:flex;
-  flex-direction: column; /* Ensures .pane stacks vertically */
-
+  flex-direction: column; 
 }
 
 .mini-poster {
   position: absolute;
   top: 12rem; 
   left: 50%;
-  height: 30vh;
+  height: 50vh;
   transform: translateX(-50%);
-  width: 200px;
+  width: 250px;
   border-radius: 20px;
-  box-shadow: 10px 10px 25px rgba(182, 170, 170, 0.755);
   animation: slideInPoster 0.3s ease-out forwards;
 
 }
@@ -58,7 +56,7 @@
 .mini-poster img {
   width: 100%;
   display: block;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 20px rgba(228, 228, 228, 0.5);
   border-radius: 20px;
 }
 
@@ -102,8 +100,8 @@
     background-image: linear-gradient(
       to top,
       rgbrgba(0, 0, 0, 0.7) 0%,
-      rgba(0, 0, 0, 0.1) 50%,
-      rgba(0, 0, 0, 0.1) 100%
+      rgba(234, 218, 218, 0.1) 50%,
+      rgba(234, 214, 214, 0.1) 100%
     );
 
     @media (min-width: $breakpoint-medium) {
@@ -115,6 +113,7 @@
       );
     }
   }
+  
 
   > div {
     width: 100%;
@@ -152,8 +151,9 @@
 }
 
 .pane {
-  padding: 0 1.5rem 2.5rem;
-
+  padding: 0 3.5rem 3.5rem;
+  margin-top: 1.5rem ;
+  margin-left: 3rem;
   animation: fallIn 0.8s ease-out;
 
 
@@ -184,6 +184,44 @@
   }
 }
 
+@media (max-width: $breakpoint-medium - 1) {
+  .pane {
+    position: relative;
+    margin-top: -60px; // adjust as needed
+    margin-left: 0;
+    padding: 1.5rem;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.5); // optional, helps with readability
+  }
+
+  .slider {
+    display: block;
+    position: relative;
+  }
+
+  .backdrop {
+    position: relative; // don't make it absolute on small screens
+    width: 100%;
+    height: auto;
+
+    &::after {
+      background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.7),
+        rgba(0, 0, 0, 0.2),
+        transparent
+      );
+    }
+  }
+
+  .image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+
 
 @keyframes fallIn {
   0% {
@@ -197,11 +235,10 @@
 }
 
 .name {
-  margin: 0 0 1.7rem;
-  font-weight: 500;
-  font-size: 1.8rem;
+  margin: 0 0 2.7rem;
+  font-weight: 600;
   line-height: 1.1;
-  color: #eaeaea;
+  color: #c4c1c1;
   letter-spacing: $letter-spacing;
   cursor: pointer;
 
@@ -242,7 +279,7 @@
 .info {
   display: flex;
   align-items: center;
-  font-size: 13px;
+  font-size: 15px;
 
   span {
     margin-right: 0.4rem;

@@ -1,11 +1,5 @@
 
-// @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chivo:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&display=swap');
-// .chivo-<uniquifier> {
-//     font-family: "Chivo", sans-serif;
-//     font-optical-sizing: auto;
-//     font-weight: <weight>;
-//     font-style: normal;
-//   }
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chivo:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&display=swap');
 
 $font-family--sans-serif: "Chivo", sans-serif;
 $font-family-serif-dosis: Dosis, sans-serif;
@@ -32,4 +26,5 @@ $breakpoint-small: 768px;
 $breakpoint-medium: 1024px;
 $breakpoint-large: 1200px;
 $breakpoint-xlarge: 1400px;
+
 
