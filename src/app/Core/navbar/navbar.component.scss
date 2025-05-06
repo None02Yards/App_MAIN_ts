@@ -20,6 +20,7 @@
     }
     .dropdown:hover .dropdown-menu {
         .dropdown-item{
+          padding: 0 12px;
             color: $fontColor;
             &:hover{
                 background-color: #db0000 !important;

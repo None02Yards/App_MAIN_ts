@@ -1,0 +1,166 @@
+//  or _footer-media.scss
+
+@import 'media'; // make sure to import the mixin file first
+
+// @include mobile {
+//   .footer-links-row {
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-between;
+//     flex-wrap: nowrap;
+//     gap: 10px;
+//     padding: 0 1.5rem;
+//   }
+
+//   .footer-links-row .col-md-3 {
+//     flex: 1;
+//     min-width: 100px;
+//     margin: 0 5px;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+
+//   .footer h5 {
+//     margin-left: 2.5rem;
+//   }
+
+//   .footer .small {
+//     text-align: justify;
+//     padding: 0 50px;
+//     color: #988f8f !important;
+//   }
+
+//   .footer .form-control {
+//     margin-left: 2.5rem;
+//     font-size: 0.9rem;
+//   }
+
+//   .footer form {
+//     width: 100%;
+//     margin: 0 auto;
+//   }
+// }
+
+.footer {
+    @include md {
+      margin: 2.5rem;
+  
+      form {
+        max-width: 100%;
+        margin: 0 auto;
+      }
+    }
+  
+    @include sm {
+      .footer-links-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 3px;
+        padding: 0 1rem;
+      }
+    
+      .footer-links-row .col-md-2 {
+        flex: 1;
+        min-width: 100px;
+        margin: 0 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .footer h5 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+        margin-left: 2.5rem;
+      }
+    
+      .footer .small {
+        text-align: justify;
+        padding: 0 50px;
+        color: #988f8f !important;
+      }
+    
+      .footer .form-control {
+        margin-left: 2.5rem;
+        font-size: 0.9rem;
+        padding: 0.5rem 3rem;
+      }
+    
+      .footer .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 3rem;
+      }
+    
+      .footer p, .footer li, .footer a {
+        font-size: 0.85rem;
+      }
+    
+      .footer .form-label {
+        font-size: 0.85rem;
+      }
+    
+      .footer form {
+        width: 100%;
+        margin: 0 auto;
+      }
+
+      .footer-info-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 20px;
+        padding: 0 1rem;
+      }
+    
+      .footer-info-row .about-section,
+      .footer-info-row .language-switcher-section {
+        flex: 1;
+        min-width: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    
+      .footer-info-row .about-section p {
+        padding: 0 10px;
+      }
+    
+      .footer-info-row .language-switcher {
+        width: 100%;
+        padding: 0 1rem;
+      }
+    }
+  
+    @include xs {
+      .form-control {
+        margin-left: 2.5rem;
+        font-size: 0.9rem;
+        padding: 0.5rem 3rem;
+      }
+  
+      .btn {
+        font-size: 0.9rem;
+        padding: 0.5rem 3rem;
+      }
+  
+      h5 {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+      }
+  
+      p,
+      li,
+      a {
+        font-size: 0.85rem;
+      }
+  
+      .form-label {
+        font-size: 0.85rem;
+      }
+    }
+  }

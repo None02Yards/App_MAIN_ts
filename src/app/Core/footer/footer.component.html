@@ -8,97 +8,127 @@
   <div class="container">
     <div class="row row text-center text-md-start">
 
-      <!-- About / Logo -->
-      <div class="col-12 col-sm-6 col-md-3 mb-4">
-        <h5 class=" fw-bold text-center d-flex align-items-center gap-2">
-          CINEWORLD <span class="cinema">🎬</span>
-        </h5>
-         <p class="small">
-          Explore trending movies, top TV shows, and the people who make cinema magical.
-        </p>
-        <div class="language-switcher mt-3">
-          <label for="language" class="form-label mt-3" style="color: rgb(212, 212, 210);">
-            Language <i class="bi bi-globe"></i>
-          </label>
-            <select id="language" class="form-select form-select-sm bg-dark text-light border-secondary" (change)="changeLanguage($event)">
-            <option value="en" selected>English</option>
-            <option value="es">Español</option>
-            <option value="fr">Français</option>
-            <option value="de">Deutsch</option>
-            <option value="ar">العربية</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Quick Links -->
-      <div class="col-6 col-md-2 mb-4">
-
-        <h5 class="">Quick Links</h5>
-        <ul class="list-unstyled">
-          <li><a routerLink="/home" class=" text-decoration-none">Home</a></li>
-          <li><a routerLink="/about" class=" text-decoration-none">About Us</a></li>
-          <li><a routerLink="/networks" class=" text-decoration-none">Networks</a></li>
-          <li><a routerLink="/people/1" class=" text-decoration-none">People</a></li>
-        </ul>
-      </div>
-
-      <!-- Categories -->
-      <div class="col-6 col-md-2 mb-4">
-
-        <h5 class="">Categories</h5>
-        <ul class="list-unstyled">
-          <li><a routerLink="/movies/all/1" class=" text-decoration-none">Movies</a></li>
-          <li><a routerLink="/tvshows/all/1" class=" text-decoration-none">TV Shows</a></li>
-          <li><a routerLink="/search" class=" text-decoration-none">Search</a></li>
-          <li><a routerLink="/top-rated" class=" text-decoration-none">Top Rated</a></li>
-        </ul>
-      </div>
-
-      <!-- Resources -->
-      <div class="col-6 col-md-2 mb-4">
-       <h5 class="">Resources</h5>
-        <ul class="list-unstyled">
-          <li><a href="#" class=" text-decoration-none">Blog</a></li>
-          <li><a href="#" class=" text-decoration-none">Help Center</a></li>
-          <li><a href="#" class=" text-decoration-none">API</a></li>
-          <li><a href="#" class=" text-decoration-none">Privacy Policy</a></li>
-        </ul>
-      </div>
-
-      <!-- Newsletter -->
-      <div class="col-12 col-sm-6 col-md-3 mb-4">
-        <h5 class="text-uppercase">Stay Updated</h5>
-        <form (submit)="subscribeEmail($event)">
-          <input type="email" class="form-control mb-2" placeholder="Enter your email" required>
-          <button type="submit" class="btn btn-danger btn-block w-100">Subscribe</button>
-          
-        </form>
-      </div>
+  <!-- 👇 Flex wrapper for About + Language -->
+  <div class="footer-info-row w-100 d-flex justify-content-between flex-wrap">
+    
+    <!-- About / Logo -->
+    <div class="col-6 col-sm-6 col-md-6 mb-4 about-section">
+      <h5 class="fw-bold d-flex align-items-center gap-2 justify-content-center justify-content-md-start">
+        CINEWORLD <span class="cinema">🎬</span>
+      </h5>
+      <p class="title text-center">
+        Explore trending movies, top TV shows, and the people who make cinema magical.
+      </p>
     </div>
 
-    <!-- Social + Copyright -->
-    <div class="row mt-4">
-      <div class="col text-center">
-        <ul class="list-inline mb-2">
-          <li class="list-inline-item">
-            <a href="https://github.com/Zu34" aria-label="GitHub">
-              <i class="fab fa-github fa-lg text-light"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#" aria-label="LinkedIn">
-              <i class="fab fa-linkedin fa-lg text-light"></i>
-            </a>
-          </li>
-          <li class="list-inline-item">
-            <a href="#" aria-label="Email">
-              <i class="fas fa-envelope fa-lg text-light"></i>
-            </a>
-          </li>
+  </div>
+      <!-- Quick Links -->
+  <!-- 👇 Grouped Links Container for Flex Layout -->
+  <div class="footer-links-row d-flex justify-content-between flex-wrap flex-md-nowrap">
+    <!-- Quick Links -->
+    <div class="col-3 col-md-3 mb-4">
+      <h5>Quick Links</h5>
+      <ul class="list-unstyled">
+        <li><a routerLink="/home" class="text-decoration-none">Home</a></li>
+        <li><a routerLink="/about" class="text-decoration-none">About Us</a></li>
+        <li><a routerLink="/networks" class="text-decoration-none">Networks</a></li>
+        <li><a routerLink="/people/1" class="text-decoration-none">People</a></li>
+      </ul>
+    </div>
+
+       <!-- Quick Links -->
+       <div class="col-3 col-md-3 mb-4">
+        <h5>Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a routerLink="/home" class="text-decoration-none">Home</a></li>
+          <li><a routerLink="/about" class="text-decoration-none">About Us</a></li>
+          <li><a routerLink="/networks" class="text-decoration-none">Networks</a></li>
+          <li><a routerLink="/people/1" class="text-decoration-none">People</a></li>
         </ul>
+      </div>
+
+    <!-- Categories -->
+    <div class="col-3 col-md-3 mb-4">
+      <h5>Categories</h5>
+      <ul class="list-unstyled">
+        <li><a routerLink="/movies/all/1" class="text-decoration-none">Movies</a></li>
+        <li><a routerLink="/tvshows/all/1" class="text-decoration-none">TV Shows</a></li>
+        <li><a routerLink="/search" class="text-decoration-none">Search</a></li>
+        <li><a routerLink="/top-rated" class="text-decoration-none">Top Rated</a></li>
+      </ul>
+    </div>
+
+    <!-- Resources -->
+    <div class="col-3 col-md-3 mb-4">
+      <h5>Resources</h5>
+      <ul class="list-unstyled">
+        <li><a href="#" class="text-decoration-none">Blog</a></li>
+        <li><a href="#" class="text-decoration-none">Help Center</a></li>
+        <li><a href="#" class="text-decoration-none">API</a></li>
+        <li><a href="#" class="text-decoration-none">Privacy Policy</a></li>
+      </ul>
+    </div>
+
+    <div class="col-3 col-sm-6 col-md-3 mb-4">
+      <h5 class="text-uppercase">Stay Updated</h5>
+      <form (submit)="subscribeEmail($event)">
+        <input type="email" class="form-control mb-2" placeholder="Enter your email" required>
+        <button type="submit" class="btn btn-danger btn-block w-100">Subscribe</button>
+        
+      </form>
+    </div>
+  </div>
+
+
+    </div>
+
+    
+   
+    <!-- Social + Copyright -->
+    <div class="row social mt-2">
+      <div class="col text-center">
+        <div class="d-flex justify-content-center align-items-center">
+          <ul class="list-inline mb-2">
+            <li class="list-inline-item">
+              <a href="https://github.com/Zu34" aria-label="GitHub">
+                <i class="fab fa-github fa-lg text-light"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" aria-label="LinkedIn">
+                <i class="fab fa-linkedin fa-lg text-light"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#" aria-label="Email">
+                <i class="fas fa-envelope fa-lg text-light"></i>
+              </a>
+            </li>
+          </ul>
+
+          <!-- Language Dropdown -->
+          <div class="language-dropdown ms-3"> <!-- ms-3 adds margin-left -->
+            <button class="dropdown-toggle" (click)="toggleDropdown()">
+              <i class="bi bi-globe"></i>
+              <span>{{ currentLang }}</span>
+              <i class="bi bi-caret-down-fill"></i>
+            </button>
+
+            <ul class="dropdown-menu" [class.show]="isOpen">
+              <li (click)="setLanguage('English')">English</li>
+              <li (click)="setLanguage('Español')">Español</li>
+              <li (click)="setLanguage('Français')">Français</li>
+              <li (click)="setLanguage('Deutsch')">Deutsch</li>
+              <li (click)="setLanguage('العربية')">العربية</li>
+            </ul>
+          </div>
+        </div>
+
         <p class="small text-center text-muted mb-0">© {{ currentYear }} CineWorld. All rights reserved.</p>
       </div>
-    </div>
+</div>
+
+
   </div>
 
 </footer>
