@@ -2,9 +2,9 @@
   <!-- Title Row with Button -->
   <div class="mt-5 py-5 d-flex justify-content-between align-items-center mb-4">
     <h2 class="text-center mt-5 m-0">My Watchlist</h2>
-    
+
     <!-- Create New List Button -->
-    <button class=" mt-5 create-list-button" (click)="openCreateListModal()">
+    <button class="mt-5 create-list-button" (click)="openCreateListModal()">
       <span class="plus-icon">+</span>
       <div class="button-text">
         <div class="main-text">Create a new list</div>
@@ -12,41 +12,57 @@
       </div>
     </button>
   </div>
+
   <hr>
+
   <!-- Movies Section -->
-  <h3>Movies</h3>
+  <h3 class="watchlist-heading ">Movies</h3>
   <div class="row">
-    <div class="col-md-2 mb-4" *ngFor="let item of movies">
-      <div class="card h-100 position-relative watchlist-card">
-        <!-- Remove Button -->
-        <button (click)="removeFromWatchlist(item.id)" 
-                class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1">
-          -
-        </button>
-        <img [src]="'https://image.tmdb.org/t/p/w300' + item.poster_path" 
-             [alt]="item.name || item.title" 
-             class="card-img-top">
-        <h6 class="card-title text-center bg-dark">{{ item.name || item.title }}</h6>
+    <div class="col-md-2 overflow-hidden mb-4" *ngFor="let item of movies">
+      <div class="poster position-relative overflow-hidden">
+        <!-- Poster Image -->
+        <img class="w-100" [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path" [alt]="item.title" />
+
+        <!-- Hover Layer with Play Button -->
+        <div class="layer">
+          <a class="bg-transparent" [routerLink]="'/details/movie/' + item.id">
+            <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
+          </a>
+        </div>
+
+        <!-- Watchlist Toggle (Remove) -->
+        <div class="watchlist-icon watchlist-active" (click)="removeFromWatchlist(item.id)">
+          <i class="fa fa-bookmark bookmark-icon-inner"></i>
+        </div>
+
+        <!-- Title -->
+        <h5 class="text-center mt-2">{{ item.title }}</h5>
       </div>
     </div>
   </div>
 
   <!-- TV Shows Section -->
-  <h3>TV Shows</h3>
+  <h3 class="watchlist-heading">TV Shows</h3>
   <div class="row">
-    <div class="col-md-2 mb-4" *ngFor="let item of tvShows">
-      <div class="card h-100 position-relative watchlist-card">
-        <!-- Remove Button -->
-        <button (click)="removeFromWatchlist(item.id)" 
-                class="btn btn-danger btn-sm position-absolute top-0 end-0 m-1">
-          -
-        </button>
-        <img [src]="'https://image.tmdb.org/t/p/w300' + item.poster_path" 
-             [alt]="item.name || item.title" 
-             class="card-img-top">
-        <div class="card-body">
-          <h6 class="card-title text-center">{{ item.name || item.title }}</h6>
+    <div class="col-md-2 overflow-hidden mb-4" *ngFor="let item of tvShows">
+      <div class="poster position-relative overflow-hidden">
+        <!-- Poster Image -->
+        <img class="w-100" [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path" [alt]="item.name" />
+
+        <!-- Hover Layer with Play Button -->
+        <div class="layer">
+          <a class="bg-transparent" [routerLink]="'/details/tv/' + item.id">
+            <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
+          </a>
         </div>
+
+        <!-- Watchlist Toggle (Remove) -->
+        <div class="watchlist-icon watchlist-active" (click)="removeFromWatchlist(item.id)">
+          <i class="fa fa-bookmark bookmark-icon-inner"></i>
+        </div>
+
+        <!-- Title -->
+        <h5 class="text-center mt-2">{{ item.name }}</h5>
       </div>
     </div>
   </div>

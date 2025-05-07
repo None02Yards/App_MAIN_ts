@@ -1,64 +1,68 @@
+.poster {
+  margin: 1rem;
+  border-radius: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem; // instead of tight margins
+  justify-content: flex-start;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  position: relative;
 
-.card-body{
-    background: #000;
-    margin: 1rem;
+
+  img {
     border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    position: relative;
-  
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(247, 241, 241, 0.487);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+    border-radius: 10px;
+    z-index: 5;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+
     img {
-      border-radius: 15px;
-      transition: transform 0.4s ease-in-out;
+      transform: scale(1.1);
     }
 
-}
-
-
-.watchlist-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease; // Smooth animation
-    cursor: pointer; // Makes it feel clickable
-  
-    &:hover {
-      transform: translateY(-5px); // Slight lift on hover
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); // Nice soft shadow
+    .layer {
+      opacity: 1;
     }
   }
-  
-  /* Modal styling */
-// .modal {
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     height: 100%;
-//     background-color: rgba(0, 0, 0, 0.5);
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     z-index: 1000;
-//   }
-  
-//   .modal-content {
-//     background-color: white;
-//     padding: 20px;
-//     border-radius: 5px;
-//     width: 300px;
-//     text-align: center;
-//   }
-  
-//   input {
-//     width: 100%;
-//     padding: 8px;
-//     margin-bottom: 10px;
-//     border: 1px solid #ccc;
-//     border-radius: 4px;
-//   }
-  
-//   button {
-//     margin: 5px;
-//   }
+
+  .watchlist-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #f7f1f1ca;
+    opacity: 0.3;
+    z-index: 6;
+    transition: all 0.3s ease;
+    margin-bottom: 4rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    &.watchlist-active {
+      opacity: 1;
+      color: #ffc107;
+    }
+  }
+}
 
 .create-list-container {
   display: flex;
@@ -106,4 +110,9 @@
   color: #333;
 }
 
-
+.watchlist-heading {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #fff;
+}
