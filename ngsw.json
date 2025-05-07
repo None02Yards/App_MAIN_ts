@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1746380176565,
+  "timestamp": 1746619598869,
   "index": "https://Zu34.github.io/App_MAIN_ts/index.html",
   "assetGroups": [
     {
@@ -12,7 +12,7 @@
       },
       "urls": [
         "https://Zu34.github.io/App_MAIN_ts/index.html",
-        "https://Zu34.github.io/App_MAIN_ts/main.8e2eaf69adba909f.js",
+        "https://Zu34.github.io/App_MAIN_ts/main.83b78fdc4aaf488c.js",
         "https://Zu34.github.io/App_MAIN_ts/manifest.webmanifest",
         "https://Zu34.github.io/App_MAIN_ts/polyfills.c04b0af581447a1e.js",
         "https://Zu34.github.io/App_MAIN_ts/runtime.3f055301f0b97381.js",
@@ -44,6 +44,8 @@
         "https://Zu34.github.io/App_MAIN_ts/assets/screencapture-fullpage.png",
         "https://Zu34.github.io/App_MAIN_ts/assets/scss/_hero.scss",
         "https://Zu34.github.io/App_MAIN_ts/assets/scss/_variables.scss",
+        "https://Zu34.github.io/App_MAIN_ts/assets/scss/media/_footer-media.scss",
+        "https://Zu34.github.io/App_MAIN_ts/assets/scss/media/_media.scss",
         "https://Zu34.github.io/App_MAIN_ts/assets/tv.png",
         "https://Zu34.github.io/App_MAIN_ts/fa-brands-400.86ee2658f0f3b5a5.woff2",
         "https://Zu34.github.io/App_MAIN_ts/fa-brands-400.8eaf0c8893de015e.ttf",
@@ -78,6 +80,8 @@
     "https://Zu34.github.io/App_MAIN_ts/assets/screencapture-fullpage.png": "6f3a0573e02f15d2d3706368a833edd0b21fa494",
     "https://Zu34.github.io/App_MAIN_ts/assets/scss/_hero.scss": "b60fe9d68691b44b92103c691358c41112a5591d",
     "https://Zu34.github.io/App_MAIN_ts/assets/scss/_variables.scss": "63a54b2ce30ed8ac62e276ec906e027fbe390af5",
+    "https://Zu34.github.io/App_MAIN_ts/assets/scss/media/_footer-media.scss": "84ed1e79af221a159b1ba96c8cd0ba874802eb61",
+    "https://Zu34.github.io/App_MAIN_ts/assets/scss/media/_media.scss": "1e72224f8525d27fd942d5b0d9bbc95852f65cc3",
     "https://Zu34.github.io/App_MAIN_ts/assets/tv.png": "5ba507de8c9bc4a063beecb569e89bcf9e0a901c",
     "https://Zu34.github.io/App_MAIN_ts/fa-brands-400.86ee2658f0f3b5a5.woff2": "31c30351084e2670bbe5c47bd342e11540a68717",
     "https://Zu34.github.io/App_MAIN_ts/fa-brands-400.8eaf0c8893de015e.ttf": "da6f537cd597b76d264970f1c95e4beebc82fde9",
@@ -91,8 +95,8 @@
     "https://Zu34.github.io/App_MAIN_ts/fontawesome-webfont.cf011583fb81df9f.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "https://Zu34.github.io/App_MAIN_ts/fontawesome-webfont.da909aa098b0ee2d.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "https://Zu34.github.io/App_MAIN_ts/fontawesome-webfont.e9955780856cf8aa.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
-    "https://Zu34.github.io/App_MAIN_ts/index.html": "67a200f1b8dcd65254ffddfe3a923c1beff936f8",
-    "https://Zu34.github.io/App_MAIN_ts/main.8e2eaf69adba909f.js": "4f894032d4122a72870f2c72a8e69092e6665efd",
+    "https://Zu34.github.io/App_MAIN_ts/index.html": "336e3f3d3265613ef675f739edc9675f01aecbe9",
+    "https://Zu34.github.io/App_MAIN_ts/main.83b78fdc4aaf488c.js": "9391795e5d17ddc9f11a207ad2a30e233e815556",
     "https://Zu34.github.io/App_MAIN_ts/manifest.webmanifest": "be68b23b2091a54cc2d64866b8d7af4b8e66dac9",
     "https://Zu34.github.io/App_MAIN_ts/polyfills.c04b0af581447a1e.js": "49d6b957e8ef325f973d921e50124c378b0441ae",
     "https://Zu34.github.io/App_MAIN_ts/runtime.3f055301f0b97381.js": "77191f0269e140988269d3fb444a7f2679acdcab",
