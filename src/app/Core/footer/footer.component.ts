@@ -75,7 +75,6 @@ export class FooterComponent {
     }
   }
 
-  // Toggle dropdown visibility
   toggleDropdown(): void {
     this.isOpen = !this.isOpen;
   }

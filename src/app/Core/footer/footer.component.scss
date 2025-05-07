@@ -3,8 +3,6 @@
 @import '/src/assets/scss/media/footer-media';
 
 
-
-
 .footer {
   background-color:rgba(7, 7, 7, 0.18) !important;
   margin-top: 7rem;
@@ -17,7 +15,7 @@
 
 
   .container {
-    max-width: 1140px;
+    max-width: 1240px;
     margin:20px auto;
   }
 
@@ -147,7 +145,13 @@ line-height: 1.5;
 
 
 .social{
-  margin-top: 60px !important;
+  margin-top: 80px !important;
+  i
+  {
+    color: #afaaaa !important;
+    padding: 0 3px;
+
+}
 }
 
 .bi-globe-americas {
@@ -171,19 +175,20 @@ select:hover + .bi-globe-americas,
 .language-dropdown {
   display: inline-block;
   font-size: 14px;
-  margin-top: 19px;
-  margin-left: 18px !important; 
+  margin-top: 20px;
+  margin-left: 10px !important; 
   text-align: center;
 }
 
 .language-dropdown button {
   background: transparent;
   border: none;
-  color: #fff;
-  font-size: 14px; 
-  display: flex;
+  color: #afaaaa;
+  font-size: 13px; 
+  // display: flex;
   align-items: center;
-  gap: 5px;
+  // gap: 5px;
+  margin-left: 8px;
   list-style: none;
 }
 
