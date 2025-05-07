@@ -37,12 +37,15 @@
                     </div>
                     
                     <div class="hero-buttons">
-                      <button class="btn btn-play">
-                        <i class="material-icons">play_arrow</i> Play
-                      </button>
-                      <button class="btn btn-info">
-                        <i class="material-icons">info</i> More Info
-                      </button>
+                      <div class="hero-buttons">
+                        <button class="btn btn-play" [routerLink]="['/details/movie/', slider.id]">
+                          <i class="material-icons">play_arrow</i> Play
+                        </button>
+                        <button class="btn btn-info">
+                          <i class="material-icons">info</i> More Info
+                        </button>
+                      </div>
+                      
                     </div>
                     
               </div>      
