@@ -58,3 +58,27 @@ export class WatchlistComponent implements OnInit {
   }
   
 }
+
+// import { Component, OnInit } from '@angular/core';
+// import { ActivatedRoute } from '@angular/router';
+
+// @Component({
+//   selector: 'app-watchlist',
+//   templateUrl: './watchlist.component.html',
+//   styleUrls: ['./watchlist.component.scss']
+// })
+// export class WatchlistComponent implements OnInit {
+//   type: string = 'movies';
+
+//   constructor(private route: ActivatedRoute) {}
+
+//   ngOnInit(): void {
+//     this.route.paramMap.subscribe(params => {
+//       this.type = params.get('type') || 'movies';
+//     });
+//   }
+
+//   openCreateListModal() {
+//     this.isCreateListModalOpen = true;
+//   }
+// }

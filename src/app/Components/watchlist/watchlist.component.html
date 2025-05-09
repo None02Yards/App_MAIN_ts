@@ -29,41 +29,38 @@
 
 <!-- Main Content -->
 <div class="container mt-4">
-  <!-- Movies Section -->
-  <h3 class="watchlist-heading">Movies 🎥</h3>
-  <div class="row">
-    <div class="col-md-2 overflow-hidden mb-4" *ngFor="let item of movies">
-      <div class="poster position-relative overflow-hidden">
-        <img class="w-100" [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path" [alt]="item.title" />
-        <div class="layer">
-          <a class="bg-transparent" [routerLink]="'/details/movie/' + item.id">
-            <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
-          </a>
-        </div>
-        <div class="watchlist-icon watchlist-active" (click)="removeFromWatchlist(item.id)">
-          <i class="fa fa-bookmark bookmark-icon-inner"></i>
-        </div>
-        <h5 class="text-center mt-2">{{ item.title }}</h5>
-      </div>
-    </div>
-  </div>
 
-  <!-- TV Shows Section -->
-  <h3 class="watchlist-heading">TV Shows 📺</h3>
-  <div class="row">
-    <div class="col-md-2 overflow-hidden mb-4" *ngFor="let item of tvShows">
-      <div class="poster position-relative overflow-hidden">
-        <img class="w-100" [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path" [alt]="item.name" />
-        <div class="layer">
-          <a class="bg-transparent" [routerLink]="'/details/tv/' + item.id">
-            <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
-          </a>
-        </div>
-        <div class="watchlist-icon watchlist-active" (click)="removeFromWatchlist(item.id)">
-          <i class="fa fa-bookmark bookmark-icon-inner"></i>
-        </div>
-        <h5 class="text-center mt-2">{{ item.name }}</h5>
+  <!-- watchlist.component.html -->
+  <div class="watchlist-row">
+    <!-- Movies Card -->
+    <div class="category-card">
+      <h2>🍿 Movies</h2>
+      <div class="preview-thumbs">
+        <img *ngFor="let movie of movies.slice(0, 4)" [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="movie poster" />
       </div>
+      <a routerLink="/watchlist/movies">View All</a>
+    </div>
+  
+    <!-- TV Shows Card -->
+    <div class="category-card">
+      <h2>📺 TV Shows</h2>
+      <div class="preview-thumbs">
+        <img *ngFor="let show of tvShows.slice(0, 4)" [src]="'https://image.tmdb.org/t/p/w200' + show.poster_path" alt="tv poster" />
+      </div>
+      <a routerLink="/watchlist/tv">View All</a>
+    </div>
+  
+    <!-- Animes Card (if needed) -->
+    <div class="category-card">
+      <h2>✨ Animes</h2>
+      <div class="preview-thumbs anime">
+        <p>No animes saved yet</p>
+      </div>
+      <a routerLink="/watchlist/animes">Explore</a>
     </div>
   </div>
+  
+
 </div>
+<!-- 
+<router-outlet></router-outlet> -->

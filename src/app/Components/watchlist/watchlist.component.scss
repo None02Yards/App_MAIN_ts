@@ -67,7 +67,7 @@
 .create-list-container {
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
 
 }
 
@@ -81,7 +81,7 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   text-align: left;
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .create-list-button:hover {
@@ -119,21 +119,24 @@
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif !important;
 }
 
-
+.anime{
+  background-image: url('./anime-collage.jpg');
+  background-size: cover;
+  object-fit: contain;
+  background-repeat: no-repeat;
+}
 
 
 .watchlist-header {
-  background: linear-gradient(to right, #c4b69c, #0d0d0e, #23232380);
+  background: linear-gradient(to right, #827357,#111110b4, #0b0b0a, #23232380);
   position: relative;
   padding-top: 4rem;
  border-bottom: 1px solid #323131;
 
   .header-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    margin-bottom: 3rem;
-
-    // Fix the layout to align button left
+    // max-width: 1400px;
+    // margin: 0 auto;
+    // margin-bottom: 3rem;
     display: flex;
     justify-content: flex-end; // this makes button align left
     align-items: center;
@@ -172,3 +175,55 @@
   font-size: 1.75rem;
   margin: 2rem 0 1rem;
 }
+
+
+
+
+.watchlist-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin-top: 7rem;
+  margin-bottom: 3rem;
+}
+
+.category-card {
+  flex: 1 1 30%;
+  background: #1a1a1a;
+  color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  h2 {
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .preview-thumbs {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+
+    img {
+      height: 100px;
+      border-radius: 6px;
+      object-fit: cover;
+    }
+  }
+
+  a {
+    color: #facc15;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
+

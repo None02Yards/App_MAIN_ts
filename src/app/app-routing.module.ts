@@ -11,6 +11,12 @@ import { PersonDetailsComponent } from './Components/person-details/person-detai
 import { SearchComponent } from './Components/search/search.component';
 import { TVShowsComponent } from './Components/tvshows/tvshows.component';
 import { WatchlistComponent } from './Components/watchlist/watchlist.component';
+// import { MoviesWatchlistComponent } from './Components/watchlist/movies-watchlist/movies-watchlist.component';
+// import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-watchlist.component';
+// import { AnimeWatchlistComponent } from './Components/watchlist/anime-watchlist/anime-watchlist.component';
+
+
+
 
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
@@ -26,7 +32,16 @@ const routes: Routes = [
   {
     path: 'tvshows/:genre/:page', component: TVShowsComponent, 
   },
-  { path: 'watchlist', component: WatchlistComponent },
+{
+  path: 'watchlist',
+  component: WatchlistComponent,
+  // children: [
+  //   { path: 'movies', component: MoviesWatchlistComponent },
+  //   { path: 'tv', component: TvWatchlistComponent },
+  //   { path: 'anime', component: AnimeWatchlistComponent },
+  //   { path: '', redirectTo: 'movies', pathMatch: 'full' }
+  // ]
+},
 
   {
     path: 'details/:mediaType/:id', component: DetailsComponent, 
