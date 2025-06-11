@@ -7,6 +7,8 @@
 ![theme](./src/assets/Wlc.png)
 ## full_page
 ![theme](/src/assets/screencapture-fullpage.png).
+## Full_page 2
+![theme](/src/assets/screencapture2.png).
 
 
 ## Screen_Re
