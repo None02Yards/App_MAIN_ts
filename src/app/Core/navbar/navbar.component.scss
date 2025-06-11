@@ -131,24 +131,31 @@
     }
   }
 
+    .small-text{
+      font-family: "Dancing Script", cursive !important;
+      font-size: 13px;
+      font-weight: 600;
+      margin: -10px;
+     font-style: italic ;
+    
+      }
   
-  
-  @media (max-width: 991px) {
-    .navbar-nav .form-inline {
-      width: 100%;
-      margin-top: 10px;
+    @media (max-width: 991px) {
+      .navbar-nav .form-inline {
+        width: 100%;
+        margin-top: 10px;
+      }
+    
+      .navbar-nav .nav-item {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+      }
+    
+      .search-container {
+        justify-content: center;
+      }
     }
-  
-    .navbar-nav .nav-item {
-      width: 100%;
-      text-align: center;
-      margin-top: 10px;
-    }
-  
-    .search-container {
-      justify-content: center;
-    }
-  }
   
   
   .search-container {
@@ -207,10 +214,11 @@
   margin-right: 90px;
 }
 
-.logo{
+
+  .logo{
+  font-size: 35px !important;
+  margin-left: 75px;
   
-  font-size: 30px !important;
-  margin-left: 70px;
 
 }
   a.nav-link {

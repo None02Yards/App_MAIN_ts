@@ -1,68 +1,3 @@
-.poster {
-  margin: 1rem;
-  border-radius: 15px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem; // instead of tight margins
-  justify-content: flex-start;
-  transition: transform 0.3s ease;
-  // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  position: relative;
-
-
-  img {
-    border-radius: 15px;
-    transition: transform 0.4s ease-in-out;
-  }
-
-  .layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(247, 241, 241, 0.487);
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.3s ease;
-    border-radius: 10px;
-    z-index: 5;
-  }
-
-  &:hover {
-    transform: scale(1.05);
-
-    img {
-      transform: scale(1.1);
-    }
-
-    .layer {
-      opacity: 1;
-    }
-  }
-
-  .watchlist-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #f7f1f1ca;
-    opacity: 0.3;
-    z-index: 6;
-    transition: all 0.3s ease;
-    margin-bottom: 4rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    &.watchlist-active {
-      opacity: 1;
-      color: #ffc107;
-    }
-  }
-}
 
 .create-list-container {
   display: flex;
@@ -72,10 +7,10 @@
 }
 
 .create-list-button {
-  background-color: #f5c518; // IMDb Yellow
+  background-color: #f5c518; 
   border: none;
   border-radius: 999px;
-  padding: 3px 32px;
+  padding: 3px 20px;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -131,7 +66,7 @@
   background: linear-gradient(to right, #827357,#111110b4, #0b0b0a, #23232380);
   position: relative;
   padding-top: 4rem;
- border-bottom: 1px solid #323131;
+ border-bottom: 1px solid #7876769d;
 
   .header-content {
     // max-width: 1400px;

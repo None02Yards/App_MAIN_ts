@@ -48,6 +48,7 @@
   height: 50vh;
   transform: translateX(-50%);
   width: 250px;
+  margin-top: 1rem;
   border-radius: 20px;
   animation: slideInPoster 0.3s ease-out forwards;
 
@@ -152,7 +153,7 @@
 
 .pane {
   padding: 0 3.5rem 3.5rem;
-  margin-top: 1.5rem ;
+  margin-top: 2rem ;
   margin-left: 3rem;
   animation: fallIn 0.8s ease-out;
 

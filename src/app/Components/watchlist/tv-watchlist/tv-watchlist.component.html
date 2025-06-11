@@ -1,22 +1,15 @@
-<!-- <div class="row">
-    <div class="col-md-2 overflow-hidden mb-4" *ngFor="let item of tvShows">
-      <app-watchlist-card
-        [item]="item"
-        type="tv"
-        (remove)="remove(item.id)">
-      </app-watchlist-card>
-    </div>
-  </div> -->
 
-  <h3 class="watchlist-heading">TV Shows 📺</h3>
-<div class="row">
-  <div class="col-md-2 overflow-hidden mb-4" *ngFor="let item of tvShows">
-    <app-watchlist-card
-      [item]="item"
-      type="tv"
-      (remove)="removeFromWatchlist(item.id)">
-    </app-watchlist-card>
-  </div>
+
+<div class="tv-page px-4 my-2"> <h2 class="title mt-5 my-4">{{ pageTitle }}</h2>
+<app-watchlist-card
+[items]="tvShows"
+mediaType="tv"
+(remove)="handleRemove($event)">
+</app-watchlist-card>
+
 </div>
+
+
+
 
   

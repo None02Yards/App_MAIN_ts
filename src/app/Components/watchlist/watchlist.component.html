@@ -1,66 +1,64 @@
-<!-- Header Section with Gradient Background -->
-<div class="  watchlist-header position-relative text-white">
-  <!-- Popcorn Emoji (Floating Overlap) -->
- 
+<!-- watchlist.component.html -->
+  <div class="  watchlist-header position-relative text-white">
+  <div class="watchlist-header position-relative text-white">
+    <div class="floating-title">
+      <h1 class="watchlist-title m-0 ms-2">Watchlist Hub</h1>
+      <span class="emoji">🍿</span>
+    </div>
 
-<!-- Header Section with Gradient Background -->
-<div class="watchlist-header position-relative text-white">
-
-  <!-- Floating Popcorn Title -->
-  <div class="floating-title">
-    <h1 class="watchlist-title m-0 ms-2">Watchlist Hub</h1>
-    <span class="emoji">🍿</span>
+    <!-- Header content, button aligned left -->
+    <div class="header-content">
+      <button class="create-list-button" (click)="openCreateListModal()">
+        <span class="plus-icon me-2">+</span>
+        <div class="button-text">
+          <div class="main-text">Create a new list</div>
+          <div class="sub-text">List your movie, TV & celebrity picks.</div>
+        </div>
+      </button>
+    </div>
   </div>
 
-  <!-- Header content, button aligned left -->
-  <div class="header-content">
-    <button class="create-list-button" (click)="openCreateListModal()">
-      <span class="plus-icon me-2">+</span>
-      <div class="button-text">
-        <div class="main-text">Create a new list</div>
-        <div class="sub-text">List your movie, TV & celebrity picks.</div>
+  <!-- Main Content -->
+<div *ngIf="!childRouteActive">
+  <div class="container mt-4">
+    <div class="watchlist-row">
+      <!-- Movies Card -->
+      <div class="category-card">
+        <h2>🍿 Movies</h2>
+        <div class="preview-thumbs">
+          <img *ngFor="let movie of movies.slice(0, 4)" 
+              [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" 
+              [alt]="movie.title" />
+        </div>
+        <a routerLink="/watchlist/movies">View All</a>
       </div>
-    </button>
+    
+      <!-- TV Shows Card -->
+      <div class="category-card">
+        <h2>📺 TV Shows</h2>
+        <div class="preview-thumbs">
+          <img *ngFor="let show of tvShows.slice(0, 4)" 
+              [src]="'https://image.tmdb.org/t/p/w200' + show.poster_path" 
+              [alt]="show.title" />
+        </div>
+        <a routerLink="/watchlist/tv">View All</a>
+      </div>
+    
+      <!-- Animes Card (if needed) -->
+      <div class="category-card">
+        <h2>✨ Animes</h2>
+        <div class="preview-thumbs anime">
+          <p>No animes saved yet</p>
+        </div>
+        <a routerLink="/watchlist/animes">Explore</a>
+      </div>
+    </div>
+    
+
   </div>
 </div>
 
 
 
 
-<!-- Main Content -->
-<div class="container mt-4">
 
-  <!-- watchlist.component.html -->
-  <div class="watchlist-row">
-    <!-- Movies Card -->
-    <div class="category-card">
-      <h2>🍿 Movies</h2>
-      <div class="preview-thumbs">
-        <img *ngFor="let movie of movies.slice(0, 4)" [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" alt="movie poster" />
-      </div>
-      <a routerLink="/watchlist/movies">View All</a>
-    </div>
-  
-    <!-- TV Shows Card -->
-    <div class="category-card">
-      <h2>📺 TV Shows</h2>
-      <div class="preview-thumbs">
-        <img *ngFor="let show of tvShows.slice(0, 4)" [src]="'https://image.tmdb.org/t/p/w200' + show.poster_path" alt="tv poster" />
-      </div>
-      <a routerLink="/watchlist/tv">View All</a>
-    </div>
-  
-    <!-- Animes Card (if needed) -->
-    <div class="category-card">
-      <h2>✨ Animes</h2>
-      <div class="preview-thumbs anime">
-        <p>No animes saved yet</p>
-      </div>
-      <a routerLink="/watchlist/animes">Explore</a>
-    </div>
-  </div>
-  
-
-</div>
-<!-- 
-<router-outlet></router-outlet> -->
