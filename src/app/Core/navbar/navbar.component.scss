@@ -214,6 +214,11 @@
   margin-right: 90px;
 }
 
+.navbar .nav-item.active > .nav-link,
+.navbar .nav-item .dropdown-item.active {
+  color: #db0000 !important;
+  font-weight: bold;
+}
 
   .logo{
   font-size: 35px !important;
