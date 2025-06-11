@@ -1,7 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MoviesWatchlistComponent } from './movies-watchlist.component';
-
 describe('MoviesWatchlistComponent', () => {
   let component: MoviesWatchlistComponent;
   let fixture: ComponentFixture<MoviesWatchlistComponent>;

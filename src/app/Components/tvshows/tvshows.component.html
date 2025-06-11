@@ -17,7 +17,9 @@
                 <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
               </a>
             </div>
-            <div class="watchlist-icon" [ngClass]="{ 'watchlist-active': isInWatchlist(item.id) }" (click)="toggleWatchlist(item.id)">
+            <div class="watchlist-icon"
+         [ngClass]="{ 'watchlist-active': isInWatchlist(item.id) }"
+         (click)="toggleWatchlist(item)">
               <i class="fa fa-bookmark bookmark-icon-inner"></i>
             </div>
             <h5 class="text-center mt-2">{{ item.name }}</h5>

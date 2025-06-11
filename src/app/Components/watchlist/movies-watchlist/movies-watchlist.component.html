@@ -1,10 +1,10 @@
-<h3 class="watchlist-heading">Movies 🎥</h3>
-<div class="row">
-  <div class="col-md-2 overflow-hidden mb-4" *ngFor="let item of movies">
-    <app-watchlist-card
-      [item]="item"
-      type="movie"
-      (remove)="removeFromWatchlist(item.id)">
-    </app-watchlist-card>
-  </div>
+<!-- Watchlist/movies-watchlist/movies-watchlist.component.html -->
+<div class="movies-page px-4 my-2"> <h2 class="title my-4">{{ pageTitle }}</h2>
+<app-watchlist-card
+[items]="movies"
+mediaType="movie"
+(remove)="handleRemove($event)">
+</app-watchlist-card>
+
 </div>
+

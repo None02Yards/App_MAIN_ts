@@ -21,12 +21,11 @@ import { AboutComponent } from './Components/about/about.component';
 import { DetailsComponent } from './Components/details/details.component';
 import { WatchlistComponent } from './Components/watchlist/watchlist.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-// import { MoviesWatchlistComponent } from './Components/watchlist/movies-watchlist/movies-watchlist.component';
-// import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-watchlist.component'; // Add this import
+import { MoviesWatchlistComponent } from './Components/watchlist/movies-watchlist/movies-watchlist.component';
+import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-watchlist.component'; // Add this import
 // import { AnimeWatchlistComponent } from './Components/watchlist/anime-watchlist/anime-watchlist.component'; // Add this import
 // import { WatchlistCardComponent } from './Components/shared/watchlist-card/watchlist-card.component';
-// import { SharedModule } from './Components/shared/shared.module'; 
-
+import { SharedModule } from './Components/shared/shared.module'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,13 +43,10 @@ import { WelcomeComponent } from './welcome/welcome.component';
     DetailsComponent,
     WatchlistComponent,
     WelcomeComponent,
-    // WatchlistCardComponent,
-    // MoviesWatchlistComponent,
-    // TvWatchlistComponent, // Declare this component
-    // AnimeWatchlistComponent, // Declare this component
-
+     TvWatchlistComponent,
+  MoviesWatchlistComponent
+    // No need to declare WatchlistCardComponent here
   ],
-  
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -59,11 +55,9 @@ import { WelcomeComponent } from './welcome/welcome.component';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    AppRoutingModule,
-    // SharedModule,
-
-],
-  providers: [],
+    SharedModule // ✅ Brings in WatchlistCardComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

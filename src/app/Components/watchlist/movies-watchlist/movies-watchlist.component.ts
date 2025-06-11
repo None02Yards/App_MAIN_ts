@@ -1,36 +1,39 @@
+import { Component, OnInit } from '@angular/core';
+import { WatchlistService, WatchlistItem } from 'src/app/Services/watchlist.service';
+import { DataService } from 'src/app/Services/data.service';
 
-// // movies-watchlist.ts
-// import { Component, OnInit } from '@angular/core';
-// import { DataService } from 'src/app/Services/data.service';
-// import { WatchlistService } from 'src/app/Services/watchlist.service';
+@Component({
+  selector: 'app-movies-watchlist',
+  templateUrl: './movies-watchlist.component.html',
+  styleUrls: ['./movies-watchlist.component.scss']
+})
+export class MoviesWatchlistComponent implements OnInit {
+  movies: WatchlistItem[] = [];
+  pageTitle = 'Movies Watchlist';
 
-// @Component({
-//   selector: 'app-movies-watchlist',
-//   templateUrl: './movies-watchlist.component.html',
-//   styleUrls: ['./movies-watchlist.component.scss']
-// })
-// export class MoviesWatchlistComponent implements OnInit {
-//   movies: any[] = [];
+  constructor(
+    private watchlistService: WatchlistService,
+    private dataService: DataService
+  ) {}
 
-//   constructor(
-//     private dataService: DataService,
-//     private watchlistService: WatchlistService
-//   ) {}
+  ngOnInit(): void {
+    const saved = this.watchlistService.getByType('movie');
 
-//   ngOnInit(): void {
-//     const ids = this.watchlistService.getWatchlist();
+    for (const item of saved) {
+      this.dataService.getDetails('movie', item.id).subscribe(data => {
+        const mapped: WatchlistItem = {
+          id: item.id,
+          type: item.type,
+          title: data.title || data.name,
+          poster_path: data.poster_path
+        };
+        this.movies.push(mapped);
+      });
+    }
+  }
 
-//     ids.forEach((id: number) => {
-//       this.dataService.getDetails('movie', id).subscribe(data => {
-//         if (data) this.movies.push(data);
-//       });
-//     });
-//   }
-
-//   removeFromWatchlist(id: number) {
-//     this.watchlistService.removeItem(id, 'movie').subscribe(() => {
-//       this.movies = this.movies.filter(item => item.id !== id);
-//     });
-//   }
-  
-// }
+  handleRemove(id: number): void {
+    this.watchlistService.removeFromWatchlist(id, 'movie');
+    this.movies = this.movies.filter(movie => movie.id !== id);
+  }
+}
