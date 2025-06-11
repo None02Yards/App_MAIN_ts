@@ -77,49 +77,42 @@ exclusiveVideos: {
   }
 
 
-  fetchTrendingData(): void {
-    this.spinner.show();
-    this._DataService.getTrending("all").subscribe({
-      next: (data) => {
-        this.spinner.hide();
+fetchTrendingData(): void {
+  this.spinner.show();
 
-        this.allData = data.results.filter((item: any) => item.poster_path != null);
+  this._DataService.getTrending("all").subscribe({
+    next: (data) => {
+      this.spinner.hide();
 
-        const movies = this.shuffle(this.allData.filter((item: any) => item.media_type === "movie"));
-        const shows = this.shuffle(this.allData.filter((item: any) => item.media_type === "tv"));
-        this.trendingMovies = movies;
-        this.trendingShows = shows;
+      this.allData = data.results.filter((item: any) => item.poster_path != null);
 
-              const staffPicks = movies.slice(0, 4);  
-              const netflixPicks = shows.slice(0, 8);
-              const laLoveMovies = movies.slice(8,12);
-        
-              this.moreToExplore[0].posters = staffPicks;
-              this.moreToExplore[1].posters = netflixPicks;
-              this.moreToExplore[2].posters = laLoveMovies;
+      const movies = this.shuffle(this.allData.filter((item: any) => item.media_type === "movie"));
+      const shows = this.shuffle(this.allData.filter((item: any) => item.media_type === "tv"));
 
-              const showItems = this.allData.filter((item: any) => item.media_type === "tv");
-              const shuffledShows = this.shuffle(showItems);
-              
-              this.trendingShows = shuffledShows;
-              this.trendingMovies = this.shuffle(this.allData.filter((item: any) => item.media_type === "movie"));
-              
-              this.topTenMovies = this.shuffle(
-                showItems.filter((show: any) => !!show.poster_path)
-              ).slice(0, 6);
-              
-                
-        },
+      this.trendingMovies = movies;
+      this.trendingShows = shows;
 
-      error: (err) => {
-        this.spinner.hide();
-        console.error("Error fetching trending data:", err);
-      }
-    });
+      this.moreToExplore[0].posters = movies.slice(0, 4);
+      this.moreToExplore[1].posters = shows.slice(0, 8);
+      this.moreToExplore[2].posters = movies.slice(8, 12);
+    },
+    error: (err) => {
+      this.spinner.hide();
+      console.error("Error fetching trending (all):", err);
+    }
+  });
+
+  // 🎯 Separate call just for clean TV poster set
+  this._DataService.getTrending("tv").subscribe({
+    next: (tvRes) => {
+      const validTv = tvRes.results.filter((show: any) => show.poster_path);
+      this.topTenMovies = this.shuffle(validTv).slice(0, 6);
+    },
+    error: (err) => console.error("Error fetching trending (tv):", err)
+  });
+}
 
 
-    
-  }
   fetchNews(): void {
     this._DataService.getEntertainmentNews().subscribe({
       next: (data) => {
