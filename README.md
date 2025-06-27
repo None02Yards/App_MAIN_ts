@@ -5,7 +5,7 @@
 
 ## Welcome_page
 ![theme](./src/assets/Wlc.png)
-![theme](./src/assets/Screenshot%202025-06-26%20172402.png.png)
+![theme](./src/assets/Screenshot%202025-06-26%20172402.png)
 ## full_page
 ![theme](/src/assets/screencapture-fullpage.png).
 ## Full_page 2
