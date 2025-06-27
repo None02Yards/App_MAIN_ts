@@ -50,7 +50,7 @@
   [routerLinkActiveOptions]="{ exact: false }"
   *ngIf="showMenuItem">
   
-  <a class="nav-link dropdown-toggle" role="button">Movies</a>
+  <a class="nav-link dropdown-toggle" (click)="navigateWithFragment('movie-section')" role="button">Movies</a>
   
   <div class="dropdown-menu">
     <a class="dropdown-item" routerLink="/movies/now_playing/1" routerLinkActive="active">Now Playing</a>
@@ -63,7 +63,7 @@
 
       <!-- TV Shows Dropdown -->
       <li class="nav-item dropdown" routerLinkActive="active" *ngIf="showMenuItem">
-        <a class="nav-link dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle"   (click)="navigateWithFragment('tv-section')" role="button" aria-haspopup="true" aria-expanded="false">
           TV Shows
         </a>
         <div class="dropdown-menu">
