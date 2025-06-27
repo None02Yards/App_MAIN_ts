@@ -16,6 +16,9 @@
             color: #b70e0e;
 
     }
+
+ 
+
     .navbar-toggler{
         border: 1px rgba(0, 0, 0,0.7) solid;
     }
@@ -74,6 +77,11 @@
 
 }
 
+.no-bg-navbar {
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
 
 
 .text-danger {

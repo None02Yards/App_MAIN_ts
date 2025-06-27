@@ -26,6 +26,8 @@ import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-wat
 // import { AnimeWatchlistComponent } from './Components/watchlist/anime-watchlist/anime-watchlist.component'; // Add this import
 // import { WatchlistCardComponent } from './Components/shared/watchlist-card/watchlist-card.component';
 import { SharedModule } from './Components/shared/shared.module'; 
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,8 @@ import { SharedModule } from './Components/shared/shared.module';
     WatchlistComponent,
     WelcomeComponent,
      TvWatchlistComponent,
-  MoviesWatchlistComponent
+  MoviesWatchlistComponent,
+
     // No need to declare WatchlistCardComponent here
   ],
   imports: [
@@ -55,7 +58,8 @@ import { SharedModule } from './Components/shared/shared.module';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-    SharedModule // ✅ Brings in WatchlistCardComponent
+    SharedModule, // ✅ Brings in WatchlistCardComponent
+    FormsModule
   ],
   bootstrap: [AppComponent]
 })

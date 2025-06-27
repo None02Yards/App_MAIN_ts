@@ -45,6 +45,48 @@
   color: #333;
 }
 
+.new-list-form {
+  position: relative;
+  left: 500px;
+  background: #1a1a1a;
+  width: 500px;
+  border-radius: 20px;
+  padding: 80px;
+  margin-right: 60px;
+  margin-left: 60px;
+  margin-bottom: 80px !important;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(180, 142, 6, 0.39);
+
+  input, textarea {
+    background: #121212;
+    border: 1px solid #d3a40a;
+    color: #fff;
+    padding: 8px;
+    width: 100%;
+  }
+
+  label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  .btn-warning {
+    background-color: #ffcc00;
+    color: #000;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .btn-secondary {
+    background-color: #555;
+    color: #fff;
+  }
+}
+
+
+
 .watchlist-heading {
   font-size: 3rem;
   font-weight: 600;
