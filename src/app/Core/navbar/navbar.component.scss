@@ -3,11 +3,12 @@
 
 .navbar{
     background-color: $lightBgColor;
-    margin: 0 30px;
+    // margin: 0 30px;
    
     .nav-link{
         color: #c2bbbb;
         font-family: 'Montserrat';
+        font-size: 17px;
         }
 
         a:hover, .active{
@@ -93,7 +94,7 @@
     background-color: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(10px);
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-    height: 60px; 
+    height: 70px; 
     padding: 0 2rem; 
   }
   

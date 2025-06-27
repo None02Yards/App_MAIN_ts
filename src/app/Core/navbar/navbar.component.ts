@@ -94,7 +94,7 @@ export class NavbarComponent implements OnInit {
     }
 
     const scrollY = window.scrollY || window.pageYOffset;
-    const heroHeight = 700;
+    const heroHeight = 500;
     this.isScrolled = scrollY > heroHeight;
     this.showSearch = this.isScrolled;
   }
