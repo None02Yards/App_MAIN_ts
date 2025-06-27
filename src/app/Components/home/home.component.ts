@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/app/Services/data.service';
-
+import { Router } from '@angular/router';
 
 interface Movie {
   poster_path: string;
@@ -65,7 +65,7 @@ private topTenScrollPos = 0;
   constructor(
     private _DataService: DataService,
     private spinner: NgxSpinnerService,
-    
+     private router: Router,
 
   ) {}
 
@@ -119,6 +119,9 @@ fetchTrendingData(): void {
     },
     error: (err) => console.error("Error fetching trending (tv):", err)
   });
+}
+goToPopularTVShows(): void {
+  this.router.navigate(['/tvshows/popular', 1]);
 }
 
 
