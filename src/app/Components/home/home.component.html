@@ -74,7 +74,7 @@
 
 
   <!-- Top 10 This Week -->
-  <section class="py-5">
+  <!-- <section class="py-5">
     <div class="container">
       <h3 class="section-title">Top TVShows on IMDb This Week</h3>
       <div class="Border w-25"></div>
@@ -92,7 +92,31 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
+
+<!-- Top 10 TV Shows This Week -->
+<section class="py-5">
+  <div class="container">
+    <h3 class="section-title">Top TV Shows on IMDb This Week</h3>
+    <div class="Border w-25 mb-4"></div>
+
+    <div class="scroll-wrapper" #topTenSlider>
+      <div class="top-card" *ngFor="let movie of topTenMovies">
+        <div class="card h-100">
+          <img
+            [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path"
+            [alt]="movie.name"
+            class="card-img-top"
+          />
+          <div class="movie-title mt-2 px-1">
+            <h5 class="rank me-1">{{ movie.name }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
   
   <section class="tv-shows-section py-5">
     <div class="container text-center">

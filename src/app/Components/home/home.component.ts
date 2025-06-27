@@ -3,7 +3,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/app/Services/data.service';
 
 
-// Define outside the component
 interface Movie {
   poster_path: string;
   title: string;
@@ -60,9 +59,14 @@ exclusiveVideos: {
 
   @ViewChild('movieSlider', { static: false }) movieSlider!: ElementRef;
 
+  @ViewChild('topTenSlider', { static: false }) topTenSlider!: ElementRef;
+private topTenScrollPos = 0;
+
   constructor(
     private _DataService: DataService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    
+
   ) {}
 
     ngOnInit(): void {
@@ -73,6 +77,10 @@ exclusiveVideos: {
       setInterval(() => {
       this.scrollRight();
     }, 3000);
+
+    setInterval(() => {
+    this.scrollTopTenRight();
+  }, 3000);
     
   }
 
@@ -102,11 +110,12 @@ fetchTrendingData(): void {
     }
   });
 
-  // 🎯 Separate call just for clean TV poster set
+  //  Separate call just for clean TV poster set
   this._DataService.getTrending("tv").subscribe({
     next: (tvRes) => {
       const validTv = tvRes.results.filter((show: any) => show.poster_path);
-      this.topTenMovies = this.shuffle(validTv).slice(0, 6);
+      // this.topTenMovies = this.shuffle(validTv).slice(0, 6);
+      this.topTenMovies = this.shuffle(validTv).slice(0, 18);
     },
     error: (err) => console.error("Error fetching trending (tv):", err)
   });
@@ -135,6 +144,26 @@ fetchTrendingData(): void {
   scrollRight(): void {
     this.movieSlider.nativeElement.scrollBy({ left: 800, behavior: 'smooth' });
   }
+
+  scrollTopTenRight(): void {
+  if (!this.topTenSlider) return;
+
+  const container = this.topTenSlider.nativeElement;
+  const cardWidth = 180 + 16; // Card width + approx. margin/gap
+  const scrollStep = cardWidth * 6; // 6 cards per scroll
+  const maxScrollLeft = container.scrollWidth - container.clientWidth;
+
+  this.topTenScrollPos += scrollStep;
+
+  if (this.topTenScrollPos >= maxScrollLeft) {
+    this.topTenScrollPos = 0;
+  }
+
+  container.scrollTo({
+    left: this.topTenScrollPos,
+    behavior: 'smooth'
+  });
+}
 
   
   fetchExclusiveVideos(): void {
