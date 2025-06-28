@@ -31,6 +31,16 @@ getSimilar(mediaType: string, id: number): Observable<any> {
   );
 }
 
+searchByType(query: string, type: string): Observable<any> {
+  const url = `https://api.themoviedb.org/3/search/${type}?query=${query}&api_key=${this.APIKey}`;
+  return this._HttpClient.get(url);
+}
+
+
+searchMulti(query: string, type: string): Observable<any> {
+  return this._HttpClient.get(`${this.MovieAPI}/search/${type}?query=${query}&api_key=${this.APIKey}`);
+}
+
 
   getData(mediaType:any,mediaCategory:any,page:number): Observable<any>{
     return this._HttpClient.get(`${this.MovieAPI}/${mediaType}/${mediaCategory}?api_key=${this.APIKey}&page=${page}`).pipe(
@@ -55,6 +65,39 @@ getSimilar(mediaType: string, id: number): Observable<any> {
       catchError(this.handleError)
     );
   }
+
+  getPersonCredits(id: number): Observable<any> {
+  return this._HttpClient.get(`${this.MovieAPI}/person/${id}/movie_credits?api_key=${this.APIKey}`).pipe(
+    catchError(this.handleError)
+  );
+}
+
+// This is for getting cast of a movie or TV show
+getMediaCredits(mediaType: string, id: number): Observable<any> {
+  return this._HttpClient.get(`${this.MovieAPI}/${mediaType}/${id}/credits?api_key=${this.APIKey}`).pipe(
+    catchError(this.handleError)
+  );
+}
+getPeople(page: number = 1): Observable<any> {
+  return this._HttpClient.get(
+    `https://api.themoviedb.org/3/person/popular?api_key=${this.APIKey}&language=en-US&page=${page}`
+  );
+}
+
+getPersonDetails(id: string): Observable<any> {
+  return this._HttpClient.get(
+    `https://api.themoviedb.org/3/person/${id}?api_key=${this.APIKey}&language=en-US`
+  );
+}
+
+getCombinedCredits(id: string): Observable<any> {
+  return this._HttpClient.get(
+    `https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${this.APIKey}&language=en-US`
+  );
+}
+
+
+
 
   search(searchText:any):Observable<any>{
     return this._HttpClient.get(`${this.MovieAPI}/search/multi?api_key=${this.APIKey}&query=${searchText}`).pipe(
