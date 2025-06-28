@@ -20,13 +20,27 @@
     
                 <!-- Optional Watchlist Icon --> 
                 
-               <div class="watchlist-icon" 
-     [ngClass]="{ 'watchlist-active': isInWatchlist(item.id) }" 
-     (click)="toggleWatchlist(item)">
+ <div class="watchlist-icon-container">
+  <!-- Bookmark Icon -->
+  <i class="fa fa-bookmark bookmark-icon-inner"
+     [ngClass]="{ 'watchlist-active': isInAnyCustomList(item.id) }"
+     (click)="toggleDropdown(item.id)">
+  </i>
 
-                <i class="fa fa-bookmark bookmark-icon-inner"></i>
-                </div> 
-               
+  <!-- Dropdown -->
+  <div *ngIf="dropdownVisibleForId === item.id"
+       class="dropdown-menu show custom-dropdown">
+    <a *ngFor="let list of customLists"
+       class="dropdown-item d-flex justify-content-between align-items-center"
+       (click)="addToCustomList(item, list)">
+      {{ list.name }}
+      <i *ngIf="isItemInList(item, list)" class="fa fa-check text-success ms-2"></i>
+    </a>
+  </div>
+</div>
+
+
+
     
                 <h5 class="text-center mt-2">{{ item.original_title }}</h5>
             </div>

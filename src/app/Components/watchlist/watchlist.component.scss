@@ -204,3 +204,21 @@
   }
 }
 
+
+.eye-icon-button {
+  position: relative;
+ right: 100px;
+  border: none;
+  // background: transparent;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: #f5c518;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    background-color: transparent !important;
+    transform: scale(1.5);
+    color: #fff700;
+  }
+}
+

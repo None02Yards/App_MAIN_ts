@@ -3,8 +3,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
+
 import { DataService } from 'src/app/Services/data.service';
-import { WatchlistService } from 'src/app/Services/watchlist.service';
+import { WatchlistService, WatchlistItem, CustomList  } from 'src/app/Services/watchlist.service';
 
 @Component({
   selector: 'app-movies',
@@ -18,6 +20,8 @@ export class MoviesComponent implements OnInit {
 
   Movies: any[] = [];
   displayedMovies: any[] = [];
+dropdownVisibleForId: number | null = null;
+customLists: CustomList[] = [];
 
   disablePrev = true;
   disableNext = false;
@@ -27,6 +31,7 @@ export class MoviesComponent implements OnInit {
     private dataService: DataService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
+     private toastr: ToastrService,
     private watchlistService: WatchlistService // ✅ Injected
   ) {}
 
@@ -34,6 +39,7 @@ export class MoviesComponent implements OnInit {
     this.route.params.subscribe(() => {
       this.type = this.route.snapshot.paramMap.get('genre') || '';
       this.page = Number(this.route.snapshot.paramMap.get('page')) || 1;
+       this.customLists = this.watchlistService.getCustomLists();
 
       switch (this.type) {
         case 'now_playing':
@@ -102,13 +108,66 @@ export class MoviesComponent implements OnInit {
   }
 
   // ✅ Toggle using service
-  toggleWatchlist(movie: any): void {
-    const isSaved = this.watchlistService.isInWatchlist(movie.id, 'movie');
+  // toggleWatchlist(movie: any): void {
+  //   const isSaved = this.watchlistService.isInWatchlist(movie.id, 'movie');
 
-    if (isSaved) {
-      this.watchlistService.removeFromWatchlist(movie.id, 'movie');
-    } else {
-      this.watchlistService.addToWatchlist({ id: movie.id, type: 'movie' });
+  //   if (isSaved) {
+  //     this.watchlistService.removeFromWatchlist(movie.id, 'movie');
+  //   } else {
+  //     this.watchlistService.addToWatchlist({ id: movie.id, type: 'movie' });
+  //   }
+  // }
+
+  toggleWatchlist(item: WatchlistItem): void {
+  const customLists = this.watchlistService.getCustomLists();
+
+  if (customLists.length > 0) {
+    // Prompt the user to pick a list
+    const choice = prompt(
+      'Choose a custom list:\n' +
+      customLists.map((list, i) => `${i + 1}. ${list.name}`).join('\n')
+    );
+
+    const index = parseInt(choice || '', 10) - 1;
+    const selectedList = customLists[index];
+
+    if (selectedList) {
+      selectedList.items.push(item);
+      this.watchlistService.updateCustomLists(customLists);
+      alert(`✅ Added to "${selectedList.name}"`);
     }
+  } else {
+    this.watchlistService.addToWatchlist(item);
+    alert(`✅ Added to general watchlist`);
   }
+}
+
+toggleDropdown(id: number): void {
+  this.dropdownVisibleForId = this.dropdownVisibleForId === id ? null : id;
+}
+
+// addToCustomList(item: WatchlistItem, list: CustomList): void {
+//   list.items.push(item);
+//   this.watchlistService.updateCustomLists(this.customLists);
+//   this.dropdownVisibleForId = null;
+//   alert(`✅ Added to "${list.name}"`);
+// }
+isInAnyCustomList(itemId: number): boolean {
+  return this.customLists.some(list => list.items.some(i => i.id === itemId));
+}
+
+isItemInList(item: WatchlistItem, list: CustomList): boolean {
+  return list.items.some(i => i.id === item.id);
+}
+addToCustomList(item: WatchlistItem, list: CustomList): void {
+  if (!this.isItemInList(item, list)) {
+    list.items.push(item);
+    this.watchlistService.updateCustomLists(this.customLists);
+    this.toastr.success(`Added to "${list.name}"`);
+  } else {
+    this.toastr.info(`Already in "${list.name}"`);
+  }
+
+  this.dropdownVisibleForId = null;
+}
 }

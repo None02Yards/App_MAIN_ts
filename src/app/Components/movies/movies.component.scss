@@ -50,24 +50,54 @@
       opacity: 1;
     }
   }
+}
 
-  .watchlist-icon {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #f7f1f1ca;
-    opacity: 0.3;
-    z-index: 6;
-    transition: all 0.3s ease;
+.watchlist-icon-container {
+  position: relative;
+  display: inline-block;
+  z-index: 5;
+}
 
-    &.watchlist-active {
-      opacity: 1;
-      color: #ffc107;
-    }
+.bookmark-icon-inner {
+  font-size: 1.5rem;
+  color: #f7f1f1ca;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: color 0.3s ease, opacity 0.3s ease;
+  z-index: 10;
+  position: relative;
+    bottom: 190px;
+    left: 100px;
+
+  &.watchlist-active {
+    color: #ffc107;
+    opacity: 1;
   }
 }
+
+.custom-dropdown {
+  position: absolute;
+    bottom: 50px;
+    right: -170px;
+  transform: translateX(-50%);
+  background-color: #e3e1e1;
+  border-radius: 6px;
+  padding: 0.5rem;
+  z-index: 1000;
+  min-width: 100px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+}
+
+.custom-dropdown .dropdown-item:hover {
+  background-color: #32312e;
+  color: #ffc107;
+  cursor: pointer;
+}
+.dropdown-item .fa-check {
+  font-size: 0.9rem;
+  color: #28a745;
+}
+
 
 h5 {
   font-size: 1rem;

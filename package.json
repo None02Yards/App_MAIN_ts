@@ -29,7 +29,7 @@
     "ngx-owl-carousel": "^2.0.7",
     "ngx-owl-carousel-o": "^7.0.1",
     "ngx-spinner": "^13.1.1",
-    "ngx-toastr": "^14.2.1",
+    "ngx-toastr": "^14.3.0",
     "popper.js": "^1.16.1",
     "rxjs": "~7.4.0",
     "swiper": "^9.4.1",

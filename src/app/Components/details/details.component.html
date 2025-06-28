@@ -1,48 +1,133 @@
+<div class="container mt-5 pt-5">
 
-<div class="details-wrapper d-flex flex-column justify-content-center align-items-center min-vh-100 mt-5 pt-5">
-    <div class="container">
-        <div class="row" *ngIf="showRow">
-        <div class="col-md-12 my-md-2 mx-0 d-flex justify-content-center">
-            <iframe [src]="videoSafeURL" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-           </iframe>
-           
-        </div>
-        </div>
-        <br>
-
-        <div class="px-2 mx-0"><div class="row">
-            <div class="col-md-12 d-flex justify-content-start">
-                <div>
-                    <div class="details-container">
-                        <h2 class="media-title">{{ media }} name: {{ itemDetails.name || itemDetails.original_title }}</h2>
-                        <p class="tagline">{{ itemDetails.tagline }}</p>
-                      
-                        <div *ngIf="showGenre" class="genres">
-                          <div class="genre-buttons">
-                            <button *ngFor="let genre of itemDetails.genres" class="genre-btn">{{ genre.name }}</button>
-                          </div>
-                        </div>
-                      
-                        <div class="stats">
-                          <p>⭐ Vote: <strong>{{ itemDetails.vote_average }}</strong></p>
-                          <p>🗳️ Vote count: <strong>{{ itemDetails.vote_count }}</strong></p>
-                          <p>🔥 Popularity: <strong>{{ itemDetails.popularity }}</strong></p>
-                          <p>📅 Release date: <strong>{{ itemDetails.release_date || itemDetails.first_air_date }}</strong></p>
-                        </div>
-
-
-                        <div class="overview-section text-center my-5 px-3">
-                            <h3 class="overview-title">Overview</h3>
-                            <p class="overview-text mt-3">{{ itemDetails.overview }}</p>
-                        </div>
-                    </div>
-                      
-                        
-                        
-
-                </div>
-            </div>
-        </div></div>
+  <!-- ✅ Centered Video Row -->
+  <div class="videofilm row justify-content-center mb-4" *ngIf="showRow">
+    <div class="col-lg-10 text-center">
+      <div class="ratio ratio-16x9">
+        <iframe
+          [src]="videoSafeURL"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
     </div>
+  </div>
+
+  <!-- Main Row -->
+    <div class="row">
+  <!-- LEFT: Details (8 columns) -->
+  <div class="col-lg-8 col-md-12">
+    <div class="details-container text-white">
+      <h2 class="media-title">{{ media }} name: {{ itemDetails.name || itemDetails.original_title }}</h2>
+      <p class="tagline">{{ itemDetails.tagline }}</p>
+
+      <!-- Genre + Action Buttons (Single Row inside LEFT) -->
+      <div class="row align-items-start mt-4 gx-3">
+        <!-- Genres -->
+        <div class="col-12 col-md-6" *ngIf="showGenre">
+          <div class="genre-buttons d-flex flex-wrap gap-2">
+            <button *ngFor="let genre of itemDetails.genres" class="genre-btn btn btn-outline-light btn-sm">
+              {{ genre.name }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="col-12 col-md-6 mt-3 mt-md-0">
+          <div class="watch-actions d-flex flex-column gap-2">
+            <button class="btn btn-add-watchlist d-flex justify-content-between align-items-center">
+              <span><i class="fa fa-plus me-2"></i> Add to Watchlist</span>
+              <i class="fa fa-chevron-down"></i>
+            </button>
+            <button class="btn btn-mark-watched">
+              <i class="fa fa-eye me-2 text-primary"></i>
+              <span class="text-primary">Mark as Watched</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats mt-4">
+        <p>⭐ Vote: <strong>{{ itemDetails.vote_average }}</strong></p>
+        <p>🗳️ Vote count: <strong>{{ itemDetails.vote_count }}</strong></p>
+        <p>🔥 Popularity: <strong>{{ itemDetails.popularity }}</strong></p>
+        <p>📅 Release date: <strong>{{ itemDetails.release_date || itemDetails.first_air_date }}</strong></p>
+      </div>
+
+      <!-- Overview -->
+      <!-- <div class="overview-section text-center my-5 px-3">
+        <h3 class="overview-title">Overview</h3>
+        <p class="overview-text mt-3">{{ itemDetails.overview }}</p>
+      </div> -->
+    </div>
+  </div>
+
+  <!-- RIGHT: More to Explore -->
+  <div class="col-lg-4 col-md-12">
+    <div class="more-to-explore-sidebar text-white">
+      <h5 class="fw-bold mb-3 border-start border-3 ps-2 border-warning">More to CineWorld</h5>
+
+      <div *ngFor="let section of moreToExplore | slice:0:2" class="mb-4">
+        <div class="editor-card p-3 rounded shadow-sm bg-dark h-100">
+          <h6 class="editor-title mb-2">{{ section.title }}</h6>
+
+          <div class="d-flex gap-2 flex-wrap">
+            <div *ngFor="let movie of section.posters | slice:0:3" class="poster-box">
+              <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
+                   [alt]="movie.title"
+                   class="img-fluid rounded" />
+            </div>
+          </div>
+
+          <a [href]="section.link" class="d-block mt-2 text-primary small">
+            {{ section.linkText }}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Trending as More Like This (4 Small Cards) -->
+<!-- Similar Items Section -->
+<div class="container mt-5">
+  <h4 class="titlemore text-white mb-3 border-start border-3 ps-2 border-warning">More Like This</h4>
+  <div class="slider-container similar-slider mb-5 position-relative">
+    
+    <button *ngIf="showLeftArrow" class="arrow left" (click)="scrollSimilarLeft()">
+      <i class="fa fa-chevron-left"></i>
+    </button>
+
+    <div #similarSlider class="slider d-flex overflow-auto">
+      <div *ngFor="let item of similarItems" class="movie-card small-card">
+        <div class="poster position-relative overflow-hidden">
+          <img class="w-100" [src]="'https://image.tmdb.org/t/p/w300/' + item.poster_path" [alt]="item.title || item.name">
+          <div class="layer">
+  <a [routerLink]="'/details/' + mediaType + '/' + item.id" class="bg-transparent d-block h-100 w-100 d-flex flex-column justify-content-center align-items-center text-decoration-none">
+    <i class="fa fa-play-circle fa-2x text-dark"></i>
+    <p class="fw-bold text-dark mb-0 mt-1">See more!</p>
+  </a>
+</div>
+
+        </div>
+        <div class="text-center mt-2">
+          <h6 class="text-truncate text-white">{{ item.title || item.name }}</h6>
+          <p class="text-warning mb-0">⭐ {{ item.vote_average?.toFixed(1) }}</p>
+        </div>
+      </div>
+    </div>
+
+    <button *ngIf="showRightArrow" class="arrow right" (click)="scrollSimilarRight()">
+      <i class="fa fa-chevron-right"></i>
+    </button>
+  </div>
+</div>
+
+<!-- Overview -->
+      <div class="overview-section text-center my-5 px-3">
+        <h3 class="overview-title">Overview 📝</h3>
+        <p class="overview-text mt-3">{{ itemDetails.overview }}</p>
+      </div>
 </div>

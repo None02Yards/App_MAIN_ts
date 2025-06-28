@@ -27,6 +27,8 @@ import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-wat
 // import { WatchlistCardComponent } from './Components/shared/watchlist-card/watchlist-card.component';
 import { SharedModule } from './Components/shared/shared.module'; 
 import { FormsModule } from '@angular/forms';
+import { CustomListDetailComponent } from './Components/watchlist/custom-list-detail/custom-list-detail.component';
+import { CreateListComponent } from './Components/watchlist/create-list/create-list.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { FormsModule } from '@angular/forms';
     WelcomeComponent,
      TvWatchlistComponent,
   MoviesWatchlistComponent,
+  CustomListDetailComponent,
+  CreateListComponent,
 
     // No need to declare WatchlistCardComponent here
   ],
