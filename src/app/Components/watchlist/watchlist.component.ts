@@ -1,4 +1,4 @@
-
+// watchlist.component.ts
 import { Component, OnInit } from '@angular/core';
 import { DataService } from 'src/app/Services/data.service';
 import { WatchlistService, WatchlistItem } from 'src/app/Services/watchlist.service';
@@ -21,14 +21,16 @@ export class WatchlistComponent implements OnInit {
   newListDesc: string = '';
   newListPrivacy: 'public' | 'private' = 'public';
   isCreateListModalOpen: boolean = false;
-
+lastCreatedListId: string | null = null;
   constructor(
     private dataService: DataService,
     private watchlistService: WatchlistService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
-
+generateListId(): string {
+  return Math.random().toString(36).substr(2, 9); // Generates a short unique ID
+}
   ngOnInit(): void {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -36,7 +38,10 @@ export class WatchlistComponent implements OnInit {
         this.childRouteActive = !!currentRoute;
       }
     });
-
+ const savedId = localStorage.getItem('lastCreatedListId');
+  if (savedId) {
+    this.lastCreatedListId = savedId;
+  }
     const savedItems = this.watchlistService.getWatchlist();
     savedItems.forEach(item => {
       this.dataService.getDetails(item.type, item.id).subscribe(data => {
@@ -61,7 +66,9 @@ export class WatchlistComponent implements OnInit {
       });
     });
   }
-
+goToCustomList(): void {
+  this.router.navigate(['/watchlist/custom']);
+}
   removeFromWatchlist(id: number, type: 'movie' | 'tv' | 'anime'): void {
     this.watchlistService.removeFromWatchlist(id, type);
 
@@ -83,23 +90,30 @@ export class WatchlistComponent implements OnInit {
     this.isCreateListModalOpen = true;
   }
 
-  createCustomList(): void {
-    if (!this.newListName.trim()) {
-      alert('List name is required.');
-      return;
-    }
+createCustomList() {
+  const newListId = Date.now().toString();
 
-    const newList = {
-      name: this.newListName,
-      description: this.newListDesc,
-      privacy: this.newListPrivacy
-    };
+  const newList = {
+    id: newListId,
+    name: this.newListName,
+    description: this.newListDesc,
+    privacy: this.newListPrivacy,
+    items: []
+  };
 
-    this.customLists.push(newList.name); // Or store the full object
+  this.watchlistService.saveCustomList(newList);
+  this.lastCreatedListId = newListId;
+  localStorage.setItem('lastCreatedListId', newListId);
 
-    // Reset form and close modal
-    this.resetListForm();
-  }
+  this.resetListForm();
+  this.newListName = '';
+  this.newListDesc = '';
+  this.newListPrivacy = 'public';
+  this.isCreateListModalOpen = false;
+
+  // ✅ Corrected navigation with ID
+  this.router.navigate(['/watchlist/custom', newListId]);
+}
 
   //  Cancel and reset the form
   cancelCreate(): void {

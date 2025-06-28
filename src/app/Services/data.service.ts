@@ -25,6 +25,12 @@ export class DataService {
       catchError(this.handleError)
     );
   }
+getSimilar(mediaType: string, id: number): Observable<any> {
+  return this._HttpClient.get(`${this.MovieAPI}/${mediaType}/${id}/similar?api_key=${this.APIKey}`).pipe(
+    catchError(this.handleError)
+  );
+}
+
 
   getData(mediaType:any,mediaCategory:any,page:number): Observable<any>{
     return this._HttpClient.get(`${this.MovieAPI}/${mediaType}/${mediaCategory}?api_key=${this.APIKey}&page=${page}`).pipe(
