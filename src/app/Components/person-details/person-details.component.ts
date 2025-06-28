@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { OwlOptions } from 'ngx-owl-carousel-o';
 import { DataService } from 'src/app/Services/data.service';
+import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-person-details',
@@ -14,15 +16,20 @@ export class PersonDetailsComponent implements OnInit {
 page:number=0
 personData:any=[]
 knownFor:any[]=[]
+moreToExploreCelebs: any[] = [];
 id:any;
 profileSrc:string = "";
 Src:any=[];
 showFullBio = false;
+  personId: string = '';
+  roles: string[] = [];
 
+  
   constructor(
     private _Router:Router,
     private _DataService:DataService,
-    private _ActivatedRoute:ActivatedRoute
+    private _ActivatedRoute:ActivatedRoute,
+     private router: Router,
     )
     {
     this.id=_ActivatedRoute.snapshot.paramMap.get("id")
@@ -40,6 +47,14 @@ showFullBio = false;
    }
 
   ngOnInit(): void {
+  this.getMoreToExploreCelebs();
+ this.loadPerson();
+
+  this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.loadPerson();
+      });
 
   }
   customOptions: OwlOptions = {
@@ -66,35 +81,58 @@ showFullBio = false;
     },
     nav: true
   }
+goBack(): void {
+  history.back();
+}
 
-  // toggleBio() {
-  //   this.showFullBio = !this.showFullBio;
-  // }
-  // get formattedBio(): string[] {
-  //   if (!this.personData?.biography) {
-  //     return [];
-  //   }
+loadPerson(): void {
+  this.personId = this._ActivatedRoute.snapshot.paramMap.get('id')!;
+
+  this._DataService.getDetails("person", this.personId).subscribe((response) => {
+    this.personData = response;
+    this.profileSrc = `https://image.tmdb.org/t/p/original/${this.personData.profile_path}`;
+  });
+
+  this._DataService.getCredits(this.personId).subscribe((data) => {
+    this.knownFor = data.cast?.filter((item: any) => item.poster_path != null);
+  });
+
+  this._DataService.getCombinedCredits(this.personId).subscribe((data) => {
+    const hasActing = data.cast && data.cast.length > 0;
+    const crewJobs = data.crew?.map((c: any) => c.job);
+    const uniqueJobs = new Set(crewJobs);
+
+    this.roles = [];
+    if (hasActing) this.roles.push("Actor");
+    if (uniqueJobs.has("Writer")) this.roles.push("Writer");
+    if (uniqueJobs.has("Director")) this.roles.push("Director");
+    if (uniqueJobs.has("Producer")) this.roles.push("Producer");
+  });
+}
+getMoreToExploreCelebs(): void {
+  this._DataService.getPeople(1).subscribe((res: any) => {
+    const allCelebs = res.results;
+    this.moreToExploreCelebs = this.getRandomItems(allCelebs, 3);
+  });
+}
+
+getRandomItems(array: any[], count: number): any[] {
+  const shuffled = [...array].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, count);
+}
+ get formattedBio(): string[] {
+  if (!this.personData?.biography) return [];
+  return this.personData.biography
+    .split('. ')
+    .map((sentence: string) => sentence.trim())
+    .filter((sentence: string) => sentence.length > 0)
+    .map((sentence: string) => (sentence.endsWith('.') ? sentence : sentence + '.'));
+}
   
-  //   return this.personData.biography
-  //     .split('. ')
-  //     .map((sentence: string) => sentence.trim())
-  //     .filter((sentence: string) => sentence.length > 0)
-  //     .map((sentence: string) => sentence + '.');
-  // }
-  
-  get formattedBio(): string[] {
-    if (!this.personData?.biography) return [];
-    return this.personData.biography
-      .split('. ')
-      .map((sentence: string) => sentence.trim())
-      .filter((sentence: string) => sentence.length > 0)
-      .map((sentence: string) => (sentence.endsWith('.') ? sentence : sentence + '.'));
-  }
-  
-  get visibleBio(): string[] {
-    return this.showFullBio ? this.formattedBio : this.formattedBio.slice(0, 3); // show first 3 sentences by default
-  }
-  
+get visibleBio(): string[] {
+  return this.showFullBio ? this.formattedBio : this.formattedBio.slice(0, 3);
+}
+
   toggleBio(): void {
     this.showFullBio = !this.showFullBio;
   }

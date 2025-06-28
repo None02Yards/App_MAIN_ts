@@ -20,6 +20,8 @@ export class DetailsComponent implements OnInit {
   media: string = "";
   id: any;
   videoSafeURL!: any;
+  castList: any[] = [];
+
   itemDetails: any = [];
   Trailer: string = "";
   showRow: boolean = false;
@@ -84,7 +86,8 @@ updateArrows(): void {
       this.fetchDetails();
       this.fetchTrailer();
       this.fetchMoreToExplore();
-     this.fetchSimilarItems()
+     this.fetchSimilarItems();
+     this.fetchCast();
     });
   }
 
@@ -107,6 +110,14 @@ fetchSimilarItems(): void {
       next: (response) => {
         this.Spinner.hide();
         this.itemDetails = response;
+this._DataService.getDetails(this.mediaType, this.id).subscribe({
+  next: (res) => {
+    this.castList = res.cast.filter((member: any) => member.profile_path).slice(0 ,4);
+  },
+  error: (err) => {
+    console.error('Cast fetch failed:', err);
+  }
+});
 
         if (this.itemDetails.success === false) {
           this._Router.navigateByUrl("/notfound");
@@ -120,6 +131,8 @@ fetchSimilarItems(): void {
         this.Spinner.hide();
         this._Router.navigateByUrl("/notfound");
       }
+
+      
     });
   }
 
@@ -139,7 +152,19 @@ fetchSimilarItems(): void {
       }
     });
   }
+fetchCast(): void {
+  this._DataService.getMediaCredits(this.mediaType, this.id).subscribe({
 
+    next: (res) => {
+      this.castList = res.cast
+        .filter((member: any) => member.profile_path)
+        .slice(0, 5);
+    },
+    error: (err) => {
+      console.error('Cast fetch failed:', err);
+    }
+  });
+}
   fetchMoreToExplore(): void {
     this._DataService.getTrending("all").subscribe({
       next: (data) => {

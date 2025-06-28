@@ -76,29 +76,45 @@
 
       <!-- People -->
       <li class="nav-item" routerLinkActive="active" *ngIf="showMenuItem">
-        <a class="nav-link" routerLink="/people/1">People</a>
+        <a class="nav-link" routerLink="/people/1">Celebs</a>
       </li>
     </ul>
 
     <!-- RIGHT SIDE: Search & Social -->
     <ul class="navbar-nav ms-auto d-flex align-items-center">
       <!-- Search -->
-      <li class="nav-item" *ngIf="showMenuItem && showSearch">
-        <form class="form-inline my-2 my-lg-0" (submit)="redirectToSearch()">
-          <div class="search-container">
-            <input
-              class="form-control"
-              (keyup)="targetInfo($event)"
-              type="text"
-              placeholder="Search by word"
-              name="searchInput"
-            />
-            <button type="submit" class="search-btn">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
-        </form>
-      </li>
+<!-- Search -->
+<!-- Search -->
+<li class="nav-item" *ngIf="showMenuItem && showSearch">
+  <form class="form-inline my-2 my-lg-0" (submit)="redirectToSearch()">
+    <div class="search-container">
+      
+      <!-- Dropdown: initially hidden -->
+      <div class="dropdown-select searchtype">
+        <select [(ngModel)]="searchType" name="searchType">
+          <option value="multi">All 🔽</option>
+          <option value="person">Celebs</option>
+          <option value="keyword">Keywords</option>
+        </select>
+      </div>
+
+      <!-- Input -->
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        name="searchInput"
+        placeholder="Search anything..."
+        required
+      />
+
+      <!-- Search icon -->
+      <button type="submit" class="search-btn">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  </form>
+</li>
+
 
       <!-- Watchlist -->
       <li class="nav-item" *ngIf="showSearch">

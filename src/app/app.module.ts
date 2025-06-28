@@ -5,6 +5,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
+import { FormsModule } from '@angular/forms';
+
 import { NavbarComponent } from './Core/navbar/navbar.component';
 import { FooterComponent } from './Core/footer/footer.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -26,7 +28,6 @@ import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-wat
 // import { AnimeWatchlistComponent } from './Components/watchlist/anime-watchlist/anime-watchlist.component'; // Add this import
 // import { WatchlistCardComponent } from './Components/shared/watchlist-card/watchlist-card.component';
 import { SharedModule } from './Components/shared/shared.module'; 
-import { FormsModule } from '@angular/forms';
 import { CustomListDetailComponent } from './Components/watchlist/custom-list-detail/custom-list-detail.component';
 import { CreateListComponent } from './Components/watchlist/create-list/create-list.component';
 

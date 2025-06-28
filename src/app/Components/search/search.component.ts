@@ -16,13 +16,13 @@ interface MediaItem {
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss']
 })
-
 export class SearchComponent implements OnInit {
 
-  target: string = "";
   allData: MediaItem[] = [];
   found: boolean = true;
-  
+  target: string = '';
+  searchType: string = 'multi';
+
   constructor(
     private _DataService: DataService,
     private _ActivatedRoute: ActivatedRoute,
@@ -30,40 +30,89 @@ export class SearchComponent implements OnInit {
     private _Router: Router
   ) {}
 
-  ngOnInit(): void {
-    this._ActivatedRoute.params.subscribe(() => {
-      this.target = this._ActivatedRoute.snapshot.paramMap.get("target") || "";
+ngOnInit(): void {
+  this._ActivatedRoute.queryParams.subscribe(params => {
+    const query = params['q'];
+    const type = params['type'] || 'multi'; // default to 'multi'
 
-      this.Spinner.show();
+    if (!query) return;
 
-      this._DataService.search(this.target).subscribe((response) => {
-        this.allData = response.results || [];
+    this.Spinner.show();
 
-        // Call the filterData method to filter the results
-        this.filterData();
-
-        if (this.allData.length > 0) {
-          this.found = true;
+    this._DataService.searchByType(query, type).subscribe((res) => {
+      if (type === 'person') {
+        // Go directly to person-details if 1 match found
+        const person = res.results?.[0];
+        if (person && person.id) {
+          this._Router.navigate(['/person', person.id]);
         } else {
-          this.found = false;
           this._Router.navigate(['/notfound']);
         }
+        return;
+      }
 
-        this.Spinner.hide();
-      }, (error) => {
-        // Handle error if API fails
-        this.Spinner.hide();
-        this._Router.navigate(['/notfound']);
-      });
+      this.allData = res.results || [];
+      this.filterData();
+
+      this.found = this.allData.length > 0;
+      if (!this.found) this._Router.navigate(['/notfound']);
+
+      this.Spinner.hide();
+    }, err => {
+      this.Spinner.hide();
+      this._Router.navigate(['/notfound']);
     });
-  }
-
-  // Define the filterData method outside of the subscribe block
-  filterData() {
-    this.allData = this.allData.filter((item: MediaItem) => 
-      (item.media_type === 'movie' || item.media_type === 'tv') && 
-      item.poster_path != null
-    ).slice(0, 12);
-  }
+  });
 }
 
+  searchAll(query: string): void {
+    this.Spinner.show();
+
+    this._DataService.search(query).subscribe((response) => {
+      this.allData = response.results || [];
+      this.filterData();
+
+      this.handleResult();
+    }, () => this.handleError());
+  }
+
+  searchByType(query: string, type: string): void {
+    this.Spinner.show();
+
+    this._DataService.searchMulti(query, type).subscribe((res: any) => {
+      this.allData = res.results || [];
+
+      if (type === 'person') {
+        this.allData = this.allData.slice(0, 12); // just top celebs
+      } else {
+        this.filterData();
+      }
+
+      this.handleResult();
+    }, () => this.handleError());
+  }
+
+filterData() {
+  this.allData = this.allData.filter((item: MediaItem) =>
+    ['movie', 'tv', 'person'].includes(item.media_type) &&
+    item.poster_path != null
+  ).slice(0, 12);
+}
+
+
+  handleResult(): void {
+    this.Spinner.hide();
+
+    if (this.allData.length > 0) {
+      this.found = true;
+    } else {
+      this.found = false;
+      this._Router.navigate(['/notfound']);
+    }
+  }
+
+  handleError(): void {
+    this.Spinner.hide();
+    this._Router.navigate(['/notfound']);
+  }
+}

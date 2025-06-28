@@ -166,58 +166,160 @@
       }
     }
   
-  
+
+
   .search-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin-left: 40px !important;
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 40px !important;
+
+  .dropdown-select {
+    position: absolute;
+    left: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none; // prevent interaction when hidden
   }
-  
-  .search-container input {
+
+  select {
+    background: transparent;
+    border: none;
+    color: #ffbb55;
+    font-size: 13px;
+    outline: none;
+    appearance: none;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  &:hover .dropdown-select,
+  &:focus-within .dropdown-select {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 40;
+  }
+
+  input {
     background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
     border: 1px solid rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
     border-radius: 20px;
     font-size: 14px;
     width: 0;
-    padding: 0;
+    padding: 0 40px 0 80px; 
     opacity: 0;
     pointer-events: none;
     transition: width 0.4s ease, padding 0.4s ease, opacity 0.4s ease;
     margin-right: 1rem;
   }
-  
-  .search-container:hover input,
-.search-container:focus-within input {
-  width: 200px;
-  padding: 8px 40px 8px 15px;
-  opacity: 1;
-  pointer-events: auto;
-}
-  .search-container input::placeholder {
+
+  &:hover input,
+  &:focus-within input {
+    width: 200px;
+    padding: 8px 40px 8px 80px;
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  input::placeholder {
     color: rgba(255, 255, 255, 0.7);
   }
-  
-  .search-container .search-btn {
+
+  .search-btn {
     position: absolute;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
-    // color: #db0000 !important;
-    margin-left: 10px;
     font-size: 17px;
     z-index: 10;
     cursor: pointer;
   }
-  
-  div#collapsibleNavId {
-    margin-right: 45px !important;
 }
+
+  
+//   .search-container {
+//     position: relative;
+//     display: flex;
+//     align-items: center;
+//     margin-left: 40px !important;
+//   }
+  
+//   .search-container input {
+//     background-color: rgba(255, 255, 255, 0.1);
+//     color: #fff;
+//     border: 1px solid rgba(255, 255, 255, 0.3);
+//     backdrop-filter: blur(6px);
+//     -webkit-backdrop-filter: blur(6px);
+//     border-radius: 20px;
+//     font-size: 14px;
+//     width: 0;
+//     padding: 0;
+//     opacity: 0;
+//     pointer-events: none;
+//     transition: width 0.4s ease, padding 0.4s ease, opacity 0.4s ease;
+//     margin-right: 1rem;
+//   }
+  
+//   .search-container:hover input,
+// .search-container:focus-within input {
+//   width: 200px;
+//   padding: 8px 40px 8px 15px;
+//   opacity: 1;
+//   pointer-events: auto;
+// }
+//   .search-container input::placeholder {
+//     color: rgba(255, 255, 255, 0.7);
+//   }
+  
+//   .search-container .search-btn {
+//     position: absolute;
+//     right: 20px;
+//     top: 50%;
+//     transform: translateY(-50%);
+//     background: none;
+//     border: none;
+//     // color: #db0000 !important;
+//     margin-left: 10px;
+//     font-size: 17px;
+//     z-index: 10;
+//     cursor: pointer;
+//   }
+  
+//   div#collapsibleNavId {
+//     margin-right: 45px !important;
+// }
+
+// .search-results {
+//   position: absolute;
+//   top: 100%;
+//   left: 0;
+//   z-index: 999;
+//   width: 100%;
+//   background: #1a1a1a;
+//   border: 1px solid #444;
+//   border-radius: 0.25rem;
+//   padding: 0;
+//   list-style: none;
+//   max-height: 200px;
+//   overflow-y: auto;
+
+//   li {
+//     padding: 0.5rem 1rem;
+//     color: #eee;
+//     cursor: pointer;
+
+//     &:hover {
+//       background-color: #333;
+//       color: #f8c700;
+//     }
+//   }
+// }
+
+
 .navbar-brand{
   font-weight: 900 !important;
   margin-right: 90px;

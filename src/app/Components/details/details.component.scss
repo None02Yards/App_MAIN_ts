@@ -6,7 +6,7 @@ iframe {
   width: 70vw;
   border: none;
   border-radius: 8px;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem !important;
   margin-top: 5rem !important;
   box-shadow: 0 0 20px rgba(190, 238, 238, 0.563);
 
@@ -14,6 +14,8 @@ iframe {
 .videofilm{
   text-align: center;
   margin-left: 45px;
+  margin-bottom: 5rem !important;
+
 }
 
 h4{
@@ -77,8 +79,9 @@ h4{
 }
 
 .details-container {
-  max-width: 960px;
-  margin: 4rem 60px;
+  margin-bottom: 0;
+  max-width: 1000px;
+  margin: 0 60px;
   padding: 4rem;
   background: #111;
   // border-radius: 12px;
@@ -294,3 +297,20 @@ h4{
     }
   }
 }
+.cast-section img {
+  border: 2px solid #ffc107;
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+.cast-section img:hover {
+  transform: scale(1.05);
+}
+.topcast{
+  position: relative;
+  top: -70px;
+  margin: 0 80px;
+  margin-bottom: 70px;
+}
+

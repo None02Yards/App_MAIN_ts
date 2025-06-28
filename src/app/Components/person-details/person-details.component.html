@@ -1,59 +1,155 @@
 <div class="container pt-5 mt-5"> 
   <!-- Profile image -->
-  <div class="row justify-content-center mb-4">
+  <div class="row photograph justify-content-center mb-4">
     <div class="col-md-4 col-sm-6 text-center">
-      <img class="img-fluid rounded-circle shadow" [src]="profileSrc" alt="Profile" style="max-width: 250px;">
+      <img 
+  class="img-fluid smooth-profile shadow" 
+  [src]="profileSrc" 
+  alt="Profile" 
+  style="max-width: 250px;">
+
     </div>
   </div>
 
 
 <div class="row justify-content-center mb-5">
-  <div class="col-lg-10">
-    <div class="bg-dark p-4 rounded shadow text-light">
+  <!-- Bio Section -->
+  <div class="col-lg-8 col-md-7">
+    <div class="bg-dark p-4 rounded shadow text-light h-100">
       <div class="d-md-flex align-items-start justify-content-between flex-wrap">
         <div class="mb-4">
-          <h2 class="mb-2">{{ personData.name }}</h2>
+          <h2 class="personname mb-2">{{ personData.name }}</h2>
           <h5 class="text-muted">Born: {{ personData.birthday }}</h5>
         </div>
+        <div class="d-flex flex-wrap gap-2 mt-2">
+  <span *ngFor="let role of roles" class="badge bg-warning text-dark px-3 py-1">
+    {{ role }}
+  </span>
+</div>
+
         <div class="text-md-end mt-3 mt-md-0">
           <span class="badge bg-info text-dark p-2">Popularity: {{ personData.popularity | number:'1.0-0' }}</span>
         </div>
       </div>
 
-      <h4 class="mt-4 mb-4">Biography <i class="fa fa-book-open me-2"></i>: </h4>
-        <div *ngFor="let sentence of visibleBio">
-          <p class="text-justify">{{ sentence }}</p>
-        </div>
-        <button class="btn btn-sm btn-outline-light mt-2" (click)="toggleBio()">
-          {{ showFullBio ? 'Show Less' : 'Read More' }}
-        </button>
+  <div class="d-flex align-items-center justify-content-between flex-wrap mt-4 mb-4">
+    <h4 class="mb-0 d-flex align-items-center">
+      Biography <i class="fa fa-book-open ms-2"></i>
+    </h4>
+    <button class="add-to-list-btn mt-2 mt-md-0">
+      <i class="fa fa-plus me-2"></i> Add to list
+    </button>
+  </div>
+
+<!-- Biography Section -->
+ <div>
+  <div class="bio-snippet mt-2" [class.expanded]="showFullBio">
+    {{ personData.biography }}
+  </div>
+
+  <!-- Toggle Button -->
+  <button class="btn btn-sm btn-outline-warning mt-2" (click)="toggleBio()">
+    {{ showFullBio ? 'Show Less' : 'Read More' }}
+  </button>
+ </div>
+<!-- Contact Info Links  bio-snippet div) -->
+<div class="contact-links mt-3">
+  <a href="#" class="link">Contact info</a>
+  <span class="dot">·</span>
+  <a href="#" class="link">Agent info</a>
+  <span class="dot">·</span>
+  <a href="#" class="link">Resume</a>
+</div>
 
 
-      
+</div>
+</div>
+
+  <!-- More to Explore -->
+<div class="col-lg-4 col-md-5 mt-4 mt-md-0">
+  <div class="bg-dark text-light rounded shadow overflow-hidden h-100 d-flex flex-column p-3 more-to-explore">
+
+    <div class="d-flex align-items-center mb-3">
+      <div class="border-start border-4 me-2" style="border-color: #f8c700; height: 1.5rem;"></div>
+      <h5 class="mb-0 fw-bold" style="color: #f8c700;">More to explore</h5>
+    </div>
+
+<div class="d-flex flex-column gap-3">
+  <a
+  *ngFor="let celeb of moreToExploreCelebs"
+  [routerLink]="['/person', celeb.id]"
+  class="d-flex align-items-center gap-3 text-decoration-none zoom-card"
+>
+  <div class="img-wrapper">
+    <img
+      [src]="'https://image.tmdb.org/t/p/w185' + celeb.profile_path"
+      alt="{{ celeb.name }}"
+      class="rounded shadow-sm celeb-img"
+      style="width: 60px; height: 60px; object-fit: cover;"
+    />
+  </div>
+  <div>
+    <h6 class="mb-0 text-light">{{ celeb.name }}</h6>
+    <small style="color: #ffbb55;">Popularity: {{ celeb.popularity | number:'1.0-0' }}</small>
+  </div>
+</a>
+
+</div>
+
+
+    <!-- Footer -->
+    <div class="border-top pt-3 mt-3 text-end">
+      <a routerLink="/people/1" class="fw-semibold" style="color: #ffbb55;">See the gallery</a>
     </div>
   </div>
 </div>
 
 
-  <!-- Known For -->
-  <h3 class="text-center mt-5">Known For</h3>
-    <div class="row justify-content-center">
-    <div *ngFor="let item of knownFor.slice(0, 6)" class="col-md-2 overflow-hidden mb-4">
-      <div class="poster position-relative overflow-hidden">
-        <img class="w-100" [src]="'https://image.tmdb.org/t/p/original/' + item?.poster_path" alt="Known for">
-  
+</div>
+
+
+
+<div class="mt-5">
+  <!-- Section Title with Yellow Bar -->
+  <div class="d-flex align-items-center mb-4">
+    <!-- <div class="known border-start border-4 me-3" style="border-color: #f8c700; height: 1.5rem;"></div> -->
+        <h4 class="mb-3 border-start border-3 ps-2 border-warning">Known For</h4>
+
+  </div>
+  <!-- Poster Cards -->
+  <div class="row justify-content-center">
+    <div *ngFor="let item of knownFor.slice(0, 6)" class="col-md-2 col-6 mb-4">
+      <div class="poster position-relative overflow-hidden rounded shadow-sm known-for-card">
+
+        <img
+          class="w-100 rounded"
+          [src]="'https://image.tmdb.org/t/p/original/' + item?.poster_path"
+          alt="{{ item.name || item.original_title }}"
+          style="object-fit: cover; height: 100%;"
+        />
+
         <!-- Hover Layer -->
         <div class="layer">
           <a class="bg-transparent" [routerLink]="['/details', item.media_type, item.id]">
-            <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
+            <i class="fa text-dark fa-2x fa-play-circle" aria-hidden="true"></i>
           </a>
-          <p class="text-dark font-weight-bolder">See more!</p>
+          <p class="text-dark font-weight-bolder mt-2">See more!</p>
         </div>
-  
-        <h5 class="text-center mt-2">{{ item.name || item.original_title }}</h5>
       </div>
-    </div>
+      <h6 class="text-center text-light mt-2">{{ item.name || item.original_title }}</h6>
     </div>
   </div>
+</div>
+<!-- Back Arrow -->
+
+<div class="d-flex justify-content-center mt-4">
+  <button class="back-arrow-btn" (click)="goBack()" aria-label="Back">
+    <i class="fa fa-arrow-left fa-lg"></i>
+  </button>
+</div>
+
+
+
+</div>
 
 

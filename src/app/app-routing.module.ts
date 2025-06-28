@@ -51,9 +51,9 @@ const routes: Routes = [
   {
     path: 'person/:id', component: PersonDetailsComponent, 
   },
-  {
-    path: 'search/:target', component: SearchComponent,
-  },
+{ path: 'search', component: SearchComponent },
+{ path: 'search/:target', component: SearchComponent }, // legacy fallback
+
   {
     path: 'people/:page', component: PeopleComponent,
   },
