@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
   isCollapsed = true;
 
   searchQuery = '';
-  searchType: 'multi' | 'person' | 'keyword' = 'multi'; // All 🔽 is default
+  searchType: 'multi' | 'person' | 'keyword' = 'multi'; // All is default
   searchResults: any[] = [];
   showDropdown = false;
 dropdownOpen = false;
@@ -31,35 +31,24 @@ isCelebsPage = false;
     private _DataService: DataService
   ) {}
 
- ngOnInit(): void {
-  this.updateNavbarFlags(this._Router.url);
-
+ngOnInit(): void {
+  const initialUrl = this._Router.url;
+  this.isWelcomePage = initialUrl.includes('/welcome');
+  this.hideNavbar = false; // ✅ Always show on initial welcome
+  this.showMenuItem = true;
+  this.showSearch = false;
+  
   this._Router.events
     .pipe(filter(event => event instanceof NavigationEnd))
     .subscribe((event) => {
       const nav = event as NavigationEnd;
       this.updateNavbarFlags(nav.urlAfterRedirects);
     });
+      // initially
+  this.updateNavbarFlags(this._Router.url);
 }
 
-//   private updateNavbarFlags(currentUrl: string): void {
-//   this.isWelcomePage = currentUrl.includes('/welcome');
-//   this.isWatchlistPage = currentUrl.includes('/watchlist');
-//   this.isMediaPage =
-//     currentUrl.includes('/movies') ||
-//     currentUrl.includes('/tvshows') ||
-//     currentUrl.includes('/search') ||
-//     currentUrl.includes('/home');
 
-//   const isHomePage = currentUrl === '/' || currentUrl === '/home';
-//   const isPersonDetailsPage = currentUrl.includes('/person/');
-
-//   this.isCelebsPage = currentUrl.includes('/people') || isPersonDetailsPage;
-
-//   this.hideNavbar = this.isWelcomePage;
-//   this.showSearch = !this.isWelcomePage && !isHomePage;
-//   this.showMenuItem = !this.isWelcomePage;
-// }
 
  private updateNavbarFlags(currentUrl: string): void {
     this.isWelcomePage = currentUrl.includes('/welcome');
@@ -81,8 +70,7 @@ isCelebsPage = false;
   this.showMenuItem = !this.isWelcomePage;
 
   //  Only hide on scroll for main /watchlist page, NOT its children
-    this.hideNavbar = this.isWelcomePage ? true : false;
-
+  this.hideNavbar = false;
 
   }
 
@@ -173,6 +161,7 @@ redirectToSearch(): void {
       this.searchResults = res.results?.slice(0, 6) || [];
       this.showDropdown = this.searchResults.length > 0;
     });
+   
   }
 
 goToResult(item: any): void {
@@ -209,33 +198,86 @@ goToResult(item: any): void {
     }
   }
 
+// @HostListener('window:scroll', [])
+// onWindowScroll(): void {
+//   const scrollY = window.scrollY || window.pageYOffset;
+//   const currentUrl = this._Router.url;
+
+//   const isMainWatchlist = currentUrl === '/watchlist';
+//   const isCustomListPage = currentUrl.includes('/watchlist/custom');
+//   const isCreateListPage = currentUrl.includes('/watchlist/create');
+//   const isWelcomePage = currentUrl.includes('/welcome');
+
+//   if (isWelcomePage) {
+//     this.hideNavbar = false;
+//     return;
+//   }
+
+//   if (isMainWatchlist) {
+//     this.hideNavbar = scrollY > 100;
+//     return;
+//   }
+
+//   if (
+//     currentUrl.includes('/tvshows') ||
+//     currentUrl.includes('/people') ||
+//     currentUrl.includes('/movies') ||
+//     currentUrl.includes('/person/') ||
+//     currentUrl.includes('/search')
+//   ) {
+//     this.isScrolled = true;
+//     this.showSearch = true;
+//   } else {
+//     const heroHeight = 700;
+//     this.isScrolled = scrollY > heroHeight;
+//     this.showSearch = this.isScrolled;
+//   }
+// }
+
 @HostListener('window:scroll', [])
 onWindowScroll(): void {
-    const scrollY = window.scrollY || window.pageYOffset;
+  const scrollY = window.scrollY || window.pageYOffset;
   const currentUrl = this._Router.url;
 
   const isMainWatchlist = currentUrl === '/watchlist';
   const isCustomListPage = currentUrl.includes('/watchlist/custom');
   const isCreateListPage = currentUrl.includes('/watchlist/create');
 
-  if (this._Router.url.includes('/watchlist')) {
+   const isWelcomePage = currentUrl.includes('/welcome');
+
+  if (isWelcomePage) {
+    this.hideNavbar = false;  // 🔥 Always show on welcome
+    return;
+  }
+
+  // ✅ Only hide on scroll for main /watchlist
+  if (isMainWatchlist) {
     this.hideNavbar = scrollY > 100;
     return;
   }
 
+  if (isCustomListPage || isCreateListPage) {
+    this.hideNavbar = false;
+    return;
+  }
+
+  // Default scroll logic for media pages
   if (
-    this._Router.url.includes('/tvshows') ||
-    this._Router.url.includes('/people') ||
-    this._Router.url.includes('/movies') ||
-    this._Router.url.includes('/search') ||
-    this._Router.url.includes('/person/')
+    currentUrl.includes('/tvshows') ||
+    currentUrl.includes('/people') ||
+    currentUrl.includes('/movies') ||
+    currentUrl.includes('/person/') ||
+    currentUrl.includes('/search')
   ) {
     this.isScrolled = true;
     this.showSearch = true;
   } else {
-    const heroHeight = 500;
+    const heroHeight = 700;
     this.isScrolled = scrollY > heroHeight;
     this.showSearch = this.isScrolled;
   }
 }
+
+
+
 }
