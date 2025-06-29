@@ -13,7 +13,7 @@ import { TVShowsComponent } from './Components/tvshows/tvshows.component';
 import { WatchlistComponent } from './Components/watchlist/watchlist.component';
 import { MoviesWatchlistComponent } from './Components/watchlist/movies-watchlist/movies-watchlist.component';
 import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-watchlist.component';
-// import { CreateListComponent } from './Components/watchlist/create-list/create-list.component';
+import { CreateListComponent } from './Components/watchlist/create-list/create-list.component';
 import { CustomListDetailComponent } from './Components/watchlist/custom-list-detail/custom-list-detail.component';
 
 // import { AnimeWatchlistComponent } from './Components/watchlist/anime-watchlist/anime-watchlist.component';
@@ -32,10 +32,15 @@ const routes: Routes = [
   { path: 'watchlist/tv', component: TvWatchlistComponent },
 
  // custom list creation & detail view
-{ path: 'watchlist/custom', component: CustomListDetailComponent },
 
+{ path: 'watchlist/custom', component: CustomListDetailComponent },
+{ path: 'watchlist/custom', component: CreateListComponent },
+
+{ path: 'list/:id', component: CustomListDetailComponent },
     // { path: '', redirectTo: 'movies', pathMatch: 'full' },
-  
+ { path: 'create-list/:id', component: CreateListComponent },
+    { path: 'create-list', component: CreateListComponent },
+
   {
     path: 'about', component: AboutComponent, 
   },

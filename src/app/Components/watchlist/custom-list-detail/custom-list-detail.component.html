@@ -1,24 +1,3 @@
-<!-- <div class="custom-list-header">
-  <h1 class="list-title">{{ customList.name }}</h1>
-  <p class="list-desc">{{ customList.description }}</p>
-  <span class="badge" [ngClass]="customList.privacy">{{ customList.privacy | titlecase }}</span>
-</div>
-
-<div class="container mt-4">
-  <div *ngIf="customList.items?.length > 0; else emptyState" class="custom-card-grid">
-    <div *ngFor="let item of customList.items" class="custom-card">
-      <img [src]="'https://image.tmdb.org/t/p/w300' + item.poster_path" [alt]="item.title || item.name" />
-      <h5 class="mt-2 text-center">{{ item.title || item.name }}</h5>
-    </div>
-  </div>
-
-  <ng-template #emptyState>
-    <div class="empty-placeholder text-center">
-      <p>No items added yet to this list. Start bookmarking!</p>
-    </div>
-  </ng-template>
-</div> -->
-
 <div class="custom-list-detail-wrapper">
   <div class="watchlist-header position-relative text-white">
     <div class="floating-title">
@@ -29,37 +8,71 @@
 
   <div class="container mt-5">
     <div class="watchlist-row">
-      <div class="category-card" *ngFor="let list of customLists">
-        <h2>{{ list.name }}</h2>
-        <p>{{ list.description }}</p>
-        <div class="preview-thumbs">
-          <p *ngIf="list.items.length === 0">No items added yet.</p>
-          <img *ngFor="let item of list.items.slice(0, 4)" [src]="getPoster(item.poster_path)" />
+      <div
+        class="category-card"
+        *ngFor="let list of customLists"
+        [style.backgroundColor]="list.color || '#1f1f1f'"
+      >
+        <!-- Edit Mode -->
+        <div *ngIf="editingListId === list.id; else viewMode">
+          <input
+            type="text"
+            [(ngModel)]="list.name"
+            class="form-control mb-2"
+            placeholder="List Name"
+          />
+
+          <div class="d-flex flex-wrap gap-2 mb-2">
+            <div
+              *ngFor="let color of colorOptions"
+              class="color-box"
+              [style.backgroundColor]="color"
+              (click)="setColor(list, color)"
+              [class.selected]="list.color === color"
+            ></div>
+          </div>
+
+          <div class="d-flex justify-content-end gap-2">
+            <button class="btn btn-sm btn-secondary" (click)="cancelEdit()">Cancel</button>
+            <button class="btn btn-sm btn-success" (click)="saveEdit(list)">Save</button>
+          </div>
         </div>
-     <div class="action-row mt-2 d-flex justify-content-between align-items-center">
-  <a class="view-link" (click)="viewList(list)">👁️ View</a>
 
-  <div class="dropdown position-relative">
-    <button class="menu-toggle" (click)="toggleMenu(list.id)">⋯</button>
-    
-    <ul *ngIf="activeMenuId === list.id" class="dropdown-menu show custom-dropdown">
-      <li><a (click)="editList(list)">✏️ Edit</a></li>
-      <li><a (click)="deleteList(list.id)">🗑️ Delete</a></li>
-      <li><a (click)="exportList(list)">📤 Export</a></li>
-    </ul>
-  </div>
-</div>
+        <!-- View Mode -->
+        <ng-template #viewMode>
+          <h2>{{ list.name }}</h2>
+          <p>{{ list.description }}</p>
 
+          <div class="preview-thumbs">
+            <p *ngIf="list.items.length === 0">No items added yet.</p>
+            <img
+              *ngFor="let item of list.items.slice(0, 4)"
+              [src]="getPoster(item.poster_path)"
+              [alt]="item.title || item.name"
+            />
+          </div>
+
+          <div class="action-row mt-2 d-flex justify-content-between align-items-center">
+            <a class="view-link" (click)="viewList(list)">👁️ View</a>
+
+            <div class="dropdown position-relative">
+              <button class="menu-toggle" (click)="toggleMenu(list.id)">⋯</button>
+
+              <ul *ngIf="activeMenuId === list.id" class="dropdown-menu show custom-dropdown">
+                <li><a (click)="editList(list.id)">✏️ Edit</a></li>
+                <li><a (click)="deleteList(list.id)">🗑️ Delete</a></li>
+                <li><a (click)="exportList(list)">📤 Export</a></li>
+              </ul>
+            </div>
+          </div>
+        </ng-template>
       </div>
     </div>
   </div>
+
   <div class="back-button-container text-center mt-5">
-  <button class="back-button" routerLink="/watchlist">
-    ⬅️ Back to Watchlist
-  </button>
+    <button class="back-button" routerLink="/watchlist">
+      ⬅️ Back to Watchlist
+    </button>
+  </div>
 </div>
-
-</div>
-
-
-

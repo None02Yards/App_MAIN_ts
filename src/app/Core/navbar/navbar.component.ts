@@ -17,7 +17,9 @@ export class NavbarComponent implements OnInit {
   searchType: 'multi' | 'person' | 'keyword' = 'multi'; // All 🔽 is default
   searchResults: any[] = [];
   showDropdown = false;
+dropdownOpen = false;
 
+isCelebsPage = false;
   isScrolled = false;
   isWelcomePage = false;
   isWatchlistPage = false;
@@ -29,18 +31,37 @@ export class NavbarComponent implements OnInit {
     private _DataService: DataService
   ) {}
 
-  ngOnInit(): void {
-    this.updateNavbarFlags(this._Router.url);
+ ngOnInit(): void {
+  this.updateNavbarFlags(this._Router.url);
 
-    this._Router.events
-      .pipe(filter(event => event instanceof NavigationEnd))
-      .subscribe((event) => {
-        const navigation = event as NavigationEnd;
-        this.updateNavbarFlags(navigation.urlAfterRedirects);
-      });
-  }
+  this._Router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe((event) => {
+      const nav = event as NavigationEnd;
+      this.updateNavbarFlags(nav.urlAfterRedirects);
+    });
+}
 
-  private updateNavbarFlags(currentUrl: string): void {
+//   private updateNavbarFlags(currentUrl: string): void {
+//   this.isWelcomePage = currentUrl.includes('/welcome');
+//   this.isWatchlistPage = currentUrl.includes('/watchlist');
+//   this.isMediaPage =
+//     currentUrl.includes('/movies') ||
+//     currentUrl.includes('/tvshows') ||
+//     currentUrl.includes('/search') ||
+//     currentUrl.includes('/home');
+
+//   const isHomePage = currentUrl === '/' || currentUrl === '/home';
+//   const isPersonDetailsPage = currentUrl.includes('/person/');
+
+//   this.isCelebsPage = currentUrl.includes('/people') || isPersonDetailsPage;
+
+//   this.hideNavbar = this.isWelcomePage;
+//   this.showSearch = !this.isWelcomePage && !isHomePage;
+//   this.showMenuItem = !this.isWelcomePage;
+// }
+
+ private updateNavbarFlags(currentUrl: string): void {
     this.isWelcomePage = currentUrl.includes('/welcome');
     this.isWatchlistPage = currentUrl.includes('/watchlist');
     this.isMediaPage = currentUrl.includes('/movies') || currentUrl.includes('/tvshows') || currentUrl.includes('/search') || currentUrl.includes('/home');
@@ -48,11 +69,38 @@ export class NavbarComponent implements OnInit {
     const isHomePage = currentUrl === '/' || currentUrl === '/home';
     this.showSearch = !(this.isWelcomePage || isHomePage);
     this.showMenuItem = !this.isWelcomePage;
+
+     const isPersonDetailsPage = currentUrl.includes('/person/');
+
+  this.isCelebsPage = currentUrl.includes('/people') || isPersonDetailsPage;
+
   }
 
   toggleNavbar(): void {
     this.isCollapsed = !this.isCollapsed;
   }
+
+toggleDropdown() {
+  this.dropdownOpen = !this.dropdownOpen;
+}
+
+hoverDropdown(isHovering: boolean) {
+  this.dropdownOpen = isHovering;
+}
+
+selectSearchType(type: 'multi' | 'person' | 'keyword') {
+  this.searchType = type;
+  this.dropdownOpen = false;
+}
+
+
+getSearchLabel(type: string): string {
+  switch (type) {
+    case 'person': return 'Celebs';
+    case 'keyword': return 'Keywords';
+    default: return 'All';
+  }
+}
 
   targetInfo(event: Event | undefined): void {
     const input = event?.target as HTMLInputElement | null;
@@ -63,25 +111,45 @@ redirectToSearch(): void {
   const query = this.searchQuery.trim();
   if (!query) return;
 
-  this._DataService.searchByType(query, this.searchType).subscribe((res: any) => {
-    const results = res.results || [];
+  if (this.searchType === 'person') {
+    this._DataService.searchByType(query, 'person').subscribe((res: any) => {
+      if (!res?.results?.length) {
+        this._Router.navigate(['/notfound']);
+        return;
+      }
 
-    if (this.searchType === 'person' && results.length === 1 && results[0].media_type === 'person') {
-      this._Router.navigate(['/person', results[0].id]);
-    } else {
-      this._Router.navigate(['/search'], {
-        queryParams: {
-          q: query,
-          type: this.searchType
-        }
-      });
+      // Filter out empty results
+      const validPeople = res.results.filter((person: any) =>
+        person.profile_path && person.popularity > 3
+      );
+
+      // Try to find a close name match first
+      const bestMatch = validPeople.find((p: any) =>
+        p.name.toLowerCase().includes(query.toLowerCase())
+      ) || validPeople[0];
+
+      if (bestMatch) {
+        this._Router.navigate(['/person', bestMatch.id]);
+      } else {
+        this._Router.navigate(['/notfound']);
+      }
+    });
+    return;
+  }
+
+  // For 'multi' or 'keyword' — fallback to normal search page
+  this._Router.navigate(['/search'], {
+    queryParams: {
+      q: query,
+      type: this.searchType
     }
-
-    this.searchQuery = '';
-    this.searchResults = [];
-    this.showDropdown = false;
   });
+
+  this.searchQuery = '';
+  this.searchResults = [];
+  this.showDropdown = false;
 }
+
 
   onSearchInput(): void {
     const query = this.searchQuery.trim();
@@ -102,7 +170,7 @@ goToResult(item: any): void {
   this.showDropdown = false;
 
   if (item.media_type === 'person') {
-    this._Router.navigate(['/person', item.id]); // ✅ matches: path: 'person/:id'
+    this._Router.navigate(['/person', item.id]); 
   } else if (item.media_type === 'movie' || item.media_type === 'tv') {
     this._Router.navigate(['/details', item.media_type, item.id]);
   } else if (this.searchType === 'keyword') {
@@ -131,28 +199,28 @@ goToResult(item: any): void {
     }
   }
 
-  @HostListener('window:scroll', [])
-  onWindowScroll(): void {
-    const scrollY = window.scrollY || window.pageYOffset;
+@HostListener('window:scroll', [])
+onWindowScroll(): void {
+  const scrollY = window.scrollY || window.pageYOffset;
 
-    if (this._Router.url.includes('/watchlist')) {
-      this.hideNavbar = scrollY > 100;
-      return;
-    }
-
-    if (
-      this._Router.url.includes('/tvshows') ||
-      this._Router.url.includes('/people') ||
-      this._Router.url.includes('/movies') ||
-      this._Router.url.includes('/person-details') ||
-      this._Router.url.includes('/search')
-    ) {
-      this.isScrolled = true;
-      this.showSearch = true;
-    } else {
-      const heroHeight = 500;
-      this.isScrolled = scrollY > heroHeight;
-      this.showSearch = this.isScrolled;
-    }
+  if (this._Router.url.includes('/watchlist')) {
+    this.hideNavbar = scrollY > 100;
+    return;
   }
+
+  if (
+    this._Router.url.includes('/tvshows') ||
+    this._Router.url.includes('/people') ||
+    this._Router.url.includes('/movies') ||
+    this._Router.url.includes('/search') ||
+    this._Router.url.includes('/person/')
+  ) {
+    this.isScrolled = true;
+    this.showSearch = true;
+  } else {
+    const heroHeight = 500;
+    this.isScrolled = scrollY > heroHeight;
+    this.showSearch = this.isScrolled;
+  }
+}
 }

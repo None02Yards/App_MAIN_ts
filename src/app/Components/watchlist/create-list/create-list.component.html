@@ -1,1 +1,22 @@
-<p>create-list works!</p>
+
+<div class="custom-list-detail-wrapper">
+    <div class="container mt-5" *ngIf="selectedList">
+        <div class="watchlist-header position-relative text-white">
+        <div class="floating-title">
+            <h2 class="watchlist-title mt-5 ms-2">{{ selectedList.name }}</h2>
+            <span class="emoji"></span>
+        </div>
+        </div>
+    <app-watchlist-card
+        [items]="selectedList.items"
+        [mediaType]="guessMediaType(selectedList.items)"
+        (remove)="removeItemFromList($event)">
+    </app-watchlist-card>
+
+    <div class="back-button-container text-center mt-5">
+        <button class="back-button" routerLink="/watchlist/custom">
+        ⬅️ Back to Watchlist
+        </button>
+    </div>
+    </div>
+</div>

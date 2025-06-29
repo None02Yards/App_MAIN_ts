@@ -1,191 +1,4 @@
-// .custom-list-header {
-//   text-align: center;
-//   margin-top: 8rem;
-//   color: #151516;
 
-//   .list-title {
-//     font-size: 2.5rem;
-//     font-weight: bold;
-//   }
-
-//   .list-desc {
-//     font-size: 1.1rem;
-//     color: #cccccc;
-//     margin-top: 0.5rem;
-//   }
-
-//   .badge {
-//     display: inline-block;
-//     padding: 6px 12px;
-//     border-radius: 12px;
-//     font-size: 0.9rem;
-//     margin-top: 1rem;
-//     text-transform: capitalize;
-
-//     &.public {
-//       background-color: #28a745;
-//       color: white;
-//     }
-
-//     &.private {
-//       background-color: #6c757d;
-//       color: white;
-//     }
-//   }
-// }
-// .watchlisthere{
-//     margin-top: 400px !important;
-// }
-// .custom-card-grid {
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 16px;
-//   justify-content: center;
-//   margin-top: 2rem;
-
-//   .custom-card {
-//     background: #1a1a1a;
-//     padding: 12px;
-//     border-radius: 10px;
-//     width: 180px;
-//     text-align: center;
-//     color: #0c0b0b;
-//     transition: transform 0.3s ease;
-
-//     &:hover {
-//       transform: translateY(-5px);
-//     }
-
-//     img {
-//       width: 100%;
-//       border-radius: 6px;
-//     }
-
-//     h5 {
-//       margin-top: 0.5rem;
-//       font-size: 1rem;
-//     }
-//   }
-// }
-
-// .empty-placeholder {
-//   margin-top: 4rem;
-//   font-size: 1.2rem;
-//   color: #999;
-// }
-// .watchlist-row {
-//   display: flex;
-//   flex-wrap: wrap;
-//   gap: 2rem;
-// }
-
-// .category-card {
-//   flex: 1 1 300px;
-
-//   margin-top: 300px;
-//   background: #1c0202;
-//   padding: 1rem;
-//   border-radius: 12px;
-//   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-// }
-
-// .preview-thumbs {
-//   display: flex;
-//   gap: 0.5rem;
-//   margin-top: 1rem;
-
-//   img {
-//     height: 100px;
-//     border-radius: 8px;
-//   }
-// }
-// .watchlist-header {
-//   background: linear-gradient(to right, #827357,#111110b4, #0b0b0a, #23232380) !important;
-//   position: relative;
-//   padding-top: 4rem;
-//  border-bottom: 1px solid #7876769d;
-
-//   .header-content {
-//     // max-width: 1400px;
-//     // margin: 0 auto;
-//     // margin-bottom: 3rem;
-//     display: flex;
-//     justify-content: flex-end; // this makes button align left
-//     align-items: center;
-//     padding: 2rem 1.5rem;
-//   }
-
-//   .floating-title {
-//     position: absolute;
-//     bottom: -2rem;
-//     left: 2rem;
-//     color: #e9e3e3;
-//     padding: 0.4rem 1.2rem;
-//     border-radius: 2rem;
-//     font-weight: 600;
-//     // background: #1a1a1a;
-//     font-family: 'Segoe UI', sans-serif;
-//     // box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-//     z-index: 10;
-//     display: flex;
-//     align-items: center;
-//     gap: 0.5rem;
-
-//     .emoji {
-//       font-size: 2.8rem;
-//     }
-
-//     .watchlist-title {
-//       font-size: 1.3rem;
-//       margin: 0;
-//     }
-//   }
-// }
-// .custom-list-card {
-//   background: #fff;
-//   border-radius: 8px;
-//   padding: 16px;
-//   margin-bottom: 20px;
-//   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-//   position: relative;
-
-//   .three-dots-btn {
-//     position: absolute;
-//     top: 16px;
-//     right: 16px;
-//     background: #f0f0f0;
-//     border: none;
-//     border-radius: 50%;
-//     padding: 6px 10px;
-//     cursor: pointer;
-//   }
-
-//   .dropdown-menu {
-//     position: absolute;
-//     top: 48px;
-//     right: 16px;
-//     background: #222;
-//     color: #fff;
-//     border-radius: 6px;
-//     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-//     z-index: 10;
-//     display: flex;
-//     flex-direction: column;
-
-//     button {
-//       background: transparent;
-//       border: none;
-//       color: white;
-//       padding: 10px 16px;
-//       text-align: left;
-//       width: 100%;
-//       cursor: pointer;
-//       &:hover {
-//         background-color: #333;
-//       }
-//     }
-//   }
-// }
 
 .custom-list-detail-wrapper {
   min-height: 100vh;
@@ -360,4 +173,34 @@
   &:hover {
     background-color: #e5b100;
   }
+}
+.color-palette {
+  .color-option {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &.selected {
+      border: 2px solid #000;
+    }
+  }
+}
+.color-box {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border 0.2s ease-in-out;
+}
+
+.color-box.selected {
+  border: 2px solid #fff;
 }

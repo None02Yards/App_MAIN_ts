@@ -82,50 +82,60 @@
 
     </div>
 
-    
-   
-    <!-- Social + Copyright -->
-    <div class="row social mt-2">
-      <div class="col text-center">
-        <div class="d-flex justify-content-center align-items-center">
-          <ul class="list-inline mb-2">
-            <li class="list-inline-item">
-              <a href="https://github.com/Zu34" aria-label="GitHub">
-                <i class="fab fa-github fa-lg"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#" aria-label="LinkedIn">
-                <i class="fab fa-linkedin fa-lg text-light"></i>
-              </a>
-            </li>
-            <li class="list-inline-item">
-              <a href="#" aria-label="Email">
-                <i class="fas fa-envelope fa-lg text-light"></i>
-              </a>
-            </li>
-          </ul>
+ <!-- QR Code Centered Above Social Icons -->
+<div class="text-center">
+  <div class="qr-code-wrapper d-inline-flex align-items-center justify-content-center gap-3">
+    <p class="text-muted small">Scan to visit our app</p>
+    <img
+      src="https://api.qrserver.com/v1/create-qr-code/?data=https://yourwebsite.com&size=100x100"
+      alt="QR Code"
+      width="80"
+      height="80"
+      class="rounded"
+    />
+  </div>
 
-          <!-- Language Dropdown -->
-          <div class="language-dropdown ms-3"> <!-- ms-3 adds margin-left -->
-            <button class="dropdown-toggle" (click)="toggleDropdown()">
-              <i class="bi bi-globe"></i>
-              <span>{{ currentLang }}</span>
-              <i class="bi bi-caret-down-fill"></i>
-            </button>
+  <!-- Social + Language -->
+  <div class="d-flex justify-content-center align-items-center flex-wrap">
+    <ul class="list-inline mb-2">
+      <li class="list-inline-item">
+        <a href="https://github.com/Zu34" aria-label="GitHub">
+          <i class="fab fa-github fa-lg"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" aria-label="LinkedIn">
+          <i class="fab fa-linkedin fa-lg text-light"></i>
+        </a>
+      </li>
+      <li class="list-inline-item">
+        <a href="#" aria-label="Email">
+          <i class="fas fa-envelope fa-lg text-light"></i>
+        </a>
+      </li>
+    </ul>
 
-            <ul class="dropdown-menu" [class.show]="isOpen">
-              <li (click)="setLanguage('EN')">EN</li>
-              <li (click)="setLanguage('ES')">ES</li>
-              <li (click)="setLanguage('FR')">FR</li>
-              <li (click)="setLanguage('DE')">DE</li>
-              <li (click)="setLanguage('AR')">AR</li>
-            </ul>
-          </div>
-        </div>
+    <!-- Language Dropdown -->
+    <div class="language-dropdown ms-3">
+      <button class="dropdown-toggle" (click)="toggleDropdown()">
+        <i class="bi bi-globe"></i>
+        <span>{{ currentLang }}</span>
+        <i class="bi bi-caret-down-fill"></i>
+      </button>
 
-        <p class="small text-center text-muted mb-0">© {{ currentYear }} CineWorld. All rights reserved. | Happy Popcorn🍿</p>
-      </div>
+      <ul class="dropdown-menu" [class.show]="isOpen">
+        <li (click)="setLanguage('EN')">EN</li>
+        <li (click)="setLanguage('ES')">ES</li>
+        <li (click)="setLanguage('FR')">FR</li>
+        <li (click)="setLanguage('DE')">DE</li>
+        <li (click)="setLanguage('AR')">AR</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="small text-muted mt-2 mb-0">
+    © {{ currentYear }} CineWorld. All rights reserved. | Happy Popcorn🍿
+  </p>
 </div>
 
 

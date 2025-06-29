@@ -104,6 +104,8 @@ export interface CustomList {
   privacy: 'public' | 'private';
   items: any[];
   modifiedAt?: string;
+    color?: string; // ✅ Add this line
+
 }
 
 export interface WatchlistItem extends StoredWatchlistItem {

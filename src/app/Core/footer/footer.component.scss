@@ -145,7 +145,7 @@ line-height: 1.5;
 
 
 .social{
-  margin-top: 80px !important;
+  margin-top: 10px !important;
   i
   {
     color: #afaaaa !important;
@@ -303,4 +303,32 @@ select:hover + .bi-globe-americas,
 .text-uppercase{
   font-size: 17px !important;
   font-family: 'Gill Sans', 'Gill Sans MT' !important;
+}
+
+.qr-code-wrapper {
+  margin-top: 80px !important;
+  background-color: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  padding: 0 .5rem;
+  max-width: 280px;
+border: 1px solid #fbf0f014;
+align-items: center;
+  p {
+    flex: 1;
+    color: #ccc;
+    font-size: 0.85rem;
+  }
+
+  img {
+    padding: 20px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(137, 133, 133, 0.05);
+  }
+
+  img.qr-dimmed {
+  filter: brightness(0.7); // reduce brightness to 70%
+  transition: filter 0.3s ease;
+}
+
 }
