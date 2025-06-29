@@ -74,6 +74,16 @@ isCelebsPage = false;
 
   this.isCelebsPage = currentUrl.includes('/people') || isPersonDetailsPage;
 
+   const isCustomListPage = currentUrl.includes('/watchlist/custom');
+  const isCreateListPage = currentUrl.includes('/watchlist/create');
+
+   this.showSearch = !(this.isWelcomePage || isHomePage) || isCustomListPage || isCreateListPage;
+  this.showMenuItem = !this.isWelcomePage;
+
+  //  Only hide on scroll for main /watchlist page, NOT its children
+    this.hideNavbar = this.isWelcomePage ? true : false;
+
+
   }
 
   toggleNavbar(): void {
@@ -201,7 +211,12 @@ goToResult(item: any): void {
 
 @HostListener('window:scroll', [])
 onWindowScroll(): void {
-  const scrollY = window.scrollY || window.pageYOffset;
+    const scrollY = window.scrollY || window.pageYOffset;
+  const currentUrl = this._Router.url;
+
+  const isMainWatchlist = currentUrl === '/watchlist';
+  const isCustomListPage = currentUrl.includes('/watchlist/custom');
+  const isCreateListPage = currentUrl.includes('/watchlist/create');
 
   if (this._Router.url.includes('/watchlist')) {
     this.hideNavbar = scrollY > 100;
