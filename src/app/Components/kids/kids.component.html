@@ -1,0 +1,23 @@
+<ng-container>
+  <app-slider [slides]="kidsSlider"></app-slider>
+</ng-container>
+
+<!-- Spinner shown during loading -->
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0)"
+  size="medium"
+  color="#fff"
+  type="square-jelly-box"
+  [fullScreen]="true"
+>
+  <p style="color: rgb(186, 60, 60)">Loading...</p>
+</ngx-spinner>
+
+<app-home
+  [trendingMovies]="trendingMovies"
+  [topTenMovies]="topTenKidsShows"
+  [moreToExplore]="kidsMoreToExplore"
+  [exclusiveVideos]="kidsExclusiveVideos"
+  [quote]="kidsQuote"
+  [redirectToPopularTVShowsFn]="goToPopularKidsTVShows.bind(this)"
+></app-home>

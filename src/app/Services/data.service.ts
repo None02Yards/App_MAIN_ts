@@ -97,8 +97,6 @@ getCombinedCredits(id: string): Observable<any> {
 }
 
 
-
-
   search(searchText:any):Observable<any>{
     return this._HttpClient.get(`${this.MovieAPI}/search/multi?api_key=${this.APIKey}&query=${searchText}`).pipe(
       catchError(this.handleError)

@@ -106,18 +106,16 @@
 
 .watchlist-header {
   background: linear-gradient(to right, #827357,#111110b4, #0b0b0a, #23232380);
-  position: relative;
+  // position: relative;
   padding-top: 4rem;
- border-bottom: 1px solid #7876769d;
 
   .header-content {
-    // max-width: 1400px;
-    // margin: 0 auto;
-    // margin-bottom: 3rem;
     display: flex;
     justify-content: flex-end; // this makes button align left
     align-items: center;
     padding: 2rem 1.5rem;
+   border-bottom: 1px solid #7876769d;
+
   }
 
   .floating-title {
@@ -153,6 +151,14 @@
   margin: 2rem 0 1rem;
 }
 
+.maincontainer {
+  min-height: 100vh; 
+  width: 100%;
+  background: linear-gradient(to right, #827357, #111110b4, #0b0b0a, #23232380) !important;
+  position: relative;
+  padding-bottom: 3rem; // so footer doesn't overlap if fixed
+  overflow-x: hidden;
+}
 
 
 
@@ -163,7 +169,8 @@
   flex-wrap: wrap;
   padding: 20px;
   margin-top: 7rem;
-  margin-bottom: 3rem;
+  margin-bottom: 8rem !important;
+
 }
 
 .category-card {

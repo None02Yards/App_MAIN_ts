@@ -1,0 +1,89 @@
+<!-- 
+<div class="edge-trigger-container">
+  <div class="red-strip"></div>
+
+<div class="sidebar-container" [class.expanded]="isExpanded" (mouseenter)="isExpanded = true" (mouseleave)="isExpanded = false">
+  <div class="sidebar-inner">
+    <div class="logo mb-4 text-center" *ngIf="isExpanded">
+      <a routerLink="/home" class="text-danger fw-bold d-block"> <span class="small-text"></span></a>
+    </div>
+
+    
+    <ul class="nav flex-column align-items-center">
+      <li>
+        <a routerLink="/home" title="Home">
+          <i class="fas fa-home"></i>
+          <span *ngIf="isExpanded"></span>
+        </a>
+      </li>
+      <li>
+        <a (click)="navigateWithFragment('tv-section')" title="TV Shows">
+          <i class="fas fa-tv"></i>
+          <span *ngIf="isExpanded"></span>
+        </a>
+      </li>
+      <li>
+        <a (click)="navigateWithFragment('movie-section')" title="Movies">
+          <i class="fas fa-film"></i>
+          <span *ngIf="isExpanded"></span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/watchlist" title="Watchlist">
+          <i class="fas fa-bookmark"></i>
+          <span *ngIf="isExpanded"></span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="/people/1" title="Celebs">
+          <i class="fas fa-user"></i>
+          <span *ngIf="isExpanded"></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div> -->
+
+
+<div class="edge-trigger-container">
+  <div class="red-strip"></div>
+
+  <div class="sidebar-container" [class.expanded]="isExpanded" (mouseenter)="isExpanded = true" (mouseleave)="isExpanded = false">
+    <div class="sidebar-inner">
+    <ul class="nav flex-column align-items-center">
+
+  <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <a routerLink="/home" title="Home">
+      <i class="fas fa-home"></i>
+    </a>
+  </li>
+
+  <li routerLinkActive="active">
+    <a routerLink="/tvshows/popular/1" title="TV Shows">
+      <i class="fas fa-tv"></i>
+    </a>
+  </li>
+
+  <li routerLinkActive="active">
+    <a routerLink="/movies/popular/1" title="Movies">
+      <i class="fas fa-film"></i>
+    </a>
+  </li>
+
+  <li routerLinkActive="active">
+    <a routerLink="/watchlist" title="Watchlist">
+      <i class="fas fa-bookmark"></i>
+    </a>
+  </li>
+
+  <li routerLinkActive="active">
+    <a routerLink="/people/1" title="Celebs">
+      <i class="fas fa-user"></i>
+    </a>
+  </li>
+
+</ul>
+
+    </div>
+  </div>
+</div>

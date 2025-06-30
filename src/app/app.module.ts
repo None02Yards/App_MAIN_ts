@@ -30,6 +30,8 @@ import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-wat
 import { SharedModule } from './Components/shared/shared.module'; 
 import { CustomListDetailComponent } from './Components/watchlist/custom-list-detail/custom-list-detail.component';
 import { CreateListComponent } from './Components/watchlist/create-list/create-list.component';
+import { SidebarComponent } from './Core/sidebar/sidebar.component';
+import { KidsComponent } from './Components/kids/kids.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,8 @@ import { CreateListComponent } from './Components/watchlist/create-list/create-l
   MoviesWatchlistComponent,
   CustomListDetailComponent,
   CreateListComponent,
+  SidebarComponent,
+  KidsComponent,
 
     // No need to declare WatchlistCardComponent here
   ],

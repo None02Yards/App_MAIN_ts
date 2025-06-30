@@ -12,11 +12,14 @@ export class AppComponent {
   showArrow = false;
   isAtTop = true;
   currentRoute = '';
-
+ hideSidebar = false;
+  
   constructor(private router: Router) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.currentRoute = event.urlAfterRedirects;
+          this.hideSidebar = this.currentRoute === '/welcome';
+
         setTimeout(() => this.checkScroll(), 100);
       }
     });
@@ -32,7 +35,6 @@ export class AppComponent {
     const currentUrl = this.currentRoute;
     const heroHeight = 700;
 
-    // Always show arrow on these routes
     if (
       currentUrl.includes('/tvshows') ||
       currentUrl.includes('/movies') ||

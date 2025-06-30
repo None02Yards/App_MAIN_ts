@@ -62,7 +62,6 @@ customLists: CustomList[] = [];
     });
   }
 
-  // ✅ Handles pagination
   Next(): void {
     if (!this.disableNext) {
       this.page++;
@@ -77,12 +76,10 @@ customLists: CustomList[] = [];
     }
   }
 
-  // ✅ Used for ngFor trackBy
   trackById(index: number, item: any): number {
     return item.id;
   }
 
-  // ✅ Core data fetcher
   fetchMovies(): void {
     this.spinner.show();
 
@@ -106,17 +103,6 @@ customLists: CustomList[] = [];
   isInWatchlist(movieId: number): boolean {
     return this.watchlistService.isInWatchlist(movieId, 'movie');
   }
-
-  // ✅ Toggle using service
-  // toggleWatchlist(movie: any): void {
-  //   const isSaved = this.watchlistService.isInWatchlist(movie.id, 'movie');
-
-  //   if (isSaved) {
-  //     this.watchlistService.removeFromWatchlist(movie.id, 'movie');
-  //   } else {
-  //     this.watchlistService.addToWatchlist({ id: movie.id, type: 'movie' });
-  //   }
-  // }
 
   toggleWatchlist(item: WatchlistItem): void {
   const customLists = this.watchlistService.getCustomLists();

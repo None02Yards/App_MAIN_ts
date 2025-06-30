@@ -15,7 +15,7 @@ import { MoviesWatchlistComponent } from './Components/watchlist/movies-watchlis
 import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-watchlist.component';
 import { CreateListComponent } from './Components/watchlist/create-list/create-list.component';
 import { CustomListDetailComponent } from './Components/watchlist/custom-list-detail/custom-list-detail.component';
-
+import { KidsComponent } from './Components/kids/kids.component';
 // import { AnimeWatchlistComponent } from './Components/watchlist/anime-watchlist/anime-watchlist.component';
 
 
@@ -50,6 +50,10 @@ const routes: Routes = [
   {
     path: 'tvshows/:genre/:page', component: TVShowsComponent, 
   },
+  {
+  path: 'kids', component: KidsComponent
+  },
+
   {
     path: 'details/:mediaType/:id', component: DetailsComponent, 
   },

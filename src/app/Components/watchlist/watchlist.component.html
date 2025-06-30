@@ -1,117 +1,118 @@
 <!-- watchlist.component.html -->
-  <div class="  watchlist-header position-relative text-white">
-  <div class="watchlist-header position-relative text-white">
-    <div class="floating-title">
-      <h1 class="watchlist-title m-0 ms-2">Watchlist Hub</h1>
-      <span class="emoji">🍿</span>
+<div class="maincontainer position-relative">
+    <div class="  watchlist-header position-relative text-white">
+      <div class="watchlist-header position-relative text-white">
+        <div class="floating-title">
+          <h1 class="watchlist-title m-0 ms-2">Watchlist Hub</h1>
+          <span class="emoji">🍿</span>
+        </div>
+
+        <!-- Header content, button aligned left -->
+        <div class="header-content d-flex flex-column align-items-end">
+
+      <button class="btn btn-outline-light eye-icon-button" (click)="goToCustomList()" title="View Your List">
+      👁️
+    </button>
+      <!-- Create Button -->
+      <button class="create-list-button mb-2" (click)="openCreateListModal()">
+        <span class="plus-icon me-2">+</span>
+        <div class="button-text">
+          <div class="main-text">Create a new list</div>
+          <div class="sub-text">List your movie, TV & celebrity picks.</div>
+        </div>
+      </button>
+
+
     </div>
 
-    <!-- Header content, button aligned left -->
- <div class="header-content d-flex flex-column align-items-end">
 
-   <button class="btn btn-outline-light eye-icon-button" (click)="goToCustomList()" title="View Your List">
-  👁️
-</button>
-  <!-- Create Button -->
-  <button class="create-list-button mb-2" (click)="openCreateListModal()">
-    <span class="plus-icon me-2">+</span>
-    <div class="button-text">
-      <div class="main-text">Create a new list</div>
-      <div class="sub-text">List your movie, TV & celebrity picks.</div>
-    </div>
-  </button>
+    <!-- Toggleable Create List Form Below Button -->
+    <div *ngIf="isCreateListModalOpen" class="new-list-form mt-4">
+      <form (ngSubmit)="createCustomList()">
+        <div class="form-group">
+          <label for="listName">Enter the name of your list</label>
+          <input
+            type="text"
+            id="listName"
+            [(ngModel)]="newListName"
+            name="listName"
+            maxlength="255"
+            class="form-control"
+            required
+          />
+        </div>
 
+        <div class="form-group mt-3">
+          <label for="listDesc">Describe your list</label>
+          <textarea
+            id="listDesc"
+            [(ngModel)]="newListDesc"
+            name="listDesc"
+            maxlength="10000"
+            rows="3"
+            class="form-control"
+          ></textarea>
+        </div>
 
-</div>
+        <div class="form-group mt-4">
+          <label>Privacy setting</label>
+          <div class="d-flex gap-3 mt-2">
+            <label><input type="radio" name="privacy" [(ngModel)]="newListPrivacy" value="public" checked /> Public</label>
+            <label><input type="radio" name="privacy" [(ngModel)]="newListPrivacy" value="private" /> Private</label>
+          </div>
+        </div>
 
-
-<!-- Toggleable Create List Form Below Button -->
-<div *ngIf="isCreateListModalOpen" class="new-list-form mt-4">
-  <form (ngSubmit)="createCustomList()">
-    <div class="form-group">
-      <label for="listName">Enter the name of your list</label>
-      <input
-        type="text"
-        id="listName"
-        [(ngModel)]="newListName"
-        name="listName"
-        maxlength="255"
-        class="form-control"
-        required
-      />
-    </div>
-
-    <div class="form-group mt-3">
-      <label for="listDesc">Describe your list</label>
-      <textarea
-        id="listDesc"
-        [(ngModel)]="newListDesc"
-        name="listDesc"
-        maxlength="10000"
-        rows="3"
-        class="form-control"
-      ></textarea>
+        <div class="mt-4 d-flex gap-3">
+          <button type="submit" class="btn btn-warning">Create</button>
+          <button type="button" class="btn btn-secondary" (click)="cancelCreate()">Cancel</button>
+        </div>
+      </form>
     </div>
 
-    <div class="form-group mt-4">
-      <label>Privacy setting</label>
-      <div class="d-flex gap-3 mt-2">
-        <label><input type="radio" name="privacy" [(ngModel)]="newListPrivacy" value="public" checked /> Public</label>
-        <label><input type="radio" name="privacy" [(ngModel)]="newListPrivacy" value="private" /> Private</label>
-      </div>
     </div>
-
-    <div class="mt-4 d-flex gap-3">
-      <button type="submit" class="btn btn-warning">Create</button>
-      <button type="button" class="btn btn-secondary" (click)="cancelCreate()">Cancel</button>
-    </div>
-  </form>
-</div>
-
-</div>
 
   <!-- Main Content -->
-<div *ngIf="!childRouteActive">
-  <div class="container mt-4">
-    <div class="watchlist-row">
-      <!-- Movies Card -->
-      <div class="category-card">
-        <h2>🍿 Movies</h2>
-        <div class="preview-thumbs">
-          <img *ngFor="let movie of movies.slice(0, 4)" 
-              [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" 
-              [alt]="movie.title" />
+    <div *ngIf="!childRouteActive">
+      <div class="container spacebottom mt-4">
+        <div class="watchlist-row">
+          <!-- Movies Card -->
+          <div class="category-card">
+            <h2>🍿 Movies</h2>
+            <div class="preview-thumbs">
+              <img *ngFor="let movie of movies.slice(0, 4)" 
+                  [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" 
+                  [alt]="movie.title" />
+            </div>
+            <a routerLink="/watchlist/movies">View All</a>
+          </div>
+        
+          <!-- TV Shows Card -->
+          <div class="category-card">
+            <h2>📺 TV Shows</h2>
+            <div class="preview-thumbs">
+              <img *ngFor="let show of tvShows.slice(0, 4)" 
+                  [src]="'https://image.tmdb.org/t/p/w200' + show.poster_path" 
+                  [alt]="show.title" />
+            </div>
+            <a routerLink="/watchlist/tv">View All</a>
+          </div>
+        
+          <!-- Animes Card (if needed) -->
+          <div class="category-card">
+            <h2>✨ Animes</h2>
+            <div class="preview-thumbs anime">
+              <img src="anime-collage.jpg">
+              <p>No animes saved yet</p>
+            </div>
+            <a routerLink="/watchlist/animes">Explore</a>
+          </div>
         </div>
-        <a routerLink="/watchlist/movies">View All</a>
-      </div>
-    
-      <!-- TV Shows Card -->
-      <div class="category-card">
-        <h2>📺 TV Shows</h2>
-        <div class="preview-thumbs">
-          <img *ngFor="let show of tvShows.slice(0, 4)" 
-              [src]="'https://image.tmdb.org/t/p/w200' + show.poster_path" 
-              [alt]="show.title" />
-        </div>
-        <a routerLink="/watchlist/tv">View All</a>
-      </div>
-    
-      <!-- Animes Card (if needed) -->
-      <div class="category-card">
-        <h2>✨ Animes</h2>
-        <div class="preview-thumbs anime">
-          <img src="anime-collage.jpg">
-          <p>No animes saved yet</p>
-        </div>
-        <a routerLink="/watchlist/animes">Explore</a>
+        
+
       </div>
     </div>
-    
-
-  </div>
+  
 </div>
-
-
 
 
 

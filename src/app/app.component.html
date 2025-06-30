@@ -1,5 +1,8 @@
 <app-navbar></app-navbar>
 
+<!-- ✅ Conditionally show the sidebar -->
+<app-sidebar *ngIf="!hideSidebar"></app-sidebar>
+
 <router-outlet></router-outlet>
 
 <!-- Scroll Button-->
