@@ -11,11 +11,18 @@
 ## Full_page 2
 ![theme](/src/assets/screencapture2.png).
 
+## KIDS 
+
+
+![theme](/src/assets/kidsscreen.png.png).
+
 
 ## Screen_Re
+![setting](/src/assets/Recording2-gif-.gif.gif)
+
 
 ![setting](/src/assets/ScreenRecording.gif)
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4
 
 
 

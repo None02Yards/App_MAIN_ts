@@ -1,4 +1,6 @@
-<ng-container>
+
+<!-- Components/home/home.component.html -->
+<ng-container *ngIf="!isKidsLayout">
   <app-slider></app-slider>
 </ng-container>
 
@@ -7,13 +9,19 @@
   <p style="color: rgb(186, 60, 60)">Loading...</p>
 </ngx-spinner>
 <ng-container>
-  <!-- Cinematic Quote Section -->
+ <!-- Cinematic Quote Section -->
+<div *ngIf="isKidsLayout && quote; else defaultQuote" class="cinema-quote text-center my-6">
+  <blockquote class="kidsfont fw-bold">{{ quote }}</blockquote>
+</div>
+
+<ng-template #defaultQuote>
   <section class="cinema-quote text-center my-6">
     <blockquote>
       “Cinema is a matter of what’s in the frame and what’s out.”
     </blockquote>
     <cite>– Martin Scorsese</cite>
   </section>
+</ng-template>
 
 
   <div class=" mt-5 px-4 my-2">

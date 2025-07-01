@@ -1,23 +1,5 @@
-<!-- shared dir -->
- <!-- sharded/watchlist-card/watchlist-card.component.html -->
-<!-- <div class="card-wrapper row">
-  <div class="col-md-2 mb-4" *ngFor="let item of items">
-    <div class="poster">
-      <img [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path" [alt]="item.title || item.name" />
-      <div class="layer">
-        <a class="bg-transparent" [routerLink]="['/details', mediaType, item.id]">
-          <i class="fa fa-play-circle"></i>
-        </a>
-      </div>
-      <div class="watchlist-icon watchlist-active" (click)="onRemoveClick(item.id)">
-        <i class="fa fa-bookmark"></i>
-      </div>
-      <h5 class="text-center mt-2">{{ item.title || item.name }}</h5>
-    </div>
-  </div>
-</div> -->
 
-<!-- shared/watchlist-card/watchlist-card.component.html -->
+
 <!-- shared/watchlist-card/watchlist-card.component.html -->
 <div class="card-wrapper row justify-content-center">
   <ng-container *ngFor="let item of items; let i = index">

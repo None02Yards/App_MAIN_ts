@@ -21,6 +21,9 @@ export class MoviesComponent implements OnInit {
   Movies: any[] = [];
   displayedMovies: any[] = [];
 dropdownVisibleForId: number | null = null;
+showListMenuForId: number | null = null;    // Which movie's sub-menu (custom list) is open
+
+
 customLists: CustomList[] = [];
 
   disablePrev = true;
@@ -93,51 +96,45 @@ customLists: CustomList[] = [];
     });
   }
 
+
+toggleDropdown(id: number): void {
+  this.dropdownVisibleForId = this.dropdownVisibleForId === id ? null : id;
+  this.showListMenuForId = null;
+}
+
+openCustomListMenu(id: number): void {
+  this.showListMenuForId = id;
+}
+
+closeCustomListMenu(): void {
+  this.showListMenuForId = null;
+}
+
+addToGeneralWatchlist(item: WatchlistItem): void {
+  if (this.isInWatchlist(item.id)) {
+    this.watchlistService.removeFromWatchlist(item.id, 'movie');
+    this.toastr.info('Removed from general watchlist');
+  } else {
+    // Only pass what your service expects!
+    this.watchlistService.addToWatchlist({ id: item.id, type: 'movie' });
+    this.toastr.success('Added to general watchlist');
+  }
+  this.dropdownVisibleForId = null;
+}
+
+
+
+
+
+
   // ✅ Controls pagination buttons
   updatePaginationButtons(): void {
     this.disablePrev = this.page <= 1;
     this.disableNext = this.Movies.length === 0 || this.Movies.length < 12;
   }
 
-  // ✅ Check if movie is in watchlist using the service
-  isInWatchlist(movieId: number): boolean {
-    return this.watchlistService.isInWatchlist(movieId, 'movie');
-  }
 
-  toggleWatchlist(item: WatchlistItem): void {
-  const customLists = this.watchlistService.getCustomLists();
 
-  if (customLists.length > 0) {
-    // Prompt the user to pick a list
-    const choice = prompt(
-      'Choose a custom list:\n' +
-      customLists.map((list, i) => `${i + 1}. ${list.name}`).join('\n')
-    );
-
-    const index = parseInt(choice || '', 10) - 1;
-    const selectedList = customLists[index];
-
-    if (selectedList) {
-      selectedList.items.push(item);
-      this.watchlistService.updateCustomLists(customLists);
-      alert(`✅ Added to "${selectedList.name}"`);
-    }
-  } else {
-    this.watchlistService.addToWatchlist(item);
-    alert(`✅ Added to general watchlist`);
-  }
-}
-
-toggleDropdown(id: number): void {
-  this.dropdownVisibleForId = this.dropdownVisibleForId === id ? null : id;
-}
-
-// addToCustomList(item: WatchlistItem, list: CustomList): void {
-//   list.items.push(item);
-//   this.watchlistService.updateCustomLists(this.customLists);
-//   this.dropdownVisibleForId = null;
-//   alert(`✅ Added to "${list.name}"`);
-// }
 isInAnyCustomList(itemId: number): boolean {
   return this.customLists.some(list => list.items.some(i => i.id === itemId));
 }
@@ -156,4 +153,42 @@ addToCustomList(item: WatchlistItem, list: CustomList): void {
 
   this.dropdownVisibleForId = null;
 }
+// movies.component.ts
+
+toggleCustomListItem(item: WatchlistItem, list: CustomList): void {
+  if (this.isItemInList(item, list)) {
+    // Remove from list
+    list.items = list.items.filter(i => i.id !== item.id);
+    this.watchlistService.updateCustomLists(this.customLists);
+    this.toastr.info(`Removed from "${list.name}"`);
+  } else {
+    // Add to list
+    list.items.push(item);
+    this.watchlistService.updateCustomLists(this.customLists);
+    this.toastr.success(`Added to "${list.name}"`);
+  }
+  this.dropdownVisibleForId = null;
+}
+
+
+
+
+// Check if in general watchlist
+isInWatchlist(movieId: number): boolean {
+  return this.watchlistService.isInWatchlist(movieId, 'movie');
+}
+
+// Add/remove from general watchlist (like TV)
+toggleGeneralWatchlist(item: WatchlistItem): void {
+  if (this.isInWatchlist(item.id)) {
+    this.watchlistService.removeFromWatchlist(item.id, 'movie');
+    this.toastr.info('Removed from general watchlist');
+  } else {
+    this.watchlistService.addToWatchlist({ id: item.id, type: 'movie' });
+    this.toastr.success('Added to general watchlist');
+  }
+  this.dropdownVisibleForId = null;
+}
+
+
 }

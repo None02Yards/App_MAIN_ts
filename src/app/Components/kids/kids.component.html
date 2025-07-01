@@ -1,8 +1,4 @@
-<ng-container>
-  <app-slider [slides]="kidsSlider"></app-slider>
-</ng-container>
-
-<!-- Spinner shown during loading -->
+<!-- Component/kids/kids.component.html -->
 <ngx-spinner
   bdColor="rgba(0, 0, 0, 0)"
   size="medium"
@@ -13,11 +9,13 @@
   <p style="color: rgb(186, 60, 60)">Loading...</p>
 </ngx-spinner>
 
+<app-slider [slider]="kidsSlider" [isKidsLayout]="true"></app-slider>
 <app-home
-  [trendingMovies]="trendingMovies"
-  [topTenMovies]="topTenKidsShows"
+  [trendingMovies]="kidsTrending"
+  [topTenMovies]="topTenKids"
   [moreToExplore]="kidsMoreToExplore"
-  [exclusiveVideos]="kidsExclusiveVideos"
+[exclusiveVideos]="kidsExclusiveVideos"
   [quote]="kidsQuote"
-  [redirectToPopularTVShowsFn]="goToPopularKidsTVShows.bind(this)"
+  [redirectToPopularTVShowsFn]="goToPopularTVShows"
+  [isKidsLayout]="true"
 ></app-home>

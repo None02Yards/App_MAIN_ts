@@ -53,50 +53,40 @@
 }
 
 .watchlist-icon-container {
-  position: relative;
-  display: inline-block;
-  z-index: 5;
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  z-index: 10;
 }
 
 .bookmark-icon-inner {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: #f7f1f1ca;
-  opacity: 0.7;
+  opacity: 0.78;
   cursor: pointer;
-  transition: color 0.3s ease, opacity 0.3s ease;
-  z-index: 10;
-  position: relative;
-    bottom: 190px;
-    left: 100px;
-
-  &.watchlist-active {
-    color: #ffc107;
-    opacity: 1;
-  }
+  transition: color 0.3s, opacity 0.3s;
+  z-index: 20;
 }
 
-.custom-dropdown {
-  position: absolute;
-    bottom: 50px;
-    right: -170px;
-  transform: translateX(-50%);
-  background-color: #e3e1e1;
-  border-radius: 6px;
-  padding: 0.5rem;
-  z-index: 1000;
-  min-width: 100px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-}
-
-.custom-dropdown .dropdown-item:hover {
-  background-color: #32312e;
+.bookmark-icon-inner.watchlist-active {
   color: #ffc107;
-  cursor: pointer;
+  opacity: 1;
 }
+
+
 .dropdown-item .fa-check {
   font-size: 0.9rem;
   color: #28a745;
 }
+
+
+
+
+
+
+
+
+
 
 
 h5 {
@@ -120,3 +110,4 @@ h5 {
   color: #e1dddd;
  
 }
+/* Add to your CSS/SCSS */

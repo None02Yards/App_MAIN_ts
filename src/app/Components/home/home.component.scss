@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chivo:ital,wght@0,100..900;1,100..900&family=Dancing+Script:wght@500&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@1,200..1000&family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Syne+Mono&display=swap');
+
 :host {
     display: block;
     
@@ -193,6 +196,28 @@
 
     }
   }
+
+
+.kidsfont {
+  text-transform: uppercase;
+  // text-shadow: 1px 1px 4px rgba(143, 43, 43, 0.544);
+   font-style: normal !important;
+  font-size: 35px !important;
+  font-family: "Syne Mono", monospace;
+  background: linear-gradient(90deg, #e7e5e5, #e01d08, #d9b904, #d69e03, #fb7185, #e7e6e3);
+  background-size: 200% 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: kids-gradient-move 4s linear infinite;
+}
+
+@keyframes kids-gradient-move {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
 
   .cinema-quote {
     max-width: 800px;

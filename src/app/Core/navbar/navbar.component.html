@@ -85,7 +85,14 @@
 >
   <a class="nav-link" routerLink="/people/1">Celebs</a>
 </li>
-
+<!-- Kids -->
+<li
+  class="nav-item"
+  routerLinkActive="active"
+  *ngIf="showMenuItem"
+>
+  <a class="nav-link" routerLink="/kids">Kids</a>
+</li>
     </ul>
 
     <!-- RIGHT SIDE: Search & Social -->
