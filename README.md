@@ -14,7 +14,7 @@
 ## KIDS 
 
 
-![theme](/src/assets/kidsscreen.png.png).
+![theme](/src/assets/kidsscreen.png).
 
 
 ## Screen_Re
