@@ -18,7 +18,7 @@
 
 
 ## Screen_Re
-![setting](/src/assets/Recording2-gif-.gif.gif)
+![setting](/src/assets/Recording2-gif-.gif)
 
 
 ![setting](/src/assets/ScreenRecording.gif)
