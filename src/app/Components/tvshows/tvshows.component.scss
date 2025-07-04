@@ -5,72 +5,54 @@
   margin-top: 200px !important;
   }
   
-  .poster {
-    margin: 1rem;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+ .poster {
+  margin: 1rem;
+  position: relative;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(120, 119, 119, 0.3);
+
+  &:hover {
+    transform: scale(1.05);
+  }
+  .img-wrapper {
     position: relative;
-  
+    overflow: hidden;
+    border-radius: 15px;
+
     img {
-      border-radius: 15px;
+      display: block;
+      width: 100%;
       transition: transform 0.4s ease-in-out;
     }
-  
+
     .layer {
       position: absolute;
-      top: 0;
-      left: 0;
+      top: 0; left: 0;
       width: 100%;
-      height: 100%;
-      background: rgba(247, 241, 241, 0.487);
+       height: 100%;
+      background: rgba(247,241,241,0.5);
       opacity: 0;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: opacity 0.3s ease;
-      border-radius: 10px;
-      z-index: 5;
-  
-      p {
-        color: #000;
-        font-weight: bold;
-      }
+      transition: opacity 0.3s;
     }
-  
+
+    // Zoom image & show layer on hover
     &:hover {
-      transform: scale(1.05);
-  
       img {
         transform: scale(1.1);
       }
-  
       .layer {
         opacity: 1;
       }
     }
-
-    .watchlist-icon {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: #f7f1f1ca;
-      opacity: 0.3;
-      z-index: 6;
-      transition: all 0.3s ease;
-    
-   
-      &.watchlist-active {
-        opacity: 1;
-        color: #ffc107;
-      }
-    }
   }
-  
+
+ 
+}
+
   h5 {
     font-size: 1rem;
     color: #f5f5f5;
@@ -97,3 +79,214 @@
   }
  
   
+  .watchlist-icon-container {
+  position: absolute;
+  top: 0px;
+  right: 14px;
+  z-index: 1000;
+}
+
+.bookmark-icon-inner {
+  font-size: 2.5rem;
+  fill: hsla(0, 0%, 100%, .32) !important;
+  opacity: 0;
+  opacity: 0.7;
+  z-index: 1;
+}
+.bookmark-icon-inner.watchlist-active {
+  color: #ffc107;  /* your “yellow” */
+}
+.overlay-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+  font-size: 1.5rem;
+
+  i {
+    // background-color: #000;
+    color: #ffc107;
+    // border-radius: 50%;
+    padding: 2px 10px;
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+}
+/* the overlay-btn “+” default color */
+.overlay-btn .fa-plus {
+  color: rgba(255,255,255,0.7);
+}
+
+/* when it’s a checkmark, force it to white */
+.overlay-btn .fa-check {
+  color: #fff !important;
+}
+
+
+.bookmark-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  // color: rgba(255, 255, 255, 0.302);
+  cursor: pointer;
+  padding: 6px;
+  z-index: 1000;
+  transition: color 0.2s;
+}
+
+.spotify-dropdown {
+  position: fixed;
+  background-color: #282828;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 0;
+  min-width: 220px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  z-index: 99999;
+  animation: fadeIn 0.2s ease-in-out;
+
+  max-height: 400px;
+  // overflow-y: auto;
+    overflow: visible;      /* allow children to escape */
+  white-space: nowrap;    /* prevent creeping content wrapping */
+
+
+
+  .dropdown-item.has-submenu {
+    position: relative;
+
+    &:hover .dropdown-submenu {
+      display: block;
+    }
+  }
+
+  .dropdown-item {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: #3e3e3e;
+    }
+
+    i {
+      width: 18px;
+      text-align: center;
+      opacity: 0.9;
+    }
+  }
+
+  .dropdown-divider {
+    border-top: 1px solid #444;
+    margin: 6px 0;
+  }
+}
+
+.spotify-dropdown.open-upward::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; // Arrow pointing downward since dropdown is above
+  left: 20px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
+}
+
+.dropdown-item.has-submenu {
+  position: relative; /* establish containing block for the submenu */
+
+  &:hover .dropdown-submenu {
+    display: block;
+  }
+}
+
+.submenu-dropdown {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: #2a2a2a;
+  min-width: 200px;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  white-space: nowrap;
+  z-index: 10000;
+ &.open-left {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: 4px;
+  }
+
+  .dropdown-item {
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+  // .dropdown-item {
+  //   padding: 8px 12px;
+  //   display: flex;
+  //   justify-content: space-between;
+
+  //   &:hover {
+  //     background-color: rgba(255, 255, 255, 0.1);
+  //   }
+  // }
+}
+
+  .dropdown-submenu {
+    display: none;            /* hidden by default */
+    position: absolute;
+    top: 0;                   /* align with top of parent item */
+    left: 100%;               /* position just to the right */
+    margin-left: 8px;         /* a little gap */
+    background: #282828;      /* match your theme */
+    border-radius: 6px;
+    padding: 0.5rem 0;
+    min-width: 180px;         /* adjust as needed */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    z-index: 10000;           /* above everything else */
+
+    .dropdown-item {
+      padding: 0.75rem 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
+// .submenu-dropdown {
+//   position: absolute;
+//   top: 0;
+//   left: 100%;
+//   margin-left: 4px;
+//   background: #2a2a2a;
+//   min-width: 200px;
+//   border-radius: 8px;
+//   padding: 0.5rem 0;
+//   white-space: nowrap;
+//   z-index: 10000;
+
+ 
+// }

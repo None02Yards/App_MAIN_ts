@@ -1,26 +1,51 @@
 
+ <!-- shared/watchlist-card/watchlist-card.component.html -->
 
-<!-- shared/watchlist-card/watchlist-card.component.html -->
 <div class="card-wrapper row justify-content-center">
   <ng-container *ngFor="let item of items; let i = index">
     <div class="w-100" *ngIf="i % 4 === 0 && i !== 0"></div>
 
     <div class="col-sm-6 col-md-3 col-lg-2 mb-4">
       <div class="poster">
-        <img [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path" [alt]="item.title || item.name" />
-        <div class="layer">
-          <a class="bg-transparent" [routerLink]="['/details', mediaType, item.id]">
-            <i class="fa fa-play-circle"></i>
-          </a>
+
+        <!-- 1) poster-img: holds just the image, hover layer & icon -->
+        <div class="poster-img position-relative overflow-hidden rounded">
+          <img
+            [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path"
+            [alt]="item.title || item.name"
+          />
+
+          <div class="layer">
+            <a class="bg-transparent" [routerLink]="['/details', mediaType, item.id]">
+              <i class="fa fa-play-circle"></i>
+            </a>
+          </div>
+
+          <div class="watchlist-icon watchlist-active"
+               (click)="onRemoveClick(item.id)">
+            <i class="fa fa-bookmark"></i>
+          </div>
         </div>
-        <div class="watchlist-icon watchlist-active" (click)="onRemoveClick(item.id)">
-          <i class="fa fa-bookmark"></i>
-        </div>
-        <h5 class="text-center mt-2 small-text">{{ item.title || item.name }}</h5>
+
+        <!-- 2) Title is outside the poster-img, so it never gets clipped -->
+        <h5 class="text-center mt-2 small-text">
+          {{ item.title || item.name }}
+        </h5>
       </div>
     </div>
   </ng-container>
 </div>
-
-
-
+<!-- confirmation overlay -->
+<div class="confirm-overlay" *ngIf="showConfirm">
+  <div class="confirm-dialog">
+    <p>Remove from your watchlist?</p>
+    <div class="confirm-buttons">
+      <button class="btn btn-danger" (click)="confirmRemove()">Yes</button>
+      <button class="btn btn-secondary" (click)="cancelRemove()">No</button>
+    </div>
+  </div>
+</div>
+<!-- removal-verification pop-up -->
+<div class="removed-overlay" *ngIf="showRemovedMessage">
+  Removed!
+</div>

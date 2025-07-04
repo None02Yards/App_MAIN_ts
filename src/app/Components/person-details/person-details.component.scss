@@ -130,6 +130,8 @@
     margin-top: 0.5rem;
   }
  
+
+  
 img.gallery-preview {
   border-radius: 0 0 10px 10px;
   object-fit: cover;
@@ -234,7 +236,7 @@ img.gallery-preview {
   flex-wrap: wrap;
 
   .link {
-    color: #59a4ff; // or #66b3ff for softer IMDb blue
+    color: #59a4ff; 
     text-decoration: none;
     font-weight: 500;
 

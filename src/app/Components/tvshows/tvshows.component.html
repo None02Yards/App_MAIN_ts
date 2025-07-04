@@ -1,54 +1,122 @@
-
-
+<!-- tvshows.component.html -->
 <div class="tvshows-page px-4 my-2">
-    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
-      <p style="color: white">Loading...</p>
-    </ngx-spinner>
-  
-    <div class="d-flex justify-content-center">
-      <div class="row" style="max-width: 1140px;">
-        <h2 class=" title my-4">{{ pageTitle }}</h2>
+<ngx-spinner bdColor="rgba(0,0,0,0.8)"
+               size="medium"
+               color="#fff"
+               type="square-jelly-box"
+               [fullScreen]="true">
+    <p style="color:white">Loading...</p>
+  </ngx-spinner>
+  <div class="d-flex justify-content-center">
+    <div class="row" style="max-width: 1140px;">
+      <h2 class="title my-4">{{ pageTitle }}</h2>
 
-        <div *ngFor="let item of tvShows; trackBy: trackById" class="col-md-2 overflow-hidden mb-4">
-          <div class="poster position-relative overflow-hidden">
-            <img class="w-100" src="https://image.tmdb.org/t/p/original/{{ item?.poster_path }}" alt="">
+      <!-- ONLY 12 cards here -->
+      <div *ngFor="let item of displayedShows; trackBy: trackById"
+           class="col-md-2 mb-4">
+        <div class="poster position-relative overflow-hidden">
+          <div class="poster-img position-relative overflow-hidden rounded">
+            <img
+              class="w-100 rounded"
+              [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path"
+              alt="{{ item.name || item.original_title }}"
+            />
             <div class="layer">
-              <a class="bg-transparent" routerLink="/details/tv/{{ item.id }}">
-                <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
+              <a class="bg-transparent" [routerLink]="['/details/tv', item.id]">
+                <i class="fa fa-play-circle fa-3x text-dark"></i>
               </a>
             </div>
-            <div class="watchlist-icon"
-         [ngClass]="{ 'watchlist-active': isInWatchlist(item.id) }"
-         (click)="toggleWatchlist(item)">
-              <i class="fa fa-bookmark bookmark-icon-inner"></i>
-            </div>
-            <h5 class="text-center mt-2">{{ item.name }}</h5>
           </div>
+
+          <!-- Bookmark / + button -->
+          <div class="watchlist-icon-container">
+            <i class="fa fa-bookmark bookmark-icon-inner"
+               [ngClass]="{
+                 'watchlist-active': isInWatchlist(item.id) || isInAnyCustomList(item.id)
+               }">
+            </i>
+            <button class="overlay-btn" (click)="openActionMenu(item, $event)">
+              <i class="fa"
+                 [ngClass]="{
+                   'fa-check text-success': isInWatchlist(item.id) || isInAnyCustomList(item.id),
+                   'fa-plus': !isInWatchlist(item.id) && !isInAnyCustomList(item.id)
+                 }"></i>
+            </button>
+          </div>
+
+          <!-- Title outside so it never gets clipped -->
+          <h5 class="text-center mt-2">{{ item.name }}</h5>
         </div>
       </div>
     </div>
+  </div>
 
-
-      <!-- Clean Pagination Template -->
-  <!-- Pagination arrows below the cards -->
+  <!-- Pagination Controls -->
   <div class="d-flex justify-content-center align-items-center mt-4">
-    <!-- Prev -->
-    <button *ngIf="disablePrev" (click)="Prev()" class="bg-transparent border-0">
-      <i class="fa fa-3x fa-arrow-circle-left text-white" aria-hidden="true"></i>
+    <button (click)="Prev()" [disabled]="disablePrev" class="bg-transparent border-0">
+      <i class="fa fa-3x fa-arrow-circle-left text-white"></i>
     </button>
-
-    <!-- Page number -->
     <div class="mx-3 mt-2">
       <h3 class="font-weight-bolder">{{ page }}</h3>
     </div>
-
-    <!-- Next -->
-    <button *ngIf="disableNext" (click)="Next()" class="bg-transparent border-0">
-      <i class="fa fa-3x fa-arrow-circle-right text-white" aria-hidden="true"></i>
+    <button (click)="Next()" [disabled]="disableNext" class="bg-transparent border-0">
+      <i class="fa fa-3x fa-arrow-circle-right text-white"></i>
     </button>
   </div>
-
-
-
 </div>
+
+
+
   
+<!-- Main Floating Dropdown -->
+<div *ngIf="actionMenuForId"
+     class="spotify-dropdown shadow"
+     [ngStyle]="dropdownPosition">
+
+  <!--  General Watchlist -->
+  <div class="dropdown-item"
+       (click)="toggleGeneralWatchlist(actionMenuItem!)">
+    <i class="fa fa-list"></i>
+    {{ isInWatchlist(actionMenuItem!.id)
+        ? 'Remove from Watchlist'
+        : 'Add to Watchlist' }}
+  </div>
+
+  <!--  Save to Custom List (has submenu) -->
+<!-- …inside  dropdown… -->
+<div class="dropdown-item position-relative"
+     (mouseenter)="onSubmenuMouseEnter($event)"
+     (mouseleave)="onSubmenuMouseLeave()">
+  <i class="fa fa-plus"></i> Save to Custom List
+  <span class="float-end">▶</span>
+
+  <div *ngIf="showSubmenu"
+       class="submenu-dropdown shadow"
+       [ngClass]="{ 'open-left': submenuFlipLeft }">
+    <div class="dropdown-item"
+         *ngFor="let list of customLists"
+         (click)="addToCustomList(actionMenuItem!, list)">
+      {{ list.name }}
+      <i *ngIf="isItemInList(actionMenuItem!, list)"
+         class="fa fa-check text-success ms-2"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+  <div class="dropdown-divider"></div>
+
+  <div class="dropdown-item" routerLink="/watchlist/custom">
+    <i class="fa fa-user"></i> View your lists
+  </div>
+  <div class="dropdown-item" routerLink="/watchlist/tv">
+    <i class="fa fa-compact-disc"></i> View General
+  </div>
+  <div class="dropdown-divider"></div>
+  <div class="dropdown-item">
+    <i class="fa fa-share"></i> Share
+  </div>
+</div>
+
