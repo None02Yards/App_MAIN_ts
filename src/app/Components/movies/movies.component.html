@@ -1,75 +1,127 @@
-<div class="movies-page  px-4 my-2">
-    <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="true">
-        <p style="color: white">Loading...</p>
-    </ngx-spinner>
-    
-    <div class="movies-page px-4 my-2">
-        <div class="d-flex justify-content-center">
-        <div class="row" style="max-width: 1140px;">
-          <h2 class=" title my-5">{{ pageTitle }}</h2> 
-            <div *ngFor="let item of displayedMovies" class="col-md-2 overflow-hidden mb-4">
-            <div class="poster position-relative overflow-hidden">
-                <img class="w-100" src="https://image.tmdb.org/t/p/original/{{ item?.poster_path }}" alt="">
-    
-                <div class="layer">
-                <a class="bg-transparent" routerLink="/details/movie/{{ item.id }}">
-                    <i class="fa text-dark fa-3x fa-play-circle" aria-hidden="true"></i>
-                </a>
-                </div>
-    
-            
-                  <!-- bookmark icon-->
-              <div class="watchlist-icon-container position-absolute" style="top: 10px; right: 10px;">
-                  <i class="fa fa-bookmark bookmark-icon-inner"
-                    [ngClass]="{ 'watchlist-active': isInAnyCustomList(item.id) || isInWatchlist(item.id) }"
-                    (click)="toggleDropdown(item.id)">
-                  </i>
 
-                  <!-- Dropdown Menu -->
-                  <div *ngIf="dropdownVisibleForId === item.id" 
-                      class="dropdown-menu custom-dropdown"
-                      [ngClass]="{ 'show': dropdownVisibleForId === item.id }">
-                    <a class="dropdown-item" (click)="toggleGeneralWatchlist(item)">
-                      <span *ngIf="isInWatchlist(item.id)">Remove from General Watchlist</span>
-                      <span *ngIf="!isInWatchlist(item.id)">Add to General Watchlist</span>
-                      <i *ngIf="isInWatchlist(item.id)" class="fa fa-check text-success ms-2"></i>
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <span class="dropdown-header">Add to Your List</span>
-                    <a *ngFor="let list of customLists"
-                      class="dropdown-item d-flex justify-content-between align-items-center"
-                      (click)="addToCustomList(item, list)">
-                      {{ list.name }}
-                      <i *ngIf="isItemInList(item, list)" class="fa fa-check text-success ms-2"></i>
-                    </a>
-                  </div>
-                </div>
-  
-    
-                <h5 class="text-center mt-2">{{ item.original_title }}</h5>
-            </div>
-            </div>
-        </div>
-        </div>
-    
-        <!-- Pagination Controls -->
-        <div class="d-flex justify-content-center align-items-center mt-4">
-            <!-- Prev -->
-            <button (click)="Prev()" class="bg-transparent border-0">
-              <i class="fa fa-3x fa-arrow-circle-left text-white" [class.disabled]="disablePrev" aria-hidden="true"></i>
-            </button>
-          
-            <!-- Page number -->
-            <div class="mx-3 mt-2">
-              <h3 class="font-weight-bolder">{{ page }}</h3>
-            </div>
-          
-            <!-- Next -->
-            <button (click)="Next()" class="bg-transparent border-0">
-              <i class="fa fa-3x fa-arrow-circle-right text-white" [class.disabled]="disableNext" aria-hidden="true"></i>
+<!-- ed #3333 -->
+
+<div class="movies-page px-4 my-2">
+  <ngx-spinner bdColor="rgba(0,0,0,0.8)"
+               size="medium"
+               color="#fff"
+               type="square-jelly-box"
+               [fullScreen]="true">
+    <p style="color:white">Loading...</p>
+  </ngx-spinner>
+
+  <div class="d-flex justify-content-center">
+    <div class="row" style="max-width: 1140px;">
+      <h2 class="title my-4 text-center w-100">{{ pageTitle }}</h2>
+
+      <!-- 12 items total, col-md-2 = six across on md+ screens, auto-wraps to second row -->
+      <div *ngFor="let item of displayedMovies; trackBy: trackById"
+           class="col-6 col-md-2 overflow-hidden mb-4">
+        <div class="poster position-relative overflow-hidden">
+          <img
+            class="w-100"
+            [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path"
+            alt="{{ item.original_title }}"
+          />
+
+          <div class="layer">
+            <a class="bg-transparent"
+               [routerLink]="['/details/movie', item.id]">
+              <i class="fa fa-play-circle fa-3x text-dark"></i>
+            </a>
+          </div>
+
+          <!-- Bookmark / + button -->
+          <div class="watchlist-icon-container">
+            <!-- the “static” bookmark outline -->
+            <i class="fa fa-bookmark bookmark-icon-inner"
+              [ngClass]="{ 'watchlist-active': isInWatchlist(item.id) || isInAnyCustomList(item.id) }">
+            </i>
+            <!-- the “+” / “✓” button -->
+            <button class="overlay-btn" (click)="openActionMenu(item, $event)">
+              <i class="fa" [ngClass]="{
+                  'fa-check': isInWatchlist(item.id) || isInAnyCustomList(item.id),
+                  'fa-plus' : !isInWatchlist(item.id) && !isInAnyCustomList(item.id)
+                }"></i>
             </button>
           </div>
-          
-          
+
+        
+        </div>
+
+        <!-- Title outside poster so it never gets clipped -->
+        <h5 class="text-center mt-2">{{ item.original_title }}</h5>
+      </div>
     </div>
-</div>   
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="d-flex justify-content-center align-items-center mt-4">
+    <button (click)="Prev()" class="bg-transparent border-0">
+      <i class="fa fa-arrow-circle-left fa-3x text-white"
+         [class.disabled]="disablePrev"></i>
+    </button>
+    <div class="mx-3 mt-2">
+      <h3 class="font-weight-bolder">{{ page }}</h3>
+    </div>
+    <button (click)="Next()" class="bg-transparent border-0">
+      <i class="fa fa-arrow-circle-right fa-3x text-white"
+         [class.disabled]="disableNext"></i>
+    </button>
+  </div>
+</div>
+
+
+<!-- Floating Main Dropdown -->
+<div *ngIf="actionMenuForId"
+     class="spotify-dropdown shadow"
+     [ngStyle]="dropdownPosition">
+  <!-- General Watchlist -->
+  <div class="dropdown-item"
+       (click)="toggleGeneralWatchlist(actionMenuItem)">
+    <i class="fa fa-list"></i>
+    {{ isInWatchlist(actionMenuItem.id)
+        ? 'Remove from Watchlist'
+        : 'Add to Watchlist' }}
+  </div>
+
+  <!-- Submenu Trigger -->
+  <div class="dropdown-item position-relative"
+     (mouseenter)="onSubmenuMouseEnter($event)"
+     (mouseleave)="onSubmenuMouseLeave()">
+  <i class="fa fa-plus"></i> Save to Custom List
+  <span class="float-end">▶</span>
+
+  <div *ngIf="showSubmenu"
+       class="submenu-dropdown shadow"
+       [ngClass]="{ 'open-left': submenuFlipLeft }">
+    <div class="dropdown-item"
+         *ngFor="let list of customLists"
+         (click)="addToCustomList(actionMenuItem!, list)">
+      {{ list.name }}
+      <i *ngIf="isItemInList(actionMenuItem!, list)"
+         class="fa fa-check text-success ms-2"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  <div class="dropdown-divider"></div>
+
+  <div class="dropdown-item" routerLink="/watchlist/custom">
+    <i class="fa fa-user"></i> View your lists
+  </div>
+
+  <div class="dropdown-item" routerLink="/watchlist/movies">
+    <i class="fa fa-compact-disc"></i> View General
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="dropdown-item">
+    <i class="fa fa-share"></i> Share
+  </div>
+</div>

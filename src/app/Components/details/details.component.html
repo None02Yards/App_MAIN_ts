@@ -77,9 +77,10 @@
             </div>
           </div>
 
-          <a [href]="section.link" class="d-block mt-2 text-primary small">
-            {{ section.linkText }}
-          </a>
+        <a (click)="navigateTo(section.link)" class="d-block mt-2 text-primary small" style="cursor:pointer">
+  {{ section.linkText }}
+</a>
+
         </div>
       </div>
     </div>
@@ -102,7 +103,6 @@
 </div>
 
 
-<!-- Trending as More Like This (4 Small Cards) -->
 <!-- Similar Items Section -->
 <div class="container mt-5">
   <h4 class="titlemore text-white mb-3 border-start border-3 ps-2 border-warning">More Like This</h4>

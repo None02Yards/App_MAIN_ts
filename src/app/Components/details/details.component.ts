@@ -55,6 +55,7 @@ updateArrows(): void {
     title: string;
     linkText: string;
     link: string;
+    
     posters: Movie[];
   }[] = [
     {
@@ -66,7 +67,7 @@ updateArrows(): void {
     {
       title: 'Top TV Shows',
       linkText: 'Explore TV',
-      link: '/tvshows/popular/1',
+      link: '/tvshows/on_the_air/1',
       posters: []
     }
   ];
@@ -152,19 +153,19 @@ this._DataService.getDetails(this.mediaType, this.id).subscribe({
       }
     });
   }
-fetchCast(): void {
-  this._DataService.getMediaCredits(this.mediaType, this.id).subscribe({
+    fetchCast(): void {
+      this._DataService.getMediaCredits(this.mediaType, this.id).subscribe({
 
-    next: (res) => {
-      this.castList = res.cast
-        .filter((member: any) => member.profile_path)
-        .slice(0, 5);
-    },
-    error: (err) => {
-      console.error('Cast fetch failed:', err);
+        next: (res) => {
+          this.castList = res.cast
+            .filter((member: any) => member.profile_path)
+            .slice(0, 5);
+        },
+        error: (err) => {
+          console.error('Cast fetch failed:', err);
+        }
+      });
     }
-  });
-}
   fetchMoreToExplore(): void {
     this._DataService.getTrending("all").subscribe({
       next: (data) => {
@@ -188,4 +189,9 @@ fetchCast(): void {
   videoURL(videoSrcUrl: any) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(videoSrcUrl);
   }
+
+  navigateTo(path: string) {
+  this._Router.navigateByUrl(path);
+}
+
 }

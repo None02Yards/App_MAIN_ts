@@ -4,83 +4,157 @@
   margin-top: 200px !important;
 }
 
+
+
 .poster {
   margin: 1rem;
-  border-radius: 15px;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   position: relative;
-
-  img {
-    border-radius: 15px;
-    transition: transform 0.4s ease-in-out;
-  }
-
-  .layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(247, 241, 241, 0.487);
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.3s ease;
-    border-radius: 10px;
-    z-index: 5;
-
-    p {
-      color: #000;
-      font-weight: bold;
-    }
-  }
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 12px rgba(120, 119, 119, 0.3);
 
   &:hover {
     transform: scale(1.05);
+  }
+  .img-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
 
     img {
-      transform: scale(1.1);
+      display: block;
+      width: 100%;
+      transition: transform 0.4s ease-in-out;
     }
 
     .layer {
-      opacity: 1;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+       height: 100%;
+      background: rgba(247,241,241,0.5);
+      opacity: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.3s;
     }
+
+    // Zoom image & show layer on hover
+    &:hover {
+      img {
+        transform: scale(1.1);
+      }
+      .layer {
+        opacity: 1;
+      }
+    }
+  }
+
+  h5 {
+    font-size: 1rem;
+    color: #f5f5f5;
+    margin-top: 0.5rem;
   }
 }
 
+
+
+
+
+   .title {
+      text-align: center !important;
+      color: #e1dddd;
+      font-size: 2.5rem;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+
+.detached-dropdown {
+  position: fixed !important;
+  z-index: 9999 !important;
+  background: #9b99995a;
+  color: #fff;
+  border-radius: 8px;
+  min-width: 200px;
+  padding: 0.5rem 0;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+  animation: fadeInDropdown 0.2s ease-in-out;
+}
+
+
+@keyframes fadeInDropdown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.detached-dropdown.dropdown-up {
+  transform-origin: bottom center;
+  animation: slideUpFade 0.2s ease;
+}
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+
 .watchlist-icon-container {
   position: absolute;
-  top: 12px;
+  top: 0px;
   right: 14px;
-  z-index: 10;
+  z-index: 1000;
 }
 
 .bookmark-icon-inner {
-  font-size: 1.7rem;
-  color: #f7f1f1ca;
-  opacity: 0.78;
-  cursor: pointer;
-  transition: color 0.3s, opacity 0.3s;
-  z-index: 20;
+  font-size: 2.5rem;
+  fill: hsla(0, 0%, 100%, .32) !important;
+  opacity: 0;
+  opacity: 0.7;
+  z-index: 1;
 }
-
 .bookmark-icon-inner.watchlist-active {
-  color: #ffc107;
-  opacity: 1;
+  color: #ffc107;  /* your “yellow” */
+}
+.overlay-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+  font-size: 1.5rem;
+
+  i {
+    // background-color: #000;
+    color: #ffc107;
+    // border-radius: 50%;
+    padding: 2px 10px;
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+}
+/* the overlay-btn “+” default color */
+.overlay-btn .fa-plus {
+  color: rgba(255,255,255,0.7);
 }
 
-
-.dropdown-item .fa-check {
-  font-size: 0.9rem;
-  color: #28a745;
+/* when it’s a checkmark, force it to white */
+.overlay-btn .fa-check {
+  color: #fff !important;
 }
-
-
-
 
 
 
@@ -102,12 +176,132 @@ h5 {
   }
 }
 
-.title{
-  text-align: center;
-  text-transform: capitalize !important;
-  font-size: 2.5rem;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  color: #e1dddd;
+.bookmark-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
  
+
+  // color: rgba(255, 255, 255, 0.302);
+  cursor: pointer;
+  padding: 6px;
+  z-index: 1000;
+  transition: color 0.2s;
+
+  // &:hover {
+  //   color: #deb11e; // Spotify green
+  // }
+  //   &.active {
+  //   color: #ffc107; // or your highlight color
+  //   opacity: 1;
+  //   transform: scale(1.1);
+  // }
 }
-/* Add to your CSS/SCSS */
+
+.spotify-dropdown {
+  position: fixed;
+  background-color: #282828;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 0;
+  min-width: 220px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+  z-index: 99999;
+  animation: fadeIn 0.2s ease-in-out;
+
+  max-height: 400px;
+  // overflow-y: auto;
+    overflow: visible;      /* allow children to escape */
+  white-space: nowrap;    /* prevent creeping content wrapping */
+
+  .dropdown-item {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: #3e3e3e;
+    }
+
+    i {
+      width: 18px;
+      text-align: center;
+      opacity: 0.9;
+    }
+  }
+
+  .dropdown-divider {
+    border-top: 1px solid #444;
+    margin: 6px 0;
+  }
+}
+
+.spotify-dropdown.open-upward::after {
+  content: '';
+  position: absolute;
+  bottom: -10px; // Arrow pointing downward since dropdown is above
+  left: 20px;
+  border-width: 10px;
+  border-style: solid;
+  border-color: #333 transparent transparent transparent;
+}
+
+
+
+
+
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
+}
+
+.dropdown-item.has-submenu {
+  position: relative; /* establish containing block for the submenu */
+
+  &:hover .dropdown-submenu {
+    display: block;
+  }
+}
+
+
+.submenu-dropdown {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: #2a2a2a;
+  min-width: 200px;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  white-space: nowrap;
+  z-index: 10000;
+ &.open-left {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: 4px;
+  }
+
+  .dropdown-item {
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+  // .dropdown-item {
+  //   padding: 8px 12px;
+  //   display: flex;
+  //   justify-content: space-between;
+
+  //   &:hover {
+  //     background-color: rgba(255, 255, 255, 0.1);
+  //   }
+  // }
+}

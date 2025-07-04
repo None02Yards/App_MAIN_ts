@@ -1,30 +1,43 @@
 
-
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 
 import { DataService } from 'src/app/Services/data.service';
-import { WatchlistService, WatchlistItem, CustomList  } from 'src/app/Services/watchlist.service';
+import {
+  WatchlistService,
+  WatchlistItem,
+  CustomList
+} from 'src/app/Services/watchlist.service';
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.scss']
 })
+
+
 export class MoviesComponent implements OnInit {
-  type: string = '';
-  pageTitle: string = '';
-  page: number = 1;
+  type = '';
+  pageTitle = '';
+  page = 1;
 
   Movies: any[] = [];
   displayedMovies: any[] = [];
-dropdownVisibleForId: number | null = null;
-showListMenuForId: number | null = null;    // Which movie's sub-menu (custom list) is open
+    rowsOfSix: any[][] = [];   
+
+  customLists: CustomList[] = [];
 
 
-customLists: CustomList[] = [];
+  
+  // dropdown state
+  actionMenuForId: number | null = null;
+  actionMenuItem: any = null;
+  dropdownPosition: { [k: string]: string } = {};
+
+  showSubmenu = false;
+submenuFlipLeft = false;
 
   disablePrev = true;
   disableNext = false;
@@ -34,161 +47,196 @@ customLists: CustomList[] = [];
     private dataService: DataService,
     private route: ActivatedRoute,
     private spinner: NgxSpinnerService,
-     private toastr: ToastrService,
-    private watchlistService: WatchlistService // ✅ Injected
+    private toastr: ToastrService,
+    private watchlistService: WatchlistService
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.type = this.route.snapshot.paramMap.get('genre') || '';
       this.page = Number(this.route.snapshot.paramMap.get('page')) || 1;
-       this.customLists = this.watchlistService.getCustomLists();
-
-      switch (this.type) {
-        case 'now_playing':
-          this.pageTitle = 'Now Playing';
-          break;
-        case 'popular':
-          this.pageTitle = 'Popular Movies';
-          break;
-        case 'top_rated':
-          this.pageTitle = 'Top Rated Movies';
-          break;
-        case 'upcoming':
-          this.pageTitle = 'Upcoming Movies';
-          break;
-        default:
-          this.pageTitle = 'Movies';
-      }
-
+      this.customLists = this.watchlistService.getCustomLists();
+      this.pageTitle = this.getTitle(this.type);
       this.fetchMovies();
     });
   }
 
-  Next(): void {
-    if (!this.disableNext) {
-      this.page++;
-      this.fetchMovies();
+  private getTitle(type: string): string {
+    switch(type) {
+      case 'now_playing': return 'Now Playing';
+      case 'popular':     return 'Popular Movies';
+      case 'top_rated':   return 'Top Rated Movies';
+      case 'upcoming':    return 'Upcoming Movies';
+      default:            return 'Movies';
     }
   }
 
-  Prev(): void {
-    if (!this.disablePrev) {
-      this.page--;
-      this.fetchMovies();
-    }
-  }
+//  fetchMovies(): void {
+//     this.spinner.show();
+//     this.dataService.getData('movie', this.type, this.page).subscribe(res => {
+//       this.spinner.hide();
+//       this.notice = res.success;
 
-  trackById(index: number, item: any): number {
-    return item.id;
-  }
+//       // keep up to 12
+//       this.Movies = (res.results || []).filter((m: any) => m.poster_path);
+//       this.displayedMovies = this.Movies.slice(0, 12);
 
-  fetchMovies(): void {
+//       // chunk into rows of 6
+//       this.rowsOfSix = [];
+//       for (let i = 0; i < this.displayedMovies.length; i += 6) {
+//         this.rowsOfSix.push(this.displayedMovies.slice(i, i + 6));
+//       }
+
+//       this.updatePaginationButtons();
+//     });
+//   }
+
+ fetchMovies(): void {
     this.spinner.show();
-
-    this.dataService.getData('movie', this.type, this.page).subscribe(response => {
+    this.dataService.getData('movie', this.type, this.page).subscribe(res => {
       this.spinner.hide();
-
-      this.notice = response.success;
-      this.Movies = (response.results || []).filter((item: any) => item.poster_path);
+      this.notice = res.success;
+      this.Movies = (res.results || []).filter((m: any) => m.poster_path);
+      // grab exactly 12
       this.displayedMovies = this.Movies.slice(0, 12);
       this.updatePaginationButtons();
     });
   }
 
-
-toggleDropdown(id: number): void {
-  this.dropdownVisibleForId = this.dropdownVisibleForId === id ? null : id;
-  this.showListMenuForId = null;
-}
-
-openCustomListMenu(id: number): void {
-  this.showListMenuForId = id;
-}
-
-closeCustomListMenu(): void {
-  this.showListMenuForId = null;
-}
-
-addToGeneralWatchlist(item: WatchlistItem): void {
-  if (this.isInWatchlist(item.id)) {
-    this.watchlistService.removeFromWatchlist(item.id, 'movie');
-    this.toastr.info('Removed from general watchlist');
-  } else {
-    // Only pass what your service expects!
-    this.watchlistService.addToWatchlist({ id: item.id, type: 'movie' });
-    this.toastr.success('Added to general watchlist');
+  trackById(_: number, item: any) {
+    return item.id;
   }
-  this.dropdownVisibleForId = null;
-}
 
 
 
-
-
-
-  // ✅ Controls pagination buttons
-  updatePaginationButtons(): void {
+  updatePaginationButtons() {
     this.disablePrev = this.page <= 1;
-    this.disableNext = this.Movies.length === 0 || this.Movies.length < 12;
+    this.disableNext = this.Movies.length < 12;
   }
 
 
 
-isInAnyCustomList(itemId: number): boolean {
-  return this.customLists.some(list => list.items.some(i => i.id === itemId));
-}
 
-isItemInList(item: WatchlistItem, list: CustomList): boolean {
-  return list.items.some(i => i.id === item.id);
-}
-addToCustomList(item: WatchlistItem, list: CustomList): void {
-  if (!this.isItemInList(item, list)) {
-    list.items.push(item);
+// fetchMovies(): void {
+//   this.spinner.show();
+//   this.dataService.getData('movie', this.type, this.page).subscribe(res => {
+//     this.spinner.hide();
+//     this.notice = res.success;
+// this.Movies = (res.results || [])
+//   .filter((m: any) => m.poster_path);
+//   this.displayedMovies = this.Movies.slice(0, 10);
+
+
+//     // grab exactly PAGE_SIZE items for the current page
+//     const start = (this.page - 1) * this.PAGE_SIZE;
+//     this.displayedMovies = this.Movies.slice(start, start + this.PAGE_SIZE);
+
+//     this.updatePaginationButtons();
+//   });
+// }
+
+// updatePaginationButtons(): void {
+//   this.disablePrev = this.page <= 1;
+//   this.disableNext = this.Movies.length <= this.page * this.PAGE_SIZE;
+// }
+
+  Next() { if (!this.disableNext) { this.page++; this.fetchMovies(); } }
+  Prev() { if (!this.disablePrev) { this.page--; this.fetchMovies(); } }
+
+  // ——— Watchlist logic ———
+  isInWatchlist(id: number) {
+    return this.watchlistService.isInWatchlist(id, 'movie');
+  }
+  isInAnyCustomList(id: number) {
+    return this.customLists.some(l => l.items.some(i => i.id === id));
+  }
+  isItemInList(item: WatchlistItem, list: CustomList) {
+    return list.items.some(i => i.id === item.id);
+  }
+
+  toggleGeneralWatchlist(item: WatchlistItem) {
+    if (this.isInWatchlist(item.id)) {
+      this.watchlistService.removeFromWatchlist(item.id, 'movie');
+      this.toastr.info('Removed from watchlist');
+    } else {
+      this.watchlistService.addToWatchlist({ id: item.id, type: 'movie' });
+      this.toastr.success('Added to watchlist');
+    }
+    this.closeActionMenu();
+  }
+
+  addToCustomList(item: WatchlistItem, list: CustomList) {
+    if (!this.isItemInList(item, list)) {
+      list.items.push(item);
+      this.toastr.success(`Added to "${list.name}"`);
+    } else {
+      list.items = list.items.filter(i => i.id !== item.id);
+      this.toastr.info(`Removed from "${list.name}"`);
+    }
     this.watchlistService.updateCustomLists(this.customLists);
-    this.toastr.success(`Added to "${list.name}"`);
-  } else {
-    this.toastr.info(`Already in "${list.name}"`);
+    this.closeActionMenu();
   }
 
-  this.dropdownVisibleForId = null;
-}
-// movies.component.ts
+  // ——— Dropdown positioning + control ———
+  openActionMenu(item: any, e: MouseEvent) {
+    e.stopPropagation();
+    this.showSubmenu = false;
 
-toggleCustomListItem(item: WatchlistItem, list: CustomList): void {
-  if (this.isItemInList(item, list)) {
-    // Remove from list
-    list.items = list.items.filter(i => i.id !== item.id);
-    this.watchlistService.updateCustomLists(this.customLists);
-    this.toastr.info(`Removed from "${list.name}"`);
-  } else {
-    // Add to list
-    list.items.push(item);
-    this.watchlistService.updateCustomLists(this.customLists);
-    this.toastr.success(`Added to "${list.name}"`);
+    const target = e.target as HTMLElement;
+    const rect = target.getBoundingClientRect();
+    const ddH = 700, padding = 10;
+    const scrollY = window.scrollY;
+
+    // clamp top so it never runs below viewport
+    const candidate = rect.top + scrollY + target.offsetHeight;
+    const maxTop = scrollY + window.innerHeight - ddH - padding;
+    const top = Math.min(candidate, maxTop);
+
+    this.dropdownPosition = {
+      top: `${top}px`,
+      left: `${rect.left + window.scrollX}px`,
+      zIndex: '9999'
+    };
+    this.actionMenuForId = item.id;
+    this.actionMenuItem = item;
   }
-  this.dropdownVisibleForId = null;
+
+
+    onSubmenuMouseEnter(event: MouseEvent) {
+  this.showSubmenu = true;
+  // find submenu width & screen space
+  const trigger = event.currentTarget as HTMLElement;
+  const rect = trigger.getBoundingClientRect();
+  const submenuWidth = 200 + 8; // your min-width + padding/margin
+  const spaceRight = window.innerWidth - rect.right;
+  this.submenuFlipLeft = spaceRight < submenuWidth;
 }
-
-
-
-
-// Check if in general watchlist
-isInWatchlist(movieId: number): boolean {
-  return this.watchlistService.isInWatchlist(movieId, 'movie');
+onSubmenuMouseLeave() {
+  this.showSubmenu = false;
 }
-
-// Add/remove from general watchlist (like TV)
-toggleGeneralWatchlist(item: WatchlistItem): void {
-  if (this.isInWatchlist(item.id)) {
-    this.watchlistService.removeFromWatchlist(item.id, 'movie');
-    this.toastr.info('Removed from general watchlist');
-  } else {
-    this.watchlistService.addToWatchlist({ id: item.id, type: 'movie' });
-    this.toastr.success('Added to general watchlist');
+  closeActionMenu() {
+    this.actionMenuForId = null;
+    this.actionMenuItem = null;
+    this.showSubmenu = false;
   }
-  this.dropdownVisibleForId = null;
-}
 
 
+
+  // outside click
+  @HostListener('document:click', ['$event'])
+  onDocClick(event: MouseEvent) {
+    const el = event.target as HTMLElement;
+    if (
+      !el.closest('.spotify-dropdown') &&
+      !el.classList.contains('overlay-btn')
+    ) {
+      this.closeActionMenu();
+    }
+  }
+
+  @HostListener('window:scroll')
+  onScroll() { this.closeActionMenu(); }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  onEsc() { this.closeActionMenu(); }
 }
