@@ -18,6 +18,10 @@ router-outlet + * {
     margin-bottom: 80px; 
   }
   
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
 
   img, video, .slider, .swiper, .background-image {
     max-width: 100%;
