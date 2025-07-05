@@ -128,7 +128,12 @@
     display: flex !important;
     flex-direction: column;
   }
-  
+  .navbar.blurred {
+  background-color: rgba(0,0,0,0.6);
+  backdrop-filter: blur(8px);
+  transition: backdrop-filter 0.3s, background-color 0.3s;
+}
+
 
   .form-inline {
     input {

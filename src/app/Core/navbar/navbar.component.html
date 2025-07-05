@@ -4,7 +4,7 @@
 <nav
   *ngIf="!hideNavbar"
   class="navbar fixed-top navbar-expand-lg navbar-dark scroll"
-  [ngClass]="{ 'scrolled': isScrolled, 'media-margin': isMediaPage, 'no-bg-navbar': isWatchlistPage }"
+  [ngClass]="{ 'scrolled': isScrolled, 'media-margin': isMediaPage, 'no-bg-navbar': isWatchlistPage && !isScrolled ,   'd-none':  hideNavbar }"
 >
   <a
     class="navbar-brand mt-3 logo"

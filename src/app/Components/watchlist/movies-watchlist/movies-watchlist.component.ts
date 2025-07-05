@@ -31,7 +31,7 @@ export class MoviesWatchlistComponent implements OnInit {
           title: data.title || data.name,
           poster_path: data.poster_path
         };
-        this.movies.push(mapped);
+        this.movies = [...this.movies, mapped]; // Triggers Input change detection
       });
     }
   }

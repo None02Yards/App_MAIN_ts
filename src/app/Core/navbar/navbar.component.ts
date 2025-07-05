@@ -1,3 +1,4 @@
+
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { DataService } from 'src/app/Services/data.service';
@@ -23,6 +24,9 @@ isCelebsPage = false;
   isScrolled = false;
   isWelcomePage = false;
   isWatchlistPage = false;
+  isWatchMoviesPage=false;
+  isWatchTvPage=false;
+
   isMediaPage = false;
   hideNavbar = false;
 
@@ -49,11 +53,15 @@ ngOnInit(): void {
 }
 
 
-
  private updateNavbarFlags(currentUrl: string): void {
     this.isWelcomePage = currentUrl.includes('/welcome');
-    this.isWatchlistPage = currentUrl.includes('/watchlist');
-    this.isMediaPage = currentUrl.includes('/movies') || currentUrl.includes('/tvshows') || currentUrl.includes('/search') || currentUrl.includes('/home');
+
+   // 1) Explicitly track the two watchlist children:
+  // this.isWatchMoviesPage = currentUrl.includes('/watchlist/movies');
+  // this.isWatchTvPage     = currentUrl.includes('/watchlist/tv');
+  this.isWatchlistPage   = currentUrl.includes('/watchlist');
+
+    this.isMediaPage = currentUrl.includes('/movies') || currentUrl.includes('/tvshows') || currentUrl.includes('/search') || currentUrl.includes('/home') || currentUrl.includes('/watchlist/tv') || currentUrl.includes('/watchlist/movies');
 
     const isHomePage = currentUrl === '/' || currentUrl === '/home';
     this.showSearch = !(this.isWelcomePage || isHomePage);
@@ -73,6 +81,10 @@ ngOnInit(): void {
   this.hideNavbar = false;
 
   }
+
+
+
+
 
   toggleNavbar(): void {
     this.isCollapsed = !this.isCollapsed;
@@ -249,7 +261,14 @@ onWindowScroll(): void {
     this.hideNavbar = false;  // 🔥 Always show on welcome
     return;
   }
-
+ // ✅ Specific scroll logic for /watchlist/movies and /watchlist/tv
+  if (
+    currentUrl.startsWith('/watchlist/movies') ||
+    currentUrl.startsWith('/watchlist/tv')
+  ) {
+    this.isScrolled = scrollY > 0;  // show full navbar on first scroll
+    return;
+  }
   // ✅ Only hide on scroll for main /watchlist
   if (isMainWatchlist) {
     this.hideNavbar = scrollY > 100;
@@ -267,7 +286,7 @@ onWindowScroll(): void {
     currentUrl.includes('/people') ||
     currentUrl.includes('/movies') ||
     currentUrl.includes('/person/') ||
-    currentUrl.includes('/search')
+    currentUrl.includes('/search') 
   ) {
     this.isScrolled = true;
     this.showSearch = true;

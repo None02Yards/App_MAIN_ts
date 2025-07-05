@@ -1,45 +1,97 @@
-import { Component, Input, Output, EventEmitter, HostListener  } from '@angular/core';
+
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  HostListener,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 
 @Component({
   selector: 'app-watchlist-card',
   templateUrl: './watchlist-card.component.html',
   styleUrls: ['./watchlist-card.component.scss']
 })
-export class WatchlistCardComponent {
+export class WatchlistCardComponent implements OnChanges {
   @Input() items: any[] = [];
-  @Input() mediaType: 'movie' | 'tv' = 'movie'; 
+  @Input() mediaType: 'movie' | 'tv' = 'movie';
   @Output() remove = new EventEmitter<number>();
 
-  // confirmation & feedback state
   showConfirm = false;
   pendingId: number | null = null;
   showRemovedMessage = false;
 
-  onRemoveClick(id: number) {
+  // pagination
+  page = 1;
+  itemsPerPage = 8;
+  paginatedItems: any[] = [];
+  disablePrev = true;
+  disableNext = false;
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['items'] && this.items?.length) {
+      this.page = 1;
+      this.updatePaginatedItems();
+    }
+  }
+
+  updatePaginatedItems(): void {
+    const start = (this.page - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.paginatedItems = this.items.slice(start, end);
+    this.updatePaginationButtons();
+  }
+
+  updatePaginationButtons(): void {
+    this.disablePrev = this.page <= 1;
+    this.disableNext = (this.page * this.itemsPerPage) >= this.items.length;
+  }
+
+  Next(): void {
+    if (!this.disableNext) {
+      this.page++;
+      this.updatePaginatedItems();
+    }
+  }
+
+  Prev(): void {
+    if (!this.disablePrev) {
+      this.page--;
+      this.updatePaginatedItems();
+    }
+  }
+
+  onRemoveClick(id: number): void {
     this.pendingId = id;
     this.showConfirm = true;
   }
 
-  confirmRemove() {
+  confirmRemove(): void {
     if (this.pendingId != null) {
       this.remove.emit(this.pendingId);
       this.showConfirm = false;
       this.showRemovedMessage = true;
-      // hide after 1.5s
-      setTimeout(() => this.showRemovedMessage = false, 4000);
+      this.pendingId = null;
+
+      setTimeout(() => {
+        this.showRemovedMessage = false;
+        this.updatePaginatedItems(); // re-sync after removal
+      }, 4000);
     }
   }
 
-  cancelRemove() {
+  cancelRemove(): void {
     this.showConfirm = false;
     this.pendingId = null;
   }
 
-   // <-- new HostListener
   @HostListener('document:keydown.escape', ['$event'])
-  handleEscape(event: KeyboardEvent) {
+  handleEscape(event: KeyboardEvent): void {
     if (this.showConfirm) {
       this.cancelRemove();
     }
   }
 }
+

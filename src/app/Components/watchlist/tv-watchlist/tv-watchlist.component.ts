@@ -32,7 +32,7 @@ ngOnInit(): void {
         title: data.title || data.name,
         poster_path: data.poster_path
       };
-      this.tvShows.push(mapped);
+      this.tvShows = [...this.tvShows, mapped];
     });
   });
 }

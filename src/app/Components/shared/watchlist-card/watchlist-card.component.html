@@ -1,14 +1,9 @@
-
- <!-- shared/watchlist-card/watchlist-card.component.html -->
-
 <div class="card-wrapper row justify-content-center">
-  <ng-container *ngFor="let item of items; let i = index">
+  <ng-container *ngFor="let item of paginatedItems; let i = index">
     <div class="w-100" *ngIf="i % 4 === 0 && i !== 0"></div>
 
     <div class="col-sm-6 col-md-3 col-lg-2 mb-4">
       <div class="poster">
-
-        <!-- 1) poster-img: holds just the image, hover layer & icon -->
         <div class="poster-img position-relative overflow-hidden rounded">
           <img
             [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path"
@@ -21,13 +16,11 @@
             </a>
           </div>
 
-          <div class="watchlist-icon watchlist-active"
-               (click)="onRemoveClick(item.id)">
+          <div class="watchlist-icon watchlist-active" (click)="onRemoveClick(item.id)">
             <i class="fa fa-bookmark"></i>
           </div>
         </div>
 
-        <!-- 2) Title is outside the poster-img, so it never gets clipped -->
         <h5 class="text-center mt-2 small-text">
           {{ item.title || item.name }}
         </h5>
@@ -35,7 +28,21 @@
     </div>
   </ng-container>
 </div>
-<!-- confirmation overlay -->
+
+<!-- Pagination -->
+<div class="d-flex justify-content-center align-items-center mt-4">
+  <button (click)="Prev()" class="bg-transparent border-0">
+    <i class="fa fa-arrow-circle-left fa-3x text-white" [class.disabled]="disablePrev"></i>
+  </button>
+  <div class="mx-3 mt-2">
+    <h3 class="font-weight-bolder">{{ page }}</h3>
+  </div>
+  <button (click)="Next()" class="bg-transparent border-0">
+    <i class="fa fa-arrow-circle-right fa-3x text-white" [class.disabled]="disableNext"></i>
+  </button>
+</div>
+
+<!-- Confirmation -->
 <div class="confirm-overlay" *ngIf="showConfirm">
   <div class="confirm-dialog">
     <p>Remove from your watchlist?</p>
@@ -45,7 +52,7 @@
     </div>
   </div>
 </div>
-<!-- removal-verification pop-up -->
+
 <div class="removed-overlay" *ngIf="showRemovedMessage">
   Removed!
 </div>

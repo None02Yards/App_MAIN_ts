@@ -29,7 +29,6 @@ export class MoviesComponent implements OnInit {
 
   customLists: CustomList[] = [];
 
-
   
   // dropdown state
   actionMenuForId: number | null = null;
@@ -71,26 +70,6 @@ submenuFlipLeft = false;
     }
   }
 
-//  fetchMovies(): void {
-//     this.spinner.show();
-//     this.dataService.getData('movie', this.type, this.page).subscribe(res => {
-//       this.spinner.hide();
-//       this.notice = res.success;
-
-//       // keep up to 12
-//       this.Movies = (res.results || []).filter((m: any) => m.poster_path);
-//       this.displayedMovies = this.Movies.slice(0, 12);
-
-//       // chunk into rows of 6
-//       this.rowsOfSix = [];
-//       for (let i = 0; i < this.displayedMovies.length; i += 6) {
-//         this.rowsOfSix.push(this.displayedMovies.slice(i, i + 6));
-//       }
-
-//       this.updatePaginationButtons();
-//     });
-//   }
-
  fetchMovies(): void {
     this.spinner.show();
     this.dataService.getData('movie', this.type, this.page).subscribe(res => {
@@ -107,38 +86,10 @@ submenuFlipLeft = false;
     return item.id;
   }
 
-
-
   updatePaginationButtons() {
     this.disablePrev = this.page <= 1;
     this.disableNext = this.Movies.length < 12;
   }
-
-
-
-
-// fetchMovies(): void {
-//   this.spinner.show();
-//   this.dataService.getData('movie', this.type, this.page).subscribe(res => {
-//     this.spinner.hide();
-//     this.notice = res.success;
-// this.Movies = (res.results || [])
-//   .filter((m: any) => m.poster_path);
-//   this.displayedMovies = this.Movies.slice(0, 10);
-
-
-//     // grab exactly PAGE_SIZE items for the current page
-//     const start = (this.page - 1) * this.PAGE_SIZE;
-//     this.displayedMovies = this.Movies.slice(start, start + this.PAGE_SIZE);
-
-//     this.updatePaginationButtons();
-//   });
-// }
-
-// updatePaginationButtons(): void {
-//   this.disablePrev = this.page <= 1;
-//   this.disableNext = this.Movies.length <= this.page * this.PAGE_SIZE;
-// }
 
   Next() { if (!this.disableNext) { this.page++; this.fetchMovies(); } }
   Prev() { if (!this.disablePrev) { this.page--; this.fetchMovies(); } }
