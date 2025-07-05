@@ -3,8 +3,10 @@
 <!-- ✅ Conditionally show the sidebar -->
 <app-sidebar *ngIf="!hideSidebar"></app-sidebar>
 
-<router-outlet></router-outlet>
-
+<div class="main-content-wrapper">
+  <router-outlet></router-outlet>
+  <div class="px-4 my-2"></div>
+</div>
 <!-- Scroll Button-->
 <button *ngIf="showArrow" class="scroll-button" (click)="handleScroll()">
   <span [ngClass]="isAtTop ? 'arrow-down' : 'arrow-up'"></span>

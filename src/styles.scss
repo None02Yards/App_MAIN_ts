@@ -17,11 +17,7 @@ $secondFontColor:#949cb0;
 router-outlet + * {
     margin-bottom: 80px; 
   }
-  
-html, body {
-  overflow: hidden;
-  height: 100%;
-}
+
 
   img, video, .slider, .swiper, .background-image {
     max-width: 100%;
@@ -30,8 +26,29 @@ html, body {
   html {
   scroll-behavior: smooth;
 }
+// body, html {
+//   overflow-x: hidden;
+//   scroll-behavior: smooth;
+//   background-color: $bgColor;
+//   color: $fontColor;
+//   font-family: 'Open Sans', sans-serif;
+//   font-weight: 400;
 
-body{
+//   scrollbar-width: none; 
+//   -ms-overflow-style: none; // IE 10+
+// }
+
+html, body {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background-color: $bgColor;
+  color: $fontColor;
+//   (thin scrollbar)
+  scrollbar-width: thin;
+  scrollbar-color: #1a1a1a transparent;
+}
+
+body{         
     overflow-x: hidden;
     background-color: $bgColor;
     color: $fontColor;
@@ -78,25 +95,48 @@ body{
         }
 
     }
-h1{
-    font-family: "Bebas Neue", sans-serif !important;
-    margin-top: 2rem !important;
-    font-size: 4.5rem !important;
+    h1{
+        font-family: "Bebas Neue", sans-serif !important;
+        margin-top: 2rem !important;
+        font-size: 4.5rem !important;
+    }
+
+    h2 {
+        font-family: "Lora",Verdana, Geneva, Tahoma, sans-serif;
+        font-size: 1.7rem;
+        font-weight: 300;
+        margin-top: 1.5rem;
+        color: #ffffff;
+    }
+
+    h3 {
+        font-family: "Lora",sans-serif;
+        font-size: 1.8614em;
+    
+    }
+
+
+}
+// body::-webkit-scrollbar {
+//   display: none;               
+// }
+
+
+// Chrome, Edge, Safari
+body::-webkit-scrollbar {
+  width: 4px;
 }
 
-h2 {
-    font-family: "Lora",Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.7rem;
-    font-weight: 300;
-    margin-top: 1.5rem;
-    color: #ffffff;
+body::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-h3 {
-    font-family: "Lora",sans-serif;
-    font-size: 1.8614em;
-   
+body::-webkit-scrollbar-thumb {
+  background-color: #111111;
+  border-radius: 6px;
+  transition: background-color 0.3s;
 }
 
-
+body::-webkit-scrollbar-thumb:hover {
+  background-color: #1f1e1e;
 }
