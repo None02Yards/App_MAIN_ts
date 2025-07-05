@@ -210,41 +210,6 @@ goToResult(item: any): void {
     }
   }
 
-// @HostListener('window:scroll', [])
-// onWindowScroll(): void {
-//   const scrollY = window.scrollY || window.pageYOffset;
-//   const currentUrl = this._Router.url;
-
-//   const isMainWatchlist = currentUrl === '/watchlist';
-//   const isCustomListPage = currentUrl.includes('/watchlist/custom');
-//   const isCreateListPage = currentUrl.includes('/watchlist/create');
-//   const isWelcomePage = currentUrl.includes('/welcome');
-
-//   if (isWelcomePage) {
-//     this.hideNavbar = false;
-//     return;
-//   }
-
-//   if (isMainWatchlist) {
-//     this.hideNavbar = scrollY > 100;
-//     return;
-//   }
-
-//   if (
-//     currentUrl.includes('/tvshows') ||
-//     currentUrl.includes('/people') ||
-//     currentUrl.includes('/movies') ||
-//     currentUrl.includes('/person/') ||
-//     currentUrl.includes('/search')
-//   ) {
-//     this.isScrolled = true;
-//     this.showSearch = true;
-//   } else {
-//     const heroHeight = 700;
-//     this.isScrolled = scrollY > heroHeight;
-//     this.showSearch = this.isScrolled;
-//   }
-// }
 
 @HostListener('window:scroll', [])
 onWindowScroll(): void {
