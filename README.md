@@ -12,9 +12,10 @@
 ![theme](/src/assets/screencapture2.png).
 
 ## KIDS 
-
+![theme](/src/assets/kids2.png).
 
 ![theme](/src/assets/kidsscreen.png).
+
 
 
 ## Screen_Re
