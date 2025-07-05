@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1751173754908,
+  "timestamp": 1751720053689,
   "index": "/App_MAIN_ts/index.html",
   "assetGroups": [
     {
@@ -12,7 +12,7 @@
       },
       "urls": [
         "/App_MAIN_ts/index.html",
-        "/App_MAIN_ts/main.cc8c300d78b5e5b2.js",
+        "/App_MAIN_ts/main.cc973a33240083f8.js",
         "/App_MAIN_ts/manifest.webmanifest",
         "/App_MAIN_ts/polyfills.c04b0af581447a1e.js",
         "/App_MAIN_ts/runtime.3f055301f0b97381.js",
@@ -31,6 +31,7 @@
       "urls": [
         "/App_MAIN_ts/anime-collage.d6de21cbe7e6b2d1.jpg",
         "/App_MAIN_ts/assets/1495 (1).gif",
+        "/App_MAIN_ts/assets/Recording2-gif-.gif",
         "/App_MAIN_ts/assets/ScreenRecording.gif",
         "/App_MAIN_ts/assets/Screenshot 2025-06-26 172402.png",
         "/App_MAIN_ts/assets/Wlc.png",
@@ -43,6 +44,7 @@
         "/App_MAIN_ts/assets/icons/icon-512x512.png",
         "/App_MAIN_ts/assets/icons/icon-72x72.png",
         "/App_MAIN_ts/assets/icons/icon-96x96.png",
+        "/App_MAIN_ts/assets/kidsscreen.png",
         "/App_MAIN_ts/assets/popcorn.svg",
         "/App_MAIN_ts/assets/screencapture-fullpage.png",
         "/App_MAIN_ts/assets/screencapture2.png",
@@ -71,6 +73,7 @@
   "hashTable": {
     "/App_MAIN_ts/anime-collage.d6de21cbe7e6b2d1.jpg": "ec6818540a3591ca9f915382b7fde579fc37ddf0",
     "/App_MAIN_ts/assets/1495 (1).gif": "ea2e6a5af82d7fa7eb005acaa776fc7edff3ba01",
+    "/App_MAIN_ts/assets/Recording2-gif-.gif": "357c3e699728bd63226f77b287dfcc0d4e410888",
     "/App_MAIN_ts/assets/ScreenRecording.gif": "f465d41c1a81442992c35859256766cf75d8a0b1",
     "/App_MAIN_ts/assets/Screenshot 2025-06-26 172402.png": "933443ad18abda1c4efd19e14b699a6715767ad0",
     "/App_MAIN_ts/assets/Wlc.png": "68e2f527195828dce06235918df9fb7d1449f473",
@@ -83,13 +86,14 @@
     "/App_MAIN_ts/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
     "/App_MAIN_ts/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/App_MAIN_ts/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/App_MAIN_ts/assets/kidsscreen.png": "1a0a9cedd4b2c2720b33868bfcf4743c3dcfe3b4",
     "/App_MAIN_ts/assets/popcorn.svg": "ab01b7848edcd97c8a293f527e606ea8edb1b3fc",
     "/App_MAIN_ts/assets/screencapture-fullpage.png": "6f3a0573e02f15d2d3706368a833edd0b21fa494",
     "/App_MAIN_ts/assets/screencapture2.png": "7fe1aa55675172f15b2e23f71162736868158758",
     "/App_MAIN_ts/assets/scss/_hero.scss": "531563642fd22eaade8260d67a295daa6b85d203",
     "/App_MAIN_ts/assets/scss/_variables.scss": "63a54b2ce30ed8ac62e276ec906e027fbe390af5",
     "/App_MAIN_ts/assets/scss/media/_footer-media.scss": "84ed1e79af221a159b1ba96c8cd0ba874802eb61",
-    "/App_MAIN_ts/assets/scss/media/_media.scss": "1e72224f8525d27fd942d5b0d9bbc95852f65cc3",
+    "/App_MAIN_ts/assets/scss/media/_media.scss": "8156dedd0e7487559eb1fe6ae57590c9f6373dfe",
     "/App_MAIN_ts/assets/tv.png": "5ba507de8c9bc4a063beecb569e89bcf9e0a901c",
     "/App_MAIN_ts/fa-brands-400.86ee2658f0f3b5a5.woff2": "31c30351084e2670bbe5c47bd342e11540a68717",
     "/App_MAIN_ts/fa-brands-400.8eaf0c8893de015e.ttf": "da6f537cd597b76d264970f1c95e4beebc82fde9",
@@ -103,8 +107,8 @@
     "/App_MAIN_ts/fontawesome-webfont.cf011583fb81df9f.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "/App_MAIN_ts/fontawesome-webfont.da909aa098b0ee2d.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "/App_MAIN_ts/fontawesome-webfont.e9955780856cf8aa.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
-    "/App_MAIN_ts/index.html": "25cd386405d0278ece305e15e45e805a632fa463",
-    "/App_MAIN_ts/main.cc8c300d78b5e5b2.js": "4a8881482c125303f75b79d68ea599e683a2864e",
+    "/App_MAIN_ts/index.html": "c6198d9a5d60b27a2e6373cacbdd237187827b8e",
+    "/App_MAIN_ts/main.cc973a33240083f8.js": "1d69a4216d43cbb0e104a68103d51b8cb185b610",
     "/App_MAIN_ts/manifest.webmanifest": "be68b23b2091a54cc2d64866b8d7af4b8e66dac9",
     "/App_MAIN_ts/polyfills.c04b0af581447a1e.js": "49d6b957e8ef325f973d921e50124c378b0441ae",
     "/App_MAIN_ts/runtime.3f055301f0b97381.js": "77191f0269e140988269d3fb444a7f2679acdcab",
