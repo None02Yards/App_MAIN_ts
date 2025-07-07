@@ -41,7 +41,6 @@ router-outlet + * {
 html, body {
   overflow-x: hidden;
   scroll-behavior: smooth;
-  background-color: $bgColor;
   color: $fontColor;
 //   (thin scrollbar)
   scrollbar-width: thin;
