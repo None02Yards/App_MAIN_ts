@@ -6,7 +6,9 @@ import { DataService } from 'src/app/Services/data.service';
 
 interface Movie {
   poster_path: string;
-  title: string;
+   title?: string;
+  name?: string;
+  
 }
 
 @Component({
@@ -55,20 +57,22 @@ updateArrows(): void {
     title: string;
     linkText: string;
     link: string;
-    
     posters: Movie[];
+     type: 'movie' | 'tv';
   }[] = [
     {
       title: 'Top Trending Movies',
       linkText: 'See All',
       link: '/movies/popular/1',
-      posters: []
+      posters: [],
+      type:'movie'
     },
     {
       title: 'Top TV Shows',
       linkText: 'Explore TV',
       link: '/tvshows/on_the_air/1',
-      posters: []
+      posters: [],
+      type:'tv',
     }
   ];
 

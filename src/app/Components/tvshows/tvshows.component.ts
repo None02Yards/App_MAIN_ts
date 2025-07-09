@@ -33,11 +33,12 @@ export class TVShowsComponent implements OnInit {
   dropdownPosition: { [k: string]: string } = {};
 
   showSubmenu = false;
-submenuFlipLeft = false;
+  submenuFlipLeft = false;
 
   disablePrev = true;
   disableNext = false;
   notice = true;
+totalPages: number = 1;
 
   constructor(
     private dataService: DataService,
@@ -74,20 +75,22 @@ submenuFlipLeft = false;
     }
   }
 
- fetchShows(): void {
-    this.dataService.getData('tv', this.type, this.page)
-      .subscribe(res => {
-        this.tvShows = (res.results || []).filter((m: any) => m.poster_path);
-        // show *exactly* 12 per page
-        this.displayedShows = this.tvShows.slice(0, 12);
-        this.updatePaginationButtons();
-      });
-  }
+fetchShows(): void {
+  this.dataService.getData('tv', this.type, this.page)
+    .subscribe(res => {
+      this.tvShows = (res.results || []).filter((m: any) => m.poster_path);
+      this.totalPages = res.total_pages || 1;
+      this.displayedShows = this.tvShows.slice(0, 12);
+      this.updatePaginationButtons();
+    });
+}
 
-  updatePaginationButtons(): void {
-    this.disablePrev = this.page <= 1;
-    this.disableNext = this.tvShows.length <= this.page * 12;
-  }
+
+ updatePaginationButtons(): void {
+  this.disablePrev = this.page <= 1;
+  this.disableNext = this.page >= this.totalPages;
+}
+
 
   Next(): void {
     if (!this.disableNext) {

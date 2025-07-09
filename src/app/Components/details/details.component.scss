@@ -164,24 +164,29 @@ h4{
 
 .more-to-explore-sidebar {
   margin-top: 40px !important;
+
   // margin-left: 25px !important;
   margin-top: 30px !important;
-    position: relative;
-    left: 70px;
+    position: relative !important;
+    margin-left: 70px;
   .editor-card {
     background-color: #080707 !important;
     min-height: auto;
     border-radius: 8px;
     padding: 1rem;
-
+z-index: 5;
+position: relative;
     .poster-box {
       overflow: hidden;
       width: 30%;
+        position: relative;
+        z-index: 2;
       img {
         width: 100%;
         height: auto;
         border-radius: 8px;
         object-fit: cover;
+         pointer-events: auto;
          transition: transform 0.3s ease, box-shadow 0.3s ease;
           box-shadow: 0 5px 15px rgba(241, 239, 239, 0.202) !important;
       }
@@ -197,17 +202,39 @@ h4{
       margin-bottom: 0.5rem;
     }
 
-    .editor-link {
+    a {
       font-size: 0.875rem;
       font-weight: 500;
       color: #ffb611d1 !important;
     }
   }
 }
+.link-pointer {
+  cursor: pointer !important;
+}
+.editor-card a,
+.editor-card .link-pointer {
+  cursor: pointer !important;
+}
+
 
 .titlemore{
   margin-left: 100px !important;
 }
+
+.link-pointer {
+  cursor: pointer !important;
+  color: #ffb611d1;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.link-pointer:hover {
+  color: #ffc107;
+}
+
+
+
 
 .slider-container {
   position: relative;

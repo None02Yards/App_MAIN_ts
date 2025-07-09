@@ -64,25 +64,29 @@
   <div class="col-lg-4 col-md-12">
     <div class="more-to-explore-sidebar text-white">
       <h5 class="fw-bold mb-3 border-start border-3 ps-2 border-warning">More to CineWorld</h5>
-
+  
       <div *ngFor="let section of moreToExplore | slice:0:2" class="mb-4">
-        <div class="editor-card p-3 rounded shadow-sm bg-dark h-100">
-          <h6 class="editor-title mb-2">{{ section.title }}</h6>
+  <div class="editor-card p-3 rounded shadow-sm bg-dark h-100">
+    <h6 class="editor-title mb-2">{{ section.title }}</h6>
 
-          <div class="d-flex gap-2 flex-wrap">
-            <div *ngFor="let movie of section.posters | slice:0:3" class="poster-box">
-              <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
-                   [alt]="movie.title"
-                   class="img-fluid rounded" />
-            </div>
-          </div>
+  <div class="d-flex gap-2 flex-wrap">
+  <div *ngFor="let media of section.posters | slice:0:3" class="poster-box">
+    <img [src]="'https://image.tmdb.org/t/p/w200' + media.poster_path" [alt]="media.title"
+      class="img-fluid rounded" />
+  </div>
+</div>
 
-        <a (click)="navigateTo(section.link)" class="d-block mt-2 text-primary small" style="cursor:pointer">
+
+<a [routerLink]="section.link" class="link-pointer d-block">
   {{ section.linkText }}
 </a>
 
-        </div>
-      </div>
+
+
+
+  </div>
+</div>
+
     </div>
   </div>
 </div>
@@ -93,11 +97,14 @@
   <div *ngIf="castList.length > 0" class="cast-section text-white">
     <h4 class="mb-3 border-start border-3 ps-2 border-warning">Top Cast</h4>
     <div class="d-flex gap-4 flex-wrap">
-      <div *ngFor="let cast of castList" class="text-center" style="width: 100px;">
-        <img [src]="'https://image.tmdb.org/t/p/w185' + cast.profile_path" class="rounded-circle img-fluid mb-2" />
-        <p class="mb-0 fw-bold small">{{ cast.name }}</p>
-        <p class="text-muted small">{{ cast.character }}</p>
+     <div *ngFor="let cast of castList" class="text-center" style="width: 100px;">
+        <a [routerLink]="['/person', cast.id]" class="text-decoration-none text-white d-block">
+          <img [src]="'https://image.tmdb.org/t/p/w185' + cast.profile_path" class="rounded-circle img-fluid mb-2" />
+          <p class="mb-0 fw-bold small">{{ cast.name }}</p>
+          <p class="text-muted small">{{ cast.character }}</p>
+        </a>
       </div>
+
     </div>
   </div>
 </div>
