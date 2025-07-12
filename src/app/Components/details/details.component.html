@@ -123,6 +123,8 @@
       <div *ngFor="let item of similarItems" class="movie-card small-card">
         <div class="poster position-relative overflow-hidden">
           <img class="w-100" [src]="'https://image.tmdb.org/t/p/w300/' + item.poster_path" [alt]="item.title || item.name">
+          <app-rating-circle [rating]="item.vote_average"></app-rating-circle>
+
           <div class="layer">
   <a [routerLink]="'/details/' + mediaType + '/' + item.id" class="bg-transparent d-block h-100 w-100 d-flex flex-column justify-content-center align-items-center text-decoration-none">
     <i class="fa fa-play-circle fa-2x text-dark"></i>

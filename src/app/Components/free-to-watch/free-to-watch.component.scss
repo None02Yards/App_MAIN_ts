@@ -1,0 +1,117 @@
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #eeebd8;
+  margin-bottom: 0.5rem;
+}
+
+.top-ten-wrapper {
+  margin-top: 60px !important;
+}
+
+.top-card {
+  width: calc(100% / 6 - 1.5rem);
+  flex: 0 0 auto;
+  margin-right: 1.5rem;
+  flex-shrink: 0;
+  justify-content: space-between;
+
+  .card {
+    background-color: #020202 !important;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    img {
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      border-radius: 8px;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+      z-index: 2;
+
+      img {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  .movie-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #c0b5b5;
+    line-height: 1.4;
+    text-align: center;
+    margin-top: 0.5rem;
+
+    &:hover {
+      // color: #e30f0f;
+      text-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+.scroll-wrapper {
+  display: flex;
+  overflow-x: auto;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-card:nth-child(n+6) {
+    display: none !important;
+  }
+}
+
+.toggle-group {
+  display: inline-flex;
+  border: 1px solid #d19e04;
+  border-radius: 999px;
+  overflow: hidden;
+  color: #fff !important ;
+  background-color: #1d1d1d0d;
+  margin-left: 1rem;
+}
+
+.toggle-btn {
+  background-color: transparent;
+  border: none;
+  padding: 8px 20px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #c2c0a1;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  min-width: 80px;
+  text-align: center;
+
+  &:not(:last-child) {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  &.active {
+    background-color: #ffeded;
+    color: #383837;
+    border-radius: 1000px;
+  }
+
+  &:hover:not(.active) {
+    background-color: #f3f6f901;
+  }
+}
+
+.titlefree{
+  margin-bottom: 50px !important;
+}

@@ -1,0 +1,43 @@
+<section class="py-5 free-section" id="free-to-watch">
+  <div class="container">
+    <div class="d-flex justify-content-start align-items-center titlefree">
+      <h3 class="section-title m-0">Free To Watch</h3>
+
+      <div class="toggle-group">
+        <button
+          class="toggle-btn"
+          [class.active]="freeTab === 'movie'"
+          (click)="freeTab = 'movie'"
+        >
+          Movies
+        </button>
+        <button
+          class="toggle-btn"
+          [class.active]="freeTab === 'tv'"
+          (click)="freeTab = 'tv'"
+        >
+          TV
+        </button>
+      </div>
+    </div>
+
+    <div class="scroll-wrapper">
+      <div class="top-card" *ngFor="let item of freeTab === 'movie' ? freeMovies : freeTV">
+        <div class="card h-100 position-relative">
+          <img
+            [src]="'https://image.tmdb.org/t/p/w300' + item.poster_path"
+            [alt]="item.title || item.name"
+            class="card-img-top"
+          />
+
+          <app-rating-circle [rating]="item.vote_average"></app-rating-circle>
+
+          <div class="movie-title mt-2 px-1">
+            <h5 class="rank small fw-bold">{{ item.title || item.name }}</h5>
+            <small class="release-date">{{ item.release_date || item.first_air_date }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

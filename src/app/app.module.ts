@@ -32,6 +32,8 @@ import { CreateListComponent } from './Components/watchlist/create-list/create-l
 import { SidebarComponent } from './Core/sidebar/sidebar.component';
 import { HomeLayoutModule } from './Components/layouts/home-layout/home-layout.module';
 import { KidsComponent } from './Components/kids/kids.component';
+// import { FreeToWatchComponent } from './Components/free-to-watch/free-to-watch.component';
+// import { RatingCircleComponent } from './shared/rating-circle/rating-circle.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +55,9 @@ import { KidsComponent } from './Components/kids/kids.component';
   CustomListDetailComponent,
   CreateListComponent,
   SidebarComponent,
-KidsComponent
+KidsComponent,
+// FreeToWatchComponent,
+// RatingCircleComponent
   ],
 
   imports: [
