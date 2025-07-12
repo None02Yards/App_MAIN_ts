@@ -141,6 +141,14 @@ fetchFromApi(url: string): Observable<any> {
   );
 }
 
+getFreeToWatch(type: 'movie' | 'tv'): Observable<any> {
+  const url = `${this.MovieAPI}/discover/${type}?api_key=${this.APIKey}&with_watch_monetization_types=free&sort_by=popularity.desc`;
+  return this._HttpClient.get(url).pipe(catchError(this.handleError));
+}
+
+
+
+
 // Get YouTube Trailer Key for a movie (returns a Promise)
 getYoutubeTrailerKey(movieId: number, apiKey: string): Promise<string | null> {
   const videoUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`;

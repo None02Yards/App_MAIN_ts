@@ -127,6 +127,7 @@
           alt="{{ item.name || item.original_title }}"
           style="object-fit: cover; height: 100%;"
         />
+            <app-rating-circle [rating]="item.vote_average"></app-rating-circle>
 
         <!-- Hover Layer -->
         <div class="layer">

@@ -27,7 +27,7 @@
   <div class=" mt-5 px-4 my-2">
 
   <!-- Slider with Arrows Movies -->
-  <div id="movie-section"  class=" mb-5 slider-container position-relative">
+  <section id="movie-section"  class=" mb-5 slider-container position-relative">
     <button class="arrow left" (click)="scrollLeft()">
       <i class="fa fa-chevron-left"></i>
     </button>
@@ -50,7 +50,7 @@
     <button class="arrow right" (click)="scrollRight()">
       <i class="fa fa-chevron-right"></i>
     </button>
-  </div>
+  </section>
 
 
 <!-- More to Explore -->
@@ -81,35 +81,43 @@
   </section>
 
 <!-- Top 10 TV Shows This Week -->
-<section  id="tv-section"  class=" py-5 ">
-  <div class="container">
-    <h3 class="section-title">Top TV Shows on IMDb This Week</h3>
-    <div class="Border w-25 mb-4"></div>
-<!-- 🔗 Make the whole section clickable -->
-<div 
-  class="top-ten-wrapper"
-  role="button"
-  (click)="goToPopularTVShows()"
-  title="See all popular TV shows"
->
+    <section id="tv-section" class="py-5">
+      <div class="container">
+        <h3 class="section-title">Top TV Shows on IMDb This Week</h3>
+        <div class="Border w-25 mb-4"></div>
 
-  <div class="scroll-wrapper" #topTenSlider>
-    <div class="top-card" *ngFor="let movie of topTenMovies">
-      <div class="card h-100">
-        <img [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path"
-             [alt]="movie.name" class="card-img-top" />
-        <div class="movie-title mt-2 px-1">
-          <h5 class="rank me-1">{{ movie.name }}</h5>
+        <div class="top-ten-wrapper" (click)="goToPopularTVShows()" title="See all popular TV shows">
+          <div class="scroll-wrapper" #topTenSlider>
+            <div class="top-card" *ngFor="let movie of topTenMovies">
+              <div class="card h-100 position-relative">
+                <img
+                  [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path"
+                  [alt]="movie.name"
+                  class="card-img-top"
+                />
+
+                <!-- 🔥 Insert rating badge HERE using 'movie' (not 'item') -->
+               <app-rating-circle [rating]="movie.vote_average"></app-rating-circle>
+
+
+
+
+                <div class="movie-title mt-2 px-1">
+                  <h5 class="rank me-1">{{ movie.name }}</h5>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-</div>
+    </section>
 
-  </div>
-</section>
+
 
   
+<app-free-to-watch *ngIf="!isKidsLayout"></app-free-to-watch>
+
+
   <section class="tv-shows-section py-5">
     <div class="container text-center">
       <h2 class="text-warning fw-bold mb-2">Exclusive Videos</h2>
