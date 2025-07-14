@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1751757186564,
+  "timestamp": 1752468308102,
   "index": "/App_MAIN_ts/index.html",
   "assetGroups": [
     {
@@ -12,12 +12,12 @@
       },
       "urls": [
         "/App_MAIN_ts/index.html",
-        "/App_MAIN_ts/main.ba86bf125a1153d3.js",
+        "/App_MAIN_ts/main.473d09e333bc5e01.js",
         "/App_MAIN_ts/manifest.webmanifest",
         "/App_MAIN_ts/polyfills.c04b0af581447a1e.js",
         "/App_MAIN_ts/runtime.3f055301f0b97381.js",
         "/App_MAIN_ts/scripts.b44807315ae3cf8c.js",
-        "/App_MAIN_ts/styles.628be3357ac10f9b.css"
+        "/App_MAIN_ts/styles.ec1675232a6fcee1.css"
       ],
       "patterns": []
     },
@@ -45,10 +45,12 @@
         "/App_MAIN_ts/assets/icons/icon-72x72.png",
         "/App_MAIN_ts/assets/icons/icon-96x96.png",
         "/App_MAIN_ts/assets/kids2.png",
+        "/App_MAIN_ts/assets/kidsfinal.png",
         "/App_MAIN_ts/assets/kidsscreen.png",
         "/App_MAIN_ts/assets/popcorn.svg",
         "/App_MAIN_ts/assets/screencapture-fullpage.png",
         "/App_MAIN_ts/assets/screencapture2.png",
+        "/App_MAIN_ts/assets/screencapturefinal.png",
         "/App_MAIN_ts/assets/scss/_hero.scss",
         "/App_MAIN_ts/assets/scss/_variables.scss",
         "/App_MAIN_ts/assets/scss/media/_footer-media.scss",
@@ -88,10 +90,12 @@
     "/App_MAIN_ts/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/App_MAIN_ts/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "/App_MAIN_ts/assets/kids2.png": "49852b49c37b329c5f15d858eaa74bf1a1c0edcf",
+    "/App_MAIN_ts/assets/kidsfinal.png": "f542ff93d670164abe4024e48ab18a26a06e7cdc",
     "/App_MAIN_ts/assets/kidsscreen.png": "1a0a9cedd4b2c2720b33868bfcf4743c3dcfe3b4",
     "/App_MAIN_ts/assets/popcorn.svg": "ab01b7848edcd97c8a293f527e606ea8edb1b3fc",
     "/App_MAIN_ts/assets/screencapture-fullpage.png": "6f3a0573e02f15d2d3706368a833edd0b21fa494",
     "/App_MAIN_ts/assets/screencapture2.png": "7fe1aa55675172f15b2e23f71162736868158758",
+    "/App_MAIN_ts/assets/screencapturefinal.png": "e63f066d3bd0d626e62f296b8c6ec47bfd537076",
     "/App_MAIN_ts/assets/scss/_hero.scss": "531563642fd22eaade8260d67a295daa6b85d203",
     "/App_MAIN_ts/assets/scss/_variables.scss": "63a54b2ce30ed8ac62e276ec906e027fbe390af5",
     "/App_MAIN_ts/assets/scss/media/_footer-media.scss": "84ed1e79af221a159b1ba96c8cd0ba874802eb61",
@@ -109,13 +113,13 @@
     "/App_MAIN_ts/fontawesome-webfont.cf011583fb81df9f.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "/App_MAIN_ts/fontawesome-webfont.da909aa098b0ee2d.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "/App_MAIN_ts/fontawesome-webfont.e9955780856cf8aa.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
-    "/App_MAIN_ts/index.html": "707a5005d197a6feb0de156a7c53fa5b772d9f99",
-    "/App_MAIN_ts/main.ba86bf125a1153d3.js": "73e11adec7e1746781eaf794c3022bc8017aab3d",
+    "/App_MAIN_ts/index.html": "df51b928a307240bc54751778e584fe86985afe9",
+    "/App_MAIN_ts/main.473d09e333bc5e01.js": "26a9e2b3b78637804427bd012780dce65edc75b6",
     "/App_MAIN_ts/manifest.webmanifest": "be68b23b2091a54cc2d64866b8d7af4b8e66dac9",
     "/App_MAIN_ts/polyfills.c04b0af581447a1e.js": "49d6b957e8ef325f973d921e50124c378b0441ae",
     "/App_MAIN_ts/runtime.3f055301f0b97381.js": "77191f0269e140988269d3fb444a7f2679acdcab",
     "/App_MAIN_ts/scripts.b44807315ae3cf8c.js": "c28205c59d7bad9dccd0b7265e3e903a14c1a975",
-    "/App_MAIN_ts/styles.628be3357ac10f9b.css": "076a37b3bfb514d0648ee5aa6f45513a631b14f3"
+    "/App_MAIN_ts/styles.ec1675232a6fcee1.css": "174882a75df4da0c1fefb01db2382b626f9e5387"
   },
   "navigationUrls": [
     {
