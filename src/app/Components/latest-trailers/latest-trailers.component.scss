@@ -1,44 +1,4 @@
-// .tab-menu {
-//   .tab-btn {
-//     border: 1px solid #21d4fd;
-//     padding: 0.4rem 1.2rem;
-//     border-radius: 999px;
-//     background: transparent;
-//     font-weight: 600;
-//     color: #fff;
-//     transition: all 0.3s ease;
-
-//     &.active {
-//       background: linear-gradient(to right, #21d4fd, #b721ff);
-//       color: #000;
-//     }
-//   }
-// }
-
-// .trailer-scroll {
-//   scrollbar-width: none;
-//   -ms-overflow-style: none;
-//   &::-webkit-scrollbar {
-//     display: none;
-//   }
-// }
-
-// .trailer-card {
-//   min-width: 250px;
-//   .video-thumb {
-//     position: relative;
-
-//     .play-icon {
-//       position: absolute;
-//       top: 50%;
-//       left: 50%;
-//       transform: translate(-50%, -50%);
-//       font-size: 2rem;
-//       color: #fff;
-//     }
-//   }
-// }
-
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chivo:ital,wght@0,100..900;1,100..900&family=Dancing+Script:wght@500&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Nunito:ital,wght@1,200..1000&family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Syne+Mono&display=swap');
 
 .latest-trailers-section {
   .video-card {
@@ -101,10 +61,13 @@
   }
 
   .section-title {
-    font-size: 1.4rem;
-    font-weight: bold;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    font-weight: 600;
     margin: 62px 1rem 16px;
-    color: #fbf1d9;
+    color: #f9bc02;
+    text-align: center;
+  font-family: "Bebas Neue", sans-serif;
   }
 
   .tab-btn {
