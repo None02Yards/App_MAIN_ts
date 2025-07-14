@@ -49,12 +49,14 @@ export class HomeComponent implements OnInit {
     }
   ];
 
-  @Input() exclusiveVideos: {
-    title: string;
-    videoUrl: string;
-    imageUrl: string;
-    key: string;
-  }[] = [];
+ @Input() exclusiveVideos: {
+  title: string;
+  description: string;
+  thumbnail: string;
+  videoUrl: string;
+  key: string;
+}[] = [];
+
 
   @Input() redirectToPopularTVShowsFn!: () => void;
 
@@ -76,7 +78,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
      if (!this.isKidsLayout) {
     this.fetchTrendingData();
-    this.fetchExclusiveVideos();
+    // this.fetchExclusiveVideos();
     this.fetchNews();
 
     return;
@@ -164,35 +166,6 @@ export class HomeComponent implements OnInit {
     container.scrollTo({
       left: this.topTenScrollPos,
       behavior: 'smooth'
-    });
-  }
-
-
-
-
-  fetchExclusiveVideos(): void {
-    const API_KEY = 'd229a3f3a83df351970dc2d5600d2410';
-    const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
-
-    this._DataService.fetchFromApi(API_URL).subscribe(async (data: any) => {
-      const results = data.results.slice(0, 5);
-      const videos: any[] = [];
-
-      for (const movie of results) {
-        const videoKey = await this._DataService.getYoutubeTrailerKey(movie.id, API_KEY);
-        if (videoKey) {
-          videos.push({
-            title: movie.title,
-            videoUrl: `https://www.youtube.com/watch?v=${videoKey}`,
-            imageUrl: movie.backdrop_path
-              ? `https://image.tmdb.org/t/p/w500${movie.backdrop_path}`
-              : 'https://via.placeholder.com/500',
-            key: videoKey
-          });
-        }
-      }
-
-      this.exclusiveVideos = videos.slice(0, 3);
     });
   }
 

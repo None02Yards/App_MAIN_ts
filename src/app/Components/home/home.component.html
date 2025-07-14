@@ -117,26 +117,7 @@
   
 <app-free-to-watch *ngIf="!isKidsLayout"></app-free-to-watch>
 
+<app-latest-trailers *ngIf="!isKidsLayout"></app-latest-trailers>
 
-  <section class="tv-shows-section py-5">
-    <div class="container text-center">
-      <h2 class="text-warning fw-bold mb-2">Exclusive Videos</h2>
-      <p class="text-light mb-4">Celebrity interviews, trending entertainment stories, and expert analysis</p>
-  
-      <div class="d-flex justify-content-center flex-wrap gap-4">
-        <div class="video-card bg-dark text-white position-relative" *ngFor="let video of exclusiveVideos.slice(0, 3)">
-          <img [src]="video.imageUrl" class="video-card-img" [alt]="video.title">
-  
-          <a [href]="'https://www.youtube.com/watch?v=' + video.key" target="_blank" class="play-button">▶</a>
-  
-          <div class="video-card-overlay d-flex flex-column justify-content-end">
-            <h5 class="video-card-title">{{ video.title }}</h5>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
- 
 </div>
 </ng-container>

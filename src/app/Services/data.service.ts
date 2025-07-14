@@ -148,16 +148,74 @@ getFreeToWatch(type: 'movie' | 'tv'): Observable<any> {
 
 
 
+getTrailerCategory(category: string): Observable<any> {
+  let url = '';
+
+  switch (category) {
+    case 'popular':
+      url = `${this.MovieAPI}/movie/popular?api_key=${this.APIKey}`;
+      break;
+    case 'streaming':
+      url = `${this.MovieAPI}/movie/upcoming?api_key=${this.APIKey}`;
+      break;
+   case 'on_tv':
+  const randomPage = Math.floor(Math.random() * 5) + 1;
+  url = `${this.MovieAPI}/discover/tv?api_key=${this.APIKey}&with_watch_monetization_types=flatrate&sort_by=popularity.desc&page=${randomPage}`;
+  break;
+
+    case 'for_rent':
+      url = `${this.MovieAPI}/discover/movie?api_key=${this.APIKey}&with_watch_monetization_types=rent`;
+      break;
+    case 'in_theaters':
+      url = `${this.MovieAPI}/movie/now_playing?api_key=${this.APIKey}`;
+      break;
+    default:
+      url = `${this.MovieAPI}/movie/popular?api_key=${this.APIKey}`;
+  }
+
+  return this._HttpClient.get(url).pipe(catchError(this.handleError));
+}
+
+
+
+
+
+
+
+// getTrailerCategory(category: string): Observable<any> {
+//   let url = '';
+
+//   switch (category) {
+//     case 'popular':
+//       url = `${this.MovieAPI}/movie/popular?api_key=${this.APIKey}`;
+//       break;
+//     case 'streaming':
+//       url = `${this.MovieAPI}/discover/movie?api_key=${this.APIKey}&with_watch_monetization_types=flatrate`;
+//       break;
+//     case 'on_tv':
+//       url = `${this.MovieAPI}/discover/tv?api_key=${this.APIKey}&with_watch_monetization_types=flatrate`;
+//       break;
+//     case 'for_rent':
+//       url = `${this.MovieAPI}/discover/movie?api_key=${this.APIKey}&with_watch_monetization_types=rent`;
+//       break;
+//     case 'in_theaters':
+//       url = `${this.MovieAPI}/movie/now_playing?api_key=${this.APIKey}`;
+//       break;
+//     default:
+//       url = `${this.MovieAPI}/movie/popular?api_key=${this.APIKey}`;
+//   }
+
+//   return this._HttpClient.get(url).pipe(catchError(this.handleError));
+// }
+
 
 // Get YouTube Trailer Key for a movie (returns a Promise)
-getYoutubeTrailerKey(movieId: number, apiKey: string): Promise<string | null> {
-  const videoUrl = `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`;
+getYoutubeTrailerKey(id: number, apiKey: string, mediaType: 'movie' | 'tv' = 'movie'): Promise<string | null> {
+  const videoUrl = `https://api.themoviedb.org/3/${mediaType}/${id}/videos?api_key=${apiKey}`;
   return fetch(videoUrl)
-    .then((res) => res.json())
-    .then((data) => {
-      const video = data.results.find(
-        (v: any) => v.site === 'YouTube' && v.type === 'Trailer'
-      );
+    .then(res => res.json())
+    .then(data => {
+      const video = data.results.find((v: any) => v.site === 'YouTube' && v.type === 'Trailer');
       return video ? video.key : null;
     })
     .catch(() => null);

@@ -98,12 +98,14 @@ submenuFlipLeft = false;
   isInWatchlist(id: number) {
     return this.watchlistService.isInWatchlist(id, 'movie');
   }
+  
   isInAnyCustomList(id: number) {
     return this.customLists.some(l => l.items.some(i => i.id === id));
   }
+
   isItemInList(item: WatchlistItem, list: CustomList) {
     return list.items.some(i => i.id === item.id);
-  }
+  }  
 
   toggleGeneralWatchlist(item: WatchlistItem) {
     if (this.isInWatchlist(item.id)) {

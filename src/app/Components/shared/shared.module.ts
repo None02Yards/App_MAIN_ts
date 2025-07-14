@@ -6,17 +6,20 @@ import { CommonModule } from '@angular/common';
 import { WatchlistCardComponent } from './watchlist-card/watchlist-card.component';
 import { RatingCircleComponent } from '../../shared/rating-circle/rating-circle.component'; // 👈 Import it
 import { FreeToWatchComponent } from '../free-to-watch/free-to-watch.component';
+import { LatestTrailersComponent } from '../latest-trailers/latest-trailers.component'; // ✅ Import it
 
 @NgModule({
   declarations: [
     WatchlistCardComponent,
     RatingCircleComponent,
-    FreeToWatchComponent // 👈 Declare it
+    FreeToWatchComponent,
+      LatestTrailersComponent
   ],
   exports: [
     WatchlistCardComponent,
     RatingCircleComponent,
-    FreeToWatchComponent // 👈 Export it too
+    FreeToWatchComponent,
+    LatestTrailersComponent 
   ],
   imports: [ CommonModule, RouterModule ]
 })

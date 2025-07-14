@@ -15,7 +15,7 @@ import { SharedModule } from 'src/app/Components/shared/shared.module'; // ✅ a
     CommonModule,
     RouterModule,
     NgxSpinnerModule,
-    SharedModule // ✅ now it’s valid
+    SharedModule 
   ],
   exports: [HomeComponent, SliderComponent]
 })
