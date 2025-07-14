@@ -6,15 +6,24 @@
 ## Welcome_page
 ![theme](./src/assets/Wlc.png)
 ![theme](./src/assets/Screenshot%202025-06-26%20172402.png)
-## full_page
+## full_page1
 ![theme](/src/assets/screencapture-fullpage.png).
 ## Full_page 2
 ![theme](/src/assets/screencapture2.png).
+
+
+## full_page3 Final touch 
+
+![theme](/src/assets/screencapturefinal.png).
+
 
 ## KIDS 
 ![theme](/src/assets/kids2.png).
 
 ![theme](/src/assets/kidsscreen.png).
+## kid final touch 
+![theme](/src/assets/kidsfinal.png).
+
 
 
 
