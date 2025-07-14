@@ -56,6 +56,7 @@ import { KidsComponent } from './Components/kids/kids.component';
   CreateListComponent,
   SidebarComponent,
 KidsComponent,
+
 // FreeToWatchComponent,
 // RatingCircleComponent
   ],

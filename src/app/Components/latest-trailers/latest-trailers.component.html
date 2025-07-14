@@ -1,0 +1,26 @@
+<section class="latest-trailers-section py-5">
+  <div class="container">
+    <h3 class="section-title">Latest Trailers</h3>
+
+    <div class="video-tabs d-flex gap-3 mb-4">
+      <button
+        class="tab-btn"
+        *ngFor="let tab of trailerTabs"
+        [class.active]="selectedTab === tab.key"
+        (click)="fetchLatestTrailers(tab.key)"
+      >
+        {{ tab.label }}
+      </button>
+    </div>
+
+    <div class="d-flex overflow-auto gap-4 px-1">
+      <div class="video-card" *ngFor="let video of latestTrailers">
+        <img [src]="video.thumbnail" class="video-card-img" />
+        <i class="fa fa-play play-button"></i>
+        <div class="video-card-overlay">
+          <h5 class="video-card-title">{{ video.title }}</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
