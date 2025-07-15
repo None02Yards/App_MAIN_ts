@@ -45,6 +45,7 @@
       font-weight: 500;
       color: #f1ead6;
       margin: 0;
+      
     }
 
     &:hover {
@@ -57,6 +58,7 @@
 
       .play-button {
         opacity: 1;
+        cursor: pointer;
       }
     }
   }
