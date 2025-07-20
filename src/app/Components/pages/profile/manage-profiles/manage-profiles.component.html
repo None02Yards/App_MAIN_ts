@@ -1,0 +1,56 @@
+<!-- manage-profiles.component.html -->
+<header class="top-header"></header>
+<div class="starsec"></div>
+<div class="starthird"></div>
+<div class="starfourth"></div>
+<div class="starfifth"></div>
+
+<div class="profile-screen">
+  <h1 class="profile-title">Manage Profiles</h1>
+
+  <div class="profiles">
+<div *ngFor="let profile of profiles; let i = index" class="profile editable-profile">
+    <img [src]="profile.image" alt="{{ profile.name }}" />
+    <p>{{ profile.name }}</p>
+
+    <!-- pass both profile and index -->
+    <button class="edit-btn" (click)="openEditModal(profile, i)">
+        <i class="fa fa-pencil"></i>
+    </button>
+
+    <button class="delete-btn" (click)="deleteProfile(profile)">
+        <i class="fa fa-trash"></i>
+    </button>
+</div>
+
+
+
+    <div class="profile add-profile" (click)="addProfile()">
+      <div class="addProfileIcon icon-tvuiAdd"></div>
+      <p>Add Profile</p>
+    </div>
+  </div>
+
+  <button class="done-btn" (click)="goBack()">Done</button>
+</div>
+
+<!-- Modal -->
+<div class="modal-backdrop" *ngIf="isModalOpen">
+  <div class="modal-content">
+    <h2>Edit Profile</h2>
+    <form (ngSubmit)="saveChanges()">
+      <label>Name:</label>
+      <input type="text" [(ngModel)]="editableProfile.name" name="name" required />
+
+      <label>Image:</label>
+<input type="file" accept="image/*" (change)="onImageSelected($event)" />
+<img *ngIf="editableProfile.image" [src]="editableProfile.image" alt="preview" class="image-preview" />
+
+
+      <div class="modal-actions">
+        <button type="submit" class="save-btn">Save</button>
+        <button type="button" class="cancel-btn" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
