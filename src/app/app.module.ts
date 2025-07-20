@@ -25,13 +25,16 @@ import { WatchlistComponent } from './Components/watchlist/watchlist.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { MoviesWatchlistComponent } from './Components/watchlist/movies-watchlist/movies-watchlist.component';
 import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-watchlist.component'; 
-// import { AnimeWatchlistComponent } from './Components/watchlist/anime-watchlist/anime-watchlist.component'; 
+import { AnimeWatchlistComponent } from './Components/watchlist/anime-watchlist/anime-watchlist.component'; 
 import { SharedModule } from './Components/shared/shared.module'; 
 import { CustomListDetailComponent } from './Components/watchlist/custom-list-detail/custom-list-detail.component';
 import { CreateListComponent } from './Components/watchlist/create-list/create-list.component';
 import { SidebarComponent } from './Core/sidebar/sidebar.component';
 import { HomeLayoutModule } from './Components/layouts/home-layout/home-layout.module';
 import { KidsComponent } from './Components/kids/kids.component';
+import { ProfileComponent } from './Components/pages/profile/profile.component';
+import { ManageProfilesComponent } from './Components/pages/profile/manage-profiles/manage-profiles.component';
+// import { WatchlistActionComponent } from './Components/watchlist-action/watchlist-action.component';
 // import { FreeToWatchComponent } from './Components/free-to-watch/free-to-watch.component';
 // import { RatingCircleComponent } from './shared/rating-circle/rating-circle.component';
 
@@ -52,10 +55,14 @@ import { KidsComponent } from './Components/kids/kids.component';
     WelcomeComponent,
      TvWatchlistComponent,
   MoviesWatchlistComponent,
+  AnimeWatchlistComponent,
   CustomListDetailComponent,
   CreateListComponent,
   SidebarComponent,
 KidsComponent,
+ProfileComponent,
+ManageProfilesComponent,
+
 
 // FreeToWatchComponent,
 // RatingCircleComponent

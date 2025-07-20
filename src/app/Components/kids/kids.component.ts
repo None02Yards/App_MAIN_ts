@@ -2,6 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { KidsDataService } from 'src/app/Services/kids-data.service';
 import { delay } from 'rxjs/operators';
+import { WatchlistService, WatchlistItem, CustomList  } from 'src/app/Services/watchlist.service';
+
 
 @Component({
   selector: 'app-kids',
@@ -10,6 +12,7 @@ import { delay } from 'rxjs/operators';
 })
 export class KidsComponent implements OnInit {
    kidsSlider: any[] = [];
+customLists: CustomList[] = [];
 
   kidsTrending: any[] = [];
   kidsTrendingMovies: any[] = [];
@@ -36,7 +39,10 @@ kidsExclusiveVideos: any[] = [];
 ];
   kidsQuote: string = '';
 
-  constructor(private kidsData: KidsDataService) {}
+  constructor(private kidsData: KidsDataService,
+        private watchlistService: WatchlistService,
+
+  ) {}
 
   ngOnInit(): void {
     
@@ -65,7 +71,8 @@ kidsExclusiveVideos: any[] = [];
       this.kidsMoreToExplore = sections;
     });
 
-  
+  this.customLists = this.watchlistService.getCustomLists();
+
     this.kidsData.getKidsMovies().subscribe((data) => {
       this.kidsTrendingMovies = data.results.slice(0, 10);
 
@@ -79,6 +86,16 @@ kidsExclusiveVideos: any[] = [];
             key: v.key,
           }));
         });
+const firstAnime = this.kidsTrendingTV[0];
+if (firstAnime) {
+this.watchlistService.addToWatchlist({
+  id: firstMovieId,
+  type: 'anime',
+  addedAt: new Date().toISOString()
+});
+
+}
+
 
 
         this.kidsData.getKidsExclusiveVideos().subscribe((videos) => {

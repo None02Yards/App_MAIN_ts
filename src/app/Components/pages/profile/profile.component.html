@@ -1,0 +1,29 @@
+<header class="top-header"></header>
+
+<div>
+  <div class="starsec"></div>
+  <div class="starthird"></div>
+  <div class="starfourth"></div>
+  <div class="starfifth"></div>
+</div>
+
+<div class="profile-screen">
+  <h1 class="profile-title">Who's watching?</h1>
+
+  <div class="profiles">
+   <div class="profile" *ngFor="let profile of profiles" (click)="goToProfile(profile.name)">
+  <img [src]="profile.image" [alt]="profile.name" />
+  <p>{{ profile.name }}</p>
+</div>
+
+
+   <div class="profile add-profile" role="button" tabindex="0">
+  <div class="addProfileIcon icon-tvuiAdd"></div>
+  <p class="profile-name">Add Profile</p>
+</div>
+
+  </div>
+
+<button class="manage-btn" (click)="goToManageProfiles()">Manage Profiles</button>
+</div>
+

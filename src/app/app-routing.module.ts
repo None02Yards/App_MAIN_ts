@@ -1,6 +1,9 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { ProfileComponent } from './Components/pages/profile/profile.component';
+import { ManageProfilesComponent } from './Components/pages/profile/manage-profiles/manage-profiles.component';
+
 import { HomeComponent } from './Components/home/home.component';
 import { NotFoundPageComponent } from './Components/not-found-page/not-found-page.component';
 import { AboutComponent } from './Components/about/about.component';
@@ -16,7 +19,7 @@ import { TvWatchlistComponent } from './Components/watchlist/tv-watchlist/tv-wat
 import { CreateListComponent } from './Components/watchlist/create-list/create-list.component';
 import { CustomListDetailComponent } from './Components/watchlist/custom-list-detail/custom-list-detail.component';
 import { KidsComponent } from './Components/kids/kids.component';
-// import { AnimeWatchlistComponent } from './Components/watchlist/anime-watchlist/anime-watchlist.component';
+import { AnimeWatchlistComponent } from './Components/watchlist/anime-watchlist/anime-watchlist.component';
 
 
 
@@ -24,12 +27,16 @@ import { KidsComponent } from './Components/kids/kids.component';
 const routes: Routes = [
   { path: '', redirectTo: '/welcome', pathMatch: 'full' },
   { path: 'welcome', component: WelcomeComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'manage-profiles', component: ManageProfilesComponent },
+
   { path: 'home', component: HomeComponent },
 
   { path: 'watchlist', component: WatchlistComponent},
 
   { path: 'watchlist/movies', component: MoviesWatchlistComponent },
   { path: 'watchlist/tv', component: TvWatchlistComponent },
+  { path: 'watchlist/tv', component: AnimeWatchlistComponent },
 
  // custom list creation & detail view
 
@@ -75,7 +82,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), RouterModule.forRoot(routes, { onSameUrlNavigation: 'reload' })
+],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

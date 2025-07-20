@@ -80,31 +80,45 @@
     </section>
 
     <!-- Top 10 TV Shows This Week -->
-    <section id="tv-section" class="py-5">
-      <div class="container">
-        <h3 class="section-title">Top TV Shows on IMDb This Week</h3>
-        <div class="Border w-25 mb-4"></div>
+  <section id="tv-section" class="py-5">
+  <div class="container">
+    <h3 class="section-title">Top TV Shows on IMDb This Week</h3>
+    <div class="Border w-25 mb-4"></div>
 
-        <div class="top-ten-wrapper" (click)="goToPopularTVShows()" title="See all popular TV shows">
-          <div class="scroll-wrapper" #topTenSlider>
-            <div class="top-card" *ngFor="let movie of topTenMovies">
-              <div class="card h-100 position-relative">
-                <img [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path" [alt]="movie.name"
-                  class="card-img-top" />
+    <div class="top-ten-wrapper" (click)="goToPopularTVShows()" title="See all popular TV shows">
+      <div class="scroll-wrapper" #topTenSlider>
+        <div class="top-card" *ngFor="let movie of topTenMovies">
+          <div class="card h-100 position-relative">
+            <div
+              class="poster-img position-relative rounded"
+              [ngClass]="{ 'overflow-visible': isKidsLayout, 'overflow-hidden': !isKidsLayout }"
+            >
+              <img
+                [src]="'https://image.tmdb.org/t/p/w300' + movie.poster_path"
+                [alt]="movie.name"
+                class="card-img-top"
+              />
 
-                <!-- 🔥 Insert rating badge HERE using 'movie' (not 'item') -->
-                <app-rating-circle [rating]="movie.vote_average"></app-rating-circle>
+              <!-- ✅ Bookmark floating menu -->
+              <app-watchlist-action
+                *ngIf="isKidsLayout"
+                [item]="movie"
+                mediaType="tv"
+                [customLists]="customLists"
+              ></app-watchlist-action>
+            </div>
 
-                <div class="movie-title mt-2 px-1">
-                  <h5 class="rank me-1">{{ movie.name }}</h5>
-                </div>
-              </div>
+            <app-rating-circle [rating]="movie.vote_average"></app-rating-circle>
+
+            <div class="movie-title mt-2 px-1">
+              <h5 class="rank me-1">{{ movie.name }}</h5>
             </div>
           </div>
         </div>
       </div>
-    </section>
-
+    </div>
+  </div>
+</section>
 
 
 

@@ -326,6 +326,18 @@
     display: none;
   }
 }
+// Allow dropdowns like <app-watchlist-action> to overflow properly
+// .poster-img.overflow-visible {
+//   overflow: visible !important;
+//   position: relative; // ensure stacking context
+//   z-index: 999 !important; // just in case layering is affected
+// }
+
+// OPTIONAL: Ensure dropdown inside watchlist-action floats above poster
+// app-watchlist-action {
+//   z-index: 599 !important;
+//   position: relative;
+// }
 
 
 

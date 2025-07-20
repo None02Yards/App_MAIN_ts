@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild, Input } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/app/Services/data.service';
 import { Router } from '@angular/router';
+import { CustomList } from 'src/app/Services/watchlist.service'; // ✅ Fixes the error
 
 interface Movie {
   poster_path: string;
@@ -19,7 +20,8 @@ export class HomeComponent implements OnInit {
   @Input() topTenMovies: any[] = [];
   @Input() quote: string = '';
   @Input() quoteGradient: string = '';
-  
+  @Input() customLists: CustomList[] = [];
+
 @Input() isKidsLayout: boolean = false;
 @Input() sliderData: any[] = [];
 
