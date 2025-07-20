@@ -54,7 +54,7 @@ ngOnInit(): void {
 
 
  private updateNavbarFlags(currentUrl: string): void {
-    this.isWelcomePage = currentUrl.includes('/welcome');
+this.isWelcomePage = currentUrl.includes('/welcome') || currentUrl.includes('/profile');
 
    // 1) Explicitly track the two watchlist children:
   // this.isWatchMoviesPage = currentUrl.includes('/watchlist/movies');
@@ -220,7 +220,7 @@ onWindowScroll(): void {
   const isCustomListPage = currentUrl.includes('/watchlist/custom');
   const isCreateListPage = currentUrl.includes('/watchlist/create');
 
-   const isWelcomePage = currentUrl.includes('/welcome');
+const isWelcomePage = currentUrl.includes('/welcome') || currentUrl.includes('/profile');
 
   if (isWelcomePage) {
     this.hideNavbar = false;  // 🔥 Always show on welcome

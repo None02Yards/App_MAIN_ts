@@ -8,6 +8,8 @@ export interface StoredWatchlistItem {
   id: number;
   type: 'movie' | 'tv' | 'anime';
   addedAt?: string;
+    name?: string; // ✅ add this if you want to use it in the HTML
+
 }
 export interface CustomList {
 
@@ -39,6 +41,7 @@ export class WatchlistService {
 
   constructor() {
     this.migrateLegacyWatchlist();
+    
   }
 
   getWatchlist(): StoredWatchlistItem[] {
@@ -148,6 +151,7 @@ export class WatchlistService {
   updateCustomLists(lists: CustomList[]): void {
   localStorage.setItem('customLists', JSON.stringify(lists));
 }
+
 
 }
 
