@@ -98,14 +98,23 @@
           </div>
         
           <!-- Animes Card (if needed) -->
-          <div class="category-card">
-            <h2>✨ Animes</h2>
-            <div class="preview-thumbs anime">
-              <img src="anime-collage.jpg">
+        <!-- Animes Card -->
+        <div class="category-card">
+          <h2>✨ Animes</h2>
+          <div class="preview-thumbs anime">
+            <ng-container *ngIf="animes?.length; else noAnimes">
+              <img *ngFor="let anime of animes.slice(0, 4)" [src]="'https://image.tmdb.org/t/p/w200' + anime.poster_path"
+                [alt]="anime.title || anime.name" />
+            </ng-container>
+        
+            <ng-template #noAnimes>
+              <img src="anime-collage.jpg" alt="Anime Placeholder">
               <p>No animes saved yet</p>
-            </div>
-            <a routerLink="/watchlist/animes">Explore</a>
+            </ng-template>
           </div>
+          <a routerLink="/watchlist/animes">Explore</a>
+        </div>
+
         </div>
         
 

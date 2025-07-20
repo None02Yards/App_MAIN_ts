@@ -1,4 +1,4 @@
-
+// E:\Angular-Movies\MAIN-CineWorld-App\MAIN-CineWorld-App\src\app\Components\shared\watchlist-card
 import {
   Component,
   Input,
@@ -16,7 +16,7 @@ import {
 })
 export class WatchlistCardComponent implements OnChanges {
   @Input() items: any[] = [];
-  @Input() mediaType: 'movie' | 'tv' = 'movie';
+@Input() mediaType: 'movie' | 'tv' | 'anime' = 'movie';
   @Output() remove = new EventEmitter<number>();
 
   showConfirm = false;
