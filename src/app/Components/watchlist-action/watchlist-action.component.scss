@@ -1,0 +1,130 @@
+
+
+// ---- BOOKMARK / ACTION ICON ----
+.watchlist-icon-container {
+  position: absolute;
+  top: 0;
+  right: 14px;
+  // z-index: 999 !important; // high enough to appear on top, but not block things globally
+  //  pointer-events: auto; // ✅ ensure it's clickable
+}
+
+.bookmark-icon-inner {
+  font-size: 2.5rem;
+  opacity: 0.7;
+  z-index: 99 !important;
+  pointer-events: auto; // ✅ passive icon, no need to interact
+
+  &.watchlist-active {
+    color: #ffc107;
+  }
+}
+
+.overlay-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+  pointer-events: auto;
+
+  i {
+    padding: 2px 10px;
+    font-size: 0.75rem;
+    line-height: 1;
+  }
+
+  .fa-plus {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .fa-check {
+    color: #fff !important;
+  }
+}
+
+// ---- DROPDOWNS ----
+.spotify-dropdown,
+.submenu-dropdown {
+  position: fixed;
+  background-color: #282828;
+  color: #fff;
+  border-radius: 8px;
+  padding: 8px 0;
+  min-width: 220px;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease-in-out;
+  white-space: nowrap;
+  pointer-events: auto;
+
+  .dropdown-item {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+
+    &:hover {
+      background-color: #3e3e3e;
+    }
+
+    i {
+      width: 18px;
+      text-align: center;
+      opacity: 0.9;
+    }
+  }
+
+  .dropdown-divider {
+    border-top: 1px solid #444;
+    margin: 6px 0;
+  }
+
+  &.open-upward::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 20px;
+    border-width: 10px;
+    border-style: solid;
+    border-color: #333 transparent transparent transparent;
+  }
+}
+
+.submenu-dropdown {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: #2a2a2a;
+  min-width: 200px;
+  border-radius: 8px;
+  padding: 0.5rem 0;
+  z-index: 9999;
+
+  &.open-left {
+    left: auto;
+    right: 100%;
+    margin-left: 0;
+    margin-right: 4px;
+  }
+
+  .dropdown-item {
+    padding: 8px 12px;
+    display: flex;
+    justify-content: space-between;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: none; }
+}

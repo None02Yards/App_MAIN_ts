@@ -1,0 +1,98 @@
+<!-- 
+<div class="watchlist-icon-container">
+  <i class="fa fa-bookmark bookmark-icon-inner"
+     [ngClass]="{
+       'watchlist-active': isInWatchlist() || isInAnyCustomList()
+     }">
+  </i>
+<button class="overlay-btn" (click)="openActionMenu($event); $event.stopPropagation()">
+    <i class="fa"
+       [ngClass]="{
+         'fa-check text-success': isInWatchlist() || isInAnyCustomList(),
+         'fa-plus': !isInWatchlist() && !isInAnyCustomList()
+       }"></i>
+  </button>
+
+  <div *ngIf="actionMenuForId" class="spotify-dropdown shadow" [ngStyle]="dropdownPosition">
+
+    <div class="dropdown-item" (click)="toggleGeneralWatchlist()">
+      <i class="fa fa-list"></i>
+      {{ isInWatchlist() ? 'Remove from Watchlist' : 'Add to Watchlist' }}
+    </div>
+
+    <div class="dropdown-item position-relative"
+         (mouseenter)="onSubmenuMouseEnter($event)"
+         (mouseleave)="onSubmenuMouseLeave()">
+      <i class="fa fa-plus"></i> Save to Custom List
+      <span class="float-end">▶</span>
+
+      <div *ngIf="showSubmenu" class="submenu-dropdown shadow" [ngClass]="{ 'open-left': submenuFlipLeft }">
+        <div class="dropdown-item"
+             *ngFor="let list of customLists"
+             (click)="addToCustomList(list)">
+          {{ list.name }}
+          <i *ngIf="isItemInList(list)" class="fa fa-check text-success ms-2"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <div class="dropdown-item" routerLink="/watchlist/custom">
+      <i class="fa fa-user"></i> View your lists
+    </div>
+    <div class="dropdown-item" routerLink="/watchlist/{{ mediaType }}">
+      <i class="fa fa-compact-disc"></i> View General
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="dropdown-item"><i class="fa fa-share"></i> Share</div>
+  </div>
+</div> -->
+
+<div class="watchlist-icon-container">
+  <i class="fa fa-bookmark bookmark-icon-inner"
+     [ngClass]="{
+       'watchlist-active': isInWatchlist() || isInAnyCustomList()
+     }">
+  </i>
+
+  <button class="overlay-btn" (click)="openActionMenu($event)">
+    <i class="fa"
+       [ngClass]="{
+         'fa-check text-success': isInWatchlist() || isInAnyCustomList(),
+         'fa-plus': !isInWatchlist() && !isInAnyCustomList()
+       }"></i>
+  </button>
+
+  <div *ngIf="actionMenuForId" class="spotify-dropdown shadow" [ngStyle]="dropdownPosition">
+    <div class="dropdown-item" (click)="toggleGeneralWatchlist()">
+      <i class="fa fa-list"></i>
+      {{ isInWatchlist() ? 'Remove from Watchlist' : 'Add to Watchlist' }}
+    </div>
+
+    <div class="dropdown-item position-relative"
+         (mouseenter)="onSubmenuMouseEnter($event)"
+         (mouseleave)="onSubmenuMouseLeave()">
+      <i class="fa fa-plus"></i> Save to Custom List
+      <span class="float-end">▶</span>
+
+      <div *ngIf="showSubmenu" class="submenu-dropdown shadow" [ngClass]="{ 'open-left': submenuFlipLeft }">
+        <div class="dropdown-item"
+             *ngFor="let list of customLists"
+             (click)="addToCustomList(list)">
+          {{ list.name }}
+          <i *ngIf="isItemInList(list)" class="fa fa-check text-success ms-2"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <div class="dropdown-item" routerLink="/watchlist/custom">
+      <i class="fa fa-user"></i> View your lists
+    </div>
+    <div class="dropdown-item" routerLink="/watchlist/{{ mediaType }}">
+      <i class="fa fa-compact-disc"></i> View General
+    </div>
+    <div class="dropdown-divider"></div>
+    <div class="dropdown-item"><i class="fa fa-share"></i> Share</div>
+  </div>
+</div>
