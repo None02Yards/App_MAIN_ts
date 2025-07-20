@@ -1,10 +1,10 @@
-<!-- <h3 class="watchlist-heading">Anime 🎌</h3>
-<div class="row">
-  <div class="col-md-2 overflow-hidden mb-4" *ngFor="let item of animeList">
-    <app-watchlist-card
-      [item]="item"
-      type="anime"
-      (remove)="removeFromWatchlist(item.id)">
-    </app-watchlist-card>
-  </div>
-</div> -->
+<!-- E:\Angular-Movies\MAIN-CineWorld-App\MAIN-CineWorld-App\src\app\Components\watchlist\anime-watchlist -->
+<!-- src/app/Components/watchlist/anime-watchlist/anime-watchlist.component.html -->
+
+<h3 class="watchlist-heading">Anime 🎌</h3>
+<app-watchlist-card
+  [items]="animeList"
+  mediaType="anime"
+  (remove)="removeFromWatchlist($event)">
+</app-watchlist-card>
+

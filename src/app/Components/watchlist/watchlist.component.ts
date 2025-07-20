@@ -22,6 +22,7 @@ export class WatchlistComponent implements OnInit {
   newListPrivacy: 'public' | 'private' = 'public';
   isCreateListModalOpen: boolean = false;
 lastCreatedListId: string | null = null;
+
   constructor(
     private dataService: DataService,
     private watchlistService: WatchlistService,
