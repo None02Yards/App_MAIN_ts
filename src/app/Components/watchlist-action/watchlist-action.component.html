@@ -1,98 +1,93 @@
-<!-- 
+
 <div class="watchlist-icon-container">
-  <i class="fa fa-bookmark bookmark-icon-inner"
-     [ngClass]="{
-       'watchlist-active': isInWatchlist() || isInAnyCustomList()
-     }">
+  <i
+    class="fa fa-bookmark bookmark-icon-inner"
+    [ngClass]="{ 'watchlist-active': isInWatchlist() || isInAnyCustomList() }">
   </i>
-<button class="overlay-btn" (click)="openActionMenu($event); $event.stopPropagation()">
+
+  <button
+    type="button"
+    class="overlay-btn"
+    (click)="open($event)"
+    (mousedown)="$event.preventDefault()"
+    aria-haspopup="menu"
+    [attr.aria-expanded]="visible ? 'true' : 'false'">
     <i class="fa"
        [ngClass]="{
          'fa-check text-success': isInWatchlist() || isInAnyCustomList(),
          'fa-plus': !isInWatchlist() && !isInAnyCustomList()
        }"></i>
   </button>
+</div>
 
-  <div *ngIf="actionMenuForId" class="spotify-dropdown shadow" [ngStyle]="dropdownPosition">
+<!-- ===== Floating MAIN dropdown ===== -->
+<div *ngIf="actionMenuForId"
+     #mainMenu
+     class="spotify-dropdown shadow"
+     [ngStyle]="dropdownPosition"
+     [ngClass]="{
+       'join-right': showSubmenu && !submenuFlipLeft,
+       'join-left' : showSubmenu &&  submenuFlipLeft
+     }"
+     role="menu"
+     (mouseenter)="cancelSubmenuClose()"
+     (mouseleave)="scheduleSubmenuClose()"
+     (click)="$event.stopPropagation()">
 
-    <div class="dropdown-item" (click)="toggleGeneralWatchlist()">
-      <i class="fa fa-list"></i>
-      {{ isInWatchlist() ? 'Remove from Watchlist' : 'Add to Watchlist' }}
-    </div>
-
-    <div class="dropdown-item position-relative"
-         (mouseenter)="onSubmenuMouseEnter($event)"
-         (mouseleave)="onSubmenuMouseLeave()">
-      <i class="fa fa-plus"></i> Save to Custom List
-      <span class="float-end">▶</span>
-
-      <div *ngIf="showSubmenu" class="submenu-dropdown shadow" [ngClass]="{ 'open-left': submenuFlipLeft }">
-        <div class="dropdown-item"
-             *ngFor="let list of customLists"
-             (click)="addToCustomList(list)">
-          {{ list.name }}
-          <i *ngIf="isItemInList(list)" class="fa fa-check text-success ms-2"></i>
-        </div>
-      </div>
-    </div>
-
-    <div class="dropdown-divider"></div>
-    <div class="dropdown-item" routerLink="/watchlist/custom">
-      <i class="fa fa-user"></i> View your lists
-    </div>
-    <div class="dropdown-item" routerLink="/watchlist/{{ mediaType }}">
-      <i class="fa fa-compact-disc"></i> View General
-    </div>
-    <div class="dropdown-divider"></div>
-    <div class="dropdown-item"><i class="fa fa-share"></i> Share</div>
+  <!-- General Watchlist -->
+  <div class="dropdown-item"
+       role="menuitem"
+       (click)="toggleGeneralWatchlist(actionMenuItem!)">
+    <i class="fa fa-list"></i>
+    {{ isInWatchlist(actionMenuItem!.id) ? 'Remove from Watchlist' : 'Add to Watchlist' }}
   </div>
-</div> -->
 
-<div class="watchlist-icon-container">
-  <i class="fa fa-bookmark bookmark-icon-inner"
+  <!-- Save to Custom List (opens floating submenu) -->
+  <div class="dropdown-item position-relative"
+       role="menuitem"
+       aria-haspopup="true"
+       [attr.aria-expanded]="showSubmenu ? 'true' : 'false'"
+       (mouseenter)="openSubmenuFromRow($event)">
+    <i class="fa fa-plus"></i>
+    Save to Custom List
+    <span class="float-end">▶</span>
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="dropdown-item" role="menuitem" routerLink="/watchlist/custom">
+    <i class="fa fa-user"></i> View your lists
+  </div>
+
+  <div class="dropdown-item" role="menuitem" routerLink="/watchlist/tv">
+    <i class="fa fa-compact-disc"></i> View General
+  </div>
+
+  <div class="dropdown-divider"></div>
+
+  <div class="dropdown-item" role="menuitem">
+    <i class="fa fa-share"></i> Share
+  </div>
+</div>
+
+<!-- (flush to main) -->
+<div *ngIf="showSubmenu"
+     class="submenu-dropdown shadow"
      [ngClass]="{
-       'watchlist-active': isInWatchlist() || isInAnyCustomList()
-     }">
-  </i>
+       'touch-right': !submenuFlipLeft,
+       'touch-left' :  submenuFlipLeft
+     }"
+     [ngStyle]="submenuPosition"
+     (mouseenter)="cancelSubmenuClose()"
+     (mouseleave)="scheduleSubmenuClose()"
+     role="menu">
 
-  <button class="overlay-btn" (click)="openActionMenu($event)">
-    <i class="fa"
-       [ngClass]="{
-         'fa-check text-success': isInWatchlist() || isInAnyCustomList(),
-         'fa-plus': !isInWatchlist() && !isInAnyCustomList()
-       }"></i>
-  </button>
-
-  <div *ngIf="actionMenuForId" class="spotify-dropdown shadow" [ngStyle]="dropdownPosition">
-    <div class="dropdown-item" (click)="toggleGeneralWatchlist()">
-      <i class="fa fa-list"></i>
-      {{ isInWatchlist() ? 'Remove from Watchlist' : 'Add to Watchlist' }}
-    </div>
-
-    <div class="dropdown-item position-relative"
-         (mouseenter)="onSubmenuMouseEnter($event)"
-         (mouseleave)="onSubmenuMouseLeave()">
-      <i class="fa fa-plus"></i> Save to Custom List
-      <span class="float-end">▶</span>
-
-      <div *ngIf="showSubmenu" class="submenu-dropdown shadow" [ngClass]="{ 'open-left': submenuFlipLeft }">
-        <div class="dropdown-item"
-             *ngFor="let list of customLists"
-             (click)="addToCustomList(list)">
-          {{ list.name }}
-          <i *ngIf="isItemInList(list)" class="fa fa-check text-success ms-2"></i>
-        </div>
-      </div>
-    </div>
-
-    <div class="dropdown-divider"></div>
-    <div class="dropdown-item" routerLink="/watchlist/custom">
-      <i class="fa fa-user"></i> View your lists
-    </div>
-    <div class="dropdown-item" routerLink="/watchlist/{{ mediaType }}">
-      <i class="fa fa-compact-disc"></i> View General
-    </div>
-    <div class="dropdown-divider"></div>
-    <div class="dropdown-item"><i class="fa fa-share"></i> Share</div>
+  <div class="dropdown-item"
+       role="menuitem"
+       *ngFor="let list of customLists"
+       (click)="addToCustomList(actionMenuItem!, list)">
+    {{ list.name }}
+    <i *ngIf="actionMenuItem && isItemInList(actionMenuItem, list)"
+       class="fa fa-check text-success ms-2"></i>
   </div>
 </div>

@@ -34,9 +34,7 @@ import { HomeLayoutModule } from './Components/layouts/home-layout/home-layout.m
 import { KidsComponent } from './Components/kids/kids.component';
 import { ProfileComponent } from './Components/pages/profile/profile.component';
 import { ManageProfilesComponent } from './Components/pages/profile/manage-profiles/manage-profiles.component';
-// import { WatchlistActionComponent } from './Components/watchlist-action/watchlist-action.component';
-// import { FreeToWatchComponent } from './Components/free-to-watch/free-to-watch.component';
-// import { RatingCircleComponent } from './shared/rating-circle/rating-circle.component';
+
 
 @NgModule({
   declarations: [
@@ -63,9 +61,6 @@ KidsComponent,
 ProfileComponent,
 ManageProfilesComponent,
 
-
-// FreeToWatchComponent,
-// RatingCircleComponent
   ],
 
   imports: [

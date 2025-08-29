@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+/*  global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chivo:ital,wght@0,100..900;1,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&display=swap');
 $bgColor:#000000;
@@ -66,34 +66,37 @@ body{
     }
 
 
-    .poster{
-        .layer{
-            opacity: 0;
-            width: 100%;
-            height: 100%;
-            background-color:white;
-           position: absolute;
-           top: 100%;
-           left: 0px;
-           transition: all 0.8s;
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           flex-direction: column;
-           z-index: 100;
-        }
-        img{
-            transition: all 0.5s;
-        }
-        &:hover .layer{
-            opacity: 0.5;
-            top: 0%;
-        }
-        &:hover img{
-            transform: scale(1.2,1.2)
-        }
+//     .poster{
+//         .layer{
+//             opacity: 0;
+//             width: 100%;
+//             height: 100%;
+//             background-color:white;
+//            position: absolute;
+//            top: 100%;
+//            left: 0px;
+//            transition: all 0.8s;
+//            display: flex;
+//            justify-content: center;
+//            align-items: center;
+//            flex-direction: column;
+//            z-index: 100;
+//         }
+//         img{
+//             transition: all 0.5s;
+//         }
+//         &:hover .layer{
+//             opacity: 0.5;
+//             top: 0%;
+//         }
+//         &:hover img{
+//             transform: scale(1.2,1.2)
+//         }
+//     .poster-img .layer {
+//   pointer-events: none !important; /* purely visual overlay */
+// }
 
-    }
+//     }
     h1{
         font-family: "Bebas Neue", sans-serif !important;
         margin-top: 2rem !important;
@@ -137,4 +140,41 @@ body::-webkit-scrollbar-thumb {
 
 body::-webkit-scrollbar-thumb:hover {
   background-color: #1f1e1e;
+}
+
+
+body.watchlist-open .top-ten-wrapper .top-card .card:hover,
+body.watchlist-open .top-ten-wrapper .top-card .card {
+  transform: none !important;      /* kill hover scale & any transform */
+  overflow: visible !important;     /* no clipping */
+}
+
+body.watchlist-open .top-ten-wrapper .top-card .card:hover img {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+body.watchlist-open .top-ten-wrapper .scroll-wrapper {
+  overflow-x: auto !important;     /* keep the row width; no extra card appears */
+  overflow-y: visible !important;   /* vertical contents can overhang if needed */
+  scroll-snap-type: none !important;/* stop micro nudges */
+}
+/* Optional: if any parent uses AOS/animations with transform, neutralize */
+body.watchlist-open [data-aos],
+body.watchlist-open .aos-animate {
+  transform: none !important;
+}
+body.watchlist-open .watchlist-icon-container,
+body.watchlist-open .bookmark-icon-inner,
+body.watchlist-open app-rating-circle,
+body.watchlist-open .rating-circle {
+  pointer-events: none !important;   /* stop stealing hover/click */
+  /* no z-index override here */
+}
+
+
+
+   body.watchlist-open .rating-circle.is-stubborn,
+body.watchlist-open .watchlist-icon-container.is-stubborn {
+  visibility: hidden !important;
 }
