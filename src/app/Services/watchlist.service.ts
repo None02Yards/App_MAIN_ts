@@ -1,14 +1,13 @@
 
-
 // watchlist.services
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, BehaviorSubject  } from 'rxjs';
 
 export interface StoredWatchlistItem {
   id: number;
   type: 'movie' | 'tv' | 'anime';
   addedAt?: string;
-    name?: string; // ✅ add this if you want to use it in the HTML
+    name?: string; 
 
 }
 export interface CustomList {
@@ -27,6 +26,13 @@ export interface CustomList {
 export interface WatchlistItem extends StoredWatchlistItem {
   title: string;
   poster_path: string;
+}
+// add near your other interfaces
+export interface WatchlistMenuState {
+  anchor: HTMLElement;
+  item?: WatchlistItem;
+  mediaType?: 'movie' | 'tv' | 'anime';
+  customLists?: CustomList[];
 }
 
 @Injectable({
@@ -93,7 +99,7 @@ export class WatchlistService {
     return this.getWatchlist().filter(item => item.type === type);
   }
 
-  // ✅ Migrate old format (for safety)
+  
   private migrateLegacyWatchlist(): void {
     const raw = localStorage.getItem(this.storageKey);
     if (!raw) return;
@@ -112,7 +118,10 @@ export class WatchlistService {
       console.warn('[WatchlistService] Failed to parse legacy watchlist.', err);
     }
   }
-
+private _menuState = new BehaviorSubject<WatchlistMenuState | null>(null);
+  menuState$ = this._menuState.asObservable();
+  openMenu(state: WatchlistMenuState) { this._menuState.next(state); }
+  closeMenu() { this._menuState.next(null); }
   //  ------ CUSTOM LIST SUPPORT ------
 
   private customLists: {
@@ -153,5 +162,7 @@ export class WatchlistService {
 }
 
 
-}
 
+
+
+}

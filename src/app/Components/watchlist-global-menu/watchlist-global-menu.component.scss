@@ -1,0 +1,68 @@
+// // .spotify-dropdown {
+// //   position: fixed;
+// //   background-color: #282828;
+// //   color: #fff;
+// //   border-radius: 8px;
+// //   padding: 8px 0;
+// //   min-width: 220px;
+// //   box-shadow: 0 8px 24px rgba(0,0,0,0.6);
+// //   z-index: 1000000;
+// //   animation: fadeIn 0.18s ease-out;
+// //   max-height: 70vh;
+// //   overflow-y: auto;
+// //   white-space: nowrap;
+
+// //   .dropdown-item {
+// //     padding: 10px 16px;
+// //     display: flex;
+// //     align-items: center;
+// //     gap: 12px;
+// //     cursor: pointer;
+// //     font-size: 0.95rem;
+// //     transition: background 0.2s;
+// //     &:hover { background-color: #3e3e3e; }
+// //     i { width: 18px; text-align: center; opacity: 0.9; }
+// //   }
+// //   .dropdown-divider { border-top: 1px solid #444; margin: 6px 0; }
+// // }
+// // .spotify-dropdown.open-upward::after {
+// //   content: '';
+// //   position: absolute;
+// //   bottom: -10px; left: 20px;
+// //   border-width: 10px; border-style: solid;
+// //   border-color: #333 transparent transparent transparent;
+// // }
+// // .submenu-dropdown {
+// //   position: absolute; top: 0; left: 100%;
+// //   background: #2a2a2a; min-width: 200px;
+// //   border-radius: 8px; padding: 0.5rem 0;
+// //   white-space: nowrap; z-index: 1000001;
+// //   &.open-left { left: auto; right: 100%; margin-right: 6px; }
+// //   .dropdown-item { padding: 8px 12px; display: flex; justify-content: space-between;
+// //     &:hover { background-color: rgba(255,255,255,0.1); } }
+// // }
+// // @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+// /* src/app/Components/watchlist-global-menu/watchlist-global-menu.component.scss */
+
+// /* Full-screen, fixed frame that sits above the app */
+// .watchlist-frame {
+//   position: fixed;
+//   inset: 0;
+//   z-index: 1000000;   /* high enough to beat card stacks */
+//   pointer-events: auto;
+//   /* Optional: dim the page behind
+//   background: rgba(0,0,0,0.25);
+//   */
+// }
+
+// /* Inside the frame, the panel is absolutely positioned */
+// .spotify-dropdown {
+//   position: absolute; /* IMPORTANT: no 'fixed' here */
+//   min-width: 220px;
+//   max-height: 70vh;
+//   overflow-y: auto;
+// }
+
+// /* keep your existing submenu styles; ensure it's above the panel */
+// .submenu-dropdown { z-index: 101; }

@@ -1,0 +1,50 @@
+<!-- 
+
+<div *ngIf="visible" class="watchlist-frame" (click)="watchlist.closeMenu()">
+  <div
+    class="spotify-dropdown shadow"
+    [ngClass]="{ 'open-upward': openUpward, 'open-left': flipLeft }"
+    [style.top.px]="top"
+    [style.left.px]="left"
+    role="menu"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="dropdown-item" (click)="toggleGeneralWatchlist()" role="menuitem">
+      <i class="fa fa-list"></i>
+      {{ isInWatchlist() ? 'Remove from Watchlist' : 'Add to Watchlist' }}
+    </div>
+
+    <div class="dropdown-item position-relative"
+         (mouseenter)="onSubmenuEnter($event)"
+         (mouseleave)="onSubmenuLeave()"
+         role="menuitem" aria-haspopup="true">
+      <i class="fa fa-plus"></i>
+      Save to Custom List
+      <span class="float-end">▶</span>
+
+      <div *ngIf="showSubmenu"
+           class="submenu-dropdown shadow"
+           [ngClass]="{ 'open-left': submenuFlipLeft }">
+        <ng-container *ngIf="payload as p">
+          <div class="dropdown-item"
+               *ngFor="let list of p.customLists"
+               (click)="addToCustomList(list)">
+            {{ list.name }}
+            <i *ngIf="isItemInList(list)" class="fa fa-check text-success ms-2"></i>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" routerLink="/watchlist/custom">
+      <i class="fa fa-user"></i> View your lists
+    </a>
+    <a class="dropdown-item" *ngIf="payload as p" [routerLink]="'/watchlist/' + (p.mediaType ?? 'tv')">
+      <i class="fa fa-compact-disc"></i> View General
+    </a>
+    <div class="dropdown-divider"></div>
+    <div class="dropdown-item"><i class="fa fa-share"></i> Share</div>
+  </div>
+</div> -->
+
