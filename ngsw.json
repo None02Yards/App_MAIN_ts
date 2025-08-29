@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1752471163739,
+  "timestamp": 1756481381881,
   "index": "/App_MAIN_ts/index.html",
   "assetGroups": [
     {
@@ -12,12 +12,12 @@
       },
       "urls": [
         "/App_MAIN_ts/index.html",
-        "/App_MAIN_ts/main.c51f70f8fa2bcc41.js",
+        "/App_MAIN_ts/main.ffc3354571b88e03.js",
         "/App_MAIN_ts/manifest.webmanifest",
         "/App_MAIN_ts/polyfills.c04b0af581447a1e.js",
         "/App_MAIN_ts/runtime.3f055301f0b97381.js",
         "/App_MAIN_ts/scripts.b44807315ae3cf8c.js",
-        "/App_MAIN_ts/styles.ec1675232a6fcee1.css"
+        "/App_MAIN_ts/styles.bbc4d22f800b5054.css"
       ],
       "patterns": []
     },
@@ -36,6 +36,7 @@
         "/App_MAIN_ts/assets/Screenshot 2025-06-26 172402.png",
         "/App_MAIN_ts/assets/Wlc.png",
         "/App_MAIN_ts/assets/favicon.jpg",
+        "/App_MAIN_ts/assets/icons/Zulogo.png",
         "/App_MAIN_ts/assets/icons/icon-128x128.png",
         "/App_MAIN_ts/assets/icons/icon-144x144.png",
         "/App_MAIN_ts/assets/icons/icon-152x152.png",
@@ -44,6 +45,8 @@
         "/App_MAIN_ts/assets/icons/icon-512x512.png",
         "/App_MAIN_ts/assets/icons/icon-72x72.png",
         "/App_MAIN_ts/assets/icons/icon-96x96.png",
+        "/App_MAIN_ts/assets/icons/kidslogo.png",
+        "/App_MAIN_ts/assets/icons/logokids.jpg",
         "/App_MAIN_ts/assets/kids2.png",
         "/App_MAIN_ts/assets/kidsfinal.png",
         "/App_MAIN_ts/assets/kidsscreen.png",
@@ -81,6 +84,7 @@
     "/App_MAIN_ts/assets/Screenshot 2025-06-26 172402.png": "933443ad18abda1c4efd19e14b699a6715767ad0",
     "/App_MAIN_ts/assets/Wlc.png": "68e2f527195828dce06235918df9fb7d1449f473",
     "/App_MAIN_ts/assets/favicon.jpg": "79d41c4e7e3ff910d4a791fe73c9d68b6a0d3c5b",
+    "/App_MAIN_ts/assets/icons/Zulogo.png": "38a8aa8288cb8ced309bc659ca0572c30badbb15",
     "/App_MAIN_ts/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "/App_MAIN_ts/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
     "/App_MAIN_ts/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
@@ -89,6 +93,8 @@
     "/App_MAIN_ts/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
     "/App_MAIN_ts/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "/App_MAIN_ts/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/App_MAIN_ts/assets/icons/kidslogo.png": "b1a4e47fddd57ec3b3fc4432ffb04fc41344f441",
+    "/App_MAIN_ts/assets/icons/logokids.jpg": "63aa18c382544c24cdb1b23a8475cee18fc25656",
     "/App_MAIN_ts/assets/kids2.png": "49852b49c37b329c5f15d858eaa74bf1a1c0edcf",
     "/App_MAIN_ts/assets/kidsfinal.png": "f542ff93d670164abe4024e48ab18a26a06e7cdc",
     "/App_MAIN_ts/assets/kidsscreen.png": "1a0a9cedd4b2c2720b33868bfcf4743c3dcfe3b4",
@@ -113,13 +119,13 @@
     "/App_MAIN_ts/fontawesome-webfont.cf011583fb81df9f.woff": "28b782240b3e76db824e12c02754a9731a167527",
     "/App_MAIN_ts/fontawesome-webfont.da909aa098b0ee2d.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
     "/App_MAIN_ts/fontawesome-webfont.e9955780856cf8aa.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
-    "/App_MAIN_ts/index.html": "4bd0c7e0080b975ba0caacc2cca4b0ce6b315a04",
-    "/App_MAIN_ts/main.c51f70f8fa2bcc41.js": "c89ee529c2c35aa5b79ce33702d0c75e336b0e0d",
+    "/App_MAIN_ts/index.html": "49cbeab5babb4b050f908295552d55f449d808d0",
+    "/App_MAIN_ts/main.ffc3354571b88e03.js": "45d727cbc87ccc78c1e30af9405da19d42ceca15",
     "/App_MAIN_ts/manifest.webmanifest": "be68b23b2091a54cc2d64866b8d7af4b8e66dac9",
     "/App_MAIN_ts/polyfills.c04b0af581447a1e.js": "49d6b957e8ef325f973d921e50124c378b0441ae",
     "/App_MAIN_ts/runtime.3f055301f0b97381.js": "77191f0269e140988269d3fb444a7f2679acdcab",
     "/App_MAIN_ts/scripts.b44807315ae3cf8c.js": "c28205c59d7bad9dccd0b7265e3e903a14c1a975",
-    "/App_MAIN_ts/styles.ec1675232a6fcee1.css": "174882a75df4da0c1fefb01db2382b626f9e5387"
+    "/App_MAIN_ts/styles.bbc4d22f800b5054.css": "05223b7fdc7d2b284d0dd2e94f287b98c2ff0393"
   },
   "navigationUrls": [
     {
