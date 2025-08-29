@@ -108,6 +108,8 @@
             *ngIf="isKidsLayout"
             [item]="movie"
             mediaType="tv"
+              [generalTypeOverride]="'anime'" 
+
             [customLists]="customLists"
             (click)="$event.stopPropagation()"
           ></app-watchlist-action> 

@@ -1,4 +1,5 @@
 
+
 // src/app/Components/watchlist-action/watchlist-action.component.ts
 import {
   Component,
@@ -26,14 +27,18 @@ export class WatchlistActionComponent implements OnDestroy {
   @Input() mediaType: 'movie' | 'tv' | 'anime' = 'tv';
   @Input() customLists: CustomList[] = [];
 
-  /** Main floating menu element (for flush submenu placement) */
+  /** Optional: force the General bucket storage type (e.g., 'anime' on kids) */
+  @Input() generalTypeOverride?: 'movie' | 'tv' | 'anime';
+
+  /** Optional: force where "View General" routes (/watchlist/<tab>) */
+  @Input() generalTabOverride?: 'movies' | 'tv' | 'animes';
+
   @ViewChild('mainMenu') mainMenuRef?: ElementRef<HTMLElement>;
 
   // ===== State used by the template =====
   actionMenuForId: number | null = null;
   actionMenuItem: WatchlistItem | null = null;
 
-  /** Lets `[attr.aria-expanded]="visible ? 'true' : 'false'"` compile */
   get visible(): boolean {
     return this.actionMenuForId !== null;
   }
@@ -41,7 +46,7 @@ export class WatchlistActionComponent implements OnDestroy {
   /** CSS styles for main menu: { top, left, zIndex } */
   dropdownPosition: { [k: string]: string } = {};
 
-  /** Submenu  + placement */
+  /** Submenu visibility + placement */
   showSubmenu = false;
   submenuFlipLeft = false;
   submenuPosition: { [k: string]: string } = {};
@@ -53,6 +58,24 @@ export class WatchlistActionComponent implements OnDestroy {
   private readonly shiverThreshold = 48; // px
   private submenuCloseTimer: any = null;
 
+  /** Effective general bucket type (storage + badge state) */
+  private get generalType(): 'movie' | 'tv' | 'anime' {
+    return this.generalTypeOverride ?? this.mediaType;
+  }
+
+  /** /watchlist/<segment> for the "View General" link */
+  get generalRouteSegment(): 'movies' | 'tv' | 'animes' {
+    if (this.generalTabOverride) return this.generalTabOverride;
+    switch (this.generalType) {            // <-- use effective type
+      case 'movie': return 'movies';
+      case 'anime': return 'animes';
+      default:      return 'tv';
+    }
+  }
+  get generalRoute(): (string | number)[] {
+    return ['/watchlist', this.generalRouteSegment];
+  }
+
   constructor(
     private elRef: ElementRef,
     private watchlist: WatchlistService,
@@ -63,7 +86,8 @@ export class WatchlistActionComponent implements OnDestroy {
   isInWatchlist(id?: number): boolean {
     const checkId = id ?? this.item?.id;
     if (checkId == null) return false;
-    return this.watchlist.isInWatchlist(checkId, this.mediaType);
+    // reflect the overridden general bucket
+    return this.watchlist.isInWatchlist(checkId, this.generalType);
   }
 
   isInAnyCustomList(id?: number): boolean {
@@ -88,11 +112,9 @@ export class WatchlistActionComponent implements OnDestroy {
 
     const w = 260, h = 320, gutter = 8;
 
-    // baseline: below-left of the trigger
     let left = r.left;
     let top  = r.bottom;
 
-    // flip near edges
     if (left + w > vw - gutter) left = Math.max(gutter, vw - w - gutter);
     if (top  + h > vh - gutter) top  = Math.max(gutter, r.top - h);
 
@@ -110,7 +132,6 @@ export class WatchlistActionComponent implements OnDestroy {
     this.openScrollY = window.scrollY;
     this.openAt = Date.now();
 
-    // ignore the opening click for outside-close
     this.ignoreFirstDocClick = true;
     setTimeout(() => (this.ignoreFirstDocClick = false), 40);
   }
@@ -126,21 +147,17 @@ export class WatchlistActionComponent implements OnDestroy {
     const mr  = this.mainMenuRef?.nativeElement.getBoundingClientRect() ?? rr;
 
     const vw = window.innerWidth, vh = window.innerHeight;
-    const sw = 240, sh = 260, gutter = 8, overlap = 2;  // 2px overlap hides seam better
+    const sw = 240, sh = 260, gutter = 8, overlap = 2;
 
-    // default: flush RIGHT of main menu, aligned to row top
     let left = mr.right - overlap;
     let top  = rr.top;
 
-    // flip LEFT if needed
     const roomRight = vw - mr.right;
     this.submenuFlipLeft = roomRight < sw + gutter;
     if (this.submenuFlipLeft) left = mr.left - sw + overlap;
 
-    // vertical fit
     if (top + sh > vh - gutter) top = Math.max(gutter, rr.bottom - sh);
 
-    // clamp
     left = Math.max(gutter, Math.min(left, vw - sw - gutter));
     top  = Math.max(gutter, Math.min(top,  vh - sh - gutter));
 
@@ -152,46 +169,27 @@ export class WatchlistActionComponent implements OnDestroy {
   }
 
   /* ---------- sticky hover helpers ---------- */
-  // cancelSubmenuClose(): void {
-  //   if (this.submenuCloseTimer) {
-  //     clearTimeout(this.submenuCloseTimer);
-  //     this.submenuCloseTimer = null;
-  //   }
-  //   // keep it open while hovering either panel
-  //   if (this.actionMenuForId) this.showSubmenu = this.showSubmenu || true;
-  // }
-
-  // scheduleSubmenuClose(): void {
-  //   if (this.submenuCloseTimer) clearTimeout(this.submenuCloseTimer);
-  //   this.submenuCloseTimer = setTimeout(() => {
-  //     this.showSubmenu = false;
-  //     this.submenuCloseTimer = null;
-  //   }, 220); // grace to cross the seam without flicker
-  // }
-
-// DO NOT toggle showSubmenu here—only cancel the timer
-cancelSubmenuClose(): void {
-  if (this.submenuCloseTimer) {
-    clearTimeout(this.submenuCloseTimer);
-    this.submenuCloseTimer = null;
+  cancelSubmenuClose(): void {
+    if (this.submenuCloseTimer) {
+      clearTimeout(this.submenuCloseTimer);
+      this.submenuCloseTimer = null;
+    }
   }
-}
 
-// Just schedules a close; if you re-enter either panel, cancel it
-scheduleSubmenuClose(): void {
-  if (this.submenuCloseTimer) clearTimeout(this.submenuCloseTimer);
-  this.submenuCloseTimer = setTimeout(() => {
-    this.showSubmenu = false;
-    this.submenuCloseTimer = null;
-  }, 220);
-}
+  scheduleSubmenuClose(): void {
+    if (this.submenuCloseTimer) clearTimeout(this.submenuCloseTimer);
+    this.submenuCloseTimer = setTimeout(() => {
+      this.showSubmenu = false;
+      this.submenuCloseTimer = null;
+    }, 220);
+  }
 
   /* ---------- actions ---------- */
   toggleGeneralWatchlist(item?: WatchlistItem): void {
     const current = item ?? this.actionMenuItem ?? this.item;
     if (!current) return;
 
-    const type = this.mediaType;
+    const type = this.generalType;  // <-- override applied here
 
     if (this.watchlist.isInWatchlist(current.id, type)) {
       this.watchlist.removeFromWatchlist(current.id, type);
@@ -206,13 +204,13 @@ scheduleSubmenuClose(): void {
 
   addToCustomList(item: WatchlistItem, list: CustomList): void {
     if (!list.items) list.items = [];
-
     const inList = list.items.some(i => i?.id === item.id);
+
     if (inList) {
       list.items = list.items.filter(i => i?.id !== item.id);
       this.toastr.info(`Removed from "${list.name}"`);
     } else {
-      list.items.push(item); // push full card
+      list.items.push(item);
       this.toastr.success(`Added to "${list.name}"`);
     }
 
@@ -237,8 +235,6 @@ scheduleSubmenuClose(): void {
   onDocClick(ev: MouseEvent): void {
     if (!this.actionMenuForId || this.ignoreFirstDocClick) return;
     const target = ev.target as HTMLElement;
-
-    // clicks inside component (main or submenu) do nothing
     const inside = this.elRef.nativeElement.contains(target);
     if (!inside) this.closeMenu();
   }
@@ -251,7 +247,6 @@ scheduleSubmenuClose(): void {
   @HostListener('window:scroll')
   onScroll(): void {
     if (!this.actionMenuForId) return;
-    // ignore immediate inertial micro-scroll
     if (Date.now() - this.openAt < 150) return;
     if (Math.abs(window.scrollY - this.openScrollY) > this.shiverThreshold) {
       this.closeMenu();

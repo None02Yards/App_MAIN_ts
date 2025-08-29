@@ -9,7 +9,11 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
   templateUrl: './watchlist.component.html',
   styleUrls: ['./watchlist.component.scss']
 })
+
+
 export class WatchlistComponent implements OnInit {
+
+  
   childRouteActive = false;
   movies: WatchlistItem[] = [];
   tvShows: WatchlistItem[] = [];

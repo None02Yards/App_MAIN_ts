@@ -36,8 +36,7 @@ const routes: Routes = [
 
   { path: 'watchlist/movies', component: MoviesWatchlistComponent },
   { path: 'watchlist/tv', component: TvWatchlistComponent },
-  { path: 'watchlist/tv', component: AnimeWatchlistComponent },
-
+{ path: 'watchlist/animes', component: AnimeWatchlistComponent }, // ✅ add this
  // custom list creation & detail view
 
 { path: 'watchlist/custom', component: CustomListDetailComponent },
