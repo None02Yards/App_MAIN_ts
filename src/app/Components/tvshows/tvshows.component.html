@@ -14,7 +14,7 @@
       <!-- ONLY 12 cards here -->
       <div *ngFor="let item of displayedShows; trackBy: trackById"
            class="col-md-2 mb-4">
-        <div class="poster position-relative overflow-hidden">
+        <!-- <div class="poster position-relative overflow-hidden">
           <div class="poster-img position-relative overflow-hidden rounded">
             <img
               class="w-100 rounded"
@@ -28,7 +28,6 @@
             </div>
           </div>
 
-          <!-- Bookmark / + button -->
           <div class="watchlist-icon-container">
             <i class="fa fa-bookmark bookmark-icon-inner"
                [ngClass]="{
@@ -43,7 +42,36 @@
                  }"></i>
             </button>
           </div>
-        </div>
+        </div> -->
+
+        <div class="poster position-relative overflow-hidden">
+  <div class="poster-img position-relative overflow-hidden rounded">
+    <img
+      class="w-100 rounded"
+      [src]="'https://image.tmdb.org/t/p/original/' + item.poster_path"
+      alt="{{ item.original_title }}"
+    />
+    <div class="layer">
+      <a class="bg-transparent" [routerLink]="['/details/movie', item.id]">
+        <i class="fa fa-play-circle fa-3x text-dark"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- Bookmark / + button -->
+  <div class="watchlist-icon-container">
+    <i class="fa fa-bookmark bookmark-icon-inner"
+       [ngClass]="{ 'watchlist-active': isInWatchlist(item.id) || isInAnyCustomList(item.id) }"></i>
+    <button class="overlay-btn" (click)="openActionMenu(item, $event)">
+      <i class="fa"
+         [ngClass]="{
+           'fa-check': isInWatchlist(item.id) || isInAnyCustomList(item.id),
+           'fa-plus' : !isInWatchlist(item.id) && !isInAnyCustomList(item.id)
+         }"></i>
+    </button>
+  </div>
+</div>
+
            <!-- Title outside so it never gets clipped -->
         <h5 class="text-center mt-2">{{ item.name }}</h5>
       </div>

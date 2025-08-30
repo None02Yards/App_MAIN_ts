@@ -66,37 +66,37 @@ body{
     }
 
 
-//     .poster{
-//         .layer{
-//             opacity: 0;
-//             width: 100%;
-//             height: 100%;
-//             background-color:white;
-//            position: absolute;
-//            top: 100%;
-//            left: 0px;
-//            transition: all 0.8s;
-//            display: flex;
-//            justify-content: center;
-//            align-items: center;
-//            flex-direction: column;
-//            z-index: 100;
-//         }
-//         img{
-//             transition: all 0.5s;
-//         }
-//         &:hover .layer{
-//             opacity: 0.5;
-//             top: 0%;
-//         }
-//         &:hover img{
-//             transform: scale(1.2,1.2)
-//         }
-//     .poster-img .layer {
-//   pointer-events: none !important; /* purely visual overlay */
-// }
+    .poster{
+        .layer{
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            background-color:white;
+           position: absolute;
+           top: 100%;
+           left: 0px;
+           transition: all 0.8s;
+           display: flex;
+           justify-content: center;
+           align-items: center;
+           flex-direction: column;
+           z-index: 100;
+        }
+        img{
+            transition: all 0.5s;
+        }
+        &:hover .layer{
+            opacity: 0.5;
+            top: 0%;
+        }
+        &:hover img{
+            transform: scale(1.2,1.2)
+        }
+    .poster-img .layer {
+  pointer-events: none !important; /* purely visual overlay */
+}
 
-//     }
+    }
     h1{
         font-family: "Bebas Neue", sans-serif !important;
         margin-top: 2rem !important;
