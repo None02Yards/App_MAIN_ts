@@ -34,7 +34,7 @@
       <div #listRow class="row-scroll" (scroll)="maybeLoadMore(listRow)">
         <div class="person"
              *ngFor="let p of peopleForTab(); let i = index; trackBy: trackById">
-          <a [routerLink]="['/details/person', p.id]" class="avatar-wrap" [title]="p.name">
+          <a [routerLink]="['/person', p.id]" class="avatar-wrap" [title]="p.name">
             <img [src]="imgUrl(p)" [alt]="p.name" loading="lazy" />
             <span class="ring"></span>
           </a>
