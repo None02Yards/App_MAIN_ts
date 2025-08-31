@@ -4,6 +4,43 @@
   padding: 32px 0 8px;
   margin-top: 60px !important;
 
+ @media (hover: hover) and (pointer: fine) {
+    .avatar-wrap {
+      overflow: hidden;            /* already set, just to be safe */
+      will-change: transform;      /* hint for smoother anims */
+
+      img {
+        transform: scale(1);
+        transition: transform .28s ease;
+        transform-origin: center center;
+        backface-visibility: hidden;
+      }
+    }
+
+    /* hover OR focus-visible (keyboard) gets the same effect */
+    .person:hover .avatar-wrap img,
+    .avatar-wrap:focus-visible img {
+      transform: scale(1.08);      /* subtle zoom in */
+    }
+
+    /* small glow on the rim when active */
+    .person:hover .avatar-wrap .ring,
+    .avatar-wrap:focus-visible .ring {
+      box-shadow:
+        0 0 0 3px rgba(255,255,255,.10) inset,
+        0 0 28px rgba(255,255,255,.18);
+      transition: box-shadow .25s ease;
+    }
+
+    /* nice tap/press feel */
+    .person:active .avatar-wrap img {
+      transform: scale(1.03);
+      transition-duration: .12s;
+    }
+  }
+
+
+
   .container { max-width: 1140px; margin: 0 auto; }
   .header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
