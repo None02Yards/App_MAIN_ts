@@ -8,8 +8,7 @@ import { RatingCircleComponent } from '../../shared/rating-circle/rating-circle.
 import { FreeToWatchComponent } from '../free-to-watch/free-to-watch.component';
 import { LatestTrailersComponent } from '../latest-trailers/latest-trailers.component'; // ✅ Import it
 import { WatchlistActionComponent } from '../watchlist-action/watchlist-action.component';
-// import { WatchlistGlobalMenuComponent } from '../watchlist-global-menu/watchlist-global-menu.component';
-
+import {CelebritiesComponent} from '../celebrities/celebrities.component';
 @NgModule({
   declarations: [
     WatchlistCardComponent,
@@ -17,15 +16,16 @@ import { WatchlistActionComponent } from '../watchlist-action/watchlist-action.c
     FreeToWatchComponent,
       LatestTrailersComponent,
       WatchlistActionComponent,
-      // WatchlistGlobalMenuComponent
-  ],
+CelebritiesComponent
+
+],
   exports: [
     WatchlistCardComponent,
     RatingCircleComponent,
     FreeToWatchComponent,
     LatestTrailersComponent,
     WatchlistActionComponent,
-    // WatchlistGlobalMenuComponent
+    CelebritiesComponent
   ],
 imports: [
     CommonModule,
