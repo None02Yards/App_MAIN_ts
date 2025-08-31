@@ -1,22 +1,71 @@
 @import "../../../styles.scss";
 
 
-iframe {
-  height:65vh;
-  width: 70vw;
-  border: none;
-  border-radius: 8px;
-  margin-bottom: 4rem !important;
-  margin-top: 5rem !important;
-  box-shadow: 0 0 20px rgba(190, 238, 238, 0.563);
+// iframe {
+//   height:65vh;
+//   width: 70vw;
+//   border: none;
+//   border-radius: 8px;
+//   margin-bottom: 4rem !important;
+//   margin-top: 5rem !important;
+//   box-shadow: 0 0 20px rgba(190, 238, 238, 0.563);
 
-}
-.videofilm{
-  text-align: center;
-  margin-left: 45px;
-  margin-bottom: 5rem !important;
+// }
+// .videofilm{
+//   text-align: center;
+//   margin-left: 45px;
+//   margin-bottom: 5rem !important;
 
+// }
+
+/* Hero player */
+.hero-video {
+  position: relative;
+   margin-top: 5rem !important;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 28px rgba(0,0,0,.4);
+  background: #0b0b0b;
+
+  .thumb {
+    position: relative;
+    width: 100%; height: 100%;
+    border: 0; padding: 0; cursor: pointer;
+    background-position: center; background-size: cover; background-repeat: no-repeat;
+
+    .gradient { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.45) 100%); }
+    .play {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      i { font-size: 2.75rem; color: #fff; filter: drop-shadow(0 4px 12px rgba(0,0,0,.6)); transition: transform .18s, opacity .18s; opacity: .95; }
+    }
+    &:hover .play i { transform: scale(1.06); }
+  }
+
+  .player { position: absolute; inset: 0;
+    iframe { width: 100%; height: 100%; display: block; }
+  }
+
+  .loading { position: absolute; inset: 0; display: grid; place-items: center;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,.2), rgba(0,0,0,.45));
+    .spinner { width: 36px; height: 36px; border-radius: 50%;
+      border: 3px solid rgba(255,255,255,.35); border-top-color: #ffc107; animation: spin .8s linear infinite; }
+  }
+
+  .close {
+    position: absolute; top: 8px; right: 8px; width: 36px; height: 36px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.25); background: rgba(0,0,0,.55);
+    color: #fff; display: grid; place-items: center; cursor: pointer;
+    i { font-size: 16px; }
+  }
 }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* IMPORTANT: remove old global iframe sizing to avoid fighting the ratio */
+iframe { width: auto; height: auto; border: none; }
+
 
 h4{
   color: $secondFontColor;

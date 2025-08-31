@@ -1,15 +1,18 @@
+
+
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/app/Services/data.service';
 
 interface Movie {
   poster_path: string;
-   title?: string;
+  title?: string;
   name?: string;
-  
 }
+
+type MT = 'movie' | 'tv';
 
 @Component({
   selector: 'app-details',
@@ -19,61 +22,42 @@ interface Movie {
 export class DetailsComponent implements OnInit {
 
   mediaType: any;
-  media: string = "";
+  media = '';
   id: any;
-  videoSafeURL!: any;
+
+  // OLD: videoSafeURL/showRow kept for compatibility but no longer used in template
+  videoSafeURL!: SafeResourceUrl;
+  showRow = false;
+
+  // ✅ Hero player state
+  hero = {
+    key: '' as string,
+    url: null as SafeResourceUrl | null,
+    urlAuto: null as SafeResourceUrl | null,
+    playing: false,
+    loaded: false,
+    bgImage: '' as string, // css background-image: url("...")
+  };
+
   castList: any[] = [];
-
   itemDetails: any = [];
-  Trailer: string = "";
-  showRow: boolean = false;
+  Trailer = '';
   showGenre = false;
- @ViewChild('similarSlider', { static: false }) similarSlider!: ElementRef;
-similarItems: any[] = [];
 
-
-showLeftArrow = false;
-showRightArrow = true;
-
-
-scrollSimilarLeft(): void {
-  this.similarSlider.nativeElement.scrollBy({ left: -600, behavior: 'smooth' });
-  setTimeout(() => this.updateArrows(), 300);
-}
-
-scrollSimilarRight(): void {
-  this.similarSlider.nativeElement.scrollBy({ left: 600, behavior: 'smooth' });
-  setTimeout(() => this.updateArrows(), 300);
-}
-
-updateArrows(): void {
-  const el = this.similarSlider.nativeElement;
-  this.showLeftArrow = el.scrollLeft > 0;
-  this.showRightArrow = el.scrollLeft + el.clientWidth < el.scrollWidth;
-}
-
+  @ViewChild('similarSlider', { static: false }) similarSlider!: ElementRef;
+  similarItems: any[] = [];
+  showLeftArrow = false;
+  showRightArrow = true;
 
   moreToExplore: {
     title: string;
     linkText: string;
     link: string;
     posters: Movie[];
-     type: 'movie' | 'tv';
+    type: 'movie' | 'tv';
   }[] = [
-    {
-      title: 'Top Trending Movies',
-      linkText: 'See All',
-      link: '/movies/popular/1',
-      posters: [],
-      type:'movie'
-    },
-    {
-      title: 'Top TV Shows',
-      linkText: 'Explore TV',
-      link: '/tvshows/on_the_air/1',
-      posters: [],
-      type:'tv',
-    }
+    { title: 'Top Trending Movies', linkText: 'See All', link: '/movies/popular/1', posters: [], type: 'movie' },
+    { title: 'Top TV Shows',        linkText: 'Explore TV', link: '/tvshows/on_the_air/1', posters: [], type: 'tv' }
   ];
 
   constructor(
@@ -84,118 +68,137 @@ updateArrows(): void {
     private Spinner: NgxSpinnerService
   ) {
     this._ActivatedRoute.params.subscribe(() => {
-      this.mediaType = this._ActivatedRoute.snapshot.paramMap.get("mediaType");
-      this.media = this.mediaType === "tv" ? "Tv show" : "Movie";
-      this.id = this._ActivatedRoute.snapshot.paramMap.get("id");
+      this.mediaType = this._ActivatedRoute.snapshot.paramMap.get('mediaType');
+      this.media = this.mediaType === 'tv' ? 'Tv show' : 'Movie';
+      this.id = this._ActivatedRoute.snapshot.paramMap.get('id');
 
       this.fetchDetails();
       this.fetchTrailer();
       this.fetchMoreToExplore();
-     this.fetchSimilarItems();
-     this.fetchCast();
+      this.fetchSimilarItems();
+      this.fetchCast();
     });
   }
 
   ngOnInit(): void {}
 
-fetchSimilarItems(): void {
-  this._DataService.getSimilar(this.mediaType, this.id).subscribe({
-    next: (res: any) => {
-      this.similarItems = res.results.filter((item: any) => item.poster_path).slice(0, 12);
-    },
-    error: (err) => {
-      console.error('Failed to fetch similar items', err);
-    }
-  });
-}
+  // ===== Similar row =====
+  fetchSimilarItems(): void {
+    this._DataService.getSimilar(this.mediaType, this.id).subscribe({
+      next: (res: any) => {
+        this.similarItems = res.results.filter((item: any) => item.poster_path).slice(0, 12);
+        setTimeout(() => this.updateArrows(), 0);
+      },
+      error: err => console.error('Failed to fetch similar items', err)
+    });
+  }
+  scrollSimilarLeft(): void {
+    this.similarSlider.nativeElement.scrollBy({ left: -600, behavior: 'smooth' });
+    setTimeout(() => this.updateArrows(), 300);
+  }
+  scrollSimilarRight(): void {
+    this.similarSlider.nativeElement.scrollBy({ left: 600, behavior: 'smooth' });
+    setTimeout(() => this.updateArrows(), 300);
+  }
+  updateArrows(): void {
+    const el = this.similarSlider?.nativeElement;
+    if (!el) return;
+    this.showLeftArrow = el.scrollLeft > 0;
+    this.showRightArrow = el.scrollLeft + el.clientWidth < el.scrollWidth;
+  }
 
+  // ===== Details =====
   fetchDetails(): void {
     this.Spinner.show();
     this._DataService.getDetails(this.mediaType, this.id).subscribe({
       next: (response) => {
         this.Spinner.hide();
         this.itemDetails = response;
-this._DataService.getDetails(this.mediaType, this.id).subscribe({
-  next: (res) => {
-    this.castList = res.cast.filter((member: any) => member.profile_path).slice(0 ,4);
-  },
-  error: (err) => {
-    console.error('Cast fetch failed:', err);
-  }
-});
 
         if (this.itemDetails.success === false) {
-          this._Router.navigateByUrl("/notfound");
+          this._Router.navigateByUrl('/notfound');
+          return;
         }
+        this.showGenre = !!this.itemDetails.genres?.length;
 
-        if (this.itemDetails.genres?.length) {
-          this.showGenre = true;
-        }
+        // If hero is already built (e.g., trailer fetched first), finalize its poster
+        this.applyHeroBackdrop();
       },
       error: () => {
         this.Spinner.hide();
-        this._Router.navigateByUrl("/notfound");
+        this._Router.navigateByUrl('/notfound');
       }
-
-      
     });
   }
 
+  // ===== Cast =====
+  fetchCast(): void {
+    this._DataService.getMediaCredits(this.mediaType, this.id).subscribe({
+      next: (res) => {
+        this.castList = res.cast.filter((m: any) => m.profile_path).slice(0, 5);
+      },
+      error: (err) => console.error('Cast fetch failed:', err)
+    });
+  }
+
+  // ===== Trailer / Hero build =====
   fetchTrailer(): void {
     this._DataService.getTrailer(this.mediaType, this.id).subscribe({
       next: (videos) => {
-        if (videos.results?.[0]?.key) {
-          this.Trailer = videos.results[0].key;
-          this.showRow = true;
-          this.videoSafeURL = this.sanitizer.bypassSecurityTrustResourceUrl(
-            `https://www.youtube.com/embed/${this.Trailer}?rel=0`
-          );
-        }
+        // Pick best: an official YouTube Trailer if available
+        const items = videos?.results || [];
+        const preferred = items.find((v: any) => v.site === 'YouTube' && v.type === 'Trailer')
+                      || items.find((v: any) => v.site === 'YouTube');
+        const key = preferred?.key;
+
+        if (!key) { this.showRow = false; return; }
+
+        this.Trailer = key;
+        this.videoSafeURL = this.sanitizer.bypassSecurityTrustResourceUrl(
+          `https://www.youtube.com/embed/${key}?rel=0`
+        ); // kept for compatibility
+
+        // Build hero URLs
+        const base = `https://www.youtube-nocookie.com/embed/${key}?rel=0&modestbranding=1&playsinline=1`;
+        this.hero.key = key;
+        this.hero.url = this.sanitizer.bypassSecurityTrustResourceUrl(base);
+        this.hero.urlAuto = this.sanitizer.bypassSecurityTrustResourceUrl(base + '&autoplay=1&mute=1');
+        this.showRow = true; // controls block visibility
+
+        // Poster backdrop once details arrive
+        this.applyHeroBackdrop();
       },
-      error: (err) => {
-        console.error("Trailer fetch error:", err);
-      }
+      error: (err) => console.error('Trailer fetch error:', err)
     });
   }
-    fetchCast(): void {
-      this._DataService.getMediaCredits(this.mediaType, this.id).subscribe({
 
-        next: (res) => {
-          this.castList = res.cast
-            .filter((member: any) => member.profile_path)
-            .slice(0, 5);
-        },
-        error: (err) => {
-          console.error('Cast fetch failed:', err);
-        }
-      });
-    }
+  private applyHeroBackdrop() {
+    if (!this.hero.key) return;
+    const backdrop = this.itemDetails?.backdrop_path
+      ? `https://image.tmdb.org/t/p/w1280${this.itemDetails.backdrop_path}`
+      : `https://img.youtube.com/vi/${this.hero.key}/hqdefault.jpg`;
+    this.hero.bgImage = `url("${backdrop}")`;
+  }
+
+  playHero()  { this.hero.playing = true; this.hero.loaded = false; }
+  stopHero()  { this.hero.playing = false; }
+
+  // ===== Explore =====
   fetchMoreToExplore(): void {
-    this._DataService.getTrending("all").subscribe({
+    this._DataService.getTrending('all').subscribe({
       next: (data) => {
         const allData = data.results.filter((item: any) => item.poster_path);
-        const movies = this.shuffle(allData.filter((item: any) => item.media_type === "movie"));
-        const tvs = this.shuffle(allData.filter((item: any) => item.media_type === "tv"));
-
+        const movies = this.shuffle(allData.filter((i: any) => i.media_type === 'movie'));
+        const tvs    = this.shuffle(allData.filter((i: any) => i.media_type === 'tv'));
         this.moreToExplore[0].posters = movies.slice(0, 3);
         this.moreToExplore[1].posters = tvs.slice(0, 3);
       },
-      error: (err) => {
-        console.error('MoreToExplore fetch failed:', err);
-      }
+      error: (err) => console.error('MoreToExplore fetch failed:', err)
     });
   }
 
-  shuffle(array: any[]): any[] {
-    return array.sort(() => Math.random() - 0.5);
-  }
-
-  videoURL(videoSrcUrl: any) {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(videoSrcUrl);
-  }
-
-  navigateTo(path: string) {
-  this._Router.navigateByUrl(path);
+  shuffle(array: any[]): any[] { return array.sort(() => Math.random() - 0.5); }
+  videoURL(url: any) { return this.sanitizer.bypassSecurityTrustResourceUrl(url); }
+  navigateTo(path: string) { this._Router.navigateByUrl(path); }
 }
 
-}

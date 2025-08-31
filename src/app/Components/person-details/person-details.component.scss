@@ -1,8 +1,98 @@
 
+:root { --gap: 32px; --radius: 12px; --shadow: 0 8px 24px rgba(0,0,0,.35); }
+
+.section + .section { margin-top: var(--gap); }
+
+.trailer-tile, .known-for .poster img, .sidebar .celeb-img {
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.trailer-tile {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+
+
+
+
 .photograph{
   margin-top: 80px !important;
   margin-bottom: 35px !important;
 }
+
+
+
+.profile-header { margin-top: 3rem;
+margin-bottom: 80px !important; }
+
+.profile-photo {
+  transition: transform .25s ease;
+}
+.profile-photo:hover { transform: translateY(-2px); }
+
+.trailers-inline {
+  .trailers-inline-row {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: .5rem;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .trailers-inline-row::-webkit-scrollbar { display: none; }
+
+  .clip {
+    flex: 0 0 309px;                 /* ~3–4 clips fit in one row area */
+    scroll-snap-align: start;
+
+    .thumb, .player {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #111;
+      box-shadow: 0 6px 18px rgba(0,0,0,.35);
+    }
+
+    .thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .28s ease;
+    }
+    .thumb:hover img { transform: scale(1.05); }
+    .thumb .play {
+      position: absolute; inset: 0; display: grid; place-items: center;
+      background: linear-gradient(transparent, rgba(0,0,0,.25));
+      i { font-size: 2rem; color: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,.6)); }
+    }
+
+    .player iframe { width: 100%; height: 100%; display: block; }
+    .player .stop {
+      position: absolute; top: 6px; right: 6px;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: rgba(0,0,0,.55); border: 1px solid rgba(255,255,255,.25);
+      color: #fff; display: grid; place-items: center; cursor: pointer;
+    }
+
+    .clip-title {
+      display: block; color: #cfcfcf; font-weight: 600;
+      font-size: .95rem; margin-top: .5rem; text-decoration: none;
+    }
+    .clip-title:hover { color: #fff; }
+  }
+
+  /* tighter on small screens */
+  @media (max-width: 992px) {
+    .clip { flex-basis: 220px; }
+  }
+  @media (max-width: 576px) {
+    .clip { flex-basis: 85vw; }       /* one big card on phones */
+  }
+}
+
+
 
 .bg-dark {
   background-color: #100f0f !important;
@@ -76,53 +166,65 @@
  
 
 }
-  .poster {
-    margin: 1rem;
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+.poster {
+  margin: 1rem;
+  position: relative;
+  border-radius: 15px;
+  /* don't clip children like the rating badge */
+  overflow: visible;
+  transition: transform 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+
+  /* image-only container */
+  .img-wrap {
     position: relative;
-  
-    img {
-      border-radius: 15px;
-      transition: transform 0.4s ease-in-out;
+    overflow: hidden;             /* clip the image + overlay to rounded corners */
+    border-radius: 15px;
+
+    .poster-img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 2 / 3;        /* or 3/2 depending on your art */
+      object-fit: cover;
+      transition: transform 0.35s ease;
+      will-change: transform;
     }
-  
+
     .layer {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(247, 241, 241, 0.487);
+      inset: 0;                   /* top:0; right:0; bottom:0; left:0 */
+      background: rgba(247,241,241,0.48);
       opacity: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      transition: opacity 0.3s ease;
-      border-radius: 10px;
-      z-index: 5;
-  
-      p {
-        color: #000;
-        font-weight: bold;
-      }
+      transition: opacity 0.25s ease;
+      border-radius: 15px;
+      z-index: 2;
+      pointer-events: none;       /* ignore clicks while hidden */
+
+      p { color: #000; font-weight: 700; margin: .5rem 0 0; }
     }
-  
-    &:hover {
-      transform: scale(1.05);
-  
-      img {
-        transform: scale(1.1);
-      }
-  
-      .layer {
-        opacity: 1;
-      }
-    }
-  }  
+
+    /* hover/focus only affects the image area */
+    &:hover .poster-img { transform: scale(1.06); }
+    &:hover .layer { opacity: 1; pointer-events: auto; }
+  }
+
+  /* optional slight lift for the whole card */
+  &:hover { transform: translateY(-2px); }
+}
+
+/* keep the rating chip visible above the image overlay */
+.rating-badge {
+  position: absolute;
+  bottom: -36px;
+  left: 4px;
+  z-index: 3;
+}
+
+
   h5 {
     font-size: 1rem;
     color: #f5f5f5;

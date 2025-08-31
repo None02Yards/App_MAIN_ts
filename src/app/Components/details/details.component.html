@@ -1,18 +1,44 @@
 <div class="container mt-5 pt-5">
 
   <!-- ✅ Centered Video Row -->
-  <div class="videofilm row justify-content-center mb-4" *ngIf="showRow">
-    <div class="col-lg-10 text-center">
-      <div class="ratio ratio-16x9">
+<!-- ✅ Hero Player (poster ➜ smooth iframe) -->
+<div class="row justify-content-center mb-4">
+  <div class="col-lg-10">
+    <div class="hero-video">
+      <!-- Poster/thumb state -->
+      <button class="thumb" *ngIf="!hero.playing" (click)="playHero()" [style.backgroundImage]="hero.bgImage">
+        <span class="gradient"></span>
+        <span class="play"><i class="fa fa-play"></i></span>
+      </button>
+
+      <!-- Iframe state -->
+      <div class="player" *ngIf="hero.playing">
         <iframe
-          [src]="videoSafeURL"
+          [src]="hero.urlAuto"
+          title="Trailer"
           frameborder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowfullscreen
+          (load)="hero.loaded = true">
         </iframe>
+
+        <!-- lightweight loader until the iframe finishes -->
+        <div class="loading" *ngIf="!hero.loaded">
+          <span class="spinner"></span>
+        </div>
+
+        <button class="close" (click)="stopHero()" aria-label="Close video">
+          <i class="fa fa-times"></i>
+        </button>
       </div>
     </div>
   </div>
+</div>
+
+
+
+
+
 
   <!-- Main Row -->
 <div class="row">

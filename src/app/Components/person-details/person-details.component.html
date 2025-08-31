@@ -1,15 +1,66 @@
 <div class="container pt-5 mt-5"> 
-  <!-- Profile image -->
-  <div class="row photograph justify-content-center mb-4">
-    <div class="col-md-4 col-sm-6 text-center">
-      <img 
-  class="img-fluid smooth-profile shadow" 
-  [src]="profileSrc" 
-  alt="Profile" 
-  style="max-width: 250px;">
 
+  <!-- Header: photo (left) + trailers (right) -->
+   <div class="layoutbottom">
+    <div class="row align-items-start g-4 mb-4 profile-header">
+        <!-- Profile image -->
+          <div class="col-xl-3 col-lg-4 col-md-5 text-center">
+            <img
+              class="img-fluid smooth-profile shadow rounded-3 profile-photo"
+              [src]="profileSrc"
+              alt="Profile"
+              style="max-width: 250px;"
+            />
+          </div>
+
+      <!-- Trailers beside the photo -->
+      <div class="col-xl-9 col-lg-8 col-md-7">
+        <section class="trailers-inline" *ngIf="trailers?.length">
+          <div class="d-flex align-items-center justify-content-between mb-2">
+            <h5 class="mb-0 border-start border-3 ps-2 border-warning">Trailers</h5>
+            <small class="text-muted">{{ trailers.length }} clip{{ trailers.length > 1 ? 's' : '' }}</small>
+          </div>
+
+          <div class="trailers-inline-row" #inlineRow>
+            <div class="clip" *ngFor="let t of trailers | slice:0:6; trackBy: trackById">
+              <!-- thumbnail until play -->
+              <div class="thumb" *ngIf="!t.playing" (click)="playTrailer(t)" [title]="t.title">
+                <img
+                  [src]="'https://image.tmdb.org/t/p/w780' + (t.poster || '')"
+                  [alt]="t.title" loading="lazy"
+                />
+                <span class="play"><i class="fa fa-play"></i></span>
+              </div>
+
+              <!-- player once clicked -->
+              <div class="player" *ngIf="t.playing">
+                <iframe
+                  [src]="t.urlAuto"
+                  title="{{ t.title }} trailer"
+                  frameborder="0"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowfullscreen>
+                </iframe>
+                <button class="stop" (click)="stopTrailer(t)" aria-label="Stop trailer">
+                  <i class="fa fa-times"></i>
+                </button>
+              </div>
+
+              <a class="clip-title" [routerLink]="['/details', t.mediaType, t.id]">
+                {{ t.title }}
+              </a>
+            </div>
+          </div>
+        </section>
+      
     </div>
   </div>
+</div>
+
+
+
+
+
 
 
 <div class="row justify-content-center mb-5">
@@ -110,26 +161,24 @@
 
 
 <div class="mt-5">
-  <!-- Section Title with Yellow Bar -->
   <div class="d-flex align-items-center mb-4">
-    <!-- <div class="known border-start border-4 me-3" style="border-color: #f8c700; height: 1.5rem;"></div> -->
         <h4 class="mb-3 border-start border-3 ps-2 border-warning">Known For</h4>
 
   </div>
   <!-- Poster Cards -->
   <div class="row justify-content-center">
-    <div *ngFor="let item of knownFor.slice(0, 6)" class="col-md-2 col-6 mb-4">
-      <div class="poster position-relative overflow-hidden rounded shadow-sm known-for-card">
-
+  <div *ngFor="let item of knownFor.slice(0, 6)" class="col-md-2 col-6 mb-4">
+    <div class="poster known-for-card position-relative">
+      <!-- image-only container -->
+      <div class="img-wrap">
         <img
-          class="w-100 rounded"
+          class="poster-img"
           [src]="'https://image.tmdb.org/t/p/original/' + item?.poster_path"
-          alt="{{ item.name || item.original_title }}"
-          style="object-fit: cover; height: 100%;"
+          [alt]="item.name || item.original_title"
+          loading="lazy"
         />
-            <app-rating-circle [rating]="item.vote_average"></app-rating-circle>
 
-        <!-- Hover Layer -->
+        <!-- Hover Layer (now only over the image) -->
         <div class="layer">
           <a class="bg-transparent" [routerLink]="['/details', item.media_type, item.id]">
             <i class="fa text-dark fa-2x fa-play-circle" aria-hidden="true"></i>
@@ -137,9 +186,15 @@
           <p class="text-dark font-weight-bolder mt-2">See more!</p>
         </div>
       </div>
-      <h6 class="text-center text-light mt-2">{{ item.name || item.original_title }}</h6>
+
+      <!-- stays outside the img overlay -->
+      <app-rating-circle class="rating-badge" [rating]="item.vote_average"></app-rating-circle>
     </div>
+
+    <h6 class="text-center text-light mt-2">{{ item.name || item.original_title }}</h6>
   </div>
+</div>
+
 </div>
 <!-- Back Arrow -->
 
