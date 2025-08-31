@@ -1,0 +1,63 @@
+<section class="celebrities-section py-5">
+  <div class="container">
+    <div class="header-row">
+      <h3 class="section-title">
+        <span class="accent">|</span> Most popular celebrities
+        <span class="arrow">›</span>
+      </h3>
+
+      <!-- Sliding toggle (TOP RISING / BY RANKING) -->
+      <div class="celebs-toggle" [class.is-ranking]="tab === 'ranking'">
+        <button type="button"
+                class="seg-btn"
+                [class.active]="tab === 'rising'"
+                (click)="onTab('rising')">
+          TOP RISING
+        </button>
+        <button type="button"
+                class="seg-btn"
+                [class.active]="tab === 'ranking'"
+                (click)="onTab('ranking')">
+          BY RANKING
+        </button>
+        <span class="thumb" aria-hidden="true"></span>
+      </div>
+    </div>
+
+    <!-- Single scroller used by both tabs -->
+    <div class="scroller">
+      <!-- arrows sit slightly outside the strip -->
+      <button class="nav left"  type="button" (click)="scroll(listRow, 'left')"  aria-label="Scroll left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+      </button>
+
+      <div #listRow class="row-scroll" (scroll)="maybeLoadMore(listRow)">
+        <div class="person"
+             *ngFor="let p of peopleForTab(); let i = index; trackBy: trackById">
+          <a [routerLink]="['/details/person', p.id]" class="avatar-wrap" [title]="p.name">
+            <img [src]="imgUrl(p)" [alt]="p.name" loading="lazy" />
+            <span class="ring"></span>
+          </a>
+
+          <div class="meta">
+            <div class="rank">
+              {{ i + 1 }}
+              <span class="delta"
+                    [class.up]="badgeFor(p.id).cls === 'up'"
+                    [class.down]="badgeFor(p.id).cls === 'down'"
+                    [class.none]="badgeFor(p.id).cls === 'none'">
+                ( {{ badgeFor(p.id).symbol }}
+                  <ng-container *ngIf="badgeFor(p.id).valueText as v"> {{ ' ' + v }} </ng-container> )
+              </span>
+            </div>
+            <a [routerLink]="['/details/person', p.id]" class="name">{{ p.name }}</a>
+          </div>
+        </div>
+      </div>
+
+      <button class="nav right" type="button" (click)="scroll(listRow, 'right')" aria-label="Scroll right">
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</section>
