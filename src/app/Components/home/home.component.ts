@@ -102,39 +102,60 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.menuSub?.unsubscribe();
   }
 
+
   fetchTrendingData(): void {
-    this.spinner.show();
+  this.spinner.show();
 
-    this._DataService.getTrending('all').subscribe({
-      next: (data) => {
-        this.spinner.hide();
+  this._DataService.getTrending('all').subscribe({
+    next: (data) => {
+      this.spinner.hide();
 
-        this.allData = data.results.filter((item: any) => item.poster_path != null);
+      // base pools (no mutation)
+      const all = (data?.results ?? []).filter((x: any) => !!x?.poster_path);
+      const moviesPool = all.filter((x: any) => x.media_type === 'movie');
+      const showsPool  = all.filter((x: any) => x.media_type === 'tv');
 
-        const movies = this.shuffle(this.allData.filter((item: any) => item.media_type === 'movie'));
-        const shows  = this.shuffle(this.allData.filter((item: any) => item.media_type === 'tv'));
+      // clone + shuffle copies (shuffle without mutating originals)
+      const shuffle = <T>(arr: T[]) => [...arr].sort(() => Math.random() - 0.5);
+      const movies = shuffle(moviesPool);
+      const shows  = shuffle(showsPool);
 
-        this.trendingMovies = movies;
-        this.trendingShows  = shows;
+      // --- Slider gets its own copy ---
+      this.trendingMovies = movies; // if you still use this elsewhere
+      this.trendingShows  = shows;  // if you still use this elsewhere
 
-        this.moreToExplore[0].posters = movies.slice(0, 4);
-        this.moreToExplore[1].posters = shows.slice(0, 8);
-        this.moreToExplore[2].posters = movies.slice(8, 12);
-      },
-      error: (err) => {
-        this.spinner.hide();
-        console.error('Error fetching trending (all):', err);
-      }
-    });
+      // Helper: non-mutating “take” from a source
+      const take = (src: any[], start: number, n: number) => src.slice(start, start + n);
 
-    this._DataService.getTrending('tv').subscribe({
-      next: (tvRes) => {
-        const validTv = tvRes.results.filter((show: any) => show.poster_path);
-        this.topTenMovies = this.shuffle(validTv).slice(0, 18);
-      },
-      error: (err) => console.error('Error fetching trending (tv):', err)
-    });
-  }
+      // sections (independent slices)
+      let c1 = take(movies, 0, 3);
+      if (c1.length < 3) c1 = c1.concat(take(shows, 0, 3 - c1.length));
+
+      let c2 = take(shows, 0, 3);
+      if (c2.length < 3) c2 = c2.concat(take(movies, 3, 3 - c2.length));
+
+      let c3 = take(movies, 3, 3);
+      if (c3.length < 3) c3 = c3.concat(take(shows, 3, 3 - c3.length));
+
+      // Reassign the whole array so Angular sees the change
+      this.moreToExplore = [
+        { title: 'Staff Picks: What to Watch',     linkText: 'See our picks', link: '#', posters: c1 },
+        { title: 'Everything New on Netflix',      linkText: 'See the list',  link: '#', posters: c2 },
+        { title: 'Movies That Make Us Love L.A.',  linkText: 'Vote now',      link: '#', posters: c3 },
+      ];
+    },
+    error: () => this.spinner.hide()
+  });
+
+  this._DataService.getTrending('tv').subscribe({
+    next: (tvRes) => {
+      const validTv = (tvRes?.results ?? []).filter((x: any) => !!x?.poster_path);
+      this.topTenMovies = validTv.slice(0, 18);
+    }
+  });
+}
+
+
 
   goToPopularTVShows(event?: MouseEvent) {
     // if the overlay is open, do nothing
@@ -165,6 +186,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       this.router.navigate(['/tvshows/popular', 1]);
     }
   }
+
+
 
   fetchNews(): void {
     this._DataService.getEntertainmentNews().subscribe({

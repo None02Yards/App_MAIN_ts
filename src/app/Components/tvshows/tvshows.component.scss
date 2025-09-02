@@ -21,36 +21,12 @@
   &:hover {
     transform: scale(1.05);
   }
-  // .poster-img {
-  //   background-color: none !important;
-  // background: none !important;
-  //   position: relative;
-  //   overflow: hidden;
-  //   border-radius: 15px;
-
-  //   img {
-  //     display: block;
-  //     width: 100%;
-  //     transition: transform 0.4s ease-in-out;
-  //   }
-
-  //   .layer {
-  //     position: absolute;
-  //     top: 0; left: 0;
-  //     width: 100%;
-  //      height: 100%;
-  //     background: rgba(247,241,241,0.5);
-  //     opacity: 0;
-  //     display: flex;
-  //     justify-content: center;
-  //     align-items: center;
-  //     transition: opacity 0.3s;
-  //   }
 
 
   .poster-img {
     position: relative;
     overflow: hidden;
+    cursor: pointer;
     border-radius: 15px;
 
     img {
@@ -61,22 +37,23 @@
 
     .layer {
       position: absolute;
-      inset: 0;                 /* shorthand for top/left/width/height 100% */
+      inset: 0;                 
       background: rgba(247,241,241,0.5);
       opacity: 0;
       display: flex;
       justify-content: center;
       align-items: center;
       transition: opacity 0.3s;
-      pointer-events: none;     /* prevent clicks when hidden */
-      z-index: 3;
+      // pointer-events:none;     
+      z-index: 20;
     }
 
     &:hover {
       img { transform: scale(1.1); }
       .layer {
         opacity: 1;
-        pointer-events: auto;
+         pointer-events: auto;  
+        cursor: pointer !important;  
       }
     }
   
@@ -89,11 +66,17 @@
       }
       .layer {
         opacity: 1;
+         
       }
     }
   }
 
  
+}
+.see-more-link {
+  width: 100%;
+  height: 100%;
+  cursor: pointer !important;
 }
 
 h5 {

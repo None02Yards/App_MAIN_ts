@@ -10,7 +10,7 @@ $radius:        12px;
 $shadow-lg:     0 20px 60px rgba(0,0,0,.6);
 $shadow-md:     0 16px 48px rgba(0,0,0,.55);
 
-/* - Corner icon on card -- */
+
 .watchlist-icon-container{
   position: absolute;
   top: 0; right: 14px;
@@ -43,10 +43,16 @@ $shadow-md:     0 16px 48px rgba(0,0,0,.55);
 .overlay-btn .fa-plus  { color: rgba(255,255,255,.95); }
 .overlay-btn .fa-check { color: #fff !important; }
 
+#toast-container,
+.toast-container {
+  z-index: 2147483647 !important; // max
+  position: fixed;
+  pointer-events: auto !important;
+}
 
 /* MAIN menu */
 .spotify-dropdown{
-  position: fixed;
+ position: fixed !important;
   min-width: 260px;
   max-height: 70vh;
   overflow-y: auto;
@@ -55,7 +61,7 @@ $shadow-md:     0 16px 48px rgba(0,0,0,.55);
   border-radius: $radius;
   padding: 6px 0;
   box-shadow: $shadow-lg;
-  z-index: 2147483000; /* safe near-max */
+  z-index: 2147483000; 
 
   font-size: .95rem; line-height: 1;
 
@@ -134,7 +140,6 @@ $shadow-md:     0 16px 48px rgba(0,0,0,.55);
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
 }
-/* watchlist-action.component.scss (or styles.scss) */
 .spotify-dropdown { z-index: 2147483000 !important; } /* main */
 .submenu-dropdown { z-index: 2147483001 !important; } /* submenu */
 

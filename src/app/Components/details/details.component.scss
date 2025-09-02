@@ -1,26 +1,9 @@
 @import "../../../styles.scss";
 
-
-// iframe {
-//   height:65vh;
-//   width: 70vw;
-//   border: none;
-//   border-radius: 8px;
-//   margin-bottom: 4rem !important;
-//   margin-top: 5rem !important;
-//   box-shadow: 0 0 20px rgba(190, 238, 238, 0.563);
-
-// }
-// .videofilm{
-//   text-align: center;
-//   margin-left: 45px;
-//   margin-bottom: 5rem !important;
-
-// }
-
 /* Hero player */
 .hero-video {
   position: relative;
+  left: 80px;
    margin-top: 5rem !important;
   width: 100%;
   aspect-ratio: 16 / 9;
@@ -63,7 +46,6 @@
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
-/* IMPORTANT: remove old global iframe sizing to avoid fighting the ratio */
 iframe { width: auto; height: auto; border: none; }
 
 
@@ -288,12 +270,18 @@ position: relative;
 .slider-container {
   position: relative;
   padding: 0 100px;
+    overflow: hidden; 
+
 
   .slider {
     display: flex;
     gap: 1rem;
     overflow-x: auto;
-    scroll-behavior: smooth;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; // iOS smooth
+  -ms-overflow-style: none;          // IE/Edge legacy
+  scrollbar-width: none;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -309,6 +297,8 @@ position: relative;
   transition: transform 0.3s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   position: relative;
+
+  
 
  img {
     border-radius: 15px;
@@ -373,6 +363,9 @@ position: relative;
     }
   }
 }
+
+
+
 .cast-section img {
   border: 2px solid #ffc107;
   height: 100px;

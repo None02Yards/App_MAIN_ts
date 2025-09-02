@@ -1,5 +1,6 @@
 
-<div class="watchlist-icon-container">
+<!-- ===== Trigger (only when showIcon=true) ===== -->
+<div class="watchlist-icon-container" *ngIf="showIcon && item">
   <i
     class="fa fa-bookmark bookmark-icon-inner"
     [ngClass]="{ 'watchlist-active': isInWatchlist() || isInAnyCustomList() }">
@@ -9,7 +10,7 @@
     type="button"
     class="overlay-btn"
     (click)="open($event)"
-    (mousedown)="$event.preventDefault()"
+    (mousedown)="$event.stopPropagation()"
     aria-haspopup="menu"
     [attr.aria-expanded]="visible ? 'true' : 'false'">
     <i class="fa"
@@ -20,74 +21,85 @@
   </button>
 </div>
 
-<!-- ===== Floating MAIN dropdown ===== -->
-<div *ngIf="actionMenuForId"
-     #mainMenu
-     class="spotify-dropdown shadow"
-     [ngStyle]="dropdownPosition"
-     [ngClass]="{
-       'join-right': showSubmenu && !submenuFlipLeft,
-       'join-left' : showSubmenu &&  submenuFlipLeft
-     }"
-     role="menu"
-     (mouseenter)="cancelSubmenuClose()"
-     (mouseleave)="scheduleSubmenuClose()"
-     (click)="$event.stopPropagation()">
+<!-- ===== MAIN dropdown ===== -->
+<div
+  *ngIf="visible"
+  #mainMenu
+  class="spotify-dropdown shadow"
+  [ngStyle]="dropdownPosition"
+  [ngClass]="{
+    'join-right': showSubmenu && !submenuFlipLeft,
+    'join-left' : showSubmenu &&  submenuFlipLeft
+  }"
+  role="menu"
+  (mouseenter)="cancelSubmenuClose()"
+  (mouseleave)="scheduleSubmenuClose()"
+  (mousedown)="$event.stopPropagation()"
+  (click)="$event.stopPropagation()">
 
-  <!-- General Watchlist -->
-  <div class="dropdown-item"
-       role="menuitem"
-       (click)="toggleGeneralWatchlist(actionMenuItem!)">
-    <i class="fa fa-list"></i>
+  <button
+    type="button"
+    class="dropdown-item"
+    role="menuitem"
+    (click)="toggleGeneralWatchlist(actionMenuItem!)">
+    <i class="fa fa-list me-2"></i>
     {{ isInWatchlist(actionMenuItem!.id) ? 'Remove from Watchlist' : 'Add to Watchlist' }}
-  </div>
+  </button>
 
-  <!-- Save to Custom List (opens floating submenu) -->
-  <div class="dropdown-item position-relative"
-       role="menuitem"
-       aria-haspopup="true"
-       [attr.aria-expanded]="showSubmenu ? 'true' : 'false'"
-       (mouseenter)="openSubmenuFromRow($event)">
-    <i class="fa fa-plus"></i>
-    Save to Custom List
-    <span class="float-end">▶</span>
-  </div>
-
-  <div class="dropdown-divider"></div>
-
-  <div class="dropdown-item" role="menuitem" routerLink="/watchlist/custom">
-    <i class="fa fa-user"></i> View your lists
-  </div>
-
-<div class="dropdown-item" role="menuitem" [routerLink]="generalRoute">
-    <i class="fa fa-compact-disc"></i> View General
-  </div>
+  <button
+    type="button"
+    class="dropdown-item save-to-custom"
+    role="menuitem"
+    aria-haspopup="true"
+    [attr.aria-expanded]="showSubmenu ? 'true' : 'false'"
+    (mouseenter)="openSubmenuFromRow($event)"
+    (click)="openSubmenuFromRow($event)"
+    (mousedown)="$event.stopPropagation()">
+    <i class="fa fa-plus me-2"></i>
+    <span>Save to Custom List</span>
+    <span class="ms-auto">▶</span>
+  </button>
 
   <div class="dropdown-divider"></div>
 
-  <div class="dropdown-item" role="menuitem">
-    <i class="fa fa-share"></i> Share
-  </div>
+  <a class="dropdown-item" role="menuitem" routerLink="/watchlist/custom">
+    <i class="fa fa-user me-2"></i> View your lists
+  </a>
+
+  <a class="dropdown-item" role="menuitem" [routerLink]="generalRoute">
+    <i class="fa fa-compact-disc me-2"></i> View General
+  </a>
+
+  <div class="dropdown-divider"></div>
+
+  <button type="button" class="dropdown-item" role="menuitem">
+    <i class="fa fa-share me-2"></i> Share
+  </button>
 </div>
 
-<!-- (flush to main) -->
-<div *ngIf="showSubmenu"
-     class="submenu-dropdown shadow"
-     [ngClass]="{
-       'touch-right': !submenuFlipLeft,
-       'touch-left' :  submenuFlipLeft
-     }"
-     [ngStyle]="submenuPosition"
-     (mouseenter)="cancelSubmenuClose()"
-     (mouseleave)="scheduleSubmenuClose()"
-     role="menu">
+<div
+  *ngIf="showSubmenu"
+  class="submenu-dropdown shadow"
+  [ngStyle]="submenuPosition"
+  [ngClass]="{ 'touch-right': !submenuFlipLeft, 'touch-left': submenuFlipLeft }"
+  (mouseenter)="cancelSubmenuClose()"
+  (mouseleave)="scheduleSubmenuClose()"
+  (mousedown)="$event.stopPropagation()"
+  role="menu">
 
-  <div class="dropdown-item"
-       role="menuitem"
-       *ngFor="let list of customLists"
-       (click)="addToCustomList(actionMenuItem!, list)">
+  <div class="dropdown-empty" *ngIf="!customLists || !customLists.length">
+    No custom lists yet.
+    <a class="ms-1" [routerLink]="'/watchlist/custom'">Create one</a>
+  </div>
+
+  <button
+    *ngFor="let list of customLists"
+    type="button"
+    class="dropdown-item"
+    role="menuitem"
+    (click)="addToCustomList(actionMenuItem!, list)">
     {{ list.name }}
     <i *ngIf="actionMenuItem && isItemInList(actionMenuItem, list)"
        class="fa fa-check text-success ms-2"></i>
-  </div>
+  </button>
 </div>

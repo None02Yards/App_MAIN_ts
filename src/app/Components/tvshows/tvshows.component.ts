@@ -1,6 +1,5 @@
-
 import { Component, OnInit, HostListener } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router'; // 👈 add Router
 import * as AOS from 'aos';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -38,23 +37,19 @@ export class TVShowsComponent implements OnInit {
   disablePrev = true;
   disableNext = false;
   notice = true;
-totalPages: number = 1;
+  totalPages: number = 1;
 
   constructor(
     private dataService: DataService,
     private route: ActivatedRoute,
+    private router: Router,                     // 👈 add Router
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     private watchlistService: WatchlistService
   ) {}
 
   ngOnInit(): void {
-
-    AOS.init({
-      duration: 800,
-      easing: 'ease-in-out',
-      once: true,
-    });
+    AOS.init({ duration: 800, easing: 'ease-in-out', once: true });
 
     this.route.params.subscribe(() => {
       this.type = this.route.snapshot.paramMap.get('genre') || '';
@@ -66,71 +61,73 @@ totalPages: number = 1;
   }
 
   private getTitle(type: string): string {
-    switch(type) {
-      case 'on_the_air':    return 'On The Air';
-      case 'popular':       return 'Popular TV Shows';
-      case 'top_rated':     return 'Top Rated Shows';
-      case 'airing_today':  return 'Airing Today';
-      default:              return 'TV Shows';
+    switch (type) {
+      case 'on_the_air':   return 'On The Air';
+      case 'popular':      return 'Popular TV Shows';
+      case 'top_rated':    return 'Top Rated Shows';
+      case 'airing_today': return 'Airing Today';
+      default:             return 'TV Shows';
     }
   }
 
-fetchShows(): void {
-  this.dataService.getData('tv', this.type, this.page)
-    .subscribe(res => {
+  fetchShows(): void {
+    this.spinner.show();
+    this.dataService.getData('tv', this.type, this.page).subscribe(res => {
+      this.spinner.hide();
       this.tvShows = (res.results || []).filter((m: any) => m.poster_path);
       this.totalPages = res.total_pages || 1;
       this.displayedShows = this.tvShows.slice(0, 12);
       this.updatePaginationButtons();
     });
-}
+  }
 
+  updatePaginationButtons(): void {
+    this.disablePrev = this.page <= 1;
+    this.disableNext = this.page >= this.totalPages;
+  }
 
- updatePaginationButtons(): void {
-  this.disablePrev = this.page <= 1;
-  this.disableNext = this.page >= this.totalPages;
-}
+  Next(): void { if (!this.disableNext) { this.page++; this.fetchShows(); } }
+  Prev(): void { if (!this.disablePrev) { this.page--; this.fetchShows(); } }
 
+  trackById(_: number, item: any): number { return item.id; }
 
-  Next(): void {
-    if (!this.disableNext) {
-      this.page++;
-      this.fetchShows();
+  // -------- Navigation (matches Movies’ UX) --------
+  goToDetails(item: any, ev: MouseEvent) {
+    const el = ev.target as HTMLElement;
+    // Ignore clicks that originate from the watchlist UI or dropdowns
+    if (
+      el.closest('.overlay-btn') ||
+      el.closest('.watchlist-icon-container') ||
+      el.closest('.spotify-dropdown') ||
+      el.closest('.submenu-dropdown')
+    ) {
+      ev.stopPropagation();
+      ev.preventDefault();
+      return;
     }
+    this.router.navigate(['/details', 'tv', item.id]); // ✅ TV route
   }
 
-  Prev(): void {
-    if (!this.disablePrev) {
-      this.page--;
-      this.fetchShows();
-    }
-  }
-
-  trackById(_: number, item: any): number {
-    return item.id;
-  }
-
-  // ——— Watchlist logic ———
-
+  // -------- Watchlist logic --------
   isInWatchlist(id: number): boolean {
     return this.watchlistService.isInWatchlist(id, 'tv');
   }
 
   isInAnyCustomList(id: number): boolean {
-    return this.customLists.some(l => l.items.some(i => i.id === id));
+    return this.customLists.some(l => l.items?.some(i => i?.id === id));
   }
 
   isItemInList(item: WatchlistItem, list: CustomList): boolean {
-    return list.items.some(i => i.id === item.id);
+    return list.items?.some(i => i?.id === item.id);
   }
 
   toggleGeneralWatchlist(item: WatchlistItem): void {
     if (this.isInWatchlist(item.id)) {
       this.watchlistService.removeFromWatchlist(item.id, 'tv');
-      this.toastr.info('Removed from general watchlist');
+      this.toastr.info('Removed from watchlist');
     } else {
       this.watchlistService.addToWatchlist({ id: item.id, type: 'tv' });
-      this.toastr.success('Added to general watchlist');
+      this.toastr.success('Added to watchlist');
     }
     this.closeActionMenu();
   }
@@ -147,35 +144,32 @@ fetchShows(): void {
     this.closeActionMenu();
   }
 
-  // ——— Dropdown positioning + control ———
-
   openActionMenu(item: any, e: MouseEvent) {
+    e.preventDefault();
     e.stopPropagation();
     this.showSubmenu = false;
 
     const target = e.currentTarget as HTMLElement;
     const rect = target.getBoundingClientRect();
-    const ddHeight = 690;     // approx dropdown height
+
+    const ddHeight = 690;
     const padding = 10;
     const scrollY = window.scrollY;
-    const pageH = window.innerHeight;
 
-    // clamp top so that menu never spills below viewport
     const candidateTop = rect.top + scrollY + target.offsetHeight;
-    const maxTop = scrollY + pageH - ddHeight - padding;
+    const maxTop = scrollY + window.innerHeight - ddHeight - padding;
     const top = Math.min(candidateTop, maxTop);
 
-    // align left
     const left = rect.left + window.scrollX;
 
     this.dropdownPosition = {
-      top:   `${top}px`,
-      left:  `${left}px`,
-      zIndex:`9999`
+      top: `${top}px`,
+      left: `${left}px`,
+      zIndex: '99999'
     };
 
-    this.actionMenuForId   = item.id;
-    this.actionMenuItem    = item;
+    this.actionMenuForId = item.id;
+    this.actionMenuItem = item;
   }
 
   closeActionMenu() {
@@ -184,21 +178,15 @@ fetchShows(): void {
     this.showSubmenu     = false;
   }
 
-
-
   onSubmenuMouseEnter(event: MouseEvent) {
-  this.showSubmenu = true;
-  // find submenu width & screen space
-  const trigger = event.currentTarget as HTMLElement;
-  const rect = trigger.getBoundingClientRect();
-  const submenuWidth = 200 + 8; // your min-width + padding/margin
-  const spaceRight = window.innerWidth - rect.right;
-  this.submenuFlipLeft = spaceRight < submenuWidth;
-}
-onSubmenuMouseLeave() {
-  this.showSubmenu = false;
-}
-  // ——— Close on outside-click, scroll or ESC ———
+    this.showSubmenu = true;
+    const trigger = event.currentTarget as HTMLElement;
+    const rect = trigger.getBoundingClientRect();
+    const submenuWidth = 208; // min-width + a bit
+    const spaceRight = window.innerWidth - rect.right;
+    this.submenuFlipLeft = spaceRight < submenuWidth;
+  }
+  onSubmenuMouseLeave() { this.showSubmenu = false; }
 
   @HostListener('document:click', ['$event'])
   onDocClick(event: MouseEvent) {
@@ -210,14 +198,6 @@ onSubmenuMouseLeave() {
       this.closeActionMenu();
     }
   }
-
-  @HostListener('window:scroll')
-  onScroll() {
-    this.closeActionMenu();
-  }
-
-  @HostListener('document:keydown.escape')
-  onEsc() {
-    this.closeActionMenu();
-  }
+  @HostListener('window:scroll') onScroll() { this.closeActionMenu(); }
+  @HostListener('document:keydown.escape') onEsc() { this.closeActionMenu(); }
 }

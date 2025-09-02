@@ -1,11 +1,11 @@
+
+<!-- src\app\Components\details\details.component.html -->
+
 <div class="container mt-5 pt-5">
 
-  <!-- ✅ Centered Video Row -->
-<!-- ✅ Hero Player (poster ➜ smooth iframe) -->
 <div class="row justify-content-center mb-4">
   <div class="col-lg-10">
     <div class="hero-video">
-      <!-- Poster/thumb state -->
       <button class="thumb" *ngIf="!hero.playing" (click)="playHero()" [style.backgroundImage]="hero.bgImage">
         <span class="gradient"></span>
         <span class="play"><i class="fa fa-play"></i></span>
@@ -22,7 +22,6 @@
           (load)="hero.loaded = true">
         </iframe>
 
-        <!-- lightweight loader until the iframe finishes -->
         <div class="loading" *ngIf="!hero.loaded">
           <span class="spinner"></span>
         </div>
@@ -42,13 +41,11 @@
 
   <!-- Main Row -->
 <div class="row">
-  <!-- LEFT: Details (8 columns) -->
   <div class="col-lg-8 col-md-12">
     <div class="details-container text-white">
       <h2 class="media-title">{{ media }} name: {{ itemDetails.name || itemDetails.original_title }}</h2>
       <p class="tagline">{{ itemDetails.tagline }}</p>
 
-      <!-- Genre + Action Buttons (Single Row inside LEFT) -->
       <div class="row align-items-start mt-4 gx-3">
         <!-- Genres -->
         <div class="col-12 col-md-6" *ngIf="showGenre">
@@ -59,13 +56,34 @@
           </div>
         </div>
 
-        <!-- Action Buttons -->
-        <div class="col-12 col-md-6 mt-3 mt-md-0">
-          <div class="watch-actions d-flex flex-column gap-2">
-            <button class="btn btn-add-watchlist d-flex justify-content-between align-items-center">
-              <span><i class="fa fa-plus me-2"></i> Add to Watchlist</span>
-              <i class="fa fa-chevron-down"></i>
-            </button>
+         <div class="col-12 col-md-6 mt-3 mt-md-0">
+           <div class="watch-actions d-flex flex-column gap-2"> 
+            
+
+              <app-watchlist-action
+                #wl
+                [showIcon]="false"
+                [item]="wlItem"
+                [mediaType]="mediaType"
+                [customLists]="customLists">
+              </app-watchlist-action>
+
+              <button
+                class="btn btn-add-watchlist d-flex justify-content-between align-items-center"
+                (click)="wl.openFor($event, wlItem)">
+                <span>
+                  <i class="fa me-2"
+                    [ngClass]="wl.isInWatchlist(itemDetails?.id) || wl.isInAnyCustomList(itemDetails?.id)
+                                ? 'fa-check text-success' : 'fa-plus'"></i>
+                  {{ (wl.isInWatchlist(itemDetails?.id) || wl.isInAnyCustomList(itemDetails?.id))
+                      ? 'In Watchlist' : 'Add to Watchlist' }}
+                </span>
+                <i class="fa fa-chevron-down"></i>
+              </button>
+
+
+
+
             <button class="btn btn-mark-watched">
               <i class="fa fa-eye me-2 text-primary"></i>
               <span class="text-primary">Mark as Watched</span>
@@ -82,7 +100,6 @@
         <p>📅 Release date: <strong>{{ itemDetails.release_date || itemDetails.first_air_date }}</strong></p>
       </div>
 
-      <!-- Overview -->
     </div>
   </div>
 

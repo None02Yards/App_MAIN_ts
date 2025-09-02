@@ -5,6 +5,7 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { DataService } from 'src/app/Services/data.service';
+import { WatchlistService, CustomList, WatchlistItem } from 'src/app/Services/watchlist.service';
 
 interface Movie {
   poster_path: string;
@@ -24,12 +25,11 @@ export class DetailsComponent implements OnInit {
   mediaType: any;
   media = '';
   id: any;
+customLists: CustomList[] = [];
 
-  // OLD: videoSafeURL/showRow kept for compatibility but no longer used in template
   videoSafeURL!: SafeResourceUrl;
   showRow = false;
 
-  // ✅ Hero player state
   hero = {
     key: '' as string,
     url: null as SafeResourceUrl | null,
@@ -60,12 +60,16 @@ export class DetailsComponent implements OnInit {
     { title: 'Top TV Shows',        linkText: 'Explore TV', link: '/tvshows/on_the_air/1', posters: [], type: 'tv' }
   ];
 
+
+
   constructor(
     private _Router: Router,
     private _DataService: DataService,
     private _ActivatedRoute: ActivatedRoute,
     private sanitizer: DomSanitizer,
-    private Spinner: NgxSpinnerService
+    private Spinner: NgxSpinnerService,
+     private watchlist: WatchlistService
+
   ) {
     this._ActivatedRoute.params.subscribe(() => {
       this.mediaType = this._ActivatedRoute.snapshot.paramMap.get('mediaType');
@@ -80,9 +84,31 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+get wlItem(): WatchlistItem {
+  const t = (this.mediaType === 'tv'
+              ? 'tv'
+              : this.mediaType === 'anime'
+                ? 'anime'
+                : 'movie') as WatchlistItem['type'];
 
-  // ===== Similar row =====
+  return {
+    id: Number(this.itemDetails?.id ?? this.id),           // ensure number
+    title: this.itemDetails?.title || this.itemDetails?.name || '',
+    poster_path: this.itemDetails?.poster_path || '',
+    type: t                                                // ✅ required by interface
+  };
+}
+
+
+  ngOnInit(): void {
+
+    if ((this.watchlist as any).getCustomLists) {
+    this.customLists = (this.watchlist as any).getCustomLists();
+  } else {
+    this.customLists = [];
+  }
+  }
+
   fetchSimilarItems(): void {
     this._DataService.getSimilar(this.mediaType, this.id).subscribe({
       next: (res: any) => {
@@ -121,7 +147,6 @@ export class DetailsComponent implements OnInit {
         }
         this.showGenre = !!this.itemDetails.genres?.length;
 
-        // If hero is already built (e.g., trailer fetched first), finalize its poster
         this.applyHeroBackdrop();
       },
       error: () => {
@@ -141,7 +166,6 @@ export class DetailsComponent implements OnInit {
     });
   }
 
-  // ===== Trailer / Hero build =====
   fetchTrailer(): void {
     this._DataService.getTrailer(this.mediaType, this.id).subscribe({
       next: (videos) => {
@@ -158,7 +182,7 @@ export class DetailsComponent implements OnInit {
           `https://www.youtube.com/embed/${key}?rel=0`
         ); // kept for compatibility
 
-        // Build hero URLs
+        //  hero URLs
         const base = `https://www.youtube-nocookie.com/embed/${key}?rel=0&modestbranding=1&playsinline=1`;
         this.hero.key = key;
         this.hero.url = this.sanitizer.bypassSecurityTrustResourceUrl(base);
@@ -183,7 +207,6 @@ export class DetailsComponent implements OnInit {
   playHero()  { this.hero.playing = true; this.hero.loaded = false; }
   stopHero()  { this.hero.playing = false; }
 
-  // ===== Explore =====
   fetchMoreToExplore(): void {
     this._DataService.getTrending('all').subscribe({
       next: (data) => {

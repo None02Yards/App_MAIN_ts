@@ -1,13 +1,13 @@
 
 
 .celebrities-section {
-  padding: 32px 0 8px;
+  // padding: 32px 0 8px;
   margin-top: 60px !important;
 
  @media (hover: hover) and (pointer: fine) {
     .avatar-wrap {
-      overflow: hidden;            /* already set, just to be safe */
-      will-change: transform;      /* hint for smoother anims */
+      overflow: hidden;           
+      will-change: transform;      
 
       img {
         transform: scale(1);
@@ -17,13 +17,11 @@
       }
     }
 
-    /* hover OR focus-visible (keyboard) gets the same effect */
     .person:hover .avatar-wrap img,
     .avatar-wrap:focus-visible img {
       transform: scale(1.08);      /* subtle zoom in */
     }
 
-    /* small glow on the rim when active */
     .person:hover .avatar-wrap .ring,
     .avatar-wrap:focus-visible .ring {
       box-shadow:
@@ -32,7 +30,6 @@
       transition: box-shadow .25s ease;
     }
 
-    /* nice tap/press feel */
     .person:active .avatar-wrap img {
       transform: scale(1.03);
       transition-duration: .12s;
@@ -41,11 +38,11 @@
 
 
 
-  .container { max-width: 1140px; margin: 0 auto; }
-  .header-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .container { max-width: 1300px; margin: 0 auto; }
+  .header-row { margin-right:20px !important; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 
   .section-title {
-    
+    margin-left: 60px !important;
     color: #e9e9e9; font-size: clamp(1.25rem, 2.4vw, 1.75rem); font-weight: 700;
     display: flex; align-items: center; gap: 8px;
     .accent { color: #ffc107; margin-right: 6px; }
@@ -85,30 +82,28 @@
     color: #c2c0a1; transition: color .2s, transform .12s;
     &:focus-visible { outline: 2px solid #c1a100; outline-offset: 2px; }
     &:active { transform: scale(.98); }
-    &.active { color: #383837; } /* dark text over gold pill */
+    &.active { color: #383837; } 
   }
 
 
-  .scroller { position: relative; margin: 60px 0 18px; } /* match spacing */
+  .scroller { position: relative; margin: 60px 0 18px; } 
 
   .row-scroll {
-    --cols: 6;           /* items per view (desktop) */
-    --g: 1.5rem;         /* same gap as Top 10 */
+    --cols: 5;           
+    --g: 2rem;         
 
     display: flex;
     overflow-x: auto;
-    gap: 0;              /* we use margins on items like Top 10 */
-    padding: 8px 56px;   /* 40px arrow + 8px breathing both sides */
+    gap: 0;             
+    padding: 8px 59px;   
     scroll-behavior: smooth;
 
-    /* nice UX like Top 10 */
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
   .row-scroll::-webkit-scrollbar { display: none; }
 
-  /* === card == .top-card equivalent === */
   .person {
     flex: 0 0 calc(100% / var(--cols) - var(--g));
     width: calc(100% / var(--cols) - var(--g));
@@ -122,7 +117,6 @@
   }
   .person:last-child { margin-right: 0; }
 
-  /* circle fills the fixed card width */
   .avatar-wrap {
     width: 100%;
     aspect-ratio: 1 / 1;
@@ -132,7 +126,6 @@
   }
   .avatar-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-  /* arrows sit in the 56px gutters */
   .nav {
 
     position: absolute; top: 41%; transform: translateY(-50%);
@@ -145,7 +138,6 @@
   .nav.left  { left: -39px; color:#ffc107; }
   .nav.right { right: -39px; color:#ffc107; }
 
-  /* subtle edge fades like carousels */
   .scroller::before,
   .scroller::after {
     content: "";
@@ -167,7 +159,6 @@
     .name { display: block; margin-top: 2px; color: #bdbdbd; text-decoration: none; &:hover { color: #fff; } }
   }
 
-  /* Responsive: change only --cols (never set grid-auto-columns directly) */
   @media (max-width: 1200px) { .row-scroll { --cols: 5; } }
   @media (max-width: 992px)  { .row-scroll { --cols: 4; } }
   @media (max-width: 768px)  { .row-scroll { --cols: 3; --gap: 1rem; } }

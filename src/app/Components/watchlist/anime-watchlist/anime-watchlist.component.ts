@@ -24,39 +24,32 @@ export class AnimeWatchlistComponent implements OnInit {
   ngOnInit(): void {
     const stored = this.watchlistService.getByType('anime') || [];
 
-    // Nothing saved? Just stop loading.
     if (!stored.length) {
       this.loading = false;
       return;
     }
 
-    // Resolve each stored id to real TMDB details.
-    // Prefer an explicit origin/media field if your service stores it.
     forkJoin(
       stored.map((it: any) => this.resolveDetails(it))
     )
     .pipe(
-      // filter out failures
       map(arr => arr.filter(Boolean) as WatchlistItem[])
     )
     .subscribe({
       next: (items) => {
-        // optionally sort newest first or by title
-        this.animeList = items;
+         this.animeList = items;
         this.loading = false;
       },
       error: () => { this.loading = false; }
     });
   }
 
-  /** Try to resolve details for a saved "anime" item.
-   *  If we have origin/media use it; else try TV then Movie. */
+  
   private resolveDetails(it: any) {
     const id = it?.id;
     if (!id) return of(null);
 
-    // If your WatchlistService stored the original media (e.g. originType/media),
-    // use it directly for a single call.
+    
     const hinted: Media | undefined = (it.originType || it.media) as Media | undefined;
 
     if (hinted === 'tv' || hinted === 'movie') {
@@ -66,7 +59,6 @@ export class AnimeWatchlistComponent implements OnInit {
       );
     }
 
-    // Fallback: try TV first, then Movie.
     return this.dataService.getDetails('tv', id).pipe(
       map((data: any) => this.toWatchlistItem(id, data, 'tv')),
       catchError(() =>
@@ -78,18 +70,16 @@ export class AnimeWatchlistComponent implements OnInit {
     );
   }
 
-  /** Normalize TMDB payload into our WatchlistItem */
   private toWatchlistItem(id: number, data: any, mediaGuess?: Media): WatchlistItem | null {
     if (!data) return null;
     const title = data.title || data.name || 'Untitled';
     const poster_path = data.poster_path || '';
-    // Keep type = 'anime' for this tab; optionally carry origin media if useful elsewhere
     const item: WatchlistItem = {
       id,
       type: 'anime',
       title,
       poster_path,
-      // @ts-ignore optionally keep the origin media (helps future fetches)
+      // @ts-ignore
       originType: mediaGuess || (data.title ? 'movie' : 'tv')
     };
     return item;
