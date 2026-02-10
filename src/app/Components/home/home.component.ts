@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 interface Movie {
   poster_path: string;
   title: string;
+   name?: string;
 }
 
 @Component({
@@ -26,29 +27,33 @@ export class HomeComponent implements OnInit, OnDestroy {
   @Input() isKidsLayout: boolean = false;
   @Input() sliderData: any[] = [];
 
-  @Input() moreToExplore: {
+   @Input() moreToExplore: {
     title: string;
     linkText: string;
     link: string;
     posters: Movie[];
+  type: 'movie' | 'tv';
   }[] = [
     {
       title: 'Staff Picks: What to Watch',
       linkText: 'See our picks',
       link: '#',
-      posters: []
+      posters: [],
+      type:'movie'
     },
     {
       title: 'Everything New on Netflix',
       linkText: 'See the list',
       link: '#',
-      posters: []
+      posters: [],
+       type:'tv'
     },
     {
       title: 'Movies That Make Us Love L.A.',
       linkText: 'Vote now',
       link: '#',
-      posters: []
+      posters: [],
+       type:'movie'
     }
   ];
 
@@ -139,9 +144,9 @@ export class HomeComponent implements OnInit, OnDestroy {
 
       // Reassign the whole array so Angular sees the change
       this.moreToExplore = [
-        { title: 'Staff Picks: What to Watch',     linkText: 'See our picks', link: '#', posters: c1 },
-        { title: 'Everything New on Netflix',      linkText: 'See the list',  link: '#', posters: c2 },
-        { title: 'Movies That Make Us Love L.A.',  linkText: 'Vote now',      link: '#', posters: c3 },
+         { title: 'Staff Picks: What to Watch',     linkText: 'See our picks', link: '#', posters: c1,    type: 'movie' },
+        { title: 'Everything New on Netflix',      linkText: 'See the list',  link: '#', posters: c2,    type: 'tv' },
+        { title: 'Movies That Make Us Love L.A.',  linkText: 'Vote now',      link: '#', posters: c3,    type: 'movie' },
       ];
     },
     error: () => this.spinner.hide()
@@ -155,6 +160,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   });
 }
 
+goToDetails(item: any, type: 'movie' | 'tv', event?: MouseEvent): void {
+  if (this.overlayOpen) {
+    event?.stopPropagation();
+    return;
+  }
+
+  this.router.navigate(['/details', type, item.id]);
+}
 
 
   goToPopularTVShows(event?: MouseEvent) {

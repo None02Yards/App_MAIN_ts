@@ -65,10 +65,17 @@
               <h4 class="editor-title mb-3">{{ section.title }}</h4>
 
               <div class="d-flex flex-wrap gap-3 justify-content-start">
-                <div *ngFor="let movie of section.posters | slice:0:3" class="poster-box">
-                  <img [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path" [alt]="movie.title"
-                    class="img-fluid rounded" />
-                </div>
+                <div
+  *ngFor="let movie of section.posters | slice:0:3"
+  class="poster-box"
+  (click)="goToDetails(movie, section.type, $event)"
+>
+  <img
+    [src]="'https://image.tmdb.org/t/p/w200' + movie.poster_path"
+    [alt]="movie.title || movie.name"
+    class="img-fluid rounded"
+  />
+</div>
               </div>
               <a [href]="section.link" class="editor-link d-block mt-3 text-primary">
                 {{ section.linkText }}
