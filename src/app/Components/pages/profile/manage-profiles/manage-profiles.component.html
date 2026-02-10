@@ -47,6 +47,33 @@
 <img *ngIf="editableProfile.image" [src]="editableProfile.image" alt="preview" class="image-preview" />
 
 
+      <label>Profile Type</label>
+
+<div class="profile-type">
+  <label>
+    <input
+      type="radio"
+      name="isKids"
+      [value]="false"
+      [(ngModel)]="editableProfile.isKids"
+      required
+    />
+    Home
+  </label>
+
+  <label>
+    <input
+      type="radio"
+      name="isKids"
+      [value]="true"
+      [(ngModel)]="editableProfile.isKids"
+      required
+    />
+    Kids
+  </label>
+</div>
+
+
       <div class="modal-actions">
         <button type="submit" class="save-btn">Save</button>
         <button type="button" class="cancel-btn" (click)="closeModal()">Cancel</button>

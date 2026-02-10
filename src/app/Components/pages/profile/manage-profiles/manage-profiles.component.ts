@@ -41,9 +41,18 @@ openEditModal(profile: Profile, index: number): void {
 }
 
 
-  addProfile(): void {
-  const newId = this.profiles.length ? Math.max(...this.profiles.map(p => p.id)) + 1 : 1;
-  this.editableProfile = { id: newId, name: '', image: 'assets/profiles/default.png' };
+addProfile(): void {
+  const newId = this.profiles.length
+    ? Math.max(...this.profiles.map(p => p.id)) + 1
+    : 1;
+
+  this.editableProfile = {
+    id: newId,
+    name: '',
+    image: 'assets/profiles/default.png',
+    isKids: false // default = Home
+  };
+
   this.isModalOpen = true;
   this.isEditing = false;
 }
