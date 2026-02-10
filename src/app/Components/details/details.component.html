@@ -112,10 +112,17 @@
   <div class="editor-card p-3 rounded shadow-sm bg-dark h-100">
     <h6 class="editor-title mb-2">{{ section.title }}</h6>
 
-  <div class="d-flex gap-2 flex-wrap">
-  <div *ngFor="let media of section.posters | slice:0:3" class="poster-box">
-    <img [src]="'https://image.tmdb.org/t/p/w200' + media.poster_path" [alt]="media.title"
-      class="img-fluid rounded" />
+ <div class="d-flex gap-2 flex-wrap">
+  <div
+    *ngFor="let media of section.posters | slice:0:3"
+    class="poster-box"
+    (click)="goToDetails(media, section.type, $event)"
+  >
+    <img
+      [src]="'https://image.tmdb.org/t/p/w200' + media.poster_path"
+      [alt]="media.title || media.name"
+      class="img-fluid rounded"
+    />
   </div>
 </div>
 

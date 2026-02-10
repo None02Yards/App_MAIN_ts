@@ -156,6 +156,11 @@ get wlItem(): WatchlistItem {
     });
   }
 
+  goToDetails(item: any, type: 'movie' | 'tv', event?: MouseEvent): void {
+  event?.stopPropagation();
+  this._Router.navigate(['/details', type, item.id]);
+}
+
   // ===== Cast =====
   fetchCast(): void {
     this._DataService.getMediaCredits(this.mediaType, this.id).subscribe({
