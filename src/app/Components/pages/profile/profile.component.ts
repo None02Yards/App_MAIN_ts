@@ -22,13 +22,22 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  goToProfile(profile: string): void {
-    if (profile === 'zu') {
-      this.router.navigate(['/home']);
-    } else if (profile.toLowerCase() === 'kids') {
-      this.router.navigate(['/kids']);
-    }
+  // goToProfile(profile: string): void {
+  //   if (profile === 'zu') {
+  //     this.router.navigate(['/home']);
+  //   } else if (profile.toLowerCase() === 'kids') {
+  //     this.router.navigate(['/kids']);
+  //   }
+  // }
+
+  goToProfile(profile: Profile): void {
+  if (profile.isKids) {
+    this.router.navigate(['/kids']);
+  } else {
+    this.router.navigate(['/home']);
   }
+}
+
 
   goToManageProfiles(): void {
     this.router.navigate(['/manage-profiles']);

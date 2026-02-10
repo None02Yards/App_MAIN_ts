@@ -11,16 +11,21 @@
   <h1 class="profile-title">Who's watching?</h1>
 
   <div class="profiles">
-   <div class="profile" *ngFor="let profile of profiles" (click)="goToProfile(profile.name)">
+   <div class="profile" *ngFor="let profile of profiles" (click)="goToProfile(profile)">
   <img [src]="profile.image" [alt]="profile.name" />
   <p>{{ profile.name }}</p>
 </div>
 
-
-   <div class="profile add-profile" role="button" tabindex="0">
+<div
+  class="profile add-profile"
+  role="button"
+  tabindex="0"
+  (click)="goToManageProfiles()"
+>
   <div class="addProfileIcon icon-tvuiAdd"></div>
   <p class="profile-name">Add Profile</p>
 </div>
+
 
   </div>
 
