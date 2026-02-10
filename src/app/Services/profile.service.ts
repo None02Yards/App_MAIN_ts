@@ -8,6 +8,7 @@ export interface Profile {
   name: string;
   image: string;
   isKids?: boolean;
+  isSystem?: boolean; 
 }
 
 @Injectable({
@@ -17,8 +18,8 @@ export class ProfileService {
   private storageKey = 'userProfiles';
 
   private defaultProfiles: Profile[] = [
-    { id: 1, name: 'Home', image: 'assets/icons/Zulogo.png' },
-    { id: 2, name: 'Kids', image: 'assets/icons/logokids.jpg', isKids: true }
+    { id: 1, name: 'Home', image: 'assets/icons/Zulogo.png',  isSystem: true },
+    { id: 2, name: 'Kids', image: 'assets/icons/logokids.jpg', isKids: true,  isSystem: true }
   ];
 
   private profiles: Profile[] = this.loadProfiles();
@@ -26,10 +27,51 @@ export class ProfileService {
   profiles$ = this.profilesSubject.asObservable();
 
   // Load from localStorage or fallback
+  // private loadProfiles(): Profile[] {
+  //   const data = localStorage.getItem(this.storageKey);
+  //   return data ? JSON.parse(data) : this.defaultProfiles;
+  // }
+
+
   private loadProfiles(): Profile[] {
-    const data = localStorage.getItem(this.storageKey);
-    return data ? JSON.parse(data) : this.defaultProfiles;
+  const data = localStorage.getItem(this.storageKey);
+
+  if (!data) {
+    return this.defaultProfiles;
   }
+
+  const stored: Profile[] = JSON.parse(data);
+
+  // 🔧 Fix legacy profiles
+  return stored.map(p => {
+    if (p.id === 1) {
+      return {
+        ...p,
+        name: 'Home',
+        image: 'assets/icons/Zulogo.png',
+        isSystem: true
+      };
+    }
+
+    if (p.id === 2) {
+      return {
+        ...p,
+        name: 'Kids',
+        image: 'assets/icons/logokids.jpg',
+        isKids: true,
+        isSystem: true
+      };
+    }
+
+    return p;
+  });
+}
+
+
+
+
+
+
 
   // Save current profiles to localStorage
   private saveProfiles(): void {
@@ -47,20 +89,28 @@ export class ProfileService {
     this.saveProfiles();
   }
 
+
   updateProfile(updatedProfile: Profile) {
-    const index = this.profiles.findIndex(p => p.id === updatedProfile.id);
-    if (index !== -1) {
-      this.profiles[index] = updatedProfile;
-      this.profilesSubject.next([...this.profiles]);
-      this.saveProfiles();
-    }
+  const index = this.profiles.findIndex(p => p.id === updatedProfile.id);
+  if (index === -1) return;
+
+  if (this.profiles[index].isSystem) {
+    return; // ❌ block edits for Home/Kids
   }
 
-  deleteProfile(profile: Profile) {
-    this.profiles = this.profiles.filter(p => p.id !== profile.id);
-    this.profilesSubject.next([...this.profiles]);
-    this.saveProfiles();
-  }
+  this.profiles[index] = updatedProfile;
+  this.profilesSubject.next([...this.profiles]);
+  this.saveProfiles();
+}
+
+deleteProfile(profile: Profile) {
+  if (profile.isSystem) return; // ❌ block delete
+
+  this.profiles = this.profiles.filter(p => p.id !== profile.id);
+  this.profilesSubject.next([...this.profiles]);
+  this.saveProfiles();
+}
+
 
   addProfile(profile: Profile) {
     this.profiles.push(profile);
