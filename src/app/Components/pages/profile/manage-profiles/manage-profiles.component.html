@@ -9,75 +9,162 @@
   <h1 class="profile-title">Manage Profiles</h1>
 
   <div class="profiles">
-<div *ngFor="let profile of profiles; let i = index" class="profile editable-profile">
-    <img [src]="profile.image" alt="{{ profile.name }}" />
-    <p>{{ profile.name }}</p>
 
-    <!-- pass both profile and index -->
-    <button class="edit-btn" (click)="openEditModal(profile, i)">
-        <i class="fa fa-pencil"></i>
-    </button>
+    <!-- Existing Profiles -->
+    <div
+      *ngFor="let profile of profiles; let i = index"
+      class="profile editable-profile"
+    >
 
-    <button class="delete-btn" (click)="deleteProfile(profile)">
-        <i class="fa fa-trash"></i>
-    </button>
+      <!-- Avatar (image OR letter) -->
+     <div class="avatar">
+  <img
+    *ngIf="profile.image; else letterAvatar"
+    [src]="profile.image"
+    alt="{{ profile.name }}"
+  />
+
+  <ng-template #letterAvatar>
+    <div
+      class="letter-avatar"
+      [style.backgroundColor]="getAvatarColor(profile.name)"
+    >
+      {{ profile.name ? profile.name.charAt(0).toUpperCase() : '?' }}
+    </div>
+  </ng-template>
 </div>
 
 
+      <p>{{ profile.name }}</p>
+<button
+  class="edit-btn"
+  (click)="openEditModal(profile, i)"
+  [disabled]="profile.isSystem"
+>
+  <i class="fa fa-pencil"></i>
+</button>
 
+<button
+  class="delete-btn"
+  (click)="deleteProfile(profile)"
+  [disabled]="profile.isSystem"
+>
+  <i class="fa fa-trash"></i>
+</button>
+
+    </div>
+
+    <!-- Add Profile -->
     <div class="profile add-profile" (click)="addProfile()">
       <div class="addProfileIcon icon-tvuiAdd"></div>
       <p>Add Profile</p>
     </div>
+
   </div>
 
   <button class="done-btn" (click)="goBack()">Done</button>
 </div>
 
-<!-- Modal -->
+<!-- ================= MODAL ================= -->
 <div class="modal-backdrop" *ngIf="isModalOpen">
   <div class="modal-content">
     <h2>Edit Profile</h2>
+
     <form (ngSubmit)="saveChanges()">
+
+      <!-- Name -->
       <label>Name:</label>
-      <input type="text" [(ngModel)]="editableProfile.name" name="name" required />
+  <input
+  type="text"
+  [(ngModel)]="editableProfile.name"
+  name="name"
+  required
+  [disabled]="!!editableProfile.isSystem"
+/>
 
+<p *ngIf="editableProfile.isSystem" class="system-note">
+  This is a system profile and cannot be modified.
+</p>
+
+      <!-- Image Upload -->
       <label>Image:</label>
-<input type="file" accept="image/*" (change)="onImageSelected($event)" />
-<img *ngIf="editableProfile.image" [src]="editableProfile.image" alt="preview" class="image-preview" />
+      <input
+  *ngIf="!editableProfile.isSystem"
+  type="file"
+  accept="image/*"
+  (change)="onImageSelected($event)"
+/>
 
 
+      <!-- Image Preview -->
+      <img
+        *ngIf="editableProfile.image"
+        [src]="editableProfile.image"
+        alt="preview"
+        class="image-preview"
+      />
+
+
+        
+      <!-- Remove Avatar -->
+      <!-- <button
+        *ngIf="editableProfile.image"
+        type="button"
+        class="remove-avatar-btn"
+        (click)="removeAvatar()"
+      >
+        Remove avatar
+      </button> -->
+
+      <button
+  *ngIf="editableProfile.image && !editableProfile.isSystem"
+  type="button"
+  class="remove-avatar-btn"
+  (click)="removeAvatar()"
+>
+  Remove avatar
+</button>
+
+
+      <!-- Profile Type -->
       <label>Profile Type</label>
+      <div class="profile-type">
+        <label>
+         <input
+  type="radio"
+  name="isKids"
+  [value]="false"
+  [(ngModel)]="editableProfile.isKids"
+  [disabled]="!!editableProfile.isSystem"
+/>
 
-<div class="profile-type">
-  <label>
-    <input
-      type="radio"
-      name="isKids"
-      [value]="false"
-      [(ngModel)]="editableProfile.isKids"
-      required
-    />
-    Home
-  </label>
+          Home
+        </label>
 
-  <label>
-    <input
-      type="radio"
-      name="isKids"
-      [value]="true"
-      [(ngModel)]="editableProfile.isKids"
-      required
-    />
-    Kids
-  </label>
-</div>
+        <label>
+          <input
+            type="radio"
+            name="isKids"
+            [value]="true"
+            [(ngModel)]="editableProfile.isKids"
+            required
+          />
+          Kids
+        </label>
+      </div>
 
-
+      <!-- Actions -->
       <div class="modal-actions">
         <button type="submit" class="save-btn">Save</button>
-        <button type="button" class="cancel-btn" (click)="closeModal()">Cancel</button>
+        <button
+          type="button"
+          class="cancel-btn"
+          (click)="closeModal()"
+        >
+          Cancel
+        </button>
       </div>
+
     </form>
   </div>
 </div>
