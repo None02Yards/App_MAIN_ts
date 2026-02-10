@@ -46,7 +46,7 @@
           <div class="preview-thumbs">
             <p *ngIf="list.items.length === 0">No items added yet.</p>
             <img
-              *ngFor="let item of list.items.slice(0, 4)"
+              *ngFor="let item of list.items.slice(0, 6)"
               [src]="getPoster(item.poster_path)"
               [alt]="item.title || item.name"
             />
