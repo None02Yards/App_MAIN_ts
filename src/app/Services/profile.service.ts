@@ -17,7 +17,7 @@ export class ProfileService {
   private storageKey = 'userProfiles';
 
   private defaultProfiles: Profile[] = [
-    { id: 1, name: 'zu', image: 'assets/icons/Zulogo.png' },
+    { id: 1, name: 'Home', image: 'assets/icons/Zulogo.png' },
     { id: 2, name: 'Kids', image: 'assets/icons/logokids.jpg', isKids: true }
   ];
 
