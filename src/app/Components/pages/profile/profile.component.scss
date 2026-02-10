@@ -109,3 +109,33 @@
     color: #aaa;
   }
 }
+
+
+.avatar {
+  // width: 120px;
+  // height: 120px;
+  // border-radius: 80%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.letter-avatar {
+      width: 130px;
+    height: 130px;
+    border-radius: 10%;
+  color: #fff;
+  font-size: 3.2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}

@@ -7,14 +7,38 @@
   <div class="starfifth"></div>
 </div>
 
-<div class="profile-screen">
-  <h1 class="profile-title">Who's watching?</h1>
+ <div class="profile-screen">
+  <h1 class="profile-title">Who's watching?</h1> 
 
-  <div class="profiles">
-   <div class="profile" *ngFor="let profile of profiles" (click)="goToProfile(profile)">
-  <img [src]="profile.image" [alt]="profile.name" />
+  <div class="profiles"> 
+
+<div
+  class="profile"
+  *ngFor="let profile of profiles"
+  (click)="goToProfile(profile)"
+>
+
+  <div class="avatar">
+    <img
+      *ngIf="profile.image; else letterAvatar"
+      [src]="profile.image"
+      [alt]="profile.name"
+    />
+
+    <ng-template #letterAvatar>
+      <div
+        class="letter-avatar"
+        [style.backgroundColor]="getAvatarColor(profile.name)"
+      >
+        {{ profile.name ? profile.name.charAt(0).toUpperCase() : '?' }}
+      </div>
+    </ng-template>
+  </div>
+
   <p>{{ profile.name }}</p>
 </div>
+
+
 
 <div
   class="profile add-profile"
